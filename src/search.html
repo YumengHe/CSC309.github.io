@@ -9,7 +9,92 @@
 </head>
 
 <body>
-    <h1>search page</h1>
+    <div class="main-nav-bar">
+        <p id="logo">Pet Pets</p>
+        <nav>
+            <ul>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign up</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="secondary-nav-bar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pet-details.html">Pet Details</a></li>
+                <li><a href="shelter-detail.html">Shelter Detail</a></li>
+                <li><a href="search.html">Search</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- a search page with a search bar, with option to filter the search result by 
+        Location(Canada, USA, others), 
+        Catagory(Dog, Cat, Bird, others) 
+        Breed[depend on catagory, huskey, goden retriver... for dogs, Maine Coon, Ragdoll, American Shorthair for cat](), 
+        Age (young, mature, old), 
+        Size(small, medium, large), 
+        Color(Popular colors), and 
+        Sex(Male, Female).-->
+    <form action="https://postman-echo.com/get" method="get">
+        <div>
+            <label for="search">search: </label>
+            <input type="text" name="search" id="search" required>
+        </div>
+        <div>
+            <label for="location">location: </label>
+            <select name="location" id="location" required>
+                <option value="Canada">Canada</option>
+                <option value="USA">USA</option>
+                <option value="others">others</option>
+            </select>
+        </div>
+        <div>
+            <label for="catagory">catagory: </label>
+            <select name="catagory" id="catagory" required>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+                <option value="Bird">Bird</option>
+                <option value="others">others</option>
+            </select>
+        </div>
+        <div>
+            <label for="breed">breed: </label> <!--breed for dog-->
+            <select name="breed" id="breed" required>
+                <option value="huskey">huskey</option>
+                <option value="goden retriver">goden retriver</option>
+                <option value="others">others</option>
+            </select>
+        </div>
+        <div>
+            <label for="age">age: </label>
+            <select name="age" id="age" required>
+                <option value="young">young</option>
+                <option value="mature">mature</option>
+                <option value="old">old</option>
+            </select>
+        </div>
+        <div>
+            <label for="size">size: </label>
+            <select name="size" id="size" required>
+                <option value="small">small</option>
+                <option value="medium">medium</option>
+                <option value="large">large</option>
+            </select>
+        </div>
+        <div>
+            <label for="color">color: </label>
+            <select name="color" id="color" required>
+                <option value="white">white</option>
+                <option value="black">black</option>
+                <option value="brown">brown</option>
+                <option value="others">others</option>
+            </select>
+        </div>
+        <input type="submit" value="search">
+    </form>
+
 </body>
 
 </html>

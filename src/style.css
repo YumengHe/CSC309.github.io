@@ -1,8 +1,81 @@
 /* ----common---- */
 /* where common style goes */
+body{
+    margin: 0;
+}
 
+.main-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #867070;
+    height: 10vh;
+}
 
+.main-nav-bar nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 2vw;
+}
 
+.main-nav-bar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav-bar nav ul li {
+    margin-left: 20px;
+}
+
+.main-nav-bar nav ul li a {
+    text-decoration: none;
+}
+
+.secondary-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #867070;
+    padding: 0 0px;
+    margin: 0 0px;
+}
+
+.secondary-nav-bar nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 2vw;
+}
+
+.secondary-nav-bar nav ul {
+    list-style: none;
+    margin: 1vh;
+    padding: 0;
+    display: flex;
+}
+
+.secondary-nav-bar nav ul li {
+    margin-left: 20px;
+}
+
+.secondary-nav-bar nav ul li a {
+    text-decoration: none;
+}
+
+#logo {
+    width: 201px;
+    height: 61px;
+    color: #F5EBEB;
+    font-family: 'Kumar One', Arial, Helvetica, sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 2vw;
+}
 /* ----page specific----- */
 /* where page specific style goes */
 /* page 1 name*/
