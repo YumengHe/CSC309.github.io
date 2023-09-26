@@ -4,39 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetPal: PetPal: signup page</title>
+    <title>PetPal: sign up page</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>signup page</h1>
-    <!-- create a simple form with username, email, password, confirm and choose between pet seeker and pet shelter -->
-    <form action="https://postman-echo.com/post" method="post">
-        <div>
-            <label for="username">username: </label>
-            <input type="text" name="username" id="username" required>
+    <div id="popup-container">
+        <div class="login-signup-container">
+            <a href="search-and-filter.html" class="close-button">X</a>
+            <h1 id="title">Sign up</h1>
+            <form action="https://postman-echo.com/post" method="post">
+                <div>
+                    <label for="username">username: </label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+                <div>
+                    <label for="email">email: </label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div>
+                    <label for="password">password: </label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div>
+                    <label for="confirm">confirm password: </label>
+                    <input type="password" name="confirm" id="confirm" required>
+                </div>
+                <div>
+                    <label for="role">role: </label>
+                    <select name="role" id="role" required>
+                        <option value="pet seeker">pet seeker</option>
+                        <option value="pet shelter">pet shelter</option>
+                    </select>
+                </div>
+            </form>
+            <p>Already have an account? <a href="login.html">login</a></p>
         </div>
-        <div>
-            <label for="email">email: </label>
-            <input type="email" name="email" id="email" required>
-        </div>
-        <div>
-            <label for="password">password: </label>
-            <input type="password" name="password" id="password" required>
-        </div>
-        <div>
-            <label for="confirm">confirm password: </label>
-            <input type="password" name="confirm" id="confirm" required>
-        </div>
-        <div>
-            <label for="role">role: </label>
-            <select name="role" id="role" required>
-                <option value="pet seeker">pet seeker</option>
-                <option value="pet shelter">pet shelter</option>
-            </select>
-        </div>
-        <input type="submit" value="signup">
-    <p>Already have an account? <a href="login.html">login</a></p>
+    </div>
 </body>
 
 </html>
