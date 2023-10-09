@@ -1,0 +1,194 @@
+/***************** Account Update Pages - For Seeker *********************************************************************************************************/
+:root {
+    --main-dark-color: #867070;
+    --main-mid-color: #D5B4B4;
+    --main-light-color: #F5EBEB;
+    --main-font-familty: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --footer-height: 50px;
+}
+
+[href] {
+    text-decoration: none;
+}
+
+.main-light-color {
+    color: var(--main-light-color)
+}
+
+.main-dark-color {
+    color: var(--main-dark-color)
+}
+
+.btn-outline-primary-cust {
+    --bs-btn-color: var(--main-dark-color);
+    --bs-btn-bg: var(--main-light-color);
+    --bs-btn-border-color: var(--main-dark-color);
+    --bs-btn-hover-color: var(--main-light-color);
+    --bs-btn-hover-bg: var(--main-dark-color);
+    --bs-btn-hover-border-color: var(--main-light-color);
+    --bs-btn-active-color: var(--main-dark-color);
+    --bs-btn-active-bg: var(--main-mid-color);
+    --bs-btn-active-border-color: var(--main-dark-color);
+    --bs-btn-focus-shadow-rgb: var(--main-mid-color);
+}
+
+.btn-outline-primary-cust {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-outline-primary-cust:hover {
+    box-shadow: none;
+    text-shadow: 0.5px 0.5px rgba(255, 255, 255, 0.5);
+}
+
+
+.btn-primary-cust {
+    --bs-btn-color: var(--main-light-color);
+    --bs-btn-bg: var(--main-dark-color);
+    --bs-btn-border-color: var(--main-dark-color);
+    --bs-btn-hover-color: var(--main-dark-color);
+    --bs-btn-hover-bg: var(--main-light-color);
+    --bs-btn-hover-border-color: var(--main-mid-color);
+    --bs-btn-active-color: var(--main-dark-color);
+    --bs-btn-active-bg: var(--main-mid-color);
+    --bs-btn-active-border-color: var(--main-dark-color);
+    --bs-btn-focus-shadow-rgb: var(--main-mid-color);
+}
+
+
+body {
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    font-family: var(--main-font-familty);
+}
+
+/************************************ Header ************************************/
+header {
+    background: var(--main-dark-color);
+}
+
+/* .logo {
+    color: var(--main-light-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+} */
+
+.nav-link:hover {
+    opacity: 0.68;
+}
+
+
+#main-nav {
+    /* for offcanvas navbar bg-color */
+    background-color: var(--main-dark-color);
+}
+
+.dropdown-toggle::after {
+    color: var(--main-light-color);
+}
+
+/*********************************** Footer ************************************/
+footer {
+    background-color: var(--main-dark-color);
+    color: var(--main-light-color);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: var(--footer-height);
+}
+
+/************************************ Main ************************************/
+main {
+    /* margin-bottom: var(--footer-height); */
+    padding-bottom: calc(2*var(--footer-height));
+    width: 100%;
+}
+
+
+.secondary_nav {
+    padding: 0 150px 0 150px;
+    min-height: 50px;
+}
+
+.secondary_nav a:hover {
+    border-bottom: 2px solid var(--main-dark-color);
+}
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Profile *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+
+/* ------------- Portrait ------------- */
+/* https://stackoverflow.com/questions/11406605/how-to-make-a-link-act-as-a-file-input */
+/* https://bootstrapious.com/p/bootstrap-image-hover */
+.portrait {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background-color: #86707020;
+    border: 0.5px solid #86707050;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    margin: 30px;
+}
+
+.portrait img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    transition: all 0.3s;
+}
+
+#portrait_shadow {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.05));
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    z-index: 3;
+    opacity: 0%;
+}
+
+#portrait_shadow:hover {
+    opacity: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#edit_portrait {
+    display: none;
+}
+
+#edit_portrait_link {
+    font-size: 18px;
+    padding-bottom: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+#profile_form .row {
+    height: auto;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Notification *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+
+
+/* div.row {
+    border: 1px solid black;
+    background: lightgreen;
+}
+
+div.col {
+    border: 1px dashed cyan;
+    background: lightgrey;
+} */
