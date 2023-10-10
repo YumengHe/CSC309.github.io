@@ -26,8 +26,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <!-- For local stylesheets -->
     <link rel="stylesheet" href="./style.css">
-
-
+    <script type="module" src="script.js"></script>
 </head>
 
 <body>
@@ -152,111 +151,147 @@
     </header>
 
     <main>
-        <nav
-            class="secondary_nav d-flex justify-content-md-evenly justify-content-lg-start border-bottom d-md-flex d-none">
-            <a class="main-dark-color px-3 fs-5 my-2 border-bottom" href="account-seeker-profile.html">Profile</a>
-            <a class="main-dark-color px-3 fs-5 my-2" href="account-seeker-security.html">Security</a>
-            <a class="main-dark-color px-3 fs-5 my-2" href="account-seeker-notification.html">Notification</a>
-            <a class="main-dark-color px-3 fs-5 my-2" href="#">Lists</a>
-        </nav>
-
-        <div class="container col-lg-6 col-10 mt-5">
-            <form id="profile_form" action="" autocomplete="on">
-                <div class="row">
-                    <div class="col-lg-6 d-flex justify-content-center align-items-center mb-3 mb-lg-0">
-                        <div class="portrait col-12 m-3">
-                            <img src="./resource/image/seeker_portrait.jpg" alt="portrait.jpg">
-                            <div id="portrait_shadow">
-                                <input id="edit_portrait" type="file" accept="image/*" />
-                                <a href="#" id="edit_portrait_link">Edit</a>​
+        <div class="container mt-5 ">
+            <div class="row d-lg-flex flex-lg-row justify-content-between">
+                <div class="side_nav col col-12 col-lg-3 mb-4">
+                    <div class="list-group list-group-flush border border-start-0 border-2 rounded-end">
+                        <a href="./account-seeker-profile.html#profile_form"
+                            class="list-group-item list-group-item-action py-3 lh-sm active">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-person-vcard-fill pe-2"></i>
+                                Profile
                             </div>
+                        </a>
 
+                        <a href="./account-seeker-security.html#email_address"
+                            class="list-group-item list-group-item-action py-3 lh-sm">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-gear-fill pe-2"></i>
+                                Account
+                            </div>
+                        </a>
+
+                        <a href="" class="list-group-item list-group-item-action py-3 lh-sm">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-collection-fill pe-2"></i>
+                                Applications
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="col col-12 col-lg-8">
+                    <form id="profile_form" action="" autocomplete="on" class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6 d-flex justify-content-center align-items-center mb-3 mb-lg-0">
+                                <div class="portrait col-12 m-3">
+                                    <img src="./resource/image/seeker_portrait.jpg" alt="portrait.jpg">
+                                    <div id="portrait_shadow">
+                                        <input id="edit_portrait" type="file" accept="image/*" />
+                                        <a href="#" id="edit_portrait_link">Edit</a>​
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-start">
+                                <lable class="form-label main-dark-color fw-bolder">Name</lable>
+                                <div class="form-floating mb-3 main-dark-color col-12">
+                                    <input type="text" class="form-control" id="floating_f_name"
+                                        placeholder="First name" name="first_name">
+                                    <label for="floating_f_name">First name</label>
+                                </div>
+                                <div class="form-floating main-dark-color col-12">
+                                    <input type="text" class="form-control" id="floating_l_name" placeholder="Last name"
+                                        name="last_name">
+                                    <label for="floating_l_name">Last name</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-start">
-                        <lable class="form-label main-dark-color fw-bolder">Name</lable>
-                        <div class="form-floating mb-3 main-dark-color col-12">
-                            <input type="text" class="form-control" id="floating_f_name" placeholder="First name"
-                                name="first_name">
-                            <label for="floating_f_name">First name</label>
+
+                        <div class="row my-2 mt-4">
+                            <lable class="sform-label main-dark-color fw-bolder">Address</lable>
                         </div>
-                        <div class="form-floating main-dark-color col-12">
-                            <input type="text" class="form-control" id="floating_l_name" placeholder="Last name"
-                                name="last_name">
-                            <label for="floating_l_name">Last name</label>
+                        <div class="row g-0 mb-3">
+                            <div class="col-12 form-floating main-dark-color">
+                                <input type="text" class="form-control" id="floating_street" placeholder="Street"
+                                    name="street">
+                                <label for="floating_street">Street</label>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="row my-2 mt-4">
-                    <lable class="sform-label main-dark-color fw-bolder">Address</lable>
-                </div>
-                <div class="row g-0 mb-3">
-                    <div class="col-12 form-floating main-dark-color">
-                        <input type="text" class="form-control" id="floating_street" placeholder="Street" name="street">
-                        <label for="floating_street">Street</label>
-                    </div>
-                </div>
+                        <div class="row g-0 justify-content-between">
+                            <div class="col col-5 col-md-4 form-floating main-dark-color ms-3 ms-md-0">
+                                <input type="text" class="form-control" id="floating_city" placeholder="City"
+                                    name="city">
+                                <label for="floating_city" class="form-label">City</label>
+                            </div>
+                            <div class="col col-5 col-md-2 form-floating main-dark-color me-3 me-md-0">
+                                <select id="floating_country" class="form-select">
+                                    <option selected disabled></option>
+                                    <option value="CA">CA</option>
+                                    <option value="US">US</option>
+                                </select>
+                                <label for="floating_country" class="form-label">Country</label>
+                            </div>
+                            <div class="w-100 d-md-none d-block m-1"></div>
+                            <div class="col col-5 col-md-2 form-floating main-dark-color ms-3 ms-md-0">
+                                <select id="floating_state" class="form-select">
+                                    <option selected disabled></option>
+                                    <option value="AB">AB</option>
+                                    <option value="BC">BC</option>
+                                    <option value="MB">MB</option>
+                                    <option value="NB">NB</option>
+                                    <option value="NL">NL</option>
+                                    <option value="NS">NS</option>
+                                    <option value="NT">NT</option>
+                                    <option value="NU">NU</option>
+                                    <option value="ON">ON</option>
+                                    <option value="PE">PE</option>
+                                    <option value="QC">QC</option>
+                                    <option value="SK">SK</option>
+                                    <option value="YT">YT</option>
+                                </select>
+                                <label for="floating_state" class="form-label">State</label>
+                            </div>
+                            <div class="col col-5 col-md-3 form-floating main-dark-color me-3 me-md-0">
+                                <input type="text" class="form-control" id="floating_postal" placeholder="Postal Code"
+                                    name="postal">
+                                <label for="floating_zip" class="form-label">Postal Code</label>
+                            </div>
+                        </div>
 
-                <div class="row g-0 justify-content-between">
-                    <div class="col-4 form-floating main-dark-color">
-                        <input type="text" class="form-control" id="floating_city" placeholder="City" name="city">
-                        <label for="floating_city" class="form-label">City</label>
-                    </div>
-                    <div class="col-2 form-floating main-dark-color">
-                        <select id="floating_country" class="form-select">
-                            <option selected disabled></option>
-                            <option value="CA">CA</option>
-                            <option value="US">US</option>
-                        </select>
-                        <label for="floating_country" class="form-label">Country</label>
-                    </div>
-                    <div class="col-2 form-floating main-dark-color">
-                        <select id="floating_state" class="form-select">
-                            <option selected disabled></option>
-                            <option value="AB">AB</option>
-                            <option value="BC">BC</option>
-                            <option value="MB">MB</option>
-                            <option value="NB">NB</option>
-                            <option value="NL">NL</option>
-                            <option value="NS">NS</option>
-                            <option value="NT">NT</option>
-                            <option value="NU">NU</option>
-                            <option value="ON">ON</option>
-                            <option value="PE">PE</option>
-                            <option value="QC">QC</option>
-                            <option value="SK">SK</option>
-                            <option value="YT">YT</option>
-                        </select>
-                        <label for="floating_state" class="form-label">State</label>
-                    </div>
-                    <div class="col-3 form-floating main-dark-color">
-                        <input type="text" class="form-control" id="floating_postal" placeholder="Postal Code"
-                            name="postal">
-                        <label for="floating_zip" class="form-label">Postal Code</label>
-                    </div>
-                </div>
+                        <div class="row my-2 mt-4">
+                            <lable class="sform-label main-dark-color fw-bolder">Contact</lable>
+                        </div>
+                        <div class="row g-0 mb-3">
+                            <div class="col-12 form-floating main-dark-color form-group">
+                                <input type="text" class="form-control" id="floating_phone" name="phone"
+                                    data-inputmask="'mask': '+1 999 999 9999'">
+                                <label for="floating_phone">Phone#</label>
+                            </div>
+                        </div>
 
-                <div class="row my-2 mt-4">
-                    <lable class="sform-label main-dark-color fw-bolder">Contact</lable>
-                </div>
-                <div class="row g-0 mb-3">
-                    <div class="col-12 form-floating main-dark-color form-group">
-                        <input type="text" class="form-control" id="floating_phone" name="phone"
-                            data-inputmask="'mask': '+1 999 999 9999'">
-                        <label for="floating_phone">Phone#</label>
-                        <script>
+                        <div class="row my-2 mt-4">
+                            <lable class="sform-label main-dark-color fw-bolder">Bio</lable>
+                        </div>
+                        <div class="row g-0 mb-3">
+                            <div class="col-12 form-floating main-dark-color form-group">
+                                <textarea name="bio" id="floating_bio" class="form-control" rows="5" cols="30"
+                                    placeholder="Feel free to tell about yourself"></textarea>
+                                <label for="floating_bio">Feel free to talk about yourself</label>
+                            </div>
+                        </div>
 
-                        </script>
-                    </div>
-                </div>
+                        <div class="row mt-4 d-flex justify-content-center">
+                            <div class="col-6">
+                                <button id="btn_save"
+                                    class="btn_save btn btn-outline-primary-cust form-control">Save</button>
+                            </div>
+                        </div>
 
-                <div class="row mt-4 d-flex justify-content-center">
-                    <div class="col-6">
-                        <button class="btn_save btn btn-outline-primary-cust form-control">Save</button>
-                    </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
 
 
@@ -266,7 +301,7 @@
     <footer class="footer py-3 mt-4 border-top">
         <div class="container d-flex justify-content-between">
             <div class="d-flex justify-content-start align-items-center">
-                <span class="mb-3 mb-md-0 main-light-color">&copy; 2023 PetPal</span>
+                <span class="main-light-color">&copy; 2023 PetPal</span>
             </div>
             <ul class="nav d-flex justify-content-end list-unstyled">
                 <li class="ms-3">
@@ -287,8 +322,6 @@
             </ul>
         </div>
     </footer>
-    <!-- Script to be used later -->
-    <script type="module" src="script.js"></script>
 </body>
 
 </html>

@@ -100,125 +100,153 @@
     </header>
 
     <main>
-        <nav
-            class="secondary_nav d-flex justify-content-md-evenly justify-content-lg-start border-bottom d-md-flex d-none">
-            <a class="main-dark-color px-3 fs-5 my-2" href="account-seeker-profile.html">Profile</a>
-            <a class="main-dark-color px-3 fs-5 my-2 border-bottom" href="account-seeker-security.html">Security</a>
-            <a class="main-dark-color px-3 fs-5 my-2" href="account-seeker-notification.html">Notification</a>
-            <a class="main-dark-color px-3 fs-5 my-2" href="#">Lists</a>
-        </nav>
+        <div class="container mt-5">
+            <div class="row d-flex flex-lg-row justify-content-between">
+                <div class="side_nav col col-12 col-lg-3 mb-5">
+                    <div class="list-group list-group-flush border border-start-0 border-2 rounded-end">
+                        <a href="./account-seeker-profile.html#profile_form"
+                            class="list-group-item list-group-item-action py-3 lh-sm">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-person-vcard-fill pe-2"></i>
+                                Profile
+                            </div>
+                        </a>
 
-        <div class="container col-lg-6 col-10 mt-5">
-            <div class="row mb-2 ps-3">
-                <lable class="form-label main-dark-color fw-bolder">Email Address</lable>
-            </div>
+                        <a href="./account-seeker-security.html#email_address"
+                            class="list-group-item list-group-item-action py-3 lh-sm active">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-gear-fill pe-2"></i>
+                                Account
+                            </div>
+                        </a>
 
-            <div class="row mb-4 d-flex justify-content-md-evenly gap-2 justify-content-center">
-                <div class="col col-8 col-lg-4">
-                    <p id="email_input" class="fw-normal m-auto text-center fs-5 lh-lg text-muted">foo@email.com</p>
+                        <a href="" class="list-group-item list-group-item-action py-3 lh-sm">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-collection-fill pe-2"></i>
+                                Applications
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
-                <div class="col col-8 col-md-5 col-lg-3 d-flex flex-column justify-content-center ">
-                    <button type="button" id="btn_confirm_email"
-                        class="btn btn-outline-primary-cust text-nowrap fw-lighter px-2 btn-sm">Confirm
-                        Email</button>
-                </div>
-                <div class="col col-8 col-md-5 col-lg-3 d-flex flex-column justify-content-center">
-                    <button class="btn btn-outline-primary-cust btn-sm text-nowrap fw-lighter px-4"
-                        data-bs-toggle="modal" data-bs-target="#change_email_modal">Change</button>
 
-                    <div class="modal fade" id="change_email_modal" tabindex="-1">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h3 class="modal-title fs-6">Change Email Address</h3>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="">
-                                        <div class="mb-3">
-                                            <label for="new_email" class="col-form-label">New Email</label>
-                                            <input type="email" class="form-control" id="new_email" required>
+
+
+                <div class="col col-12 col-lg-8">
+                    <div class="row mb-2 ps-3">
+                        <lable id="email_address" class="form-label main-dark-color fw-bolder">Email Address</lable>
+                    </div>
+
+                    <div class="row mb-4 d-flex justify-content-md-evenly gap-3 justify-content-center mb-5">
+                        <div class="col col-8 col-lg-4">
+                            <p id="email_input" class="fw-normal m-auto text-center fs-5 lh-lg text-muted">foo@email.com
+                            </p>
+                        </div>
+                        <div class="col col-8 col-md-5 col-lg-3 d-flex flex-column justify-content-center ">
+                            <button type="button" id="btn_confirm_email"
+                                class="btn btn-outline-primary-cust text-nowrap fw-lighter px-2 btn-sm">Confirm
+                                Email</button>
+                        </div>
+                        <div class="col col-8 col-md-5 col-lg-3 d-flex flex-column justify-content-center">
+                            <button class="btn btn-outline-primary-cust btn-sm text-nowrap fw-lighter px-4"
+                                data-bs-toggle="modal" data-bs-target="#change_email_modal">Change</button>
+
+                            <div class="modal fade" id="change_email_modal" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title fs-6">Change Email Address</h3>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
-                                        <div class="text-end mt-5 mb-2">
-                                            <button type="button" class="btn btn-outline-secondary btn-sm"
-                                                data-bs-dismiss="modal">Cancel</button>
-                                            <button type="submit" id="btn_send_confirm"
-                                                class="btn btn-primary-cust btn-sm">Send
-                                                Confirmation
-                                                Link</button>
+                                        <div class="modal-body">
+                                            <form action="">
+                                                <div class="mb-3">
+                                                    <label for="new_email" class="col-form-label">New Email</label>
+                                                    <input type="email" class="form-control" id="new_email" required>
+                                                </div>
+                                                <div class="text-end mt-5 mb-2">
+                                                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                                                        data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="submit" id="btn_send_confirm"
+                                                        class="btn btn-primary-cust btn-sm">Send
+                                                        Confirmation
+                                                        Link</button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
-                </div>
-            </div>
+                    <div class="row mb-2 ps-3">
+                        <lable class="form-label main-dark-color fw-bolder">Password</lable>
+                    </div>
+                    <form action="" id="pswd_form" class="form-group">
+                        <div class="row g-0 justify-content-center">
+                            <div class="col col-9 col-md-5 form-floating mb-3 main-dark-color">
+                                <input type="password" class="form-control" id="current_password"
+                                    placeholder="Current Password" name="current_password" required>
+                                <label for="current_password">Current Password</label>
+                            </div>
+                        </div>
 
-            <div class="row mb-2 ps-3">
-                <lable class="form-label main-dark-color fw-bolder">Password</lable>
-            </div>
-            <form action="" id="pswd_form" class="form-group">
-                <div class="row g-0 justify-content-center">
-                    <div class="col col-9 col-md-5 form-floating mb-3 main-dark-color">
-                        <input type="password" class="form-control" id="current_password" placeholder="Current Password"
-                            name="current_password" required>
-                        <label for="current_password">Current Password</label>
-                    </div>
-                </div>
+                        <div class="row g-0 justify-content-center">
+                            <div class="col col-9 col-md-5 form-floating mb-3 main-dark-color">
+                                <input type="password" class="form-control" id="new_password" placeholder="New Password"
+                                    name="new_password" required>
+                                <label for="new_password">New Password</label>
+                            </div>
+                        </div>
+                        <div class="row g-0 justify-content-center">
+                            <div class="col col-9 col-md-5 form-floating mb-3 main-dark-color">
+                                <input type="password" class="form-control" id="confirm_new_password"
+                                    placeholder="Confirm New Password" name="confirm_new_password" required>
+                                <label for="confirm_new_password">Confirm New Password</label>
+                            </div>
+                        </div>
 
-                <div class="row g-0 justify-content-center">
-                    <div class="col col-9 col-md-5 form-floating mb-3 main-dark-color">
-                        <input type="password" class="form-control" id="new_password" placeholder="New Password"
-                            name="new_password" required>
-                        <label for="new_password">New Password</label>
-                    </div>
-                </div>
-                <div class="row g-0 justify-content-center">
-                    <div class="col col-9 col-md-5 form-floating mb-3 main-dark-color">
-                        <input type="password" class="form-control" id="confirm_new_password"
-                            placeholder="Confirm New Password" name="confirm_new_password" required>
-                        <label for="confirm_new_password">Confirm New Password</label>
-                    </div>
-                </div>
+                        <div class="row px-5 g-0 justify-content-center gap-lg-2 gap-1">
+                            <div class="col col-7 col-lg-5 text-lg-end text-center ms">
+                                <button id="btn_update_pswd"
+                                    class="btn btn-outline-primary-cust px-5 text-nowrap btn-sm">Update</button>
+                            </div>
+                            <div class="col col-7 col-lg-5 text-lg-start text-center align-self-end">
+                                <a id="btn_forgot_pswd"
+                                    class="text-decoration-underline text-muted text-nowrap my-0 small">Forgot password
+                                </a>
+                            </div>
+                        </div>
+                    </form>
 
-                <div class="row px-5 g-0 justify-content-center gap-lg-2 gap-1">
-                    <div class="col col-7 col-lg-5 text-lg-end text-center ms">
-                        <button class="btn btn-outline-primary-cust px-5 text-nowrap btn-sm">Update</button>
-                    </div>
-                    <div class="col col-7 col-lg-5 text-lg-start text-center align-self-end">
-                        <a id="btn_forgot_pswd"
-                            class="text-decoration-underline text-muted text-nowrap my-0 small">Forgot password
-                        </a>
-                    </div>
-                </div>
-            </form>
-
-            <!-- Failed to make input label inline style  https://jsfiddle.net/zsg4foj1/  -->
-            <!-- <lable class="col-sm-2" for="current_password">
+                    <!-- Failed to make input label inline style  https://jsfiddle.net/zsg4foj1/  -->
+                    <!-- <lable class="col-sm-2" for="current_password">
                 <span class="h6 small bg-white text-muted pt-1 pl-2 pr-2">Current
                     Password</span>
             </lable>
             <input type="password" class="form-control mt-n3" id="current_password" name="current_password"> -->
 
-
-            <!-- Toast Message - for confirm email btn, forgot pswd link -->
-            <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
-                <div id="btn_confirm_email_toast" class="toast main-dark-color border-0" role="alert">
-                    <div class="d-flex">
-                        <div class="toast-body text-nowrap pe-4">Please check your email for confirmation link.
-                        </div>
-                        <button type="button" class="btn-close main-dark-color me-3 m-auto"
-                            data-bs-dismiss="toast"></button>
-                    </div>
                 </div>
-                <div id="btn_forgot_pswd_toast" class="toast main-dark-color border-0" role="alert">
-                    <div class="d-flex">
-                        <div class="toast-body text-nowrap pe-4">Please check your email for password reset.
+                <!-- Toast Message - for confirm email btn, forgot pswd link -->
+                <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+                    <div id="btn_confirm_email_toast" class="toast main-dark-color border-0" role="alert">
+                        <div class="d-flex">
+                            <div class="toast-body text-nowrap pe-4">Confirmation link is sent to your email.
+                            </div>
+                            <button type="button" class="btn-close main-dark-color me-3 m-auto"
+                                data-bs-dismiss="toast"></button>
                         </div>
-                        <button type="button" class="btn-close main-dark-color me-3 m-auto"
-                            data-bs-dismiss="toast"></button>
+                    </div>
+
+                    <div id="btn_forgot_pswd_toast" class="toast main-dark-color border-0" role="alert">
+                        <div class="d-flex">
+                            <div class="toast-body text-nowrap pe-4">Please check your email for password reset.
+                            </div>
+                            <button type="button" class="btn-close main-dark-color me-3 m-auto"
+                                data-bs-dismiss="toast"></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -230,7 +258,7 @@
     <footer class="footer py-3 mt-4 border-top">
         <div class="container d-flex justify-content-between">
             <div class="d-flex justify-content-start align-items-center">
-                <span class="mb-3 mb-md-0 main-light-color">&copy; 2023 PetPal</span>
+                <span class="main-light-color">&copy; 2023 PetPal</span>
             </div>
             <ul class="nav d-flex justify-content-end list-unstyled">
                 <li class="ms-3">

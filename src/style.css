@@ -210,46 +210,51 @@ This MUST stay below other regular css for header to get properly overwritten*/
 }
 
 .login-signup-field-container {
-    position: relative; 
+    position: relative;
     width: 80%;
     margin-bottom: 15px;
 }
 
 /* Updated styles for the label inside the input */
 .login-signup-container label {
-    position: absolute;   
-    left: 70px;          
-    top: 50%;            
-    transform: translateY(-50%); 
-    pointer-events: none; 
-    color: #fff;         
+    position: absolute;
+    left: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #fff;
 }
 
 /* Styles for the input fields */
-.login-signup-container input:not([type="submit"]), select {
-    width: 80%; /* changed from 80% to 100% because it's now inside .field-container */
+.login-signup-container input:not([type="submit"]),
+select {
+    width: 80%;
+    /* changed from 80% to 100% because it's now inside .field-container */
     height: 63px;
     border-radius: 20px;
     background: #D5B4B4;
     border: none;
-    padding-left:90px; /* text indentation */
+    padding-left: 90px;
+    /* text indentation */
     color: white;
     box-sizing: border-box;
 }
 
 
-.login-signup-container form, 
-.login-signup-container div { 
+.login-signup-container form,
+.login-signup-container div {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative; /* Make the divs the reference point for absolutely positioned labels */
+    position: relative;
+    /* Make the divs the reference point for absolutely positioned labels */
 }
 
 
-#login-button, #signup-button {
-    width: 80%;  
+#login-button,
+#signup-button {
+    width: 80%;
     height: 56px;
     border-radius: 20px;
     background: #D5B4B4;
@@ -381,14 +386,10 @@ main {
     width: 100%;
 }
 
-/* https://www.youtube.com/watch?v=wh1FKjZt_H8&ab_channel=ByteGrad */
-.secondary_nav {
-    padding: 0 150px 0 150px;
-    min-height: 50px;
-}
+.side_nav .list-group .list-group-item.active {
+    background-color: var(--main-light-color);
+    border: 0;
 
-.secondary_nav a:hover {
-    border-bottom: 2px solid var(--main-dark-color);
 }
 
 
@@ -452,6 +453,10 @@ main {
     height: auto;
 }
 
+#floating_bio {
+    min-height: 80px;
+}
+
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Notification *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 .notification.list-group>a>i {
@@ -474,6 +479,16 @@ main {
 
 
 
+
+/* div.row {
+    border: 1px solid darkblue;
+    background: lightgreen;
+}
+
+div.col {
+    border: 1px dashed darkred;
+    background: lightcoral;
+} */
 
 
 
