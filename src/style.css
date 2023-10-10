@@ -25,17 +25,21 @@ body {
 
 #secondary-nav-bar nav ul li a {
     text-decoration: none;
+    color: #F5EBEB;
+    font-size: 22px;
 }
 
 #logo {
     width: 201px;
     color: #F5EBEB;
     font-family: 'Kumar One', Arial, Helvetica, sans-serif;
-    font-size: 48px;
+    font-size: 5vw;
     font-weight: 400;
     padding-left: 2vw;
     margin-top: 2vh;
     margin-bottom: 2vh;
+    grid-area: logo;
+    text-wrap: nowrap;
 }
 
 
@@ -50,10 +54,6 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #867070;
-}
-
-#logo {
-    grid-area: logo;
 }
 
 #login-signup {
@@ -73,6 +73,8 @@ body {
 
 #login-signup ul li a {
     text-decoration: none;
+    color: #F5EBEB;
+    font-size: 26px;
 }
 
 
@@ -203,46 +205,51 @@ This MUST stay below other regular css for header to get properly overwritten*/
     box-sizing: border-box;
     background-color: rgb(245, 235, 235);
     display: flex;
-    /* new */
     flex-direction: column;
-    /* new */
     align-items: center;
-    /* new */
 }
 
-
-.login-signup-container label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.login-signup-container input[type="text"],
-.login-signup-container input[type="email"],
-.login-signup-container input[type="password"] {
+.login-signup-field-container {
+    position: relative; 
     width: 80%;
+    margin-bottom: 15px;
+}
+
+/* Updated styles for the label inside the input */
+.login-signup-container label {
+    position: absolute;   
+    left: 70px;          
+    top: 50%;            
+    transform: translateY(-50%); 
+    pointer-events: none; 
+    color: #fff;         
+}
+
+/* Styles for the input fields */
+.login-signup-container input:not([type="submit"]), select {
+    width: 80%; /* changed from 80% to 100% because it's now inside .field-container */
     height: 63px;
     border-radius: 20px;
     background: #D5B4B4;
     border: none;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding-left:90px; /* text indentation */
     color: white;
     box-sizing: border-box;
 }
 
-.login-signup-container form,
-/* new line added */
-.login-signup-container div {
-    /* new line added */
+
+.login-signup-container form, 
+.login-signup-container div { 
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative; /* Make the divs the reference point for absolutely positioned labels */
 }
 
-#login-button {
-    width: 80%;
-    /* this will make it responsive according to its parent's width */
+
+#login-button, #signup-button {
+    width: 80%;  
     height: 56px;
     border-radius: 20px;
     background: #D5B4B4;
@@ -250,7 +257,7 @@ This MUST stay below other regular css for header to get properly overwritten*/
     color: white;
     cursor: pointer;
     align-self: center;
-    /* new - this will center the button within the container */
+    font-size: large;
 }
 
 .close-button {

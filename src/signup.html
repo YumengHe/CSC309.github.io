@@ -14,29 +14,31 @@
             <a href="search-and-filter.html" class="close-button">X</a>
             <h1 id="title">Sign up</h1>
             <form action="https://postman-echo.com/post" method="post">
-                <div>
+                <div class="login-signup-field-container">
                     <label for="username">username: </label>
                     <input type="text" name="username" id="username" required>
                 </div>
-                <div>
+                <div class="login-signup-field-container">
                     <label for="email">email: </label>
                     <input type="email" name="email" id="email" required>
                 </div>
-                <div>
+                <div class="login-signup-field-container">
                     <label for="password">password: </label>
                     <input type="password" name="password" id="password" required>
                 </div>
-                <div>
+                <div class="login-signup-field-container">
                     <label for="confirm">confirm password: </label>
                     <input type="password" name="confirm" id="confirm" required>
                 </div>
-                <div>
+                <div class="login-signup-field-container">
                     <label for="role">role: </label>
                     <select name="role" id="role" required>
                         <option value="pet seeker">pet seeker</option>
                         <option value="pet shelter">pet shelter</option>
                     </select>
                 </div>
+                <div>
+                    <input type="submit" id="signup-button" value="Sign up">
             </form>
             <p>Already have an account? <a href="login.html">login</a></p>
         </div>
