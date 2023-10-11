@@ -4,12 +4,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetPal: pet adoption page</title>
-    <link rel="stylesheet" href="style.css">
+    <title>PetPal: Pet Update</title>
+    <!-- For Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- For Bootstrap w/ JQuery -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <!-- For local stylesheets -->
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .required::after {
+            content: '*';
+            color: red;
+            margin-left: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <h1>pet adoption page</h1>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Pet Gallery -->
+        <div class="col-md-6 gallery">
+            <img src="harry.jpg" alt="Harry" class="img-fluid mb-2">
+            <h3>Harry, 9 years old</h3>
+        </div>
+
+        <!-- On mobile, show only pet name and age -->
+        <div class="col-12 d-md-none text-center mb-4">
+            <h4>Harry, 9 years old</h4>
+        </div>
+
+        <!-- Adoption Form -->
+        <div class="col-md-6">
+            <h2>Adoption Application</h2>
+            <form>
+
+                <!-- Adopter's Name -->
+                <div class="mb-3">
+                    <label class="form-label required">Adopter's Name</label>
+                    <input type="text" class="form-control" placeholder="First Name" required>
+                    <input type="text" class="form-control mt-2" placeholder="Last Name" required>
+                </div>
+
+                <!-- Co-Adopter's Name -->
+                <div class="mb-3">
+                    <label class="form-label required">Co-Adopter's Name</label>
+                    <input type="text" class="form-control" placeholder="First Name" required>
+                    <input type="text" class="form-control mt-2" placeholder="Last Name" required>
+                </div>
+
+                <!-- Address -->
+                <div class="mb-3">
+                    <label class="form-label required">Address</label>
+                    <input type="text" class="form-control mb-3" placeholder="Street Address" required>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="City" required>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="State" required>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="Postal/Zip Code" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emails -->
+                <div class="mb-3">
+                    <label class="form-label required">Adopter's Email</label>
+                    <input type="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label required">Co-Adopter's Email</label>
+                    <input type="email" class="form-control" required>
+                    <small class="form-text text-muted">If you are a single adopter, type your email in both boxes.</small>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="mb-3">
+                    <label class="form-label required">Phone Number</label>
+                    <input type="tel" class="form-control" required>
+                </div>
+
+                <!-- Phone Type -->
+                <div class="mb-3">
+                    <label class="form-label required">Phone Type</label>
+                    <select class="form-control" required>
+                        <option value="" disabled selected>Select Phone Type</option>
+                        <option>Cell</option>
+                        <option>Home</option>
+                        <option>Work</option>
+                    </select>
+                </div>
+
+                <!-- Residents -->
+                <div class="mb-3">
+                    <label class="form-label">Names and ages of all permanent residents of your home (adults/children)</label>
+                    <input type="text" class="form-control">
+                </div>
+
+                <!-- Current Pets -->
+                <div class="mb-3">
+                    <label class="form-label required">Do you currently have any pets?</label>
+                    <select class="form-control" required>
+                        <option value="" disabled selected>Select an Option</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+
+                <!-- List of Pets -->
+                <div class="mb-3">
+                    <label class="form-label">If you currently have pets, please list them below.</label>
+                    <input type="text" class="form-control">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center mt-4">  <!-- Updated this line to center the button and add top margin -->
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
