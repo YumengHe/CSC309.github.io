@@ -1,33 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
+    <title>HOME</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetPal: landing page</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="./resource/image/logo.png">
+    <link rel="stylesheet" href="./style2.css">
+ 
 </head>
-
+ 
 <body>
-    <div class="main-nav-bar">
-        <p id="logo">Pet Pal</p>
-        <nav>
-            <ul>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="signup.html">Sign up</a></li>
-            </ul>
-        </nav>
+    <div class="page-container">
+        <div class="container">
+            <header id="header">
+                <div class="left">
+                    <a class="logo">PetPal</a>
+                    <a class="active" href="./index.html">HOME</a>
+                    <!-- <a href="#">ADOPT</a> -->
+                    <div class="dropdown">
+                        <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
+                        <div class="dropdown-content" id="myDropdown">
+                            <a href="#">DOG</a>
+                            <a href="#">CAT</a>
+                            <a href="#">OTHER</a>
+                        </div>
+                    </div> 
+                    <a href="#">FILTER</a>
+                    <a href="#">HOW IT WORKS</a>
+                    <a href="#">ABOUT</a>
+                </div>
+                <div class="search-bar">
+                    <form action="#">
+                      <input type="text" placeholder="Search..." name="search">
+                      <button type="submit">Submit</button>
+                    </form>
+                </div>
+                <div class="right">
+                    <a class="right" href="./login.html" >LOG IN</a>
+                    <a class="right" href="#" >SIGN UP</a>
+                </div>
+                <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+            </header>
+    
+            <div class="photo-section">
+                <img src="./resource/image/index_title.jpeg" alt="Descriptive alt text here">
+                <div class="photo-overlay">
+                    <p style="width: 28%;">PetPal is your go-to platform for seamless pet adoptions, connecting rescue animals with loving families. Join our community and discover the joy of gaining a lifelong furry companion.</p>
+                    <a href="#" class="learn-more-btn">Learn More</a>
+                </div>
+            </div>
+    
+            <section class="slide-card-section">
+                <div class="section-header">
+                    <h2>Dogs</h2>
+                    <a href="#" class="view-all-btn">View All</a>
+                </div>
+                <div class="card-slider">
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                </div>
+            </section>
+    
+            <section class="slide-card-section">
+                <div class="section-header">
+                    <h2>Cats</h2>
+                    <a href="#" class="view-all-btn">View All</a>
+                </div>
+                <div class="card-slider">
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                </div>
+            </section>
+    
+            <section class="slide-card-section">
+                <div class="section-header">
+                    <h2>Other</h2>
+                    <a href="#" class="view-all-btn">View All</a>
+                </div>
+                <div class="card-slider">
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                    <div class="card">
+                        <img src="./resource/image/dog1.jpeg" alt="Dog Image">
+                        <p>Name: Lily</p>
+                        <p>Age: 8 months</p>
+                        <a href="#" class="view-detail-btn">View Detail</a>
+                    </div>
+                </div>
+            </section>
+    
+            
+        </div>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About PetPal</h4>
+                    <p>PetPal is dedicated to connecting rescue animals with loving families. Experience the joy of adopting a pet and giving them a forever home.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="#">Adopt</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>Email: support@petpal.com</p>
+                    <p>Phone: +123-456-7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 PetPal. All rights reserved.</p>
+            </div>
+        </footer>
     </div>
-    <div class="secondary-nav-bar">
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="pet-details.html">Pet Details</a></li>
-                <li><a href="shelter-detail.html">Shelter Detail</a></li>
-            </ul>
-        </nav>
-    </div>
-    <p>This is the empty home page :)</p>
-</body>
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropdown-button')) {
+          var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
+        </script>
+        <script>
+            function myFunction() {
+    var x = document.getElementById("header");
+    if (x.className === "") {
+        x.className = "responsive";
+    } else {
+        x.className = "";
+    }
+}
 
-</html>
+        </script>
+        
+    
+</body>
+ </html>
