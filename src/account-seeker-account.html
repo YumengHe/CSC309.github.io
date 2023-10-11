@@ -105,7 +105,7 @@
                 <div class="side_nav col col-12 col-lg-3 mb-5">
                     <div class="list-group list-group-flush border border-start-0 border-2 rounded-end">
                         <a href="./account-seeker-profile.html#profile_form"
-                            class="list-group-item list-group-item-action py-3 lh-sm">
+                            class="list-group-item list-group-item-action py-3 lh-sm border-0">
                             <div class="w-100 fw-bolder ps-4 main-dark-color">
                                 <i class="bi bi-person-vcard-fill pe-2"></i>
                                 Profile
@@ -113,14 +113,14 @@
                         </a>
 
                         <a href="./account-seeker-account.html#email_address"
-                            class="list-group-item list-group-item-action py-3 lh-sm active">
+                            class="list-group-item list-group-item-action py-3 lh-sm border-0 active">
                             <div class="w-100 fw-bolder ps-4 main-dark-color">
                                 <i class="bi bi-gear-fill pe-2"></i>
                                 Account
                             </div>
                         </a>
 
-                        <a href="" class="list-group-item list-group-item-action py-3 lh-sm">
+                        <a href="" class="list-group-item list-group-item-action py-3 lh-sm border-0">
                             <div class="w-100 fw-bolder ps-4 main-dark-color">
                                 <i class="bi bi-collection-fill pe-2"></i>
                                 Applications
@@ -129,8 +129,6 @@
                     </div>
 
                 </div>
-
-
 
                 <div class="col col-12 col-lg-8">
                     <div class="row mb-2 ps-3">
@@ -180,11 +178,12 @@
 
                         </div>
                     </div>
-
-                    <div class="row mb-2 ps-3">
+                    <hr>
+                    <div class="row mb-2 mt-4 ps-3">
                         <lable class="form-label main-dark-color fw-bolder">Password</lable>
                     </div>
-                    <form action="" id="pswd_form" class="form-group">
+
+                    <form action="" id="pswd_form" class="form-group mb-5">
                         <div class="row g-0 justify-content-center">
                             <div class="col col-9 col-md-5 form-floating mb-3 main-dark-color">
                                 <input type="password" class="form-control" id="current_password"
@@ -220,6 +219,83 @@
                             </div>
                         </div>
                     </form>
+                    <hr>
+                    <div class="row mb-2 mt-4 ps-3">
+                        <lable id="email_address" class="form-label main-dark-color fw-bolder">
+                            Notification
+                            Preferences
+                        </lable>
+                    </div>
+
+                    <form action="" id="prefer_form" class="form_group flex-column d-flex gap-2">
+                        <div class="row g-0 d-flex justify-content-between gap-2 gap-md-0">
+                            <div class="col d-none d-md-inline col-md-8"></div>
+                            <div class="col d-none d-md-inline col-md-2 text-center main-dark-color fw-bold">Website
+                            </div>
+                            <div class="col d-none d-md-inline col-md-2 text-center main-dark-color fw-bold">Email</div>
+                        </div>
+                        <div
+                            class="row g-0 d-flex justify-content-between gap-2 gap-md-0 bg-secondary bg-opacity-10 py-2">
+                            <div class="col col-1 text-center align-self-center d-none d-md-inline">
+                                <i class="bi bi-star-fill main-dark-color small"></i>
+                            </div>
+                            <div class="col col-md-7 col-12 text-wrap fs-6 pe-3 text-center text-md-start">
+                                Receive notification on messages for submitted applications.
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" class="form-check-input" checked disabled>
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Website
+                                </lable>
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" name="e_push_msg" id="e_push_msg" class="form-check-input">
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Email</lable>
+                            </div>
+                        </div>
+                        <div
+                            class="row g-0 d-flex justify-content-between gap-2 gap-md-0 bg-secondary bg-opacity-10 py-2">
+                            <div class="col col-1 text-center align-self-center d-none d-md-inline">
+                                <i class="bi bi-star-fill main-dark-color small"></i>
+                            </div>
+                            <div class="col col-md-7 col-12 text-wrap fs-6 pe-3 text-center text-md-start">
+                                Receive notification on submited application status updates.
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" name="w_push_status" id="" class="form-check-input">
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Website
+                                </lable>
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" name="e_push_status" id="" class="form-check-input">
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Email</lable>
+                            </div>
+                        </div>
+
+                        <div
+                            class="row g-0 d-flex justify-content-between gap-2 gap-md-0 bg-secondary bg-opacity-10 py-2">
+                            <div class="col col-1 text-center align-self-center d-none d-md-inline">
+                                <i class="bi bi-star-fill main-dark-color small"></i>
+                            </div>
+                            <div class="col col-md-7 col-12 text-wrap fs-6 pe-3 text-center text-md-start">
+                                Receive notification on new pet listings.
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" name="w_push_status" id="" class="form-check-input" disabled>
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Website
+                                </lable>
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" name="e_push_status" id="" class="form-check-input">
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Email</lable>
+                            </div>
+                        </div>
+                        <div class="row g-0 d-flex justify-content-center py-2">
+                            <button type="submit"
+                                class="col col-md-2 col-4 btn btn-outline-primary-cust btn-sm">Save</button>
+                        </div>
+                    </form>
+
+
 
                     <!-- Failed to make input label inline style  https://jsfiddle.net/zsg4foj1/  -->
                     <!-- <lable class="col-sm-2" for="current_password">
