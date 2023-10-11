@@ -1,0 +1,430 @@
+* {
+    box-sizing: border-box;  /* Ensuring padding and borders are included in the total width and height */
+}
+
+/*... (rest of the existing styles) ...*/
+
+body, html{
+    margin: 0;
+    height: 100%;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F5EBEB;
+    flex-direction: column;
+}
+
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.container {
+    padding-bottom: 280px;
+}
+
+/* header */
+
+header {
+    overflow: hidden;
+    background-color: #867070;
+    padding-left: 8%;
+    padding-right: 8%;
+    max-width: 100%;
+}
+
+header a{
+    float: left;
+    color: #E4D0D0;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 75px;
+    display: block;
+}
+  
+header a:hover, header a.right:hover{
+    color: #D5B4B4;
+}
+
+header a:active {
+    color: #D5B4B4;
+}
+  
+header a.right {
+    float: right;
+    color: #E4D0D0;
+}
+
+/* logo */
+header a.logo {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+/* search bar */
+.search-bar {
+    float: left;
+    margin-left: 20px;
+}
+
+header input[type=text] {
+    line-height: 35px;
+    padding: 6px;
+    text-align: left;
+    margin-top: 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #F5EBEB;
+}
+
+header .search-bar button{
+    float: right;
+    padding: 6px;
+    margin-top: 30px;
+    line-height: 35px;
+    margin-right: 16px;
+    background: #D5B4B4;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    color: #867070;
+    border-radius: 5px;
+}
+
+::placeholder {
+    color: #867070;
+}
+
+/* dropdown */
+.dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+.dropdown .dropdown-button {
+    cursor: pointer;
+    font-size: 18px;  
+    border: none;
+    outline: none;
+    color: #E4D0D0;
+    padding: 14px 16px;
+    margin: 0;
+    background-color: #867070;
+    line-height: 75px;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #D5B4B4;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    line-height: 20px;
+}
+  
+.dropdown-content a {
+    float: none;
+    color: #867070;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    line-height: 20px;
+}
+
+.dropdown-button:hover{
+    color: #D5B4B4;
+}
+  
+.show {
+    display: block;
+}
+
+header a.icon {
+    float: right;
+    display: none;
+}
+
+/* index.html title photo */
+.photo-section {
+    position: relative;
+    height: 50vh; /* 50% of the viewport height */
+    overflow: hidden;
+}
+
+.photo-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures your image covers the div without distortion */
+}
+
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* A black overlay with 40% opacity */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Aligning items to the left */
+    gap: 20px;
+    padding: 20px; /* Spacing inside the overlay */
+    text-align: left;
+    padding-left: 8%;
+}
+
+.learn-more-btn {
+    background-color: #D5B4B4;
+    color: #867070;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.learn-more-btn:hover {
+    background-color: #E4D0D0;
+    color: #867070;
+}
+
+/* index.html slide section */
+.slide-card-section {
+    padding: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #867070;
+}
+
+.view-all-btn {
+    background-color: #D5B4B4;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.view-all-btn:hover {
+    background-color: #E4D0D0;
+    color: #867070;
+}
+
+.card-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto; /* This will allow horizontal scrolling for the cards */
+    padding-bottom: 20px; /* To ensure there's space for the scrollbar */
+}
+
+.card {
+    flex: 0 0 auto;
+    width: 200px; /* adjust as per requirement */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card p {
+    padding: 2px 10px;
+    color: #867070;
+    text-align: center;
+}
+
+.view-detail-btn {
+    display: inline-block;
+    background-color: #867070;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+.view-detail-btn:hover {
+    background-color: #D5B4B4;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    background-color: #867070;
+    color: white;
+    padding: 20px 0;
+    flex-shrink: 0;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    margin: 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-section h4 {
+    margin-bottom: 20px;
+}
+
+.footer-section p, .footer-section ul, .footer-section li {
+    margin: 5px 0;
+}
+
+.footer-section a {
+    text-decoration: none;
+    color: #E4D0D0;
+}
+
+.footer-section a:hover {
+    color: #D5B4B4;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* how it works */
+.how-it-works-section {
+    padding: 20px 10%;
+    background-color: #f5f5f5;  /* A light background to differentiate the section */
+}
+
+.how-it-works-section h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #867070;  /* Adjust color as needed */
+}
+
+.step {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+.step h3 {
+    margin-top: 0;
+    color: #D5B4B4;  /* Adjust color as needed */
+}
+
+.step p {
+    margin-bottom: 0;
+    color: #867070;
+}
+
+
+/* If you want to make it responsive: */
+@media screen and (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .container {
+        padding-bottom: 580px;
+    }
+    
+}
+
+
+
+@media screen and (max-width: 600px) {
+    header a:not(.icon), header a:not(:first-child), header .search-bar, header .dropdown {
+        display: none;
+    }
+    
+    header a.icon {
+        display: block;
+    }
+
+    header.responsive a, header.responsive .search-bar, header.responsive .dropdown {
+        display: block;
+        float: none;
+        text-align: left;
+    }
+    
+    header.responsive .dropdown-content {
+        position: relative; /* Making it fit into the mobile menu */
+    }
+}
+
+/* Adjusting input field width and button in mobile view for better fit */
+@media screen and (max-width: 400px) {
+    header input[type=text] {
+        width: 70%; /* Adjust this value as needed */
+    }
+
+    header .search-bar button {
+        width: 25%; /* Adjust this value as needed */
+    }
+}
+
+/*... (existing styles) ...*/
+
+@media screen and (max-width: 600px) {
+    /* Displaying the logo */
+    header a.logo {
+        display: block;
+    }
+
+    /* Adjusting line-height for better fit in mobile view */
+    header a {
+        line-height: 30px;
+    }
+    header .dropdown .dropdown-button {
+        line-height: 30px;
+    }
+
+    header a, header .search-bar, header .dropdown {
+        display: none;
+    }
+    
+    header a.icon {
+        display: block;
+    }
+
+    /* Displaying the items in the menu when responsive class is toggled */
+    header.responsive a:not(.right), header.responsive .search-bar, header.responsive .dropdown {
+        display: block;
+        float: none;
+        text-align: left;
+    }
+    
+    header.responsive .dropdown-content {
+        position: relative; /* Making it fit into the mobile menu */
+    }
+}
+
+
+
