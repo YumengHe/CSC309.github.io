@@ -1,0 +1,260 @@
+<!-- Account Profile Page for Seeker
+    Seeker can update their avatar, firstname, lastname, address, contact phone.
+
+    References
+        https://www.w3schools.com/bootstrap5/index.php
+        https://www.freecodecamp.org/news/how-to-keep-your-footer-where-it-belongs-59c6aa05c59c/
+        https://stackoverflow.com/questions/1561847/html-how-to-limit-file-upload-to-be-only-images
+        https://stackoverflow.com/questions/11406605/how-to-make-a-link-act-as-a-file-input
+        https://www.geeksforgeeks.org/jquery-inputmask/
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPal: Account</title>
+    <!-- For Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- For Bootstrap w/ JQuery -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <!-- For local stylesheets -->
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <!-- Offcanvas Dark Navbar -->
+        <!-- https://getbootstrap.com/docs/5.3/components/navbar/#offcanvas -->
+        <nav class="navbar navbar-expand-md main-dark-color navbar-dark">
+            <div class="container">
+                <a href="#home" class="navbar-brand">
+                    <span class="fw-bolder display-5 main-light-color pe-md-3">PetPal</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#main-nav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="main-nav">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title fw-bolder display-4 main-light-color" id="offcanvasNavbarLabel">Pet
+                            Pal</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link active main-light-color fs-5" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link main-light-color fs-5" href="#contact">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link main-light-color fs-5" href="#About">About</a>
+                            </li>
+                            <li class="nav-item d-md-none">
+                                <a href="#search" class="nav-link main-light-color fs-5">Search</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <form class="d-flex d-md-flex d-none px-3 col-lg-auto" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+                <nav class="d-flex ">
+                    <div class="dropdown text-end">
+                        <a href="#" class="p-2 fs-4 d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                            data-bs-toggle="dropdown">
+                            <i id="user-icon" class="bi bi-person-circle main-light-color"></i>
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="account-seeker-profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="account-seeker-account.html">Account</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                    <a id="bell-icon" class="p-2 fs-4 main-light-color" href="account-seeker-notification.html"><i
+                            class="bi bi-bell-fill position-relative">
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                <span class="visually-hidden">New alerts</span>
+                            </span></i></a>
+                </nav>
+            </div>
+        </nav>
+
+    </header>
+
+    <main>
+        <div class="container mt-5 ">
+            <div class="row d-lg-flex flex-lg-row justify-content-between">
+                <div class="side_nav col col-12 col-lg-3 mb-4">
+                    <div class="list-group list-group-flush border border-start-0 border-2 rounded-end">
+                        <a href="./account-shelter-profile.html#profile_form"
+                            class="list-group-item list-group-item-action py-3 lh-sm active">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-person-vcard-fill pe-2"></i>
+                                Profile
+                            </div>
+                        </a>
+
+                        <a href="./account-shelter-account.html#email_address"
+                            class="list-group-item list-group-item-action py-3 lh-sm">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-gear-fill pe-2"></i>
+                                Account
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="col col-12 col-lg-8">
+                    <form id="profile_form" action="" autocomplete="on" class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6 d-flex justify-content-center align-items-center mb-3 mb-lg-0">
+                                <div class="shelter-img col-12 m-3">
+                                    <img src="./resource/image/shelter.jpg" alt="a shelter picture">
+                                    <div id="shelter-pics">
+                                        <input id="edit_portrait" type="file" accept="image/*" multiple />
+                                        <a href="#" id="edit_portrait_link">Edit</a>​
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-start">
+                                <lable class="form-label main-dark-color fw-bolder">Name</lable>
+                                <div class="form-floating mb-3 main-dark-color col-12">
+                                    <input type="text" class="form-control" id="floating_f_name" >
+                                    <label for="floating_f_name">Shelter Name</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-2 mt-4">
+                            <lable class="sform-label main-dark-color fw-bolder">Address</lable>
+                        </div>
+                        <div class="row g-0 mb-3">
+                            <div class="col-12 form-floating main-dark-color">
+                                <input type="text" class="form-control" id="floating_street" placeholder="Street"
+                                    name="street">
+                                <label for="floating_street">Street</label>
+                            </div>
+                        </div>
+
+                        <div class="row g-0 justify-content-between">
+                            <div class="col col-5 col-md-4 form-floating main-dark-color ms-3 ms-md-0">
+                                <input type="text" class="form-control" id="floating_city" placeholder="City"
+                                    name="city">
+                                <label for="floating_city" class="form-label">City</label>
+                            </div>
+                            <div class="col col-5 col-md-2 form-floating main-dark-color me-3 me-md-0">
+                                <select id="floating_country" class="form-select">
+                                    <option selected disabled></option>
+                                    <option value="CA">CA</option>
+                                    <option value="US">US</option>
+                                </select>
+                                <label for="floating_country" class="form-label">Country</label>
+                            </div>
+                            <div class="w-100 d-md-none d-block m-1"></div>
+                            <div class="col col-5 col-md-2 form-floating main-dark-color ms-3 ms-md-0">
+                                <select id="floating_state" class="form-select">
+                                    <option selected disabled></option>
+                                    <option value="AB">AB</option>
+                                    <option value="BC">BC</option>
+                                    <option value="MB">MB</option>
+                                    <option value="NB">NB</option>
+                                    <option value="NL">NL</option>
+                                    <option value="NS">NS</option>
+                                    <option value="NT">NT</option>
+                                    <option value="NU">NU</option>
+                                    <option value="ON">ON</option>
+                                    <option value="PE">PE</option>
+                                    <option value="QC">QC</option>
+                                    <option value="SK">SK</option>
+                                    <option value="YT">YT</option>
+                                </select>
+                                <label for="floating_state" class="form-label">State</label>
+                            </div>
+                            <div class="col col-5 col-md-3 form-floating main-dark-color me-3 me-md-0">
+                                <input type="text" class="form-control" id="floating_postal" placeholder="Postal Code"
+                                    name="postal">
+                                <label for="floating_zip" class="form-label">Postal Code</label>
+                            </div>
+                        </div>
+
+                        <div class="row my-2 mt-4">
+                            <lable class="sform-label main-dark-color fw-bolder">Contact</lable>
+                        </div>
+                        <div class="row g-0 mb-3">
+                            <div class="col-12 form-floating main-dark-color form-group">
+                                <input type="text" class="form-control" id="floating_phone" name="phone"
+                                    data-inputmask="'mask': '+1 999 999 9999'">
+                                <label for="floating_phone">Phone#</label>
+                            </div>
+                        </div>
+
+                        <div class="row my-2 mt-4">
+                            <lable class="sform-label main-dark-color fw-bolder">Bio</lable>
+                        </div>
+                        <div class="row g-0 mb-3">
+                            <div class="col-12 form-floating main-dark-color form-group">
+                                <textarea name="bio" id="floating_bio" class="form-control" rows="5" cols="30"
+                                    placeholder="Feel free to tell about yourself"></textarea>
+                                <label for="floating_bio">Feel free to talk about this shelter</label>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4 d-flex justify-content-center">
+                            <div class="col-6">
+                                <button id="btn_save"
+                                    class="btn_save btn btn-outline-primary-cust form-control">Save</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+
+    <footer class="footer py-3 mt-4 border-top">
+        <div class="container d-flex justify-content-between">
+            <div class="d-flex justify-content-start align-items-center">
+                <span class="main-light-color">&copy; 2023 PetPal</span>
+            </div>
+            <ul class="nav d-flex justify-content-end list-unstyled">
+                <li class="ms-3">
+                    <a class="main-light-color" target="_blank" href="https://twitter.com/uoft/">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="main-light-color" target="_blank" href="https://www.instagram.com/pet/?hl=en">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="main-light-color" target="_blank" href="https://www.youtube.com/@petcollective">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>
