@@ -19,7 +19,7 @@ body, html{
 }
 
 .container {
-    padding-bottom: 280px;
+    padding-bottom: 76px;
 }
 
 /* header */
@@ -34,7 +34,7 @@ header {
 
 header a{
     float: left;
-    color: #E4D0D0;
+    color: #F5EBEB;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -47,54 +47,19 @@ header a:hover, header a.right:hover{
     color: #D5B4B4;
 }
 
-header a:active {
+header a.active {
     color: #D5B4B4;
 }
   
 header a.right {
     float: right;
-    color: #E4D0D0;
+    color: #F5EBEB;
 }
 
 /* logo */
 header a.logo {
     font-size: 40px;
     font-weight: 700;
-}
-
-/* search bar */
-.search-bar {
-    float: left;
-    margin-left: 20px;
-}
-
-header input[type=text] {
-    line-height: 35px;
-    padding: 6px;
-    text-align: left;
-    margin-top: 30px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #F5EBEB;
-}
-
-header .search-bar button{
-    float: right;
-    padding: 6px;
-    margin-top: 30px;
-    line-height: 35px;
-    margin-right: 16px;
-    background: #D5B4B4;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
-    color: #867070;
-    border-radius: 5px;
-}
-
-::placeholder {
-    color: #867070;
 }
 
 /* dropdown */
@@ -152,46 +117,18 @@ header a.icon {
 /* footer */
 footer {
     background-color: #867070;
-    color: white;
-    padding: 20px 0;
     flex-shrink: 0;
-    width: 100%;
+    margin: 0;
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 80px;
-    margin: 0;
+    text-align: center;
+    line-height: 38px;
+    color: #F5EBEB; 
 }
 
 .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.footer-section h4 {
-    margin-bottom: 20px;
-}
-
-.footer-section p, .footer-section ul, .footer-section li {
-    margin: 5px 0;
-}
-
-.footer-section a {
-    text-decoration: none;
-    color: #E4D0D0;
-}
-
-.footer-section a:hover {
-    color: #D5B4B4;
-}
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 20px;
+    
 }
 
 
@@ -238,8 +175,6 @@ footer {
         width: 25%; /* Adjust this value as needed */
     }
 }
-
-/*... (existing styles) ...*/
 
 @media screen and (max-width: 600px) {
     /* Displaying the logo */
