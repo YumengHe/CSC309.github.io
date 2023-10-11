@@ -127,11 +127,6 @@ footer {
     color: #F5EBEB; 
 }
 
-.footer-content {
-    
-}
-
-
 @media screen and (max-width: 768px) {
     .footer-content {
         flex-direction: column;
