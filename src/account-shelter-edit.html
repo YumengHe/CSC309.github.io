@@ -166,6 +166,14 @@
                             </div>
                         </div>
 
+                        <!-- a fake button to edit the gallary -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <!-- create a edit button for the page that link to another html page -->
+                                <a href="#" class="btn btn-secondary">Edit Gallery</a>
+                            </div>
+                        </div>
+
 
                         <!-- Pet listing -->
                         <div class="row mb-4">
@@ -183,7 +191,7 @@
                                                 <form>
                                                     <div class="mb-3">
                                                         <label for="petStatus" class="form-label">Pet Status:</label>
-                                                        <select id="petStatus" class="form-control" disabled>
+                                                        <select id="petStatus" class="form-control">
                                                             <option selected>Available</option>
                                                             <option>Adopted</option>
                                                             <option>Pending</option>
@@ -192,6 +200,8 @@
                                                     </div>
                                                 </form>
                                                 <a href="#" class="btn btn-primary-cust">Details</a>
+                                                <a href="#" class="btn btn-secondary">Edit</a>
+                                                <a href="#" class="btn btn-danger">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -208,7 +218,7 @@
                                                 <form>
                                                     <div class="mb-3">
                                                         <label for="petStatus" class="form-label">Pet Status:</label>
-                                                        <select id="petStatus" class="form-control" disabled>
+                                                        <select id="petStatus" class="form-control">
                                                             <option>Available</option>
                                                             <option>Adopted</option>
                                                             <option selected>Pending</option>
@@ -217,6 +227,8 @@
                                                     </div>
                                                 </form>
                                                 <a href="#" class="btn btn-primary-cust">Details</a>
+                                                <a href="#" class="btn btn-secondary">Edit</a>
+                                                <a href="#" class="btn btn-danger">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -231,7 +243,7 @@
                                                 <form>
                                                     <div class="mb-3">
                                                         <label for="petStatus" class="form-label">Pet Status:</label>
-                                                        <select id="petStatus" class="form-control" disabled>
+                                                        <select id="petStatus" class="form-control">
                                                             <option>Available</option>
                                                             <option selected>Adopted</option>
                                                             <option>Pending</option>
@@ -240,6 +252,8 @@
                                                     </div>
                                                 </form>
                                                 <a href="#" class="btn btn-primary-cust">Details</a>
+                                                <a href="#" class="btn btn-secondary">Edit</a>
+                                                <a href="#" class="btn btn-danger">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -247,63 +261,11 @@
                             </div>
                         </div>
 
-                        <!-- Comments -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h3 class="main-dark-color fw-bolder">Comments</h3>
-
-                                <!-- Comment 1 -->
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <p><strong>User 1:</strong> Great shelter with friendly staff!</p>
-                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                            data-bs-target="#replyForm1" aria-expanded="false"
-                                            aria-controls="replyForm1">Reply</button>
-
-                                        <!-- Reply form -->
-                                        <div class="collapse" id="replyForm1">
-                                            <form>
-                                                <div class="mb-3">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Type your reply here">
-                                                </div>
-                                                <button type="submit"
-                                                    class="btn btn-primary-cust btn-sm">Submit</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Comment 2 -->
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <p><strong>User 2:</strong> Had a wonderful experience adopting a pet here.</p>
-                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                            data-bs-target="#replyForm2" aria-expanded="false"
-                                            aria-controls="replyForm2">Reply</button>
-
-                                        <!-- Reply form -->
-                                        <div class="collapse" id="replyForm2">
-                                            <form>
-                                                <div class="mb-3">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Type your reply here">
-                                                </div>
-                                                <button type="submit"
-                                                    class="btn btn-primary-cust btn-sm">Submit</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- ...more comments -->
-
-                            </div>
-                        </div>
+                        <!-- finish edit button -->
                         <div class="row mb-4">
                             <div class="col-12">
                                 <!-- create a edit button for the page that link to another html page -->
-                                <a href="./account-shelter-edit.html" class="btn btn-primary-cust">Edit</a>
+                                <a href="./account-shelter-profile.html" class="btn btn-primary-cust">Finish Edit</a>
                             </div>
                         </div>
                     </div>
