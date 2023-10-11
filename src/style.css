@@ -492,5 +492,70 @@ div.col {
 
 
 
+/***************** search result page *********************************************************************************************************/
 
+/* Styling the thumb (the control knob of the slider) */
+#price-range::-webkit-slider-thumb {
+    background: var(--main-dark-color);
+}
+
+#price-range::-moz-range-thumb {
+    background: var(--main-dark-color);
+}
+
+/* Styling the track (the line the slider travels along) */
+#price-range::-webkit-slider-runnable-track {
+    background: var(--main-mid-color);
+}
+
+#price-range::-moz-range-track {
+    background: var(--main-mid-color);
+}
+
+#price-range::-moz-range-progress {
+    background: var(--main-light-color);
+}
+
+
+/***** shelter creation page *****/
+.shelter-img {
+    width: 320px;
+    height: 220px;
+    border-radius: 5px;
+    background-color: #86707020;
+    border: 0.5px solid #86707050;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    margin: 30px;
+}
+
+.shelter-img img {
+    width: 300px;
+    height: 200px;
+    border-radius: 5px;
+    object-fit: cover;
+    position: absolute;
+    transition: all 0.3s;
+}
+
+#shelter-pics {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.05));
+    width: 320px;
+    height: 220px;
+    border-radius: 15px;  /* Adjust for desired rounding */
+    z-index: 3;
+    opacity: 0%;
+}
+
+#shelter-pics:hover {
+    opacity: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+ 
 /* page 3 name*/
