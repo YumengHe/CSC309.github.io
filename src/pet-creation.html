@@ -17,7 +17,21 @@
     <!-- For local stylesheets -->
     <link rel="stylesheet" href="./style.css">
 
+    <!-- Add the style for image previews here -->
+    <style>
+        #imagePreviews {
+            display: flex;
+            flex-wrap: wrap;
+        }
 
+        .img-preview {
+            width: 100px; /* Fixed width */
+            height: 100px; /* Fixed height */
+            object-fit: cover; /* This will make the images cover the entire element, cropping them as needed */
+            border-radius: 5px; /* Optional: for rounded corners */
+            margin: 5px; /* Space between images */
+        }
+    </style>
 </head>
 
 <body>
@@ -28,7 +42,7 @@
 
         <!-- Pet Photos Upload -->
         <div class="container mt-5">
-            <h2 class="mb-4">Create a Pet Adoption Page</h2>
+<!--            <h2 class="mb-4">Create a Pet Adoption Page</h2>-->
 
             <div class="row">
                 <div class="col-md-6">
@@ -168,8 +182,7 @@
             var img = document.createElement('img');
             img.src = URL.createObjectURL(fileList[i]);
             img.alt = fileList[i].name;
-            img.width = 150; // Set the width of the image previews
-            img.classList.add('mr-2', 'mb-2'); // Add some margins
+            img.classList.add('img-preview', 'mr-2', 'mb-2'); // Add some margins and a class for styling
 
             // Append the image to the imagePreviews div
             imagePreviews.appendChild(img);
