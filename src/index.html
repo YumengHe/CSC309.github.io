@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./resource/image/logo.png">
-    <link rel="stylesheet" href="./style-general.css">
-    <link rel="stylesheet" href="./style-index.css">
+    <link rel="stylesheet" href="./resource/css/style-general.css">
+    <link rel="stylesheet" href="./resource/css/style-index.css">
  
 </head>
  
@@ -18,25 +18,24 @@
                 <div class="left">
                     <a class="logo">PetPal</a>
                     <a class="active" href="./index.html">HOME</a>
-                    <!-- <a href="#">ADOPT</a> -->
                     <div class="dropdown">
                         <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
                         <div class="dropdown-content" id="myDropdown">
-                            <a href="#">DOG</a>
-                            <a href="#">CAT</a>
-                            <a href="#">OTHER</a>
+                            <a href="./search/search-result-filtered-dog.html">DOGS</a>
+                            <a href="./search/search-result-filtered-cat.html">CATS</a>
+                            <a href="./search/search-result-filtered-others.html">OTHER</a>
                         </div>
                     </div> 
-                    <a href="#">FILTER</a>
-                    <a href="#">HOW IT WORKS</a>
-                    <a href="#">ABOUT</a>
+                    <a href="./search/search-result.html">SEARCH</a>
+                    <a href="./how-it-works.html">HOW IT WORKS</a>
+                    <a href="./about.html">ABOUT</a>
                 </div>
-                <div class="search-bar">
+                <!-- <div class="search-bar">
                     <form action="#">
                       <input type="text" placeholder="Search..." name="search">
                       <button type="submit">Submit</button>
                     </form>
-                </div>
+                </div> -->
                 <div class="right">
                     <a class="right" href="./login.html" >LOG IN</a>
                     <a class="right" href="#" >SIGN UP</a>
@@ -47,7 +46,7 @@
             <div class="photo-section">
                 <img src="./resource/image/index_title.jpeg" alt="Descriptive alt text here">
                 <div class="photo-overlay">
-                    <p style="width: 28%;">PetPal is your go-to platform for seamless pet adoptions, connecting rescue animals with loving families. Join our community and discover the joy of gaining a lifelong furry companion.</p>
+                    <p>PetPal is your go-to platform for seamless pet adoptions, connecting rescue animals with loving families. Join our community and discover the joy of gaining a lifelong furry companion.</p>
                     <a href="#" class="learn-more-btn">Learn More</a>
                 </div>
             </div>
@@ -231,17 +230,6 @@
             }
           }
         }
-        </script>
-        <script>
-            function myFunction() {
-    var x = document.getElementById("header");
-    if (x.className === "") {
-        x.className = "responsive";
-    } else {
-        x.className = "";
-    }
-}
-
         </script>
         
     

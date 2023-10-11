@@ -4,12 +4,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetPal: pet update page</title>
-    <link rel="stylesheet" href="style.css">
+    <title>PetPal: Pet Update</title>
+    <!-- For Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- For Bootstrap w/ JQuery -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <!-- For local stylesheets -->
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- Add the style for image previews here -->
+    <style>
+        #imagePreviews {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .img-preview {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 5px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>pet update page</h1>
-</body>
 
+<div class="container mt-5">
+
+    <form>
+
+        <!-- Pet Photos Upload -->
+        <div class="container mt-5">
+<!--            <h2 class="mb-4">Update a Pet Adoption Page</h2>-->
+
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Pet Photos Upload -->
+                    <div class="form-group mb-4">
+                        <label for="petPhotos" class="mb-2">Pet Photos</label><br>
+                        <button class="btn btn-primary" onclick="document.getElementById('petPhotos').click(); return false;">Choose Files</button>
+                        <small id="photosHelp" class="form-text text-muted">You can select multiple files.</small>
+                        <input type="file" class="form-control-file" id="petPhotos" multiple style="display: none;">
+                        <div id="selectedFiles"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div id="imagePreviews" class="mt-3">
+                        <!-- Default uploaded image -->
+                        <img src="harry.jpg" alt="Harry" class="img-preview">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pet Name -->
+        <div class="form-group mb-5">
+            <label for="petName" class="mb-2">Pet Name</label>
+            <input type="text" class="form-control" id="petName" value="Harry">
+        </div>
+
+        <!-- Pet Gender -->
+        <div class="form-group mb-5">
+            <label for="petGender" class="mb-2">Pet Gender</label>
+            <select class="form-control" id="petGender">
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+        </div>
+
+        <!-- Pet Age -->
+        <div class="form-group mb-5">
+            <label for="petAge" class="mb-2">Pet Age</label>
+            <input type="number" class="form-control" id="petAge" value="9">
+        </div>
+
+        <!-- Pet Species -->
+        <div class="form-group mb-5">
+            <label for="petSpecies" class="mb-2">Pet Species</label>
+            <select class="form-control" id="petSpecies">
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Other animals</option>
+            </select>
+        </div>
+
+        <!-- Pet Breed -->
+        <div class="form-group mb-5">
+            <label for="petBreed" class="mb-2">Pet Breed</label>
+            <input type="text" class="form-control" id="petBreed" value="Golden Retriever">
+        </div>
+
+        <!-- Pet Size -->
+        <div class="form-group mb-5">
+            <label for="petSize" class="mb-2">Pet Size</label>
+            <select class="form-control" id="petSize">
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+                <option>Extra Large</option>
+            </select>
+        </div>
+
+        <!-- Pet Colour -->
+        <div class="form-group mb-5">
+            <label for="petColour" class="mb-2">Pet Colour</label>
+            <input type="color" class="form-control form-control-color" id="petColour" value="#DAA520" title="Choose your color">
+        </div>
+
+        <!-- Pet Medical History -->
+        <div class="form-group mb-5">
+            <label for="petMedicalHistory" class="mb-2">Pet Medical History</label>
+            <textarea class="form-control" id="petMedicalHistory" rows="3">None</textarea>
+        </div>
+
+        <!-- Pet Behaviour -->
+        <div class="form-group mb-5">
+            <label for="petBehaviour" class="mb-2">Pet Behaviour</label>
+            <textarea class="form-control" id="petBehaviour" rows="3">Energetic</textarea>
+        </div>
+
+        <!-- Pet Special Needs/Requirements -->
+        <div class="form-group mb-5">
+            <label for="petSpecialNeeds" class="mb-2">Pet Special Needs/Requirements</label>
+            <textarea class="form-control" id="petSpecialNeeds" rows="3">None</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Update Pet Adoption Page</button>
+
+    </form>
+</div>
+
+<!-- Add Bootstrap JS and Popper JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // ... your existing JavaScript code ...
+</script>
+
+</body>
 </html>

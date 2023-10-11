@@ -30,6 +30,10 @@
     padding-left: 8%;
 }
 
+.photo-overlay p {
+    width: 28%;
+}
+
 .learn-more-btn {
     background-color: #D5B4B4;
     color: #867070;
@@ -72,6 +76,8 @@
     background-color: #E4D0D0;
     color: #867070;
 }
+
+/* cards */
 
 .card-slider {
     display: flex;
@@ -119,4 +125,10 @@
 
 .card:hover {
     transform: scale(1.05);
+}
+
+@media screen and (max-width: 600px) {
+    .photo-overlay p {
+        width: 40%;
+    }
 }
