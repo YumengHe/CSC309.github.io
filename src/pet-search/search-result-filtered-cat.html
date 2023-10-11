@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetPal: Account</title>
+    <title>PetPal: Pet Search</title>
     <!-- For Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <!-- For Bootstrap w/ JQuery -->
@@ -24,79 +24,46 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <!-- For local stylesheets -->
-    <link rel="stylesheet" href="./resource/css/style.css">
-    <script type="module" src="./resource/js/script.js"></script>
+    <link rel="stylesheet" href="../resource/css/style.css">
+    <link rel="stylesheet" href="../resource/css/style-general.css">
+    <script type="module" src="../resource/js/script.js"></script>
 
 </head>
 
 <body>
-    <header>
-        <!-- Offcanvas Dark Navbar -->
-        <!-- https://getbootstrap.com/docs/5.3/components/navbar/#offcanvas -->
-        <nav class="navbar navbar-expand-md main-dark-color navbar-dark">
-            <div class="container">
-                <a href="#home" class="navbar-brand">
-                    <span class="fw-bolder display-5 main-light-color pe-md-3">PetPal</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#main-nav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="main-nav">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title fw-bolder display-4 main-light-color" id="offcanvasNavbarLabel">Pet
-                            Pal</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link active main-light-color fs-5" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link main-light-color fs-5" href="#contact">Contact</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link main-light-color fs-5" href="#About">About</a>
-                            </li>
-                            <li class="nav-item d-md-none">
-                                <a href="#search" class="nav-link main-light-color fs-5">Search</a>
-                            </li>
-                        </ul>
-                    </div>
+    <header id="header">
+        <div class="left">
+            <a class="logo">PetPal</a>
+            <a class="active" href="../index.html">HOME</a>
+            <div class="dropdown">
+                <button class="dropdown-button">ADOPT</button>
+                <div class="dropdown-content">
+                    <a href="search-result-filtered-dog.html">DOGS</a>
+                    <a href="search-result-filtered-others.html">CATS</a>
+                    <a href="search-result-filtered-others.html">OTHER</a>
                 </div>
-                <form class="d-flex d-md-flex d-none px-3 col-lg-auto" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search">
-                    <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
-                </form>
-                <nav class="d-flex ">
-                    <div class="dropdown text-end">
-                        <a href="#"
-                            class="p-2 fs-4 main-light-color d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                            data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle main-light-color"></i>
-                        </a>
-                        <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="account-seeker-profile.html">Profile</a></li>
-                            <li><a class="dropdown-item" href="account-seeker-account.html">Account</a></li>
-                            <li><a class="dropdown-item" href="account-seeker-list.html">Lists</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
-                        </ul>
-                    </div>
-                    <a class="p-2 fs-4 main-light-color" href="account-seeker-notification.html">
-                        <i class="bi bi-bell-fill position-relative">
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                                <span class="visually-hidden">New alerts</span>
-                            </span>
-                        </i>
-                    </a>
-                </nav>
             </div>
-        </nav>
+            <div class="dropdown">
+                <button class="dropdown-button">SEARCH</button>
+                <div class="dropdown-content">
+                    <a href="../shelter-search/search-result.html">SEARCH FOR SHELTER</a>
+                    <a href="search-result.html">SEARCH FOR PETS</a>
+                </div>
+            </div>
+            <a href="../how-it-works.html">HOW IT WORKS</a>
+            <a href="../about.html">ABOUT</a>
+        </div>
+        <!-- <div class="search-bar">
+            <form action="#">
+              <input type="text" placeholder="Search..." name="search">
+              <button type="submit">Submit</button>
+            </form>
+        </div> -->
+        <div class="right">
+            <a class="right" href="../login.html">LOG IN</a>
+            <a class="right" href="../login.html">SIGN UP</a>
+        </div>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon">&#9776;</a>
     </header>
 
     <main>
@@ -183,7 +150,7 @@
                             <!-- Cat Entry -->
                             <div class="col-md-4 mb-4">
                                 <div class="card">
-                                    <img src="./resource/image/cat.jpg" class="card-img-top" alt="Cat Image">
+                                    <img src="../resource/image/cat.jpg" class="card-img-top" alt="Cat Image">
                                     <div class="card-body">
                                         <h5 class="card-title">Name: Whiskers</h5>
                                         <p class="card-text">Age: 3 years</p>
@@ -224,6 +191,30 @@
                 </li>
             </ul>
         </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Get all dropdown buttons
+                var dropdownButtons = document.querySelectorAll('.dropdown-button');
+    
+                // Toggle dropdown content when a button is clicked
+                dropdownButtons.forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        var dropdownContent = this.nextElementSibling; // Assuming the dropdown content is the next sibling element
+                        dropdownContent.classList.toggle('show');
+                    });
+                });
+    
+                // Hide all dropdown contents if clicked outside
+                window.onclick = function (e) {
+                    if (!e.target.matches('.dropdown-button')) {
+                        var dropdowns = document.querySelectorAll('.dropdown-content.show');
+                        dropdowns.forEach(function (dropdown) {
+                            dropdown.classList.remove('show');
+                        });
+                    }
+                };
+            });
+        </script>
     </footer>
 </body>
 
