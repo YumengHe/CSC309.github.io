@@ -122,12 +122,6 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="price-range" class="form-label main-dark-color fw-bolder">Price limit: $<span
-                                        id="range-eval">500<!-- Default value --></span></label>
-                                <input type="range" class="form-range" id="price-range" min="0" max="1000" step="10"
-                                    onInput="$('#range-eval').html($(this).val())">
-                            </div>
-                            <div class="mb-3">
                                 <label for="age" class="form-label main-dark-color fw-bolder">Age</label>
                                 <select class="form-select" id="age">
                                     <option selected>Choose...</option>
@@ -154,7 +148,9 @@
                                     value="#9F8170" title="Choose your color">
                             </div>
 
-                            <button type="submit" class="btn btn-outline-primary-cust px-5 text-nowrap btn-sm">Apply Filters</button>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-outline-primary-cust px-5 text-nowrap btn-sm">Apply Filter</button>
+                            </div>
                         </form>
                         <!-- add a break -->
                         <br>
@@ -171,14 +167,57 @@
                                     <option value="color">Color</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-outline-primary-cust px-5 text-nowrap btn-sm">Apply Sort</button>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-outline-primary-cust px-5 text-nowrap btn-sm">Apply Sort</button>
+                            </div>
                     </div>
                 </div>
 
 
 
                 <div class="col col-12 col-lg-8">
-                    <h1>TODO: pet details sample</h1>
+                    <div class="container">
+                        <div class="row">
+                            <!-- Dog Entry -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <img src="./resource/image/dog.jpg" class="card-img-top" alt="Dog Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Name: Buddy</h5>
+                                        <p class="card-text">Age: 2 years</p>
+                                        <a href="#" class="btn btn-primary-cust">Details</a>
+                                        <a href="account-shelter-profile.html" class="btn btn-secondary">Shelter</a>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <!-- Cat Entry -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <img src="./resource/image/cat.jpg" class="card-img-top" alt="Cat Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Name: Whiskers</h5>
+                                        <p class="card-text">Age: 3 years</p>
+                                        <a href="#" class="btn btn-primary-cust">Details</a>
+                                        <a href="account-shelter-profile.html" class="btn btn-secondary">Shelter</a>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <!-- Bird Entry -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <img src="./resource/image/bird.jpg" class="card-img-top" alt="Bird Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Name: Tweety</h5>
+                                        <p class="card-text">Age: 1 year</p>
+                                        <a href="#" class="btn btn-primary-cust">Details</a>
+                                        <a href="account-shelter-profile.html" class="btn btn-secondary">Shelter</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
