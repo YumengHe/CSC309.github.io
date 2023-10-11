@@ -1,0 +1,582 @@
+<!-- Account Account Page for Seeker
+    Seeker can confirm their email address if they havn't done, change email address, change password, change preferences.
+
+    References
+    https://www.w3schools.com/bootstrap5/bootstrap_modal.php
+    https://jsfiddle.net/qfzL86oc/
+    https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-toasts.php
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPal: Account</title>
+    <!-- For Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- For Bootstrap w/ JQuery -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <!-- For local stylesheets -->
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="script.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <!-- Offcanvas Dark Navbar -->
+        <!-- https://getbootstrap.com/docs/5.3/components/navbar/#offcanvas -->
+        <nav class="navbar navbar-expand-md main-dark-color navbar-dark">
+            <div class="container">
+                <a href="#home" class="navbar-brand">
+                    <span class="fw-bolder display-5 main-light-color pe-md-3">PetPal</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#main-nav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="main-nav">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title fw-bolder display-4 main-light-color" id="offcanvasNavbarLabel">Pet
+                            Pal</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link active main-light-color fs-5" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link main-light-color fs-5" href="#contact">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link main-light-color fs-5" href="#About">About</a>
+                            </li>
+                            <li class="nav-item d-md-none">
+                                <a href="#search" class="nav-link main-light-color fs-5">Search</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <form class="d-flex d-md-flex d-none px-3 col-lg-auto" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+                <nav class="d-flex ">
+                    <div class="dropdown text-end">
+                        <a href="#"
+                            class="p-2 fs-4 main-light-color d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                            data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle main-light-color"></i>
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="account-seeker-profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="account-seeker-account.html">Account</a></li>
+                            <li><a class="dropdown-item" href="account-seeker-list.html">Lists</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                    <a class="p-2 fs-4 main-light-color" href="account-seeker-notification.html">
+                        <i class="bi bi-bell-fill position-relative">
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                <span class="visually-hidden">New alerts</span>
+                            </span>
+                        </i>
+                    </a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container mt-5">
+            <div class="row d-flex flex-lg-row justify-content-between">
+                <!-- Sidenav -->
+                <div class="side_nav col col-12 col-lg-3 mb-5">
+                    <div class="list-group list-group-flush border border-start-0 border-2 rounded-end">
+                        <a href="./account-shelter-profile.html"
+                            class="list-group-item list-group-item-action py-3 lh-sm border-0">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-person-vcard-fill pe-2"></i>
+                                Profile
+                            </div>
+                        </a>
+
+                        <a href="./account-shelter-account.html#profile_form"
+                            class="list-group-item list-group-item-action py-3 lh-sm border-0 active">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-gear-fill pe-2"></i>
+                                Account
+                            </div>
+                        </a>
+                        <hr>
+                        <p class="text-muted px-3 mb-0">Management</p>
+                        <a href="" class="list-group-item list-group-item-action py-3 lh-sm border-0">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-list-stars pe-2"></i>
+                                Pets
+                            </div>
+                        </a>
+                        <a href="" class="list-group-item list-group-item-action py-3 lh-sm border-0">
+                            <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                <i class="bi bi-collection-fill pe-2"></i>
+                                Applications
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                <!-- Main section -->
+                <div class="col col-12 col-lg-8">
+                    <!-- Profile section -->
+                    <form id="profile_form" action="" autocomplete="on" class="form-group">
+                        <div class="row my-2 mt-4">
+                            <lable class="sform-label main-dark-color fw-bolder fs-3">Public Profile</lable>
+                        </div>
+                        <div class="row">
+                            <!-- Portrait image -->
+                            <div class="col-lg-6 d-flex justify-content-center align-items-center mb-3 mb-lg-0">
+                                <div class="shelter portrait col-12 m-3">
+                                    <img src="./resource/image/shelter_portrait.jpg" alt="portrait.jpg">
+                                    <div id="shelter_portrait_shadow">
+                                        <input id="edit_portrait" type="file" accept="image/*" />
+                                        <a href="#" id="edit_portrait_link">Edit</a>​
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Name Section -->
+                            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-start">
+                                <lable class="form-label main-dark-color fw-bolder">Shelter Name
+                                    <span class="text-danger">*</span>
+                                </lable>
+                                <div class="mb-3 main-dark-color col-12">
+                                    <input type="text" class="form-control py-3" id="shelter_name"
+                                        placeholder="Shelter Name" name="shelter_name" required
+                                        value="Toronto Humane Society">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Address Section -->
+                        <div class="row my-2 mt-4">
+                            <lable class="sform-label main-dark-color fw-bolder">Address
+                            </lable>
+                        </div>
+                        <div class="row g-0 mb-3">
+                            <div class="col-12 form-floating main-dark-color">
+                                <input type="text" class="form-control" id="floating_street" placeholder="Street"
+                                    name="street" required value="11 River Street">
+                                <label for="floating_street">Street
+                                    <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row g-0 justify-content-between">
+                            <div class="col col-5 col-md-4 form-floating main-dark-color ms-3 ms-md-0">
+                                <input type="text" class="form-control" id="floating_city" placeholder="City"
+                                    name="city" required value="Toronto">
+                                <label for="floating_city" class="form-label">City
+                                    <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                            <div class="col col-5 col-md-2 form-floating main-dark-color me-3 me-md-0">
+                                <select id="floating_country" class="form-select" required>
+                                    <option disabled></option>
+                                    <option value="CA" selected>CA</option>
+                                    <option value="US">US</option>
+                                </select>
+                                <label for="floating_country" class="form-label">Country
+                                    <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                            <div class="w-100 d-md-none d-block m-1"></div>
+                            <div class="col col-5 col-md-2 form-floating main-dark-color ms-3 ms-md-0">
+                                <select id="floating_state" class="form-select" required>
+                                    <option disabled></option>
+                                    <option value="AB">AB</option>
+                                    <option value="BC">BC</option>
+                                    <option value="MB">MB</option>
+                                    <option value="NB">NB</option>
+                                    <option value="NL">NL</option>
+                                    <option value="NS">NS</option>
+                                    <option value="NT">NT</option>
+                                    <option value="NU">NU</option>
+                                    <option value="ON" selected>ON</option>
+                                    <option value="PE">PE</option>
+                                    <option value="QC">QC</option>
+                                    <option value="SK">SK</option>
+                                    <option value="YT">YT</option>
+                                </select>
+                                <label for="floating_state" class="form-label">State
+                                    <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                            <div class="col col-5 col-md-3 form-floating main-dark-color me-3 me-md-0">
+                                <input type="text" class="form-control" id="floating_postal" placeholder="Postal Code"
+                                    name="postal" required value="M5A 4C2">
+                                <label for="floating_zip" class="form-label">Postal Code
+                                    <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Contact Section -->
+                        <div class="row my-2 mt-4">
+                            <lable class="sform-label main-dark-color fw-bolder">Contact</lable>
+                        </div>
+                        <div class="row g-0 mb-3 d-flex justify-content-between">
+                            <div class="col-6 form-floating main-dark-color form-group">
+                                <input type="text" class="form-control" id="floating_phone" name="phone"
+                                    data-inputmask="'mask': '+1 999 999 9999'" required value="4163922273">
+                                <label for="floating_phone">Phone#
+                                    <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                            <div class="col-5 form-floating main-dark-color form-group">
+                                <input type="text" class="form-control" id="floating_fax" name="fax"
+                                    data-inputmask="'mask': '+1 999 999 9999'" value="4163929978">
+                                <label for="floating_fax">Fax#</label>
+                            </div>
+                        </div>
+                        <!-- Emails section -->
+                        <div class="row g-0 d-flex flex-column">
+                            <div class="my-2">
+                                <lable class="sform-label main-dark-color fw-bolder">Emails</lable>
+                            </div>
+                            <!-- Required general email input -->
+                            <div class="input-group">
+                                <span class="input-group-text">General
+                                    <span class="text-danger">*</span>
+                                </span>
+                                <input type="email" name="" id="" class="form-control" required
+                                    value="info@torontohumanesociety.com">
+                            </div>
+                            <!-- line break -->
+                            <div class="w-100 py-1"></div>
+                            <!-- New added email with a delete icon at right-end -->
+                            <div class="input-group">
+                                <span class="input-group-text">Adoptions</span>
+                                <input type="email" name="" id="" class="form-control" required
+                                    value="adoption@torontohumanesociety.com">
+                                <i class="bi bi-trash-fill main-dark-color ps-2 align-self-center"></i>
+                            </div>
+
+                            <!-- Plus icon to trigger Add Email Modal -->
+                            <a href="" data-bs-toggle="modal" data-bs-target="#add_email_modal" id="btn_add_email"
+                                class="d-flex justify-content-end pt-1">
+                                <i class=" bi bi-plus-square-fill main-dark-color fs-4"></i>
+                            </a>
+
+                            <!-- Add Email Modal w/ two buttons -->
+                            <div class="modal fade" id="add_email_modal" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered modal-fullscreen-md-down">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title fs-6 main-dark-color fw-bolder">Add New Email
+                                            </h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="">
+                                                <div class="mb-3">
+                                                    <label for="new_email" class="col-form-label">
+                                                        Email's Label
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control" id="new_email" required>
+                                                    <label for="new_email" class="col-form-label">
+                                                        Email Address
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="email" class="form-control" id="new_email" required>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary btn-sm"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" id="" class="btn btn-primary-cust btn-sm">
+                                                Add</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Mission Section -->
+                        <div class="row my-2">
+                            <lable class="sform-label main-dark-color fw-bolder">Mission</lable>
+                        </div>
+                        <div class="row g-0 mb-3">
+                            <div class="col-12 form-floating main-dark-color form-group">
+                                <textarea name="mission" id="floating_mission" class="form-control" rows="5" cols="30"
+                                    placeholder="Feel free to tell about yourself">To Improve the Lives of Animals.
+                                </textarea>
+                                <label for="floating_mission">Feel free to talk about the mission of your
+                                    shelter</label>
+                            </div>
+                        </div>
+
+                        <!-- Save Button -->
+                        <div class="row my-4 d-flex justify-content-center">
+                            <div class="col-6">
+                                <button id="btn_save" type="submit"
+                                    class="btn_save btn btn-outline-primary-cust form-control">Save</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                    <!-- Horizontal line -->
+                    <hr class="my-5">
+                    <div class="row mt-2 mb-4">
+                        <lable class="sform-label main-dark-color fw-bolder fs-3">Account Settings</lable>
+                    </div>
+
+                    <!-- Email section -->
+                    <div class="row mb-2 ps-3">
+                        <lable id="email_address" class="form-label main-dark-color fw-bolder">Login Email</lable>
+                    </div>
+
+                    <div class="row mb-4 d-flex justify-content-md-evenly gap-3 justify-content-center mb-5">
+                        <div class="col col-8 col-lg-4">
+                            <p id="email_input" class="fw-normal m-auto text-center fs-5 lh-lg text-muted">
+                                shelter-foo@email.com
+                            </p>
+                        </div>
+                        <!--  confirm email-->
+                        <div class="col col-8 col-md-5 col-lg-3 d-flex flex-column justify-content-center ">
+                            <button type="button" id="btn_confirm_email"
+                                class="btn btn-outline-primary-cust text-nowrap fw-lighter px-2 btn-sm">Confirm
+                                Email</button>
+                        </div>
+                        <!--  change email-->
+                        <div class="col col-8 col-md-5 col-lg-3 d-flex flex-column justify-content-center">
+                            <button class="btn btn-outline-primary-cust btn-sm text-nowrap fw-lighter px-4"
+                                data-bs-toggle="modal" data-bs-target="#change_email_modal">Change</button>
+                            <!-- Modal w/ two buttons -->
+                            <div class="modal fade" id="change_email_modal" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title fs-6">Change Login Email</h3>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="">
+                                                <div class="mb-3">
+                                                    <label for="new_email" class="col-form-label">New Email</label>
+                                                    <input type="email" class="form-control" id="new_email" required>
+                                                </div>
+                                                <div class="text-end mt-5 mb-2">
+                                                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                                                        data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="submit" id="btn_send_confirm"
+                                                        class="btn btn-primary-cust btn-sm">Send
+                                                        Confirmation
+                                                        Link</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Password Section -->
+                    <div class="row mb-2 mt-4 ps-3">
+                        <lable class="form-label main-dark-color fw-bolder">Password</lable>
+                    </div>
+                    <!-- update pswd form -->
+                    <form action="" id="pswd_form" class="form-group mb-5">
+                        <div class="row g-0 justify-content-center">
+                            <div class="col col-9 col-md-5 form-floating mb-3 main-dark-color">
+                                <input type="password" class="form-control" id="current_password"
+                                    placeholder="Current Password" name="current_password" required>
+                                <label for="current_password">Current Password</label>
+                            </div>
+                        </div>
+
+                        <div class="row g-0 justify-content-center">
+                            <div class="col col-9 col-md-5 form-floating mb-3 main-dark-color">
+                                <input type="password" class="form-control" id="new_password" placeholder="New Password"
+                                    name="new_password" required>
+                                <label for="new_password">New Password</label>
+                            </div>
+                        </div>
+                        <div class="row g-0 justify-content-center">
+                            <div class="col col-9 col-md-5 form-floating mb-3 main-dark-color">
+                                <input type="password" class="form-control" id="confirm_new_password"
+                                    placeholder="Confirm New Password" name="confirm_new_password" required>
+                                <label for="confirm_new_password">Confirm New Password</label>
+                            </div>
+                        </div>
+
+                        <div class="row px-5 g-0 justify-content-center gap-lg-2 gap-1">
+                            <div class="col col-7 col-lg-5 text-lg-end text-center ms">
+                                <button id="btn_update_pswd"
+                                    class="btn btn-outline-primary-cust px-5 text-nowrap btn-sm">Update</button>
+                            </div>
+                            <div class="col col-7 col-lg-5 text-lg-start text-center align-self-end">
+                                <a id="btn_forgot_pswd"
+                                    class="text-decoration-underline text-muted text-nowrap my-0 small">Forgot password
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Notification Preference section -->
+                    <div class="row mb-2 mt-4 ps-3">
+                        <lable id="email_address" class="form-label main-dark-color fw-bolder">
+                            Notification Preferences
+                        </lable>
+                    </div>
+                    <!-- preference checkbox form -->
+                    <form action="" id="prefer_form" class="form_group flex-column d-flex gap-2">
+                        <div class="row g-0 d-flex justify-content-between gap-2 gap-md-0">
+                            <div class="col d-none d-md-inline col-md-8"></div>
+                            <div class="col d-none d-md-inline col-md-2 text-center main-dark-color fw-bold">Website
+                            </div>
+                            <div class="col d-none d-md-inline col-md-2 text-center main-dark-color fw-bold">Email</div>
+                        </div>
+                        <div
+                            class="row g-0 d-flex justify-content-between gap-2 gap-md-0 bg-secondary bg-opacity-10 py-2">
+                            <div class="col col-1 text-center align-self-center d-none d-md-inline">
+                                <i class="bi bi-star-fill main-dark-color small"></i>
+                            </div>
+                            <div class="col col-md-7 col-12 text-wrap fs-6 pe-3 text-center text-md-start">
+                                Receive notification for new applications.
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" class="form-check-input" checked disabled>
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Website
+                                </lable>
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" name="e_push_msg" id="e_push_msg" class="form-check-input">
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Email</lable>
+                            </div>
+                        </div>
+                        <div
+                            class="row g-0 d-flex justify-content-between gap-2 gap-md-0 bg-secondary bg-opacity-10 py-2">
+                            <div class="col col-1 text-center align-self-center d-none d-md-inline">
+                                <i class="bi bi-star-fill main-dark-color small"></i>
+                            </div>
+                            <div class="col col-md-7 col-12 text-wrap fs-6 pe-3 text-center text-md-start">
+                                Receive notification for messages from applicants.
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" name="w_push_status" id="" class="form-check-input" checked
+                                    disabled>
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Website
+                                </lable>
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" name="e_push_status" id="" class="form-check-input" checked>
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Email</lable>
+                            </div>
+                        </div>
+
+                        <div
+                            class="row g-0 d-flex justify-content-between gap-2 gap-md-0 bg-secondary bg-opacity-10 py-2">
+                            <div class="col col-1 text-center align-self-center d-none d-md-inline">
+                                <i class="bi bi-star-fill main-dark-color small"></i>
+                            </div>
+                            <div class="col col-md-7 col-12 text-wrap fs-6 pe-3 text-center text-md-start">
+                                Receive notification for new reviews.
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" name="w_push_status" id="" class="form-check-input">
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Website
+                                </lable>
+                            </div>
+                            <div class="col col-md-2 text-center align-self-center">
+                                <input type="checkbox" name="e_push_status" id="" class="form-check-input">
+                                <lable class="form-check-label d-inline d-md-none main-dark-color fw-bold">Email</lable>
+                            </div>
+                        </div>
+                        <div class="row g-0 d-flex justify-content-center py-2">
+                            <button type="submit"
+                                class="col col-md-2 col-4 btn btn-outline-primary-cust btn-sm">Save</button>
+                        </div>
+                    </form>
+
+
+
+                    <!-- Failed to make input label inline style  https://jsfiddle.net/zsg4foj1/  -->
+                    <!-- <lable class="col-sm-2" for="current_password">
+                <span class="h6 small bg-white text-muted pt-1 pl-2 pr-2">Current
+                    Password</span>
+            </lable>
+            <input type="password" class="form-control mt-n3" id="current_password" name="current_password"> -->
+
+                </div>
+                <!-- Toast Message - for confirm email btn, forgot pswd link -->
+                <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+                    <div id="btn_confirm_email_toast" class="toast main-dark-color border-0" role="alert">
+                        <div class="d-flex">
+                            <div class="toast-body text-nowrap pe-4">Confirmation link is sent to your email.
+                            </div>
+                            <button type="button" class="btn-close main-dark-color me-3 m-auto"
+                                data-bs-dismiss="toast"></button>
+                        </div>
+                    </div>
+
+                    <div id="btn_forgot_pswd_toast" class="toast main-dark-color border-0" role="alert">
+                        <div class="d-flex">
+                            <div class="toast-body text-nowrap pe-4">Please check your email for password reset.
+                            </div>
+                            <button type="button" class="btn-close main-dark-color me-3 m-auto"
+                                data-bs-dismiss="toast"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+    <footer class="footer py-3 mt-4 border-top">
+        <div class="container d-flex justify-content-between">
+            <!-- Copyright -->
+            <div class="d-flex justify-content-start align-items-center">
+                <span class="main-light-color">&copy; 2023 PetPal</span>
+            </div>
+            <!-- Social media links -->
+            <ul class="nav d-flex justify-content-end list-unstyled">
+                <li class="ms-3">
+                    <a class="main-light-color" target="_blank" href="https://twitter.com/uoft/">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="main-light-color" target="_blank" href="https://www.instagram.com/pet/?hl=en">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="main-light-color" target="_blank" href="https://www.youtube.com/@petcollective">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>
