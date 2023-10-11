@@ -276,7 +276,7 @@ select {
 }
 
 
-/***************** Account Update Pages - For Seeker *********************************************************************************************************/
+/***************** Account Update Pages - For Seeker & Shelter *********************************************************************************************************/
 :root {
     --main-dark-color: #867070;
     --main-mid-color: #D5B4B4;
@@ -393,13 +393,14 @@ main {
 }
 
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Seeker Profile *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*  Profile *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 
 /* ------------- Portrait ------------- */
 /* https://stackoverflow.com/questions/11406605/how-to-make-a-link-act-as-a-file-input */
 /* https://bootstrapious.com/p/bootstrap-image-hover */
-.portrait {
+.seeker.portrait,
+.shelter.portrait {
     width: 220px;
     height: 220px;
     border-radius: 50%;
@@ -413,7 +414,13 @@ main {
     margin: 30px;
 }
 
-.portrait img {
+.shelter.portrait {
+    border-radius: 0;
+    width: 320px;
+}
+
+.seeker.portrait img,
+.shelter.portrait img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -422,7 +429,15 @@ main {
     transition: all 0.3s;
 }
 
-#portrait_shadow {
+.shelter.portrait img {
+    width: 300px;
+    border-radius: 0;
+    object-fit: scale-down;
+    background-color: white;
+}
+
+#seeker_portrait_shadow,
+#shelter_portrait_shadow {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.05));
     width: 220px;
     height: 220px;
@@ -431,12 +446,19 @@ main {
     opacity: 0%;
 }
 
-#portrait_shadow:hover {
+#seeker_portrait_shadow:hover,
+#shelter_portrait_shadow:hover {
     opacity: 60%;
     display: flex;
     justify-content: center;
     align-items: flex-end;
 }
+
+#shelter_portrait_shadow {
+    width: 320px;
+    border-radius: 0%;
+}
+
 
 #edit_portrait {
     display: none;
@@ -455,6 +477,10 @@ main {
 
 #floating_bio {
     min-height: 80px;
+}
+
+#floating_mission {
+    min-height: 120px;
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Notification *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -528,5 +554,5 @@ div.col {
 
 /***** shelter creation page *****/
 
- 
+
 /* page 3 name*/

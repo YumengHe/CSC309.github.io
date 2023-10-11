@@ -153,10 +153,11 @@
     <main>
         <div class="container mt-5 ">
             <div class="row d-lg-flex flex-lg-row justify-content-between">
+                <!-- Sidenav -->
                 <div class="side_nav col col-12 col-lg-3 mb-4">
                     <div class="list-group list-group-flush border border-start-0 border-2 rounded-end">
                         <a href="./account-seeker-profile.html#profile_form"
-                            class="list-group-item list-group-item-action py-3 lh-sm active">
+                            class="list-group-item list-group-item-action py-3 lh-sm border-0 active">
                             <div class="w-100 fw-bolder ps-4 main-dark-color">
                                 <i class="bi bi-person-vcard-fill pe-2"></i>
                                 Profile
@@ -164,14 +165,14 @@
                         </a>
 
                         <a href="./account-seeker-account.html#email_address"
-                            class="list-group-item list-group-item-action py-3 lh-sm">
+                            class="list-group-item list-group-item-action py-3 lh-sm border-0">
                             <div class="w-100 fw-bolder ps-4 main-dark-color">
                                 <i class="bi bi-gear-fill pe-2"></i>
                                 Account
                             </div>
                         </a>
 
-                        <a href="" class="list-group-item list-group-item-action py-3 lh-sm">
+                        <a href="" class="list-group-item list-group-item-action py-3 lh-sm border-0">
                             <div class="w-100 fw-bolder ps-4 main-dark-color">
                                 <i class="bi bi-collection-fill pe-2"></i>
                                 Applications
@@ -180,19 +181,21 @@
                     </div>
 
                 </div>
+                <!-- Main content -->
                 <div class="col col-12 col-lg-8">
                     <form id="profile_form" action="" autocomplete="on" class="form-group">
                         <div class="row">
+                            <!-- Portrait image -->
                             <div class="col-lg-6 d-flex justify-content-center align-items-center mb-3 mb-lg-0">
-                                <div class="portrait col-12 m-3">
+                                <div class="seeker portrait col-12 m-3">
                                     <img src="./resource/image/seeker_portrait.jpg" alt="portrait.jpg">
-                                    <div id="portrait_shadow">
+                                    <div id="seeker_portrait_shadow">
                                         <input id="edit_portrait" type="file" accept="image/*" />
                                         <a href="#" id="edit_portrait_link">Edit</a>​
                                     </div>
-
                                 </div>
                             </div>
+                            <!-- Name Section -->
                             <div class="col-lg-6 d-flex flex-column justify-content-center align-items-start">
                                 <lable class="form-label main-dark-color fw-bolder">Name</lable>
                                 <div class="form-floating mb-3 main-dark-color col-12">
@@ -207,7 +210,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <!-- Address Section -->
                         <div class="row my-2 mt-4">
                             <lable class="sform-label main-dark-color fw-bolder">Address</lable>
                         </div>
@@ -227,7 +230,7 @@
                             </div>
                             <div class="col col-5 col-md-2 form-floating main-dark-color me-3 me-md-0">
                                 <select id="floating_country" class="form-select">
-                                    <option selected disabled></option>
+                                    <option selected disabled>Choose...</option>
                                     <option value="CA">CA</option>
                                     <option value="US">US</option>
                                 </select>
@@ -236,7 +239,7 @@
                             <div class="w-100 d-md-none d-block m-1"></div>
                             <div class="col col-5 col-md-2 form-floating main-dark-color ms-3 ms-md-0">
                                 <select id="floating_state" class="form-select">
-                                    <option selected disabled></option>
+                                    <option selected disabled>Choose...</option>
                                     <option value="AB">AB</option>
                                     <option value="BC">BC</option>
                                     <option value="MB">MB</option>
@@ -259,7 +262,7 @@
                                 <label for="floating_zip" class="form-label">Postal Code</label>
                             </div>
                         </div>
-
+                        <!-- Contact Section -->
                         <div class="row my-2 mt-4">
                             <lable class="sform-label main-dark-color fw-bolder">Contact</lable>
                         </div>
@@ -270,7 +273,7 @@
                                 <label for="floating_phone">Phone#</label>
                             </div>
                         </div>
-
+                        <!-- Bio Section -->
                         <div class="row my-2 mt-4">
                             <lable class="sform-label main-dark-color fw-bolder">Bio</lable>
                         </div>
@@ -281,10 +284,10 @@
                                 <label for="floating_bio">Feel free to talk about yourself</label>
                             </div>
                         </div>
-
+                        <!-- Save Button -->
                         <div class="row mt-4 d-flex justify-content-center">
                             <div class="col-6">
-                                <button id="btn_save"
+                                <button id="btn_save" type="submit"
                                     class="btn_save btn btn-outline-primary-cust form-control">Save</button>
                             </div>
                         </div>
@@ -300,9 +303,11 @@
 
     <footer class="footer py-3 mt-4 border-top">
         <div class="container d-flex justify-content-between">
+            <!-- Copyright -->
             <div class="d-flex justify-content-start align-items-center">
                 <span class="main-light-color">&copy; 2023 PetPal</span>
             </div>
+            <!-- Social media links -->
             <ul class="nav d-flex justify-content-end list-unstyled">
                 <li class="ms-3">
                     <a class="main-light-color" target="_blank" href="https://twitter.com/uoft/">
