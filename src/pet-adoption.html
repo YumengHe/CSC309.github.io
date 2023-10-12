@@ -24,27 +24,35 @@
 
 
 <body>
+
+<div class="page-container">
 <header id="header">
     <div class="left">
-        <a class="logo">PetPal</a>
+        <a class="logo" href="./index.html">PetPal</a>
         <a class="active" href="./index.html">HOME</a>
         <div class="dropdown">
-            <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
+            <button class="dropdown-button" >ADOPT</button>
             <div class="dropdown-content" id="myDropdown">
-                <a href="./search/search-result-filtered-dog.html">DOGS</a>
-                <a href="./search/search-result-filtered-cat.html">CATS</a>
-                <a href="./search/search-result-filtered-others.html">OTHER</a>
+                <a href="./pet-search/search-result-filtered-dog.html">DOGS</a>
+                <a href="./pet-search/search-result-filtered-cat.html">CATS</a>
+                <a href="./pet-search/search-result-filtered-others.html">OTHER</a>
             </div>
         </div>
-        <a href="./search/search-result.html">SEARCH</a>
+        <div class="dropdown">
+            <button class="dropdown-button">SEARCH</button>
+            <div class="dropdown-content">
+                <a href="./shelter-search/search-result.html">SEARCH FOR SHELTER</a>
+                <a href="./pet-search/search-result.html">SEARCH FOR PETS</a>
+            </div>
+        </div>
         <a href="./how-it-works.html">HOW IT WORKS</a>
         <a href="./about.html">ABOUT</a>
     </div>
     <div class="right">
-        <a class="right" href="./login.html" >LOG IN</a>
-        <a class="right" href="#" >SIGN UP</a>
+        <a class="right" href="./login.html">LOG IN</a>
+        <a class="right" href="./signup.html">SIGN UP</a>
     </div>
-    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon">&#9776;</a>
 </header>
 
 <div class="container mt-5">
@@ -169,12 +177,17 @@
 
                 <!-- Submit Button -->
                 <div class="text-center mt-4">  <!-- Updated this line to center the button and add top margin -->
-                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                    <button type="submit" class="btn">Submit Application</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
+<footer>
+    <p>© 2023 PetPal. All rights reserved.</p>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -196,6 +209,8 @@
 </script>
 
 
+
+</div>
 </body>
 
 </html>

@@ -23,34 +23,34 @@
 
 <body>
 
-
+<div class="page-container">
 <header id="header">
     <div class="left">
-        <a class="logo">PetPal</a>
+        <a class="logo" href="./index.html">PetPal</a>
         <a class="active" href="./index.html">HOME</a>
         <div class="dropdown">
-            <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
+            <button class="dropdown-button" >ADOPT</button>
             <div class="dropdown-content" id="myDropdown">
-                <a href="./search/search-result-filtered-dog.html">DOGS</a>
-                <a href="./search/search-result-filtered-cat.html">CATS</a>
-                <a href="./search/search-result-filtered-others.html">OTHER</a>
+                <a href="./pet-search/search-result-filtered-dog.html">DOGS</a>
+                <a href="./pet-search/search-result-filtered-cat.html">CATS</a>
+                <a href="./pet-search/search-result-filtered-others.html">OTHER</a>
             </div>
         </div>
-        <a href="./search/search-result.html">SEARCH</a>
+        <div class="dropdown">
+            <button class="dropdown-button">SEARCH</button>
+            <div class="dropdown-content">
+                <a href="./shelter-search/search-result.html">SEARCH FOR SHELTER</a>
+                <a href="./pet-search/search-result.html">SEARCH FOR PETS</a>
+            </div>
+        </div>
         <a href="./how-it-works.html">HOW IT WORKS</a>
         <a href="./about.html">ABOUT</a>
     </div>
-    <!-- <div class="search-bar">
-        <form action="#">
-          <input type="text" placeholder="Search..." name="search">
-          <button type="submit">Submit</button>
-        </form>
-    </div> -->
     <div class="right">
-        <a class="right" href="./login.html" >LOG IN</a>
-        <a class="right" href="#" >SIGN UP</a>
+        <a class="right" href="./login.html">LOG IN</a>
+        <a class="right" href="./signup.html">SIGN UP</a>
     </div>
-    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon">&#9776;</a>
 </header>
 
 
@@ -69,8 +69,8 @@
 
                         <!-- Pet Photos Upload -->
                         <div class="form-group mb-4">
-                            <label for="petPhotos" class="mb-2">Pet Photos</label><br>
-                            <button class="btn btn-primary" onclick="document.getElementById('petPhotos').click(); return false;">Choose Files</button>
+                            <label for="petPhotos" class="form-label required">Pet Photos</label><br>
+                            <button class="btn" onclick="document.getElementById('petPhotos').click(); return false;">Choose Files</button>
                             <small id="photosHelp" class="form-text text-muted">You can select multiple files.</small>
                             <input type="file" class="form-control-file" id="petPhotos" multiple style="display: none;">
                             <div id="selectedFiles"></div>
@@ -89,14 +89,14 @@
 
         <!-- Pet Name -->
         <div class="form-group mb-5">
-            <label for="petName" class="mb-2">Pet Name</label>
+            <label for="petName" class="form-label required">Pet Name</label>
             <input type="text" class="form-control" id="petName" placeholder="Enter pet name">
             <!-- Add your color class here -->
         </div>
 
         <!-- Pet Gender -->
         <div class="form-group mb-5">
-            <label for="petGender" class="mb-2">Pet Gender</label>
+            <label for="petGender" class="form-label required">Pet Gender</label>
             <select class="form-control" id="petGender">
                 <option selected disabled>Select Pet Gender</option>
                 <option>Male</option>
@@ -108,14 +108,14 @@
 
         <!-- Pet Age -->
         <div class="form-group mb-5">
-            <label for="petAge" class="mb-2">Pet Age</label>
+            <label for="petAge" class="form-label required">Pet Age</label>
             <input type="number" class="form-control" id="petAge" placeholder="Enter pet age in years">
             <!-- Add your color class here -->
         </div>
 
         <!-- Pet Species -->
         <div class="form-group mb-5">
-            <label for="petSpecies" class="mb-2">Pet Species</label>
+            <label for="petSpecies" class="form-label required">Pet Species</label>
             <select class="form-control" id="petSpecies">
                 <option selected disabled>Select Pet Species</option>
                 <option>Dog</option>
@@ -128,14 +128,14 @@
 
         <!-- Pet Breed -->
         <div class="form-group mb-5">
-            <label for="petBreed" class="mb-2">Pet Breed</label>
+            <label for="petBreed" class="form-label required">Pet Breed</label>
             <input type="text" class="form-control" id="petBreed" placeholder="Enter pet breed">
             <!-- Add your color class here -->
         </div>
 
         <!-- Pet Size -->
         <div class="form-group mb-5">
-            <label for="petSize" class="mb-2">Pet Size</label>
+            <label for="petSize" class="form-label required">Pet Size</label>
             <select class="form-control" id="petSize">
                 <option selected disabled>Select Pet Size</option>
                 <option>Small</option>
@@ -149,7 +149,7 @@
 
         <!-- Pet Colour -->
         <div class="form-group mb-5">
-            <label for="petColour" class="mb-2">Pet Colour</label>
+            <label for="petColour" class="form-label required">Pet Colour</label>
             <input type="color" class="form-control form-control-color" id="petColour" value="#ff0000" title="Choose your color">
             <!-- Add your color class here -->
         </div>
@@ -157,29 +157,33 @@
 
         <!-- Pet Medical History -->
         <div class="form-group mb-5">
-            <label for="petMedicalHistory" class="mb-2">Pet Medical History</label>
+            <label for="petMedicalHistory" class="form-label required">Pet Medical History</label>
             <textarea class="form-control" id="petMedicalHistory" rows="3" placeholder="Describe pet medical history"></textarea>
             <!-- Add your color class here -->
         </div>
 
         <!-- Pet Behaviour -->
         <div class="form-group mb-5">
-            <label for="petBehaviour" class="mb-2">Pet Behaviour</label>
+            <label for="petBehaviour" class="form-label required">Pet Behaviour</label>
             <textarea class="form-control" id="petBehaviour" rows="3" placeholder="Describe pet behaviour"></textarea>
             <!-- Add your color class here -->
         </div>
 
         <!-- Pet Special Needs/Requirements -->
         <div class="form-group mb-5">
-            <label for="petBehaviour" class="mb-2">Pet Behaviour</label>
+            <label for="petBehaviour" class="form-label required">Pet Behaviour</label>
             <textarea class="form-control" id="petSpecialNeeds" rows="3" placeholder="Describe pet special needs/requirements"></textarea>
             <!-- Add your color class here -->
         </div>
 
-        <button type="submit" class="btn btn-primary mt-4">Create Pet Adoption Page</button>
+        <button type="submit" class="btn mt-4">Create Pet Adoption Page</button>
 
     </form>
 </div>
+
+<footer>
+    <p>© 2023 PetPal. All rights reserved.</p>
+</footer>
 
 <!-- Add Bootstrap JS and Popper JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -228,7 +232,7 @@
     }
 </script>
 
-
+</div>
 </body>
 
 

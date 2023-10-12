@@ -1,5 +1,20 @@
 /* pet adoption*/
 /* Add this to your CSS */
+
+
+body,
+html {
+    margin: 0;
+    height: 100%;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #867070;
+    font-weight: bold;
+    /* background-color: #F5EBEB; */
+    flex-direction: column;
+}
+
+
 .carousel-inner {
     padding-bottom: 0; /* Remove padding */
 }
@@ -49,17 +64,18 @@
 }
 
 
+
 #imagePreviews {
     display: flex;
     flex-wrap: wrap;
 }
 
 .img-preview {
-    width: 100px; /* Fixed width */
-    height: 100px; /* Fixed height */
-    object-fit: cover; /* This will make the images cover the entire element, cropping them as needed */
-    border-radius: 5px; /* Optional: for rounded corners */
-    margin: 5px; /* Space between images */
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 5px;
 }
 
 
@@ -82,11 +98,32 @@ h2, h3 {
 }
 
 .btn {
-    padding: 10px 20px; /* Increase button size */
-    font-size: 1.2rem; /* Increase button font size */
+    display: inline-block;
+    background-color: #867070;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #D5B4B4;
 }
 
 
 
+
+/* Pet Status Styles */
+.pet-status {
+    margin-top: 20px;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
 
 

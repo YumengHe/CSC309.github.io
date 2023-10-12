@@ -19,55 +19,40 @@
     <link rel="icon" type="image/x-icon" href="./resource/image/logo.png">
     <link rel="stylesheet" href="./resource/css/style-general.css">
     <link rel="stylesheet" href="./resource/css/style-index.css">
-
-
-    <!-- Add the style for image previews here -->
-    <style>
-        #imagePreviews {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .img-preview {
-            width: 500px;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin: 5px;
-        }
-    </style>
 </head>
+
+<body>
+<div class="page-container">
 <header id="header">
     <div class="left">
-        <a class="logo">PetPal</a>
+        <a class="logo" href="./index.html">PetPal</a>
         <a class="active" href="./index.html">HOME</a>
         <div class="dropdown">
-            <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
+            <button class="dropdown-button" >ADOPT</button>
             <div class="dropdown-content" id="myDropdown">
-                <a href="./search/search-result-filtered-dog.html">DOGS</a>
-                <a href="./search/search-result-filtered-cat.html">CATS</a>
-                <a href="./search/search-result-filtered-others.html">OTHER</a>
+                <a href="./pet-search/search-result-filtered-dog.html">DOGS</a>
+                <a href="./pet-search/search-result-filtered-cat.html">CATS</a>
+                <a href="./pet-search/search-result-filtered-others.html">OTHER</a>
             </div>
         </div>
-        <a href="./search/search-result.html">SEARCH</a>
+        <div class="dropdown">
+            <button class="dropdown-button">SEARCH</button>
+            <div class="dropdown-content">
+                <a href="./shelter-search/search-result.html">SEARCH FOR SHELTER</a>
+                <a href="./pet-search/search-result.html">SEARCH FOR PETS</a>
+            </div>
+        </div>
         <a href="./how-it-works.html">HOW IT WORKS</a>
         <a href="./about.html">ABOUT</a>
     </div>
-    <!-- <div class="search-bar">
-        <form action="#">
-          <input type="text" placeholder="Search..." name="search">
-          <button type="submit">Submit</button>
-        </form>
-    </div> -->
     <div class="right">
-        <a class="right" href="./login.html" >LOG IN</a>
-        <a class="right" href="#" >SIGN UP</a>
+        <a class="right" href="./login.html">LOG IN</a>
+        <a class="right" href="./signup.html">SIGN UP</a>
     </div>
-    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon">&#9776;</a>
 </header>
 
 
-<body>
 
 <div class="container mt-5">
 
@@ -82,7 +67,7 @@
                     <!-- Pet Photos Upload -->
                     <div class="form-group mb-4">
                         <label for="petPhotos" class="mb-2">Pet Photos</label><br>
-                        <button class="btn btn-primary" onclick="document.getElementById('petPhotos').click(); return false;">Choose Files</button>
+                        <button class="btn" onclick="document.getElementById('petPhotos').click(); return false;">Choose Files</button>
                         <small id="photosHelp" class="form-text text-muted">You can select multiple files.</small>
                         <input type="file" class="form-control-file" id="petPhotos" multiple style="display: none;">
                         <div id="selectedFiles"></div>
@@ -170,10 +155,14 @@
             <textarea class="form-control" id="petSpecialNeeds" rows="3">None</textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-4">Update Pet Adoption Page</button>
+        <button type="submit" class="btn mt-4">Update Pet Adoption Page</button>
 
     </form>
 </div>
+
+<footer>
+    <p>© 2023 PetPal. All rights reserved.</p>
+</footer>
 
 <!-- Add Bootstrap JS and Popper JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -197,6 +186,6 @@
         }
     }
 </script>
-
+</div>
 </body>
 </html>
