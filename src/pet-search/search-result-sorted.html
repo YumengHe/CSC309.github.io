@@ -1,0 +1,231 @@
+<!-- Account Account Page for Seeker
+    Seeker can confirm their email address if they havn't done, change email address, change password, change preferences.
+
+    References
+    https://www.w3schools.com/bootstrap5/bootstrap_modal.php
+    https://jsfiddle.net/qfzL86oc/
+    https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-toasts.php
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPal: Pet Search</title>
+    <!-- For Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- For Bootstrap w/ JQuery -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <!-- For local stylesheets -->
+    <link rel="stylesheet" href="../resource/css/style.css">
+    <link rel="stylesheet" href="../resource/css/style-general.css">
+    <script type="module" src="../resource/js/script.js"></script>
+
+</head>
+
+<body>
+    <div class="page-container">
+        <header id="header">
+            <div class="left">
+                <a class="logo">PetPal</a>
+                <a href="../index.html">HOME</a>
+                <div class="dropdown">
+                    <button class="dropdown-button">ADOPT</button>
+                    <div class="dropdown-content">
+                        <a href="search-result-filtered-dog.html">DOGS</a>
+                        <a href="search-result-filtered-others.html">CATS</a>
+                        <a href="search-result-filtered-others.html">OTHER</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-button">SEARCH</button>
+                    <div class="dropdown-content">
+                        <a href="../shelter-search/search-result.html">SEARCH FOR SHELTER</a>
+                        <a href="search-result.html">SEARCH FOR PETS</a>
+                    </div>
+                </div>
+                <a href="../how-it-works.html">HOW IT WORKS</a>
+                <a href="../about.html">ABOUT</a>
+            </div>
+            <!-- <div class="search-bar">
+            <form action="#">
+              <input type="text" placeholder="Search..." name="search">
+              <button type="submit">Submit</button>
+            </form>
+        </div> -->
+            <div class="right">
+                <a class="right" href="../login.html">LOG IN</a>
+                <a class="right" href="../signup.html">SIGN UP</a>
+            </div>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon">&#9776;</a>
+        </header>
+
+        <main>
+            <div class="container mt-5">
+                <div class="row d-flex flex-lg-row justify-content-between">
+                    <div class="side_nav col col-12 col-lg-3 mb-5">
+                        <div class="list-group list-group-flush border border-2 rounded-end p-3">
+                            <h2 class="p-3 border-bottom border-top main-dark-color fw-bolder">Filter</h2>
+                            <!-- create a filter for the search result using form -->
+                            <form>
+                                <div class="mb-3">
+                                    <label for="location" class="form-label main-dark-color fw-bolder">Location</label>
+                                    <input type="text" class="form-control" id="location"
+                                        placeholder="Enter a location">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="species" class="form-label main-dark-color fw-bolder">Species</label>
+                                    <select class="form-select" id="species">
+                                        <option selected>Choose...</option>
+                                        <option value="cat">Cat</option>
+                                        <option value="dog">Dog</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="age" class="form-label main-dark-color fw-bolder">Age</label>
+                                    <select class="form-select" id="age">
+                                        <option selected>Choose...</option>
+                                        <option value="new-born">New born</option>
+                                        <option value="young">Young</option>
+                                        <option value="mature">Mature</option>
+                                        <option value="elder">Elder</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="size" class="form-label main-dark-color fw-bolder">Size</label>
+                                    <select class="form-select" id="size">
+                                        <option selected>Choose...</option>
+                                        <option value="sm">Small</option>
+                                        <option value="md">Medium</option>
+                                        <option value="lg">Large</option>
+                                        <option value="xlg">Extra large</option>
+                                    </select>
+                                </div>
+                                <!-- add a color selector -->
+                                <div class="mb-3">
+                                    <label for="colorPicker" class="form-label main-dark-color fw-bolder">Color</label>
+                                    <input type="color" class="form-control form-control-color" id="colorPicker"
+                                        value="#9F8170" title="Choose your color">
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <a href="search-result-filtered.html"
+                                        class="btn btn-outline-primary-cust px-5 text-nowrap btn-sm">Apply Filter</a>
+                                </div>
+                            </form>
+                            <!-- add a break -->
+                            <br>
+                            <h2 class="p-3 border-bottom border-top main-dark-color fw-bolder">Sort</h2>
+                            <!-- create a sort for the search result using form -->
+                            <form>
+                                <div class="mb-3">
+                                    <label for="sort" class="form-label main-dark-color fw-bolder">Sort by</label>
+                                    <select class="form-select" id="sort">
+                                        <option>Choose...</option>
+                                        <option value="price">Price</option>
+                                        <option value="age" selected>Age</option>
+                                        <option value="size">Size</option>
+                                        <option value="color">Color</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <a href="search-result-sorted.html"
+                                        class="btn btn-outline-primary-cust px-5 text-nowrap btn-sm">Apply Sort</a>
+                                </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col col-12 col-lg-8">
+                        <div class="container">
+                            <div class="row">
+                                <!-- Bird Entry -->
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <img src="../resource/image/bird.jpg" class="card-img-top" alt="Bird Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Name: Tweety</h5>
+                                            <p class="card-text">Age: 1 year</p>
+                                            <a href="#" class="btn btn-primary-cust">Details</a>
+                                            <a href="../account/shelter/account-shelter-profile.html"
+                                                class="btn btn-secondary">Shelter</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Dog Entry -->
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <img src="../resource/image/dog.jpg" class="card-img-top" alt="Dog Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Name: Buddy</h5>
+                                            <p class="card-text">Age: 2 years</p>
+                                            <a href="#" class="btn btn-primary-cust">Details</a>
+                                            <a href="../account/shelter/account-shelter-profile.html"
+                                                class="btn btn-secondary">Shelter</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Cat Entry -->
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <img src="../resource/image/cat.jpg" class="card-img-top" alt="Cat Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Name: Whiskers</h5>
+                                            <p class="card-text">Age: 3 years</p>
+                                            <a href="#" class="btn btn-primary-cust">Details</a>
+                                            <a href="../account/shelter/account-shelter-profile.html"
+                                                class="btn btn-secondary">Shelter</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+        <footer>
+            <p>© 2023 PetPal. All rights reserved.</p>
+
+        </footer>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get all dropdown buttons
+            var dropdownButtons = document.querySelectorAll('.dropdown-button');
+
+            // Toggle dropdown content when a button is clicked
+            dropdownButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var dropdownContent = this.nextElementSibling; // Assuming the dropdown content is the next sibling element
+                    dropdownContent.classList.toggle('show');
+                });
+            });
+
+            // Hide all dropdown contents if clicked outside
+            window.onclick = function (e) {
+                if (!e.target.matches('.dropdown-button')) {
+                    var dropdowns = document.querySelectorAll('.dropdown-content.show');
+                    dropdowns.forEach(function (dropdown) {
+                        dropdown.classList.remove('show');
+                    });
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>
