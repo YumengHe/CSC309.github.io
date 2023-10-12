@@ -78,6 +78,9 @@ header a.logo {
     margin: 0;
     background-color: #867070;
     line-height: 75px;
+    text-align: left;
+    padding-left: 0;
+    margin-left: 14px;
 }
   
 .dropdown-content {
@@ -89,6 +92,7 @@ header a.logo {
     z-index: 1;
     border-radius: 5px;
     line-height: 20px;
+    text-align: left;
 }
   
 .dropdown-content a {
@@ -148,70 +152,58 @@ footer {
     } 
 }
 
-
-
 @media screen and (max-width: 600px) {
-    header a:not(.icon), header a:not(:first-child), header .search-bar, header .dropdown {
+    header a, header .search-bar, header .dropdown {
         display: none;
+    }
+
+    header a.logo {
+        display: block;
     }
     
     header a.icon {
         display: block;
     }
 
-    header.responsive a, header.responsive .search-bar, header.responsive .dropdown {
+    header.responsive a, header.responsive .search-bar, header.responsive .dropdown{
         display: block;
         float: none;
         text-align: left;
+        margin-left: 0;
     }
     
     header.responsive .dropdown-content {
-        position: relative; /* Making it fit into the mobile menu */
-    }
-}
-
-/* Adjusting input field width and button in mobile view for better fit */
-@media screen and (max-width: 400px) {
-    header input[type=text] {
-        width: 70%; /* Adjust this value as needed */
+        position: relative;
     }
 
-    header .search-bar button {
-        width: 25%; /* Adjust this value as needed */
-    }
-}
-
-@media screen and (max-width: 600px) {
-    /* Displaying the logo */
-    header a.logo {
-        display: block;
-    }
-
-    /* Adjusting line-height for better fit in mobile view */
-    header a {
+    header a{
         line-height: 30px;
     }
     header .dropdown .dropdown-button {
-        line-height: 30px;
+        line-height: 2px;
+        margin-left: 0;
     }
 
     header a, header .search-bar, header .dropdown {
         display: none;
     }
-    
-    header a.icon {
-        display: block;
-    }
 
-    /* Displaying the items in the menu when responsive class is toggled */
-    header.responsive a:not(.right), header.responsive .search-bar, header.responsive .dropdown {
+    header.responsive a:not(.right), header.responsive .dropdown, header img, .dropdown, .dropdown-button{
         display: block;
         float: none;
         text-align: left;
+        padding: 10px 12px;
+        margin-left: 0;
+        margin-top: 0;
     }
     
     header.responsive .dropdown-content {
         position: relative; /* Making it fit into the mobile menu */
+    }
+
+    header.responsive header image {
+        position: relative;
+        margin-top: 0;
     }
 }
 
@@ -241,4 +233,14 @@ footer {
 
 .card:hover {
     transform: scale(1.05);
+
+/* Adjusting input field width and button in mobile view for better fit */
+@media screen and (max-width: 400px) {
+    header input[type=text] {
+        width: 70%; /* Adjust this value as needed */
+    }
+
+    header .search-bar button {
+        width: 25%; /* Adjust this value as needed */
+    }
 }

@@ -15,8 +15,8 @@
     <div class="page-container">
         <header id="header">
             <div class="left">
-                <a class="logo">PetPal</a>
-                <a class="active" href="./index.html">HOME</a>
+                <a class="logo" href="./index-logged-in.html">PetPal</a>
+                <a class="active" href="./index-logged-in.html">HOME</a>
                 <div class="dropdown">
                     <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
                     <div class="dropdown-content" id="myDropdown">
@@ -37,7 +37,7 @@
                     <img src="./resource/image/notification-logo.png" alt="NOTIFICATION">
                 </a>
             </div>
-            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction2()">&#9776;</a>
         </header>
         <div class="container">
             
@@ -208,6 +208,17 @@
             }
           }
         }
+    </script>
+
+    <script>
+        function myFunction2() {
+    var x = document.getElementById("header");
+        if (x.className === "") {
+            x.className = "responsive";
+        } else {
+            x.className = "";
+        }
+    }
     </script>
         
     
