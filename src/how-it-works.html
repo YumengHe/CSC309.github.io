@@ -12,29 +12,36 @@
  
 <body>
     <div class="page-container">
+        <header id="header">
+            <div class="left">
+                <a class="logo" href="./index.html">PetPal</a>
+                <a href="./index.html">HOME</a>
+                <div class="dropdown">
+                    <button class="dropdown-button" >ADOPT</button>
+                    <div class="dropdown-content" id="myDropdown">
+                        <a href="./pet-search/search-result-filtered-dog.html">DOGS</a>
+                        <a href="./pet-search/search-result-filtered-cat.html">CATS</a>
+                        <a href="./pet-search/search-result-filtered-others.html">OTHER</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-button">SEARCH</button>
+                    <div class="dropdown-content">
+                        <a href="./shelter-search/search-result.html">SEARCH FOR SHELTER</a>
+                        <a href="./pet-search/search-result.html">SEARCH FOR PETS</a>
+                    </div>
+                </div>
+                <a class="active" href="./how-it-works.html">HOW IT WORKS</a>
+                <a href="./about.html">ABOUT</a>
+            </div>
+            <div class="right">
+                <a class="right" href="./login.html">LOG IN</a>
+                <a class="right" href="#">SIGN UP</a>
+            </div>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon">&#9776;</a>
+        </header>
+
         <div class="container">
-            <header id="header">
-                <div class="left">
-                    <a class="logo">PetPal</a>
-                    <a href="./index.html">HOME</a>
-                    <div class="dropdown">
-                        <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
-                        <div class="dropdown-content" id="myDropdown">
-                            <a href="./search/search-result-filtered-dog.html">DOGS</a>
-                            <a href="./search/search-result-filtered-cat.html">CATS</a>
-                            <a href="./search/search-result-filtered-others.html">OTHER</a>
-                        </div>
-                    </div> 
-                    <a href="./search/search-result.html">SEARCH</a>
-                    <a class="active" href="./how-it-works.html">HOW IT WORKS</a>
-                    <a href="./about.html">ABOUT</a>
-                </div>
-                <div class="right">
-                    <a class="right" href="./login.html" >LOG IN</a>
-                    <a class="right" href="#" >SIGN UP</a>
-                </div>
-                <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
-            </header>
             <!-- how it works -->
             <section class="how-it-works-section">
                 <h2>How It Works</h2>
@@ -42,19 +49,19 @@
                 <div class="step">
                     <h3>Step 1: Research</h3>
                     <p>Start by researching the type of animal you'd like to adopt. Consider factors such as size, breed, and temperament.</p>
-                    <a href="./search/search-result.html" class="learn-more-btn"> Search for it!</a>
+                    <a href="./pet-search/search-result.html" class="learn-more-btn"> Search for it!</a>
                 </div>
             
                 <div class="step">
                     <h3>Step 2: Visit Shelters</h3>
                     <p>Visit local shelters or browse our online directory to see available animals. Spend time interacting with potential pets to find a good match.</p>
-                    <a href="./account/shelter/account-shelter-account.html" class="learn-more-btn">Check them out!</a>
+                    <a href="./shelter-search/search-result.html" class="learn-more-btn">Check them out!</a>
                 </div>
             
                 <div class="step">
                     <h3>Step 3: Submit Application</h3>
                     <p>Once you've found an animal you're interested in, submit an adoption application. This often requires references and may include a home visit.</p>
-                    <a href="#submit" class="learn-more-btn">Apply right now!</a>
+                    <a href="./pet-adoption.html" class="learn-more-btn">Apply right now!</a>
                 </div>
             </section>
 
@@ -88,22 +95,29 @@
     </div>
 
     <script>
-        /* When the user clicks on the button, 
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-        
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(e) {
-          if (!e.target.matches('.dropdown-button')) {
-          var myDropdown = document.getElementById("myDropdown");
-            if (myDropdown.classList.contains('show')) {
-              myDropdown.classList.remove('show');
-            }
-          }
-        }
-        </script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get all dropdown buttons
+            var dropdownButtons = document.querySelectorAll('.dropdown-button');
+
+            // Toggle dropdown content when a button is clicked
+            dropdownButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var dropdownContent = this.nextElementSibling; // Assuming the dropdown content is the next sibling element
+                    dropdownContent.classList.toggle('show');
+                });
+            });
+
+            // Hide all dropdown contents if clicked outside
+            window.onclick = function (e) {
+                if (!e.target.matches('.dropdown-button')) {
+                    var dropdowns = document.querySelectorAll('.dropdown-content.show');
+                    dropdowns.forEach(function (dropdown) {
+                        dropdown.classList.remove('show');
+                    });
+                }
+            };
+        });
+    </script>
  
 </body>
 </html>

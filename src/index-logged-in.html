@@ -15,8 +15,8 @@
     <div class="page-container">
         <header id="header">
             <div class="left">
-                <a class="logo">PetPal</a>
-                <a class="active" href="./index.html">HOME</a>
+                <a class="logo" href="./index-logged-in.html">PetPal</a>
+                <a class="active" href="./index-logged-in.html">HOME</a>
                 <div class="dropdown">
                     <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
                     <div class="dropdown-content" id="myDropdown">
@@ -25,19 +25,25 @@
                         <a href="./search/search-result-filtered-others.html">OTHER</a>
                     </div>
                 </div> 
-                <a href="./search/search-result.html">SEARCH</a>
+                <div class="dropdown">
+                    <button class="dropdown-button">SEARCH</button>
+                    <div class="dropdown-content">
+                        <a href="./shelter-search/search-result.html">SEARCH FOR SHELTER</a>
+                        <a href="./pet-search/search-result.html">SEARCH FOR PETS</a>
+                    </div>
+                </div>
                 <a href="./how-it-works.html">HOW IT WORKS</a>
                 <a href="./about.html">ABOUT</a>
             </div>
             <div class="right">
-                <a class="right" href="#" >
+                <a class="right" href="./account/seeker/account-seeker-profile.html" >
                     <img src="./resource/image/profile-logo.png" alt="PROFILE">
                 </a>
-                <a class="right" href="#" >
+                <a class="right" href="./account/seeker/account-seeker-notification.html" >
                     <img src="./resource/image/notification-logo.png" alt="NOTIFICATION">
                 </a>
             </div>
-            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction2()">&#9776;</a>
         </header>
         <div class="container">
             
@@ -193,21 +199,28 @@
         </footer>
     </div>
     <script>
-        /* When the user clicks on the button, 
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-        
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(e) {
-          if (!e.target.matches('.dropdown-button')) {
-          var myDropdown = document.getElementById("myDropdown");
-            if (myDropdown.classList.contains('show')) {
-              myDropdown.classList.remove('show');
-            }
-          }
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get all dropdown buttons
+            var dropdownButtons = document.querySelectorAll('.dropdown-button');
+
+            // Toggle dropdown content when a button is clicked
+            dropdownButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var dropdownContent = this.nextElementSibling; // Assuming the dropdown content is the next sibling element
+                    dropdownContent.classList.toggle('show');
+                });
+            });
+
+            // Hide all dropdown contents if clicked outside
+            window.onclick = function (e) {
+                if (!e.target.matches('.dropdown-button')) {
+                    var dropdowns = document.querySelectorAll('.dropdown-content.show');
+                    dropdowns.forEach(function (dropdown) {
+                        dropdown.classList.remove('show');
+                    });
+                }
+            };
+        });
     </script>
         
     
