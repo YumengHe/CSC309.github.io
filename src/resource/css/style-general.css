@@ -212,32 +212,6 @@ footer {
 }
 
 
-/* pet/shelter card style */
-.card {
-    flex: 0 0 auto;
-    width: 200px; /* adjust as per requirement */
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    text-align: center;
-    transition: transform 0.3s;
-}
-
-.card img {
-    width: 100%;
-    height: auto;
-}
-
-.card p {
-    padding: 2px 10px;
-    color: #867070;
-    text-align: center;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
 /* Adjusting input field width and button in mobile view for better fit */
 @media screen and (max-width: 400px) {
     header input[type=text] {
@@ -248,3 +222,277 @@ footer {
         width: 25%; /* Adjust this value as needed */
     }
 }
+
+
+/***************** Account Update Pages - For Seeker & Shelter *********************************************************************************************************/
+:root {
+    --main-dark-color: #867070;
+    --main-mid-color: #D5B4B4;
+    --main-light-color: #F5EBEB;
+    --main-font-familty: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --footer-height: 50px;
+}
+
+[href] {
+    text-decoration: none;
+}
+
+.main-light-color {
+    color: var(--main-light-color)
+}
+
+.main-dark-color {
+    color: var(--main-dark-color)
+}
+
+.btn-outline-primary-cust {
+    --bs-btn-color: var(--main-dark-color);
+    --bs-btn-bg: var(--main-light-color);
+    --bs-btn-border-color: var(--main-dark-color);
+    --bs-btn-hover-color: var(--main-light-color);
+    --bs-btn-hover-bg: var(--main-dark-color);
+    --bs-btn-hover-border-color: var(--main-light-color);
+    --bs-btn-active-color: var(--main-dark-color);
+    --bs-btn-active-bg: var(--main-mid-color);
+    --bs-btn-active-border-color: var(--main-dark-color);
+    --bs-btn-focus-shadow-rgb: var(--main-mid-color);
+}
+
+.btn-outline-primary-cust {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-outline-primary-cust:hover {
+    box-shadow: none;
+    text-shadow: 0.5px 0.5px rgba(255, 255, 255, 0.5);
+}
+
+
+.btn-primary-cust {
+    --bs-btn-color: var(--main-light-color);
+    --bs-btn-bg: var(--main-dark-color);
+    --bs-btn-border-color: var(--main-dark-color);
+    --bs-btn-hover-color: var(--main-dark-color);
+    --bs-btn-hover-bg: var(--main-light-color);
+    --bs-btn-hover-border-color: var(--main-mid-color);
+    --bs-btn-active-color: var(--main-dark-color);
+    --bs-btn-active-bg: var(--main-mid-color);
+    --bs-btn-active-border-color: var(--main-dark-color);
+    --bs-btn-focus-shadow-rgb: var(--main-mid-color);
+}
+
+
+body {
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    font-family: var(--main-font-familty);
+}
+
+/************************************ Header ************************************/
+/* header {
+    background: var(--main-dark-color);
+}
+
+.nav-link:hover {
+    opacity: 0.68;
+}
+
+
+#main-nav {
+    background-color: var(--main-dark-color);
+}
+
+.dropdown-toggle::after {
+    color: var(--main-light-color);
+} */
+
+/*********************************** Footer ************************************/
+/* footer {
+    background-color: var(--main-dark-color);
+    color: var(--main-light-color);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: var(--footer-height);
+} */
+
+/************************************ Main ************************************/
+main {
+    /* margin-bottom: var(--footer-height); */
+    padding-bottom: calc(2*var(--footer-height));
+    width: 100%;
+}
+
+.side_nav .list-group .list-group-item.active {
+    background-color: var(--main-light-color);
+    border: 0;
+
+}
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*  Profile *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+
+/* ------------- Portrait ------------- */
+/* https://stackoverflow.com/questions/11406605/how-to-make-a-link-act-as-a-file-input */
+/* https://bootstrapious.com/p/bootstrap-image-hover */
+.seeker.portrait,
+.shelter.portrait {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background-color: #86707020;
+    border: 0.5px solid #86707050;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    margin: 30px;
+}
+
+.shelter.portrait {
+    border-radius: 0;
+    width: 320px;
+}
+
+.seeker.portrait img,
+.shelter.portrait img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    transition: all 0.3s;
+}
+
+.shelter.portrait img {
+    width: 300px;
+    border-radius: 0;
+    object-fit: scale-down;
+    background-color: white;
+}
+
+#seeker_portrait_shadow,
+#shelter_portrait_shadow {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.05));
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    z-index: 3;
+    opacity: 0%;
+}
+
+#seeker_portrait_shadow:hover,
+#shelter_portrait_shadow:hover {
+    opacity: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#shelter_portrait_shadow {
+    width: 320px;
+    border-radius: 0%;
+}
+
+
+#edit_portrait {
+    display: none;
+}
+
+#edit_portrait_link {
+    font-size: 18px;
+    padding-bottom: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+#profile_form .row {
+    height: auto;
+}
+
+#floating_bio {
+    min-height: 80px;
+}
+
+#floating_mission {
+    min-height: 120px;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Notification *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+.notification.list-group>a>i {
+    font-size: 60%;
+}
+
+.read>i {
+    opacity: 0;
+}
+
+.notification.list-group>a {
+    height: 75px;
+}
+
+/* https://youtube.com/shorts/uX-BTmcfK2M?si=S0oAziZzQLbQwuD- */
+#ckbox_unread:checked~.notification.list-group>a.read {
+    display: none !important;
+}
+
+
+
+
+
+/* div.row {
+    border: 1px solid darkblue;
+    background: lightgreen;
+}
+
+div.col {
+    border: 1px dashed darkred;
+    background: lightcoral;
+} */
+
+
+
+/***************** search result page *********************************************************************************************************/
+
+/* Styling the thumb (the control knob of the slider) */
+#price-range::-webkit-slider-thumb {
+    background: var(--main-dark-color);
+}
+
+#price-range::-moz-range-thumb {
+    background: var(--main-dark-color);
+}
+
+/* Styling the track (the line the slider travels along) */
+#price-range::-webkit-slider-runnable-track {
+    background: var(--main-mid-color);
+}
+
+#price-range::-moz-range-track {
+    background: var(--main-mid-color);
+}
+
+#price-range::-moz-range-progress {
+    background: var(--main-light-color);
+}
+
+.card .btn {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.card:hover .btn {
+    opacity: 1;
+}
+
+
+/***** shelter creation page *****/
+
+
+/* page 3 name*/
