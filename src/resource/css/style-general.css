@@ -522,17 +522,5 @@ div.col {
     background: var(--main-light-color);
 }
 
-.card .btn {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.card:hover .btn {
-    opacity: 1;
-}
-
-
 /***** shelter creation page *****/
 
-
-/* page 3 name*/
