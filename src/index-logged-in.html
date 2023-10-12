@@ -37,7 +37,7 @@
                     <img src="./resource/image/notification-logo.png" alt="NOTIFICATION">
                 </a>
             </div>
-            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction2()">&#9776;</a>
         </header>
         <div class="container">
             
@@ -208,6 +208,17 @@
             }
           }
         }
+    </script>
+
+    <script>
+        function myFunction2() {
+    var x = document.getElementById("header");
+        if (x.className === "") {
+            x.className = "responsive";
+        } else {
+            x.className = "";
+        }
+    }
     </script>
         
     
