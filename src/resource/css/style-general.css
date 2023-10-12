@@ -145,11 +145,7 @@ footer {
     .footer-content {
         flex-direction: column;
         gap: 10px;
-    }
-    .container {
-        padding-bottom: 580px;
-    }
-    
+    } 
 }
 
 
