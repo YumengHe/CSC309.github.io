@@ -207,6 +207,33 @@ footer {
     }
 }
 
+
+/* pet/shelter card style */
+.card {
+    flex: 0 0 auto;
+    width: 200px; /* adjust as per requirement */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card p {
+    padding: 2px 10px;
+    color: #867070;
+    text-align: center;
+}
+
+.card:hover {
+    transform: scale(1.05);
+
 /* Adjusting input field width and button in mobile view for better fit */
 @media screen and (max-width: 400px) {
     header input[type=text] {
