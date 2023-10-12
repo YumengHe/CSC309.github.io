@@ -51,6 +51,12 @@ input[type="text"], input[type="email"], input[type="password"], select {
     text-decoration: none;
 }
 
+.signup-btn a{
+    width: 100%;
+    color: white;
+    text-decoration: none;
+}
+
 .signup-btn:hover {
     background-color: #D5B4B4;
 }

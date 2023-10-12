@@ -50,6 +50,12 @@ input[type="text"], input[type="password"] {
     text-decoration: none;
 }
 
+.login-btn a{
+    width: 100%;
+    color: white;
+    text-decoration: none;
+}
+
 .login-btn:hover {
     background-color: #D5B4B4;
 }
