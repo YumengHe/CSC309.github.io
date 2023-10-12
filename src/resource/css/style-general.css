@@ -233,7 +233,7 @@ footer {
 
 .card:hover {
     transform: scale(1.05);
-
+}
 /* Adjusting input field width and button in mobile view for better fit */
 @media screen and (max-width: 400px) {
     header input[type=text] {
