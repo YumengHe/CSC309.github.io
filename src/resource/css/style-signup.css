@@ -1,0 +1,86 @@
+/* ... (existing styles from the login page) ... */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F5EBEB;
+}
+
+h2 {
+    text-align: center;
+    color: #867070;
+}
+
+.signup-container {
+    width: 350px; /* slightly wider to fit the content comfortably */
+    padding: 20px;
+    border: 1px solid #D5B4B4;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #867070;
+}
+
+input[type="text"], input[type="email"], input[type="password"], select {
+    width: 80%;
+    padding: 10px 10%;
+    border: 1px solid #D5B4B4;
+    border-radius: 5px;
+}
+
+.signup-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #867070;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.signup-btn a{
+    width: 100%;
+    color: white;
+    text-decoration: none;
+}
+
+.signup-btn:hover {
+    background-color: #D5B4B4;
+}
+
+p {
+    text-align: center;
+    margin-top: 10px;
+    color:#867070
+}
+
+p a {
+    color:#D5B4B4;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+select {
+    color: #867070;
+    width: 100%;
+}
+
+select option {
+    color: #867070; 
+}

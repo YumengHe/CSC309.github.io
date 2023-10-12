@@ -1,17 +1,18 @@
 /* how it works */
 .how-it-works-section {
+    margin-top: 3%;
     padding: 20px 10%;
-    background-color: #f5f5f5;  /* A light background to differentiate the section */
+    background-color: #F5EBEB;
 }
 
 .how-it-works-section h2 {
     text-align: center;
     margin-top: 0;
-    color: #867070;  /* Adjust color as needed */
+    color: #867070;
 }
 
 .step {
-    border: 1px solid #e0e0e0;
+    border: 1px solid #D5B4B4;
     padding: 15px;
     margin: 15px 0;
     border-radius: 5px;
@@ -19,10 +20,75 @@
 
 .step h3 {
     margin-top: 0;
-    color: #D5B4B4;  /* Adjust color as needed */
+    color: #D5B4B4;
 }
 
 .step p {
     margin-bottom: 0;
     color: #867070;
+}
+
+/* Benefits */
+.benefits-section {
+    margin-top: 3%;
+    padding: 20px 10%;
+    background-color: #F5EBEB;
+}
+
+.benefits-section h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #867070;
+}
+
+.benefits-section p {
+    margin-bottom: 0;
+    color: #867070;
+}
+
+/* FAQ */
+.faq-section {
+    margin-top: 3%;
+    padding: 20px 10%;
+}
+
+.faq-section h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #867070;
+}
+
+.faq-item {
+    border-bottom: 1px dashed #D5B4B4;
+    padding: 10px 0;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-item h3 {
+    margin-top: 0;
+    color: #D5B4B4;
+}
+
+.faq-item p {
+    margin-top: 0;
+    color: #867070;
+}
+
+/* button */
+.learn-more-btn {
+    display: inline-block;
+    background-color: #D5B4B4;
+    color: #F5EBEB;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.learn-more-btn:hover {
+    background-color: #867070;
 }

@@ -25,308 +25,303 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <!-- For local stylesheets -->
-    <link rel="stylesheet" href="./resource/css/style.css">
-    <script type="module" src="./resource/js/script.js"></script>
+    <link rel="stylesheet" href="./../../resource/css/style.css">
+    <script type="module" src="./../../resource/js/script.js"></script>
+    <link rel="stylesheet" href="./../../resource/css/style-general.css">
+
 </head>
 
 <body>
-    <header>
-        <!-- Offcanvas Dark Navbar -->
-        <!-- https://getbootstrap.com/docs/5.3/components/navbar/#offcanvas -->
-        <nav class="navbar navbar-expand-md main-dark-color navbar-dark">
-            <div class="container">
-                <a href="#home" class="navbar-brand">
-                    <span class="fw-bolder display-5 main-light-color pe-md-3">PetPal</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#main-nav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="main-nav">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title fw-bolder display-4 main-light-color" id="offcanvasNavbarLabel">Pet
-                            Pal</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link active main-light-color fs-5" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link main-light-color fs-5" href="#contact">Contact</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link main-light-color fs-5" href="#About">About</a>
-                            </li>
-                            <li class="nav-item d-md-none">
-                                <a href="#search" class="nav-link main-light-color fs-5">Search</a>
-                            </li>
-                        </ul>
+    <div class="page-container">
+        <header id="header">
+            <div class="left">
+                <a class="logo">PetPal</a>
+                <a class="active" href="./index.html">HOME</a>
+                <div class="dropdown">
+                    <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
+                    <div class="dropdown-content" id="myDropdown">
+                        <a href="./search/search-result-filtered-dog.html">DOGS</a>
+                        <a href="./search/search-result-filtered-cat.html">CATS</a>
+                        <a href="./search/search-result-filtered-others.html">OTHER</a>
                     </div>
                 </div>
-                <form class="d-flex d-md-flex d-none px-3 col-lg-auto" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search">
-                    <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
-                </form>
-                <nav class="d-flex ">
-                    <div class="dropdown text-end">
-                        <a href="#" class="p-2 fs-4 d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                            data-bs-toggle="dropdown">
-                            <i id="user-icon" class="bi bi-person-circle main-light-color"></i>
-                        </a>
-                        <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="account-seeker-profile.html">Profile</a></li>
-                            <li><a class="dropdown-item" href="account-seeker-account.html">Account</a></li>
-                            <li><a class="dropdown-item" href="account-seeker-list.html">Lists</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
-                        </ul>
-                    </div>
-                    <a id="bell-icon" class="p-2 fs-4 main-light-color" href="account-seeker-notification.html"><i
-                            class="bi bi-bell-fill position-relative">
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                                <span class="visually-hidden">New alerts</span>
-                            </span></i></a>
-                </nav>
+                <a href="./search/search-result.html">SEARCH</a>
+                <a href="./how-it-works.html">HOW IT WORKS</a>
+                <a href="./about.html">ABOUT</a>
             </div>
-        </nav>
-
-        <!-- Right Toggler Navbar -->
-        <!-- https://getbootstrap.com/docs/5.3/components/navbar/#toggler -->
-        <!-- <nav class="navbar navbar-expand-md main-dark-color navbar-dark">
-            <div class="container">
-                <a href="#home" class="navbar-brand">
-                    <span class="fw-bolder display-4 main-light-color">PetPal</span>
+            <div class="right">
+                <a class="right" href="#">
+                    <img src="./resource/image/profile-logo.png" alt="PROFILE">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-start align-center ms-3" id="main-nav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link main-light-color fs-5" href="#home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link main-light-color fs-5" href="#contact">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link main-light-color fs-5" href="#About">About</a>
-                        </li>
-                        <li class="nav-item d-md-none">
-                            <a href="#search" class="nav-link main-light-color fs-5">Search</a>
-                        </li>
-                    </ul>
-                </div>
-                <form class="d-flex d-md-flex d-none px-5 col-lg-auto" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search">
-                    <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
-                </form>
-                <nav class="d-flex ">
-                    <div class="dropdown text-end">
-                        <a href="#"
-                            class="p-2 fs-4 main-light-color d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                            data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle main-light-color"></i>
-                        </a>
-                        <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Account</a></li>
-                            <li><a class="dropdown-item" href="#">Lists</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
-                        </ul>
-                    </div>
-                    <a class="p-2 fs-4 main-light-color" href="account-seeker-notification.html"><i
-                            class="bi bi-bell-fill"></i></a>
-                </nav>
+                <a class="right" href="#">
+                    <img src="./resource/image/notification-logo.png" alt="NOTIFICATION">
+                </a>
             </div>
-        </nav> -->
-
-    </header>
-
-    <main>
-        <div class="container mt-5 ">
-            <div class="row d-lg-flex flex-lg-row justify-content-between">
-                <!-- Sidenav -->
-                <div class="side_nav col col-12 col-lg-3 mb-4">
-                    <div class="list-group list-group-flush border border-start-0 border-2 rounded-end">
-                        <a href="./account-seeker-profile.html#profile_form"
-                            class="list-group-item list-group-item-action py-3 lh-sm border-0 active">
-                            <div class="w-100 fw-bolder ps-4 main-dark-color">
-                                <i class="bi bi-person-vcard-fill pe-2"></i>
-                                Profile
-                            </div>
-                        </a>
-
-                        <a href="./account-seeker-account.html#email_address"
-                            class="list-group-item list-group-item-action py-3 lh-sm border-0">
-                            <div class="w-100 fw-bolder ps-4 main-dark-color">
-                                <i class="bi bi-gear-fill pe-2"></i>
-                                Account
-                            </div>
-                        </a>
-
-                        <a href="" class="list-group-item list-group-item-action py-3 lh-sm border-0">
-                            <div class="w-100 fw-bolder ps-4 main-dark-color">
-                                <i class="bi bi-collection-fill pe-2"></i>
-                                Applications
-                            </div>
-                        </a>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+        </header>
+        <!-- <header>
+            <nav class="navbar navbar-expand-md main-dark-color navbar-dark">
+                <div class="container">
+                    <a href="#home" class="navbar-brand">
+                        <span class="fw-bolder display-5 main-light-color pe-md-3">PetPal</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#main-nav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="main-nav">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title fw-bolder display-4 main-light-color" id="offcanvasNavbarLabel">
+                                Pet
+                                Pal</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                                <li class="nav-item">
+                                    <a class="nav-link active main-light-color fs-5" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link main-light-color fs-5" href="#contact">Contact</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link main-light-color fs-5" href="#About">About</a>
+                                </li>
+                                <li class="nav-item d-md-none">
+                                    <a href="#search" class="nav-link main-light-color fs-5">Search</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-
+                    <form class="d-flex d-md-flex d-none px-3 col-lg-auto" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search">
+                        <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                    <nav class="d-flex ">
+                        <div class="dropdown text-end">
+                            <a href="#" class="p-2 fs-4 d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                                data-bs-toggle="dropdown">
+                                <i id="user-icon" class="bi bi-person-circle main-light-color"></i>
+                            </a>
+                            <ul class="dropdown-menu text-small">
+                                <li><a class="dropdown-item" href="account-seeker-profile.html">Profile</a></li>
+                                <li><a class="dropdown-item" href="account-seeker-account.html">Account</a></li>
+                                <li><a class="dropdown-item" href="account-seeker-list.html">Lists</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            </ul>
+                        </div>
+                        <a id="bell-icon" class="p-2 fs-4 main-light-color" href="account-seeker-notification.html"><i
+                                class="bi bi-bell-fill position-relative">
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                    <span class="visually-hidden">New alerts</span>
+                                </span></i></a>
+                    </nav>
                 </div>
-                <!-- Main content -->
-                <div class="col col-12 col-lg-8">
-                    <form id="profile_form" action="" autocomplete="on" class="form-group">
-                        <div class="row">
-                            <!-- Portrait image -->
-                            <div class="col-lg-6 d-flex justify-content-center align-items-center mb-3 mb-lg-0">
-                                <div class="seeker portrait col-12 m-3">
-                                    <img src="./resource/image/seeker_portrait.jpg" alt="portrait.jpg">
-                                    <div id="seeker_portrait_shadow">
-                                        <input id="edit_portrait" type="file" accept="image/*" />
-                                        <a href="#" id="edit_portrait_link">Edit</a>​
+            </nav>
+        </header> -->
+
+        <main>
+            <div class="container mt-5 ">
+                <div class="row d-lg-flex flex-lg-row justify-content-between">
+                    <!-- Sidenav -->
+                    <div class="side_nav col col-12 col-lg-3 mb-4">
+                        <div class="list-group list-group-flush border border-start-0 border-2 rounded-end">
+                            <a href="./account-seeker-profile.html#profile_form"
+                                class="list-group-item list-group-item-action py-3 lh-sm border-0 active">
+                                <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                    <i class="bi bi-person-vcard-fill pe-2"></i>
+                                    Profile
+                                </div>
+                            </a>
+
+                            <a href="./account-seeker-account.html#email_address"
+                                class="list-group-item list-group-item-action py-3 lh-sm border-0">
+                                <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                    <i class="bi bi-gear-fill pe-2"></i>
+                                    Account
+                                </div>
+                            </a>
+
+                            <a href="" class="list-group-item list-group-item-action py-3 lh-sm border-0">
+                                <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                    <i class="bi bi-collection-fill pe-2"></i>
+                                    Applications
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <!-- Main content -->
+                    <div class="col col-12 col-lg-8">
+                        <form id="profile_form" action="" autocomplete="on" class="form-group">
+                            <div class="row">
+                                <!-- Portrait image -->
+                                <div class="col-lg-6 d-flex justify-content-center align-items-center mb-3 mb-lg-0">
+                                    <div class="seeker portrait col-12 m-3">
+                                        <img src="./../../resource/image/seeker_portrait.jpg" alt="portrait.jpg">
+                                        <div id="seeker_portrait_shadow">
+                                            <input id="edit_portrait" type="file" accept="image/*" />
+                                            <a href="#" id="edit_portrait_link">Edit</a>​
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Name Section -->
+                                <div class="col-lg-6 d-flex flex-column justify-content-center align-items-start">
+                                    <lable class="form-label main-dark-color fw-bolder">Name</lable>
+                                    <div class="form-floating mb-3 main-dark-color col-12">
+                                        <input type="text" class="form-control" id="floating_f_name"
+                                            placeholder="First name" name="first_name" required value="Anya">
+                                        <label for="floating_f_name">First name
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-floating main-dark-color col-12">
+                                        <input type="text" class="form-control" id="floating_l_name"
+                                            placeholder="Last name" name="last_name" value="Forger">
+                                        <label for="floating_l_name">Last name</label>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Name Section -->
-                            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-start">
-                                <lable class="form-label main-dark-color fw-bolder">Name</lable>
-                                <div class="form-floating mb-3 main-dark-color col-12">
-                                    <input type="text" class="form-control" id="floating_f_name"
-                                        placeholder="First name" name="first_name">
-                                    <label for="floating_f_name">First name</label>
-                                </div>
-                                <div class="form-floating main-dark-color col-12">
-                                    <input type="text" class="form-control" id="floating_l_name" placeholder="Last name"
-                                        name="last_name">
-                                    <label for="floating_l_name">Last name</label>
+                            <!-- Address Section -->
+                            <div class="row my-2 mt-4">
+                                <lable class="sform-label main-dark-color fw-bolder">Address</lable>
+                            </div>
+                            <div class="row g-0 mb-3">
+                                <div class="col-12 form-floating main-dark-color">
+                                    <input type="text" class="form-control" id="floating_street" placeholder="Street"
+                                        name="street">
+                                    <label for="floating_street">Street</label>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Address Section -->
-                        <div class="row my-2 mt-4">
-                            <lable class="sform-label main-dark-color fw-bolder">Address</lable>
-                        </div>
-                        <div class="row g-0 mb-3">
-                            <div class="col-12 form-floating main-dark-color">
-                                <input type="text" class="form-control" id="floating_street" placeholder="Street"
-                                    name="street">
-                                <label for="floating_street">Street</label>
-                            </div>
-                        </div>
 
-                        <div class="row g-0 justify-content-between">
-                            <div class="col col-5 col-md-4 form-floating main-dark-color ms-3 ms-md-0">
-                                <input type="text" class="form-control" id="floating_city" placeholder="City"
-                                    name="city">
-                                <label for="floating_city" class="form-label">City</label>
+                            <div class="row g-0 justify-content-between">
+                                <div class="col col-5 col-md-4 form-floating main-dark-color ms-3 ms-md-0">
+                                    <input type="text" class="form-control" id="floating_city" placeholder="City"
+                                        name="city">
+                                    <label for="floating_city" class="form-label">City</label>
+                                </div>
+                                <div class="col col-5 col-md-2 form-floating main-dark-color me-3 me-md-0">
+                                    <select id="floating_country" class="form-select">
+                                        <option selected disabled>Choose...</option>
+                                        <option value="CA">CA</option>
+                                        <option value="US">US</option>
+                                    </select>
+                                    <label for="floating_country" class="form-label">Country</label>
+                                </div>
+                                <div class="w-100 d-md-none d-block m-1"></div>
+                                <div class="col col-5 col-md-2 form-floating main-dark-color ms-3 ms-md-0">
+                                    <select id="floating_state" class="form-select">
+                                        <option selected disabled>Choose...</option>
+                                        <option value="AB">AB</option>
+                                        <option value="BC">BC</option>
+                                        <option value="MB">MB</option>
+                                        <option value="NB">NB</option>
+                                        <option value="NL">NL</option>
+                                        <option value="NS">NS</option>
+                                        <option value="NT">NT</option>
+                                        <option value="NU">NU</option>
+                                        <option value="ON">ON</option>
+                                        <option value="PE">PE</option>
+                                        <option value="QC">QC</option>
+                                        <option value="SK">SK</option>
+                                        <option value="YT">YT</option>
+                                    </select>
+                                    <label for="floating_state" class="form-label">State</label>
+                                </div>
+                                <div class="col col-5 col-md-3 form-floating main-dark-color me-3 me-md-0">
+                                    <input type="text" class="form-control" id="floating_postal"
+                                        placeholder="Postal Code" name="postal">
+                                    <label for="floating_zip" class="form-label">Postal Code</label>
+                                </div>
                             </div>
-                            <div class="col col-5 col-md-2 form-floating main-dark-color me-3 me-md-0">
-                                <select id="floating_country" class="form-select">
-                                    <option selected disabled>Choose...</option>
-                                    <option value="CA">CA</option>
-                                    <option value="US">US</option>
-                                </select>
-                                <label for="floating_country" class="form-label">Country</label>
+                            <!-- Contact Section -->
+                            <div class="row my-2 mt-4">
+                                <lable class="sform-label main-dark-color fw-bolder">Contact</lable>
                             </div>
-                            <div class="w-100 d-md-none d-block m-1"></div>
-                            <div class="col col-5 col-md-2 form-floating main-dark-color ms-3 ms-md-0">
-                                <select id="floating_state" class="form-select">
-                                    <option selected disabled>Choose...</option>
-                                    <option value="AB">AB</option>
-                                    <option value="BC">BC</option>
-                                    <option value="MB">MB</option>
-                                    <option value="NB">NB</option>
-                                    <option value="NL">NL</option>
-                                    <option value="NS">NS</option>
-                                    <option value="NT">NT</option>
-                                    <option value="NU">NU</option>
-                                    <option value="ON">ON</option>
-                                    <option value="PE">PE</option>
-                                    <option value="QC">QC</option>
-                                    <option value="SK">SK</option>
-                                    <option value="YT">YT</option>
-                                </select>
-                                <label for="floating_state" class="form-label">State</label>
+                            <div class="row g-0 mb-3">
+                                <div class="col-12 form-floating main-dark-color form-group">
+                                    <input type="text" class="form-control" id="floating_phone" name="phone"
+                                        data-inputmask="'mask': '+1 999 999 9999'">
+                                    <label for="floating_phone">Phone#</label>
+                                </div>
                             </div>
-                            <div class="col col-5 col-md-3 form-floating main-dark-color me-3 me-md-0">
-                                <input type="text" class="form-control" id="floating_postal" placeholder="Postal Code"
-                                    name="postal">
-                                <label for="floating_zip" class="form-label">Postal Code</label>
+                            <!-- Bio Section -->
+                            <div class="row my-2 mt-4">
+                                <lable class="sform-label main-dark-color fw-bolder">Bio</lable>
                             </div>
-                        </div>
-                        <!-- Contact Section -->
-                        <div class="row my-2 mt-4">
-                            <lable class="sform-label main-dark-color fw-bolder">Contact</lable>
-                        </div>
-                        <div class="row g-0 mb-3">
-                            <div class="col-12 form-floating main-dark-color form-group">
-                                <input type="text" class="form-control" id="floating_phone" name="phone"
-                                    data-inputmask="'mask': '+1 999 999 9999'">
-                                <label for="floating_phone">Phone#</label>
+                            <div class="row g-0 mb-3">
+                                <div class="col-12 form-floating main-dark-color form-group">
+                                    <textarea name="bio" id="floating_bio" class="form-control" rows="5" cols="30"
+                                        placeholder="Feel free to tell about yourself"></textarea>
+                                    <label for="floating_bio">Feel free to talk about yourself</label>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Bio Section -->
-                        <div class="row my-2 mt-4">
-                            <lable class="sform-label main-dark-color fw-bolder">Bio</lable>
-                        </div>
-                        <div class="row g-0 mb-3">
-                            <div class="col-12 form-floating main-dark-color form-group">
-                                <textarea name="bio" id="floating_bio" class="form-control" rows="5" cols="30"
-                                    placeholder="Feel free to tell about yourself"></textarea>
-                                <label for="floating_bio">Feel free to talk about yourself</label>
+                            <!-- Save Button -->
+                            <div class="row mt-4 d-flex justify-content-center">
+                                <div class="col-6">
+                                    <button id="btn_save" type="submit"
+                                        class="btn_save btn btn-outline-primary-cust form-control">Save</button>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Save Button -->
-                        <div class="row mt-4 d-flex justify-content-center">
-                            <div class="col-6">
-                                <button id="btn_save" type="submit"
-                                    class="btn_save btn btn-outline-primary-cust form-control">Save</button>
-                            </div>
-                        </div>
 
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
 
 
-    </main>
+        </main>
 
+        <footer>
+            <p>© 2023 PetPal. All rights reserved.</p>
 
-    <footer class="footer py-3 mt-4 border-top">
-        <div class="container d-flex justify-content-between">
-            <!-- Copyright -->
-            <div class="d-flex justify-content-start align-items-center">
-                <span class="main-light-color">&copy; 2023 PetPal</span>
+        </footer>
+        <!-- <footer class="footer py-3 mt-4 border-top">
+            <div class="container d-flex justify-content-between">
+                <div class="d-flex justify-content-start align-items-center">
+                    <span class="main-light-color">&copy; 2023 PetPal</span>
+                </div>
+                <ul class="nav d-flex justify-content-end list-unstyled">
+                    <li class="ms-3">
+                        <a class="main-light-color" target="_blank" href="https://twitter.com/uoft/">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="main-light-color" target="_blank" href="https://www.instagram.com/pet/?hl=en">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="main-light-color" target="_blank" href="https://www.youtube.com/@petcollective">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <!-- Social media links -->
-            <ul class="nav d-flex justify-content-end list-unstyled">
-                <li class="ms-3">
-                    <a class="main-light-color" target="_blank" href="https://twitter.com/uoft/">
-                        <i class="bi bi-twitter-x"></i>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="main-light-color" target="_blank" href="https://www.instagram.com/pet/?hl=en">
-                        <i class="bi bi-instagram"></i>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="main-light-color" target="_blank" href="https://www.youtube.com/@petcollective">
-                        <i class="bi bi-youtube"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+        </footer> -->
+    </div>
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (e) {
+            if (!e.target.matches('.dropdown-button')) {
+                var myDropdown = document.getElementById("myDropdown");
+                if (myDropdown.classList.contains('show')) {
+                    myDropdown.classList.remove('show');
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

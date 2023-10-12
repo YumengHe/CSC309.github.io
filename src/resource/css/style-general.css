@@ -19,7 +19,7 @@ body, html{
 }
 
 .container {
-    padding-bottom: 280px;
+    padding-bottom: 76px;
 }
 
 /* header */
@@ -34,7 +34,7 @@ header {
 
 header a{
     float: left;
-    color: #E4D0D0;
+    color: #F5EBEB;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -47,54 +47,19 @@ header a:hover, header a.right:hover{
     color: #D5B4B4;
 }
 
-header a:active {
+header a.active {
     color: #D5B4B4;
 }
   
 header a.right {
     float: right;
-    color: #E4D0D0;
+    color: #F5EBEB;
 }
 
 /* logo */
 header a.logo {
     font-size: 40px;
     font-weight: 700;
-}
-
-/* search bar */
-.search-bar {
-    float: left;
-    margin-left: 20px;
-}
-
-header input[type=text] {
-    line-height: 35px;
-    padding: 6px;
-    text-align: left;
-    margin-top: 30px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #F5EBEB;
-}
-
-header .search-bar button{
-    float: right;
-    padding: 6px;
-    margin-top: 30px;
-    line-height: 35px;
-    margin-right: 16px;
-    background: #D5B4B4;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
-    color: #867070;
-    border-radius: 5px;
-}
-
-::placeholder {
-    color: #867070;
 }
 
 /* dropdown */
@@ -108,11 +73,14 @@ header .search-bar button{
     font-size: 18px;  
     border: none;
     outline: none;
-    color: #E4D0D0;
+    color: #F5EBEB;
     padding: 14px 16px;
     margin: 0;
     background-color: #867070;
     line-height: 75px;
+    text-align: left;
+    padding-left: 0;
+    margin-left: 14px;
 }
   
 .dropdown-content {
@@ -124,6 +92,7 @@ header .search-bar button{
     z-index: 1;
     border-radius: 5px;
     line-height: 20px;
+    text-align: left;
 }
   
 .dropdown-content a {
@@ -134,6 +103,10 @@ header .search-bar button{
     display: block;
     text-align: left;
     line-height: 20px;
+}
+
+.dropdown-content a:hover {
+    color:#F5EBEB;
 }
 
 .dropdown-button:hover{
@@ -149,85 +122,122 @@ header a.icon {
     display: none;
 }
 
+header img {
+    width: 60px;
+    /* height: 60px; */
+    float: left;
+    display: block;
+    line-height: 75px;
+    text-align: center;
+    margin-top: 10%;
+}
+
+header img:hover {
+    transform: scale(1.05);
+}
+
 /* footer */
 footer {
     background-color: #867070;
-    color: white;
-    padding: 20px 0;
     flex-shrink: 0;
-    width: 100%;
+    margin: 0;
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 80px;
-    margin: 0;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.footer-section h4 {
-    margin-bottom: 20px;
-}
-
-.footer-section p, .footer-section ul, .footer-section li {
-    margin: 5px 0;
-}
-
-.footer-section a {
-    text-decoration: none;
-    color: #E4D0D0;
-}
-
-.footer-section a:hover {
-    color: #D5B4B4;
-}
-
-.footer-bottom {
     text-align: center;
-    margin-top: 20px;
+    line-height: 38px;
+    color: #F5EBEB; 
 }
-
 
 @media screen and (max-width: 768px) {
     .footer-content {
         flex-direction: column;
         gap: 10px;
-    }
-    .container {
-        padding-bottom: 580px;
-    }
-    
+    } 
 }
 
-
-
 @media screen and (max-width: 600px) {
-    header a:not(.icon), header a:not(:first-child), header .search-bar, header .dropdown {
+    header a, header .search-bar, header .dropdown {
         display: none;
+    }
+
+    header a.logo {
+        display: block;
     }
     
     header a.icon {
         display: block;
     }
 
-    header.responsive a, header.responsive .search-bar, header.responsive .dropdown {
+    header.responsive a, header.responsive .search-bar, header.responsive .dropdown{
         display: block;
         float: none;
         text-align: left;
+        margin-left: 0;
+    }
+    
+    header.responsive .dropdown-content {
+        position: relative;
+    }
+
+    header a{
+        line-height: 30px;
+    }
+    header .dropdown .dropdown-button {
+        line-height: 2px;
+        margin-left: 0;
+    }
+
+    header a, header .search-bar, header .dropdown {
+        display: none;
+    }
+
+    header.responsive a:not(.right), header.responsive .dropdown, header img, .dropdown, .dropdown-button{
+        display: block;
+        float: none;
+        text-align: left;
+        padding: 10px 12px;
+        margin-left: 0;
+        margin-top: 0;
     }
     
     header.responsive .dropdown-content {
         position: relative; /* Making it fit into the mobile menu */
     }
+
+    header.responsive header image {
+        position: relative;
+        margin-top: 0;
+    }
 }
 
+
+/* pet/shelter card style */
+.card {
+    flex: 0 0 auto;
+    width: 200px; /* adjust as per requirement */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card p {
+    padding: 2px 10px;
+    color: #867070;
+    text-align: center;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
 /* Adjusting input field width and button in mobile view for better fit */
 @media screen and (max-width: 400px) {
     header input[type=text] {
@@ -238,42 +248,3 @@ footer {
         width: 25%; /* Adjust this value as needed */
     }
 }
-
-/*... (existing styles) ...*/
-
-@media screen and (max-width: 600px) {
-    /* Displaying the logo */
-    header a.logo {
-        display: block;
-    }
-
-    /* Adjusting line-height for better fit in mobile view */
-    header a {
-        line-height: 30px;
-    }
-    header .dropdown .dropdown-button {
-        line-height: 30px;
-    }
-
-    header a, header .search-bar, header .dropdown {
-        display: none;
-    }
-    
-    header a.icon {
-        display: block;
-    }
-
-    /* Displaying the items in the menu when responsive class is toggled */
-    header.responsive a:not(.right), header.responsive .search-bar, header.responsive .dropdown {
-        display: block;
-        float: none;
-        text-align: left;
-    }
-    
-    header.responsive .dropdown-content {
-        position: relative; /* Making it fit into the mobile menu */
-    }
-}
-
-
-

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <title>HOME</title>
     <meta charset="UTF-8">
@@ -8,51 +8,48 @@
     <link rel="icon" type="image/x-icon" href="./resource/image/logo.png">
     <link rel="stylesheet" href="./resource/css/style-general.css">
     <link rel="stylesheet" href="./resource/css/style-index.css">
-
+ 
 </head>
-
+ 
 <body>
     <div class="page-container">
         <header id="header">
             <div class="left">
-                <a class="logo" href="./index.html">PetPal</a>
-                <a class="active" href="./index.html">HOME</a>
+                <a class="logo" href="./index-logged-in.html">PetPal</a>
+                <a class="active" href="./index-logged-in.html">HOME</a>
                 <div class="dropdown">
-                    <button class="dropdown-button" >ADOPT</button>
+                    <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
                     <div class="dropdown-content" id="myDropdown">
-                        <a href="./pet-search/search-result-filtered-dog.html">DOGS</a>
-                        <a href="./pet-search/search-result-filtered-cat.html">CATS</a>
-                        <a href="./pet-search/search-result-filtered-others.html">OTHER</a>
+                        <a href="./search/search-result-filtered-dog.html">DOGS</a>
+                        <a href="./search/search-result-filtered-cat.html">CATS</a>
+                        <a href="./search/search-result-filtered-others.html">OTHER</a>
                     </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropdown-button">SEARCH</button>
-                    <div class="dropdown-content">
-                        <a href="./shelter-search/search-result.html">SEARCH FOR SHELTER</a>
-                        <a href="./pet-search/search-result.html">SEARCH FOR PETS</a>
-                    </div>
-                </div>
+                </div> 
+                <a href="./search/search-result.html">SEARCH</a>
                 <a href="./how-it-works.html">HOW IT WORKS</a>
                 <a href="./about.html">ABOUT</a>
             </div>
             <div class="right">
-                <a class="right" href="./login.html">LOG IN</a>
-                <a class="right" href="#">SIGN UP</a>
+                <a class="right" href="#" >
+                    <img src="./resource/image/profile-logo.png" alt="PROFILE">
+                </a>
+                <a class="right" href="#" >
+                    <img src="./resource/image/notification-logo.png" alt="NOTIFICATION">
+                </a>
             </div>
-            <a href="javascript:void(0);" style="font-size:15px;" class="icon">&#9776;</a>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction2()">&#9776;</a>
         </header>
         <div class="container">
-
-
+            
+    
             <div class="photo-section">
                 <img src="./resource/image/index_title.jpeg" alt="Descriptive alt text here">
                 <div class="photo-overlay">
-                    <p>PetPal is your go-to platform for seamless pet adoptions, connecting rescue animals with loving
-                        families. Join our community and discover the joy of gaining a lifelong furry companion.</p>
-                    <a href="#" class="learn-more-btn">Learn More</a>
+                    <p>PetPal is your go-to platform for seamless pet adoptions, connecting rescue animals with loving families. Join our community and discover the joy of gaining a lifelong furry companion.</p>
+                    <a href="./about.html" class="learn-more-btn">Learn More</a>
                 </div>
             </div>
-
+    
             <section class="slide-card-section">
                 <div class="section-header">
                     <h2>Dogs</h2>
@@ -97,7 +94,7 @@
                     </div>
                 </div>
             </section>
-
+    
             <section class="slide-card-section">
                 <div class="section-header">
                     <h2>Cats</h2>
@@ -142,7 +139,7 @@
                     </div>
                 </div>
             </section>
-
+    
             <section class="slide-card-section">
                 <div class="section-header">
                     <h2>Other</h2>
@@ -187,37 +184,43 @@
                     </div>
                 </div>
             </section>
-
-
+    
+            
         </div>
         <footer>
             <p>© 2023 PetPal. All rights reserved.</p>
+            
         </footer>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get all dropdown buttons
-            var dropdownButtons = document.querySelectorAll('.dropdown-button');
-
-            // Toggle dropdown content when a button is clicked
-            dropdownButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var dropdownContent = this.nextElementSibling; // Assuming the dropdown content is the next sibling element
-                    dropdownContent.classList.toggle('show');
-                });
-            });
-
-            // Hide all dropdown contents if clicked outside
-            window.onclick = function (e) {
-                if (!e.target.matches('.dropdown-button')) {
-                    var dropdowns = document.querySelectorAll('.dropdown-content.show');
-                    dropdowns.forEach(function (dropdown) {
-                        dropdown.classList.remove('show');
-                    });
-                }
-            };
-        });
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropdown-button')) {
+          var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
     </script>
-</body>
 
-</html>
+    <script>
+        function myFunction2() {
+    var x = document.getElementById("header");
+        if (x.className === "") {
+            x.className = "responsive";
+        } else {
+            x.className = "";
+        }
+    }
+    </script>
+        
+    
+</body>
+ </html>
