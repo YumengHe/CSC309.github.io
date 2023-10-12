@@ -105,6 +105,10 @@ header a.logo {
     line-height: 20px;
 }
 
+.dropdown-content a:hover {
+    color:#F5EBEB;
+}
+
 .dropdown-button:hover{
     color: #D5B4B4;
 }
