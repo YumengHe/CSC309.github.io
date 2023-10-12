@@ -1,0 +1,129 @@
+/* pet adoption*/
+/* Add this to your CSS */
+
+
+body,
+html {
+    margin: 0;
+    height: 100%;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #867070;
+    font-weight: bold;
+    /* background-color: #F5EBEB; */
+    flex-direction: column;
+}
+
+
+.carousel-inner {
+    padding-bottom: 0; /* Remove padding */
+}
+
+/* Adjust the height and center the images */
+.carousel-item img {
+    max-height: 85vh; /* Adjust this value as needed */
+    width: auto;
+    margin: auto;
+}
+
+/* Adjust the position of navigation buttons */
+.carousel-control-prev, .carousel-control-next {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Optional: Adjust the size of navigation buttons */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    height: 50px; /* Adjust this value as needed */
+    width: 50px; /* Adjust this value as needed */
+}
+
+.pet-info {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    text-align: center;
+    margin-top: 2rem; /* Add this line */
+}
+
+.carousel {
+    margin-bottom: 0; /* Remove default margin */
+}
+
+
+.required::after {
+    content: '*';
+    color: red;
+    margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        display: none;
+    }
+}
+
+
+
+#imagePreviews {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.img-preview {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+
+body {
+    font-size: 1.2rem; /* Increase base font size */
+}
+
+.mb-3 {
+    margin-bottom: 2rem !important; /* Increase margin-bottom */
+}
+
+h2, h3 {
+    font-size: 2rem; /* Increase heading font size */
+}
+
+#petGallery img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px; /* Add space between images */
+}
+
+.btn {
+    display: inline-block;
+    background-color: #867070;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #D5B4B4;
+}
+
+
+
+
+/* Pet Status Styles */
+.pet-status {
+    margin-top: 20px;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+
