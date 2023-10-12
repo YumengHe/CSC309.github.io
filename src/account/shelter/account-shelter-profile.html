@@ -25,319 +25,266 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <!-- For local stylesheets -->
-    <link rel="stylesheet" href="./../../resource/css/style.css">
+    <link rel="stylesheet" href="./../../resource/css/style-general.css">
     <script type="module" src="./../../resource/js/script.js"></script>
 </head>
 
 <body>
-    <header>
-        <!-- Offcanvas Dark Navbar -->
-        <!-- https://getbootstrap.com/docs/5.3/components/navbar/#offcanvas -->
-        <nav class="navbar navbar-expand-md main-dark-color navbar-dark">
-            <div class="container">
-                <a href="#home" class="navbar-brand">
-                    <span class="fw-bolder display-5 main-light-color pe-md-3">PetPal</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#main-nav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="main-nav">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title fw-bolder display-4 main-light-color" id="offcanvasNavbarLabel">Pet
-                            Pal</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link active main-light-color fs-5" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link main-light-color fs-5" href="#contact">Contact</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link main-light-color fs-5" href="#About">About</a>
-                            </li>
-                            <li class="nav-item d-md-none">
-                                <a href="#search" class="nav-link main-light-color fs-5">Search</a>
-                            </li>
-                        </ul>
+    <div class="page-container">
+        <header id="header">
+            <div class="left">
+                <a class="logo" href="../../index.html">PetPal</a>
+                <a href="../../index.html">HOME</a>
+                <div class="dropdown">
+                    <button class="dropdown-button" >ADOPT</button>
+                    <div class="dropdown-content" id="myDropdown">
+                        <a href="../../pet-search/search-result-filtered-dog.html">DOGS</a>
+                        <a href="../../pet-search/search-result-filtered-cat.html">CATS</a>
+                        <a href="../../pet-search/search-result-filtered-others.html">OTHER</a>
                     </div>
                 </div>
-                <form class="d-flex d-md-flex d-none px-3 col-lg-auto" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search">
-                    <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
-                </form>
-                <nav class="d-flex ">
-                    <div class="dropdown text-end">
-                        <a href="#" class="p-2 fs-4 d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                            data-bs-toggle="dropdown">
-                            <i id="user-icon" class="bi bi-person-circle main-light-color"></i>
-                        </a>
-                        <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="account-seeker-profile.html">Profile</a></li>
-                            <li><a class="dropdown-item" href="account-seeker-account.html">Account</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
-                        </ul>
+                <div class="dropdown">
+                    <button class="dropdown-button">SEARCH</button>
+                    <div class="dropdown-content">
+                        <a href="./shelter-search/search-result.html">SEARCH FOR SHELTER</a>
+                        <a href="./pet-search/search-result.html">SEARCH FOR PETS</a>
                     </div>
-                    <a id="bell-icon" class="p-2 fs-4 main-light-color" href="account-seeker-notification.html"><i
-                            class="bi bi-bell-fill position-relative">
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                                <span class="visually-hidden">New alerts</span>
-                            </span></i></a>
-                </nav>
+                </div>
+                <a href="../../how-it-works.html">HOW IT WORKS</a>
+                <a href="../../about.html">ABOUT</a>
             </div>
-        </nav>
-
-    </header>
-
-    <main>
-        <div class="container mt-5 ">
-            <div class="row d-lg-flex flex-lg-row justify-content-between">
-                <div class="side_nav col col-12 col-lg-3 mb-4">
-                    <div class="list-group list-group-flush border border-start-0 border-2 rounded-end">
-                        <a href="./account-shelter-profile.html"
-                            class="list-group-item list-group-item-action py-3 lh-sm active">
-                            <div class="w-100 fw-bolder ps-4 main-dark-color">
-                                <i class="bi bi-house pe-2"></i>
-                                Shelter Profile
-                            </div>
-                        </a>
-
-                        <a href="./account-shelter-contact.html"
-                            class="list-group-item list-group-item-action py-3 lh-sm">
-                            <div class="w-100 fw-bolder ps-4 main-dark-color">
-                                <i class="bi bi-map pe-2"></i>
-                                Contact Information
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
-                <div class="col col-12 col-lg-8">
-                    <div class="container">
-                        <!-- greeting  -->
-                        <div class="row mb-4">
-                            <div class="col-lg-12">
-                                <h2 class="main-dark-color fw-bolder">Welcome to Toronto Pet Save Shelter!</h2>
-                                <p>Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et neque quis
-                                    urna mattis blandit!</p>
-                            </div>
-                        </div>
-
-
-
-                        <!-- Gallery -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h3 class="main-dark-color fw-bolder">Gallery</h3>
-                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <!-- Repeat for each image -->
-                                        <div class="carousel-item active">
-                                            <img src="./../../resource/image/shelter1.jpg" class="d-block w-100"
-                                                alt="Shelter Image 1">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="./../../resource/image/shelter2.jpg" class="d-block w-100"
-                                                alt="Shelter Image 2">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="./../../resource/image/shelter3.jpg" class="d-block w-100"
-                                                alt="Shelter Image 3">
-                                        </div>
-                                    </div>
-                                    <button class="carousel-control-prev" type="button"
-                                        data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button"
-                                        data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Pet listing -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h3 class="main-dark-color fw-bolder">Available Pets</h3>
-                                <div class="row">
-                                    <!-- Dog Entry -->
-                                    <div class="col-md-4 mb-4">
-                                        <div class="card">
-                                            <img src="./../../resource/image/dog.jpg" class="card-img-top"
-                                                alt="Dog Image">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Name: Buddy</h5>
-                                                <p class="card-text">Age: 2 years</p>
-                                                <!-- add a disabled form with a selection saying pet status: Available, Adapted, Pending, Withdrawn -->
-                                                <form>
-                                                    <div class="mb-3">
-                                                        <label for="petStatus" class="form-label">Pet Status:</label>
-                                                        <select id="petStatus" class="form-control" disabled>
-                                                            <option selected>Available</option>
-                                                            <option>Adopted</option>
-                                                            <option>Pending</option>
-                                                            <option>Withdrawn</option>
-                                                        </select>
-                                                    </div>
-                                                </form>
-                                                <a href="#" class="btn btn-primary-cust">Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <!-- Cat Entry -->
-                                    <div class="col-md-4 mb-4">
-                                        <div class="card">
-                                            <img src="./../../resource/image/cat.jpg" class="card-img-top"
-                                                alt="Cat Image">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Name: Whiskers</h5>
-                                                <p class="card-text">Age: 3 years</p>
-                                                <form>
-                                                    <div class="mb-3">
-                                                        <label for="petStatus" class="form-label">Pet Status:</label>
-                                                        <select id="petStatus" class="form-control" disabled>
-                                                            <option>Available</option>
-                                                            <option>Adopted</option>
-                                                            <option selected>Pending</option>
-                                                            <option>Withdrawn</option>
-                                                        </select>
-                                                    </div>
-                                                </form>
-                                                <a href="#" class="btn btn-primary-cust">Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Bird Entry -->
-                                    <div class="col-md-4 mb-4">
-                                        <div class="card">
-                                            <img src="./../../resource/image/bird.jpg" class="card-img-top"
-                                                alt="Bird Image">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Name: Tweety</h5>
-                                                <p class="card-text">Age: 1 year</p>
-                                                <form>
-                                                    <div class="mb-3">
-                                                        <label for="petStatus" class="form-label">Pet Status:</label>
-                                                        <select id="petStatus" class="form-control" disabled>
-                                                            <option>Available</option>
-                                                            <option selected>Adopted</option>
-                                                            <option>Pending</option>
-                                                            <option>Withdrawn</option>
-                                                        </select>
-                                                    </div>
-                                                </form>
-                                                <a href="#" class="btn btn-primary-cust">Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Comments -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h3 class="main-dark-color fw-bolder">Comments</h3>
-
-                                <!-- Comment 1 -->
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <p><strong>User 1:</strong> Great shelter with friendly staff!</p>
-                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                            data-bs-target="#replyForm1" aria-expanded="false"
-                                            aria-controls="replyForm1">Reply</button>
-
-                                        <!-- Reply form -->
-                                        <div class="collapse" id="replyForm1">
-                                            <form>
-                                                <div class="mb-3">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Type your reply here">
-                                                </div>
-                                                <button type="submit"
-                                                    class="btn btn-primary-cust btn-sm">Submit</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Comment 2 -->
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <p><strong>User 2:</strong> Had a wonderful experience adopting a pet here.</p>
-                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                            data-bs-target="#replyForm2" aria-expanded="false"
-                                            aria-controls="replyForm2">Reply</button>
-
-                                        <!-- Reply form -->
-                                        <div class="collapse" id="replyForm2">
-                                            <form>
-                                                <div class="mb-3">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Type your reply here">
-                                                </div>
-                                                <button type="submit"
-                                                    class="btn btn-primary-cust btn-sm">Submit</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- ...more comments -->
-
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <!-- create a edit button for the page that link to another html page -->
-                                <a href="./account-shelter-edit.html" class="btn btn-primary-cust">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    </main>
-
-
-    <footer class="footer py-3 mt-4 border-top">
-        <div class="container d-flex justify-content-between">
-            <div class="d-flex justify-content-start align-items-center">
-                <span class="main-light-color">&copy; 2023 PetPal</span>
+            <div class="right">
+                <a class="right" href="../../login.html">LOG IN</a>
+                <a class="right" href="../../signup.html">SIGN UP</a>
             </div>
-            <ul class="nav d-flex justify-content-end list-unstyled">
-                <li class="ms-3">
-                    <a class="main-light-color" target="_blank" href="https://twitter.com/uoft/">
-                        <i class="bi bi-twitter-x"></i>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="main-light-color" target="_blank" href="https://www.instagram.com/pet/?hl=en">
-                        <i class="bi bi-instagram"></i>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="main-light-color" target="_blank" href="https://www.youtube.com/@petcollective">
-                        <i class="bi bi-youtube"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon">&#9776;</a>
+        </header>
+
+        <main>
+            <div class="container mt-5 ">
+                <div class="row d-lg-flex flex-lg-row justify-content-between">
+                    <div class="side_nav col col-12 col-lg-3 mb-4">
+                        <div class="list-group list-group-flush border border-start-0 border-2 rounded-end">
+                            <a href="./account-shelter-profile.html"
+                                class="list-group-item list-group-item-action py-3 lh-sm active">
+                                <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                    <i class="bi bi-house pe-2"></i>
+                                    Shelter Profile
+                                </div>
+                            </a>
+
+                            <a href="./account-shelter-contact.html"
+                                class="list-group-item list-group-item-action py-3 lh-sm">
+                                <div class="w-100 fw-bolder ps-4 main-dark-color">
+                                    <i class="bi bi-map pe-2"></i>
+                                    Contact Information
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col col-12 col-lg-8">
+                        <div class="container">
+                            <!-- greeting  -->
+                            <div class="row mb-4">
+                                <div class="col-lg-12">
+                                    <h2 class="main-dark-color fw-bolder">Welcome to Toronto Pet Save Shelter!</h2>
+                                    <p>Mission: To Improve the Lives of Animals.</p>
+                                </div>
+                            </div>
+
+
+
+                            <!-- Gallery -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h3 class="main-dark-color fw-bolder">Gallery</h3>
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <!-- Repeat for each image -->
+                                            <div class="carousel-item active">
+                                                <img src="./../../resource/image/shelter1.jpg" class="d-block w-100"
+                                                    alt="Shelter Image 1">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="./../../resource/image/shelter2.jpg" class="d-block w-100"
+                                                    alt="Shelter Image 2">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="./../../resource/image/shelter3.jpg" class="d-block w-100"
+                                                    alt="Shelter Image 3">
+                                            </div>
+                                        </div>
+                                        <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                            data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Pet listing -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h3 class="main-dark-color fw-bolder">Available Pets</h3>
+                                    <div class="row">
+                                        <!-- Dog Entry -->
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card">
+                                                <img src="./../../resource/image/dog.jpg" class="card-img-top"
+                                                    alt="Dog Image">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Name: Buddy</h5>
+                                                    <p class="card-text">Age: 2 years</p>
+                                                    <!-- add a disabled form with a selection saying pet status: Available, Adapted, Pending, Withdrawn -->
+                                                    <form>
+                                                        <div class="mb-3">
+                                                            <label for="petStatus" class="form-label">Pet
+                                                                Status:</label>
+                                                            <select id="petStatus" class="form-control" disabled>
+                                                                <option selected>Available</option>
+                                                                <option>Adopted</option>
+                                                                <option>Pending</option>
+                                                                <option>Withdrawn</option>
+                                                            </select>
+                                                        </div>
+                                                    </form>
+                                                    <a href="#" class="btn btn-primary-cust">Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <!-- Cat Entry -->
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card">
+                                                <img src="./../../resource/image/cat.jpg" class="card-img-top"
+                                                    alt="Cat Image">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Name: Whiskers</h5>
+                                                    <p class="card-text">Age: 3 years</p>
+                                                    <form>
+                                                        <div class="mb-3">
+                                                            <label for="petStatus" class="form-label">Pet
+                                                                Status:</label>
+                                                            <select id="petStatus" class="form-control" disabled>
+                                                                <option>Available</option>
+                                                                <option>Adopted</option>
+                                                                <option selected>Pending</option>
+                                                                <option>Withdrawn</option>
+                                                            </select>
+                                                        </div>
+                                                    </form>
+                                                    <a href="#" class="btn btn-primary-cust">Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Bird Entry -->
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card">
+                                                <img src="./../../resource/image/bird.jpg" class="card-img-top"
+                                                    alt="Bird Image">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Name: Tweety</h5>
+                                                    <p class="card-text">Age: 1 year</p>
+                                                    <form>
+                                                        <div class="mb-3">
+                                                            <label for="petStatus" class="form-label">Pet
+                                                                Status:</label>
+                                                            <select id="petStatus" class="form-control" disabled>
+                                                                <option>Available</option>
+                                                                <option selected>Adopted</option>
+                                                                <option>Pending</option>
+                                                                <option>Withdrawn</option>
+                                                            </select>
+                                                        </div>
+                                                    </form>
+                                                    <a href="#" class="btn btn-primary-cust">Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comments -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h3 class="main-dark-color fw-bolder">Comments</h3>
+
+                                    <!-- Comment 1 -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <p><strong>User 1:</strong> Great shelter with friendly staff!</p>
+                                            <button class="btn btn-link" data-bs-toggle="collapse"
+                                                data-bs-target="#replyForm1" aria-expanded="false"
+                                                aria-controls="replyForm1">Reply</button>
+
+                                            <!-- Reply form -->
+                                            <div class="collapse" id="replyForm1">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Type your reply here">
+                                                    </div>
+                                                    <button type="submit"
+                                                        class="btn btn-primary-cust btn-sm">Submit</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Comment 2 -->
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <p><strong>User 2:</strong> Had a wonderful experience adopting a pet here.
+                                            </p>
+                                            <button class="btn btn-link" data-bs-toggle="collapse"
+                                                data-bs-target="#replyForm2" aria-expanded="false"
+                                                aria-controls="replyForm2">Reply</button>
+
+                                            <!-- Reply form -->
+                                            <div class="collapse" id="replyForm2">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Type your reply here">
+                                                    </div>
+                                                    <button type="submit"
+                                                        class="btn btn-primary-cust btn-sm">Submit</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- ...more comments -->
+
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <!-- create a edit button for the page that link to another html page -->
+                                    <a href="./account-shelter-edit.html" class="btn btn-primary-cust">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </main>
+
+
+        <footer>
+            <p>© 2023 PetPal. All rights reserved.</p>
+        </footer>
 </body>
+</div>
 
 </html>
