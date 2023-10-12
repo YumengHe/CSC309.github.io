@@ -15,26 +15,44 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <!-- For local stylesheets -->
-    <link rel="stylesheet" href="./style.css">
-
-    <!-- Add the style for image previews here -->
-    <style>
-        #imagePreviews {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .img-preview {
-            width: 100px; /* Fixed width */
-            height: 100px; /* Fixed height */
-            object-fit: cover; /* This will make the images cover the entire element, cropping them as needed */
-            border-radius: 5px; /* Optional: for rounded corners */
-            margin: 5px; /* Space between images */
-        }
-    </style>
+    <link rel="stylesheet" href="./resource/css/style-pets.css">
+    <link rel="icon" type="image/x-icon" href="./resource/image/logo.png">
+    <link rel="stylesheet" href="./resource/css/style-general.css">
+    <link rel="stylesheet" href="./resource/css/style-index.css">
 </head>
 
 <body>
+
+
+<header id="header">
+    <div class="left">
+        <a class="logo">PetPal</a>
+        <a class="active" href="./index.html">HOME</a>
+        <div class="dropdown">
+            <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="./search/search-result-filtered-dog.html">DOGS</a>
+                <a href="./search/search-result-filtered-cat.html">CATS</a>
+                <a href="./search/search-result-filtered-others.html">OTHER</a>
+            </div>
+        </div>
+        <a href="./search/search-result.html">SEARCH</a>
+        <a href="./how-it-works.html">HOW IT WORKS</a>
+        <a href="./about.html">ABOUT</a>
+    </div>
+    <!-- <div class="search-bar">
+        <form action="#">
+          <input type="text" placeholder="Search..." name="search">
+          <button type="submit">Submit</button>
+        </form>
+    </div> -->
+    <div class="right">
+        <a class="right" href="./login.html" >LOG IN</a>
+        <a class="right" href="#" >SIGN UP</a>
+    </div>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</header>
+
 
 <div class="container mt-5">
 
@@ -190,6 +208,24 @@
 
         document.getElementById('selectedFiles').innerHTML = '<ul>' + fileNames + '</ul>';
     });
+</script>
+
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+        if (!e.target.matches('.dropdown-button')) {
+            var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+                myDropdown.classList.remove('show');
+            }
+        }
+    }
 </script>
 
 

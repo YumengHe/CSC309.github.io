@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetPal: Pet Update</title>
+    <title>PetPal: Pet Adoption</title>
     <!-- For Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <!-- For Bootstrap w/ JQuery -->
@@ -15,31 +15,66 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <!-- For local stylesheets -->
-    <link rel="stylesheet" href="./style.css">
-    <style>
-        .required::after {
-            content: '*';
-            color: red;
-            margin-left: 5px;
-        }
+    <link rel="stylesheet" href="./resource/css/style-pets.css">
+    <link rel="icon" type="image/x-icon" href="./resource/image/logo.png">
+    <link rel="stylesheet" href="./resource/css/style-general.css">
+    <link rel="stylesheet" href="./resource/css/style-index.css">
 
-        @media (max-width: 768px) {
-            .gallery {
-                display: none;
-            }
-        }
-    </style>
 </head>
 
+
 <body>
+<header id="header">
+    <div class="left">
+        <a class="logo">PetPal</a>
+        <a class="active" href="./index.html">HOME</a>
+        <div class="dropdown">
+            <button class="dropdown-button" onclick="myFunction()">ADOPT</button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="./search/search-result-filtered-dog.html">DOGS</a>
+                <a href="./search/search-result-filtered-cat.html">CATS</a>
+                <a href="./search/search-result-filtered-others.html">OTHER</a>
+            </div>
+        </div>
+        <a href="./search/search-result.html">SEARCH</a>
+        <a href="./how-it-works.html">HOW IT WORKS</a>
+        <a href="./about.html">ABOUT</a>
+    </div>
+    <div class="right">
+        <a class="right" href="./login.html" >LOG IN</a>
+        <a class="right" href="#" >SIGN UP</a>
+    </div>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</header>
 
 <div class="container mt-5">
     <div class="row">
         <!-- Pet Gallery -->
         <div class="col-md-6 gallery">
-            <img src="harry.jpg" alt="Harry" class="img-fluid mb-2">
-            <h3>Harry, 9 years old</h3>
+            <div id="petCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="resource/image/dog.jpg" class="d-block w-100" alt="Dog">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="resource/image/dog2.jpeg" class="d-block w-100" alt="Dog">
+                    </div>
+                    <!-- Add more items as needed -->
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#petCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#petCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <div class="pet-info text-center">
+                <h3>Harry, 9 years old</h3>
+            </div>
         </div>
+
 
         <!-- On mobile, show only pet name and age -->
         <div class="col-12 d-md-none text-center mb-4">
@@ -142,6 +177,25 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+        if (!e.target.matches('.dropdown-button')) {
+            var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+                myDropdown.classList.remove('show');
+            }
+        }
+    }
+</script>
+
+
 </body>
 
 </html>
