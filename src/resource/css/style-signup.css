@@ -78,6 +78,7 @@ p a:hover {
 
 select {
     color: #867070;
+    width: 100%;
 }
 
 select option {
