@@ -16,7 +16,7 @@ TABLE OF CONTENTS
 4. License
 5. Contact
 
-
+---------------
 1. INTRODUCTION
 ---------------
 PetPal was founded with the aim of bridging the gap between animal shelters and prospective pet owners. Our platform simplifies the adoption process, ensuring every pet finds its loving home.
