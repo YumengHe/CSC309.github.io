@@ -1,15 +1,16 @@
 /* This css includes style for header, footer and container*/
 
 * {
-    box-sizing: border-box;  
+    box-sizing: border-box;
 }
 
-body, html{
+body,
+html {
     margin: 0;
     height: 100%;
     font-size: 18px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #F5EBEB;
+    /* background-color: #F5EBEB; */
     flex-direction: column;
 }
 
@@ -32,7 +33,7 @@ header {
     max-width: 100%;
 }
 
-header a{
+header a {
     float: left;
     color: #F5EBEB;
     text-align: center;
@@ -42,15 +43,16 @@ header a{
     line-height: 75px;
     display: block;
 }
-  
-header a:hover, header a.right:hover{
+
+header a:hover,
+header a.right:hover {
     color: #D5B4B4;
 }
 
 header a.active {
     color: #D5B4B4;
 }
-  
+
 header a.right {
     float: right;
     color: #F5EBEB;
@@ -66,11 +68,11 @@ header a.logo {
 .dropdown {
     float: left;
     overflow: hidden;
-  }
-  
+}
+
 .dropdown .dropdown-button {
     cursor: pointer;
-    font-size: 18px;  
+    font-size: 18px;
     border: none;
     outline: none;
     color: #F5EBEB;
@@ -82,19 +84,19 @@ header a.logo {
     padding-left: 0;
     margin-left: 14px;
 }
-  
+
 .dropdown-content {
     display: none;
     position: absolute;
     background: #D5B4B4;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 5px;
     line-height: 20px;
     text-align: left;
 }
-  
+
 .dropdown-content a {
     float: none;
     color: #867070;
@@ -106,13 +108,13 @@ header a.logo {
 }
 
 .dropdown-content a:hover {
-    color:#F5EBEB;
+    color: #F5EBEB;
 }
 
-.dropdown-button:hover{
+.dropdown-button:hover {
     color: #D5B4B4;
 }
-  
+
 .show {
     display: block;
 }
@@ -146,53 +148,65 @@ footer {
     width: 100%;
     text-align: center;
     line-height: 38px;
-    color: #F5EBEB; 
+    color: #F5EBEB;
 }
 
 @media screen and (max-width: 768px) {
     .footer-content {
         flex-direction: column;
         gap: 10px;
-    } 
+    }
 }
 
 @media screen and (max-width: 600px) {
-    header a, header .search-bar, header .dropdown {
+
+    header a,
+    header .search-bar,
+    header .dropdown {
         display: none;
     }
 
     header a.logo {
         display: block;
     }
-    
+
     header a.icon {
         display: block;
     }
 
-    header.responsive a, header.responsive .search-bar, header.responsive .dropdown{
+    header.responsive a,
+    header.responsive .search-bar,
+    header.responsive .dropdown {
         display: block;
         float: none;
         text-align: left;
         margin-left: 0;
     }
-    
+
     header.responsive .dropdown-content {
         position: relative;
     }
 
-    header a{
+    header a {
         line-height: 30px;
     }
+
     header .dropdown .dropdown-button {
         line-height: 2px;
         margin-left: 0;
     }
 
-    header a, header .search-bar, header .dropdown {
+    header a,
+    header .search-bar,
+    header .dropdown {
         display: none;
     }
 
-    header.responsive a:not(.right), header.responsive .dropdown, header img, .dropdown, .dropdown-button{
+    header.responsive a:not(.right),
+    header.responsive .dropdown,
+    header img,
+    .dropdown,
+    .dropdown-button {
         display: block;
         float: none;
         text-align: left;
@@ -200,9 +214,10 @@ footer {
         margin-left: 0;
         margin-top: 0;
     }
-    
+
     header.responsive .dropdown-content {
-        position: relative; /* Making it fit into the mobile menu */
+        position: relative;
+        /* Making it fit into the mobile menu */
     }
 
     header.responsive header image {
@@ -215,11 +230,13 @@ footer {
 /* Adjusting input field width and button in mobile view for better fit */
 @media screen and (max-width: 400px) {
     header input[type=text] {
-        width: 70%; /* Adjust this value as needed */
+        width: 70%;
+        /* Adjust this value as needed */
     }
 
     header .search-bar button {
-        width: 25%; /* Adjust this value as needed */
+        width: 25%;
+        /* Adjust this value as needed */
     }
 }
 
@@ -443,7 +460,30 @@ main {
 }
 
 
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Applications & Application Submitted *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
+.application.list-group a img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--main-mid-color);
+}
+
+#conversation .shelter_conv div:nth-child(3) {
+    background-color: #86707099;
+    color: white;
+}
+
+#conversation .seeker_conv {
+    display: flex;
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+#conversation .timestamp {
+    font-size: smaller;
+}
 
 
 /* div.row {
