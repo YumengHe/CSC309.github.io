@@ -1,4 +1,5 @@
 from rest_framework import status, views
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
@@ -34,3 +35,13 @@ class LoginView(views.APIView):
 
         # Authentication failed. Respond with an error message.
         return Response({"error": "Invalid username or password"}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+class AccountInfoView(views.APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # The request.user will be set to the authenticated User instance
+        # Serialize the user information to send as a response
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
