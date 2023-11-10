@@ -10,6 +10,9 @@ fi
 
 # Activate the virtual environment
 source venv/bin/activate
+# when you are done, you can type
+# deactivate
+# to disable the virtual environment.
 
 # Upgrade pip to the latest version
 echo "Upgrading pip..."

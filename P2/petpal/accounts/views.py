@@ -1,13 +1,13 @@
-from rest_framework import status, views
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import status, views, generics
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, User
 from django.contrib.auth import authenticate
 
 
-class RegisterView(views.APIView):
+class UserRegisterView(views.APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -16,7 +16,7 @@ class RegisterView(views.APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class LoginView(views.APIView):
+class UserLoginView(views.APIView):
     def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
@@ -29,7 +29,7 @@ class LoginView(views.APIView):
 
             data = {
                 "refresh": str(refresh),
-                "access": str(access),  # Generate and include the Access Token in the response.
+                "access": str(access),
             }
             return Response(data, status=status.HTTP_200_OK)
 
@@ -37,11 +37,41 @@ class LoginView(views.APIView):
         return Response({"error": "Invalid username or password"}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-class AccountInfoView(views.APIView):
+class UserUpdateView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
-        # The request.user will be set to the authenticated User instance
-        # Serialize the user information to send as a response
-        serializer = UserSerializer(request.user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    def get_object(self):
+        # Return the current user
+        return self.request.user
+
+
+class UserDeleteView(generics.RetrieveDestroyAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        # Return the current user
+        return self.request.user
+
+
+class UserListByRoleView(generics.ListAPIView):
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned users to a given role and/or id,
+        by filtering against 'role' and 'id' query parameters in the URL.
+        """
+        # TODO add permission
+        queryset = User.objects.all()
+        role = self.request.query_params.get('role', None)
+        user_id = self.request.query_params.get('id', None)
+
+        if role:
+            queryset = queryset.filter(role=role)
+
+        if user_id:
+            queryset = queryset.filter(id=user_id)
+
+        return queryset
