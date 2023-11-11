@@ -2,3 +2,5 @@ django
 Pillow
 djangorestframework
 djangorestframework-simplejwt
+django-phonenumber-field
+django-phonenumbers
