@@ -48,5 +48,9 @@ class Application(models.Model):
         verbose_name="Names and ages of all permanent residents of your home (adults/children)"
     )
 
+    class Meta:
+        # Order applications by most recent updated
+        ordering = ("-last_updated",)
+
     def __str__(self) -> str:
         return f"{self.seeker} wants {self.petpost}"
