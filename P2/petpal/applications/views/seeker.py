@@ -10,6 +10,7 @@ from rest_framework.generics import (
 )
 from ..models import Application
 from ..permissions import IsSeeker
+from ..paginations import BasePageNumberPagination
 
 
 class SeekerBase(GenericAPIView):
@@ -19,6 +20,10 @@ class SeekerBase(GenericAPIView):
 
 class SeekerApplicationList(SeekerBase, ListAPIView):
     """Retrive a list of applications that submitted by the login user"""
+
+    # To implement pagination,
+    # add '?page_size=1&page=2' at end of URL (the 2nd page while each page contains 1 obj)
+    pagination_class = BasePageNumberPagination
 
     def get_queryset(self):
         applications = get_list_or_404(Application, seeker=self.request.user)
@@ -30,5 +35,6 @@ class SeekerApplicationDetial(SeekerBase, RetrieveAPIView):
 
     def get_object(self):
         application = get_object_or_404(Application, id=self.kwargs["id"])
+        # Need to explicitly check permissions
         self.check_object_permissions(self.request, application)
         return application

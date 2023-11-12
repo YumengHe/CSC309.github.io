@@ -11,6 +11,7 @@ from rest_framework.generics import (
 from ..permissions import IsShelter
 from ..models import Application
 from pets.models import PetPost
+from ..paginations import BasePageNumberPagination
 
 
 class ShlterBase(GenericAPIView):
@@ -20,6 +21,10 @@ class ShlterBase(GenericAPIView):
 
 class ShlterApplicationList(ShlterBase, ListAPIView):
     """Retrive a list of applications that submitted by the login user"""
+
+    # To implement pagination,
+    # add '?page_size=1&page=2' at end of URL (the 2nd page while each page contains 1 obj)
+    pagination_class = BasePageNumberPagination
 
     def get_queryset(self):
         petposts = get_list_or_404(PetPost, owner=self.request.user)
@@ -32,5 +37,6 @@ class ShlterApplicationDetial(ShlterBase, RetrieveAPIView):
 
     def get_object(self):
         application = get_object_or_404(Application, id=self.kwargs["id"])
+        # Need to explicitly check permissions
         self.check_object_permissions(self.request, application)
         return application
