@@ -14,12 +14,12 @@ from pets.models import PetPost
 from ..paginations import BasePageNumberPagination
 
 
-class ShlterBase(GenericAPIView):
+class ShlterBaseView(GenericAPIView):
     serializer_class = ApplicationSerializer
     permission_classes = [IsShelter]
 
 
-class ShlterApplicationList(ShlterBase, ListAPIView):
+class ShlterApplicationList(ShlterBaseView, ListAPIView):
     """Retrive a list of applications that submitted by the login user"""
 
     # To implement pagination,
@@ -29,10 +29,21 @@ class ShlterApplicationList(ShlterBase, ListAPIView):
     def get_queryset(self):
         petposts = get_list_or_404(PetPost, owner=self.request.user)
         applications = get_list_or_404(Application.objects.filter(petpost__in=petposts))
+
+        # Filter applications by status
+        status_param = self.request.query_params.get("status")
+        # Varify the status parameter
+        if status_param is not None and any(
+            status_param in STATUS for STATUS in Application.STATUS_CHOICE
+        ):
+            applications = get_list_or_404(
+                Application.objects.filter(petpost__in=petposts, status=status_param)
+            )
+
         return applications
 
 
-class ShlterApplicationDetial(ShlterBase, RetrieveAPIView):
+class ShlterApplicationDetial(ShlterBaseView, RetrieveAPIView):
     """Retrive the specific application detail by its id for specific login user"""
 
     def get_object(self):
@@ -40,3 +51,5 @@ class ShlterApplicationDetial(ShlterBase, RetrieveAPIView):
         # Need to explicitly check permissions
         self.check_object_permissions(self.request, application)
         return application
+
+
