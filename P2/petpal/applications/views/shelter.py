@@ -24,7 +24,7 @@ class ShelterBaseView(GenericAPIView):
 
 
 class ShelterApplicationList(ShelterBaseView, ListAPIView):
-    """Retrive a list of applications that submitted by the login user"""
+    """Retrieve a list of applications that submitted by the login user"""
 
     # To implement pagination,
     # add '?page_size=1&page=2' at end of URL (the 2nd page while each page contains 1 obj)
@@ -58,7 +58,7 @@ class ShelterApplicationList(ShelterBaseView, ListAPIView):
 
 class ShelterApplicationDetial(ShelterBaseView, RetrieveUpdateAPIView):
     """
-    Retrive the specific application detail by its id for specific login user,
+    Retrieve the specific application detail by its id for specific login user,
         update its status from 'pending' to 'accepted'/'denied'.
     """
 
