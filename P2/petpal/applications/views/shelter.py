@@ -18,12 +18,12 @@ from ..paginations import BasePageNumberPagination
 from pets.models import PetPost
 
 
-class ShlterBaseView(GenericAPIView):
+class ShelterBaseView(GenericAPIView):
     serializer_class = ApplicationSerializer
     permission_classes = [IsShelter]
 
 
-class ShlterApplicationList(ShlterBaseView, ListAPIView):
+class ShelterApplicationList(ShelterBaseView, ListAPIView):
     """Retrive a list of applications that submitted by the login user"""
 
     # To implement pagination,
@@ -56,7 +56,7 @@ class ShlterApplicationList(ShlterBaseView, ListAPIView):
         return get_list_or_404(applications)
 
 
-class ShlterApplicationDetial(ShlterBaseView, RetrieveUpdateAPIView):
+class ShelterApplicationDetial(ShelterBaseView, RetrieveUpdateAPIView):
     """
     Retrive the specific application detail by its id for specific login user,
         update its status from 'pending' to 'accepted'/'denied'.
