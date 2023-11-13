@@ -10,7 +10,7 @@ from rest_framework.generics import (
     RetrieveUpdateAPIView,
 )
 
-from ..serializers import ApplicationSerializer, ApplicationStatusSerializer
+from ..serializers import ApplicationFullSerializer, ApplicationBasicSerializer
 from ..permissions import IsShelter
 from ..models import Application
 from ..paginations import BasePageNumberPagination
@@ -19,7 +19,7 @@ from pets.models import PetPost
 
 
 class ShelterBaseView(GenericAPIView):
-    serializer_class = ApplicationSerializer
+    serializer_class = ApplicationBasicSerializer
     permission_classes = [IsShelter]
 
 
@@ -65,8 +65,8 @@ class ShelterApplicationDetial(ShelterBaseView, RetrieveUpdateAPIView):
     def get_serializer_class(self):
         # Use simplified version of serializer to update application status
         if self.request.method in ["PUT", "PATCH"]:
-            return ApplicationStatusSerializer
-        return ApplicationSerializer
+            return ApplicationBasicSerializer
+        return ApplicationFullSerializer
 
     def get_object(self):
         application = get_object_or_404(Application, id=self.kwargs["id"])
@@ -74,6 +74,8 @@ class ShelterApplicationDetial(ShelterBaseView, RetrieveUpdateAPIView):
         self.check_object_permissions(self.request, application)
         return application
 
+    # Django REST Framework - Serializers
+    # https://cheat.readthedocs.io/en/latest/django/drf_serializers.html#putting-an-object
     def update(self, request, *args, **kwargs):
         application = self.get_object()
 

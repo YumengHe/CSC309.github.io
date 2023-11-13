@@ -5,19 +5,20 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import (
     GenericAPIView,
     ListAPIView,
-    ListCreateAPIView,
+    CreateAPIView,
     RetrieveAPIView,
     RetrieveUpdateAPIView,
 )
 
-from ..serializers import ApplicationSerializer, ApplicationStatusSerializer
+from pets.models import PetPost
+from ..serializers import ApplicationFullSerializer, ApplicationBasicSerializer
 from ..models import Application
 from ..permissions import IsSeeker
 from ..paginations import BasePageNumberPagination
 
 
 class SeekerBaseView(GenericAPIView):
-    serializer_class = ApplicationSerializer
+    serializer_class = ApplicationBasicSerializer
     permission_classes = [IsSeeker]
 
 
@@ -60,9 +61,10 @@ class SeekerApplicationDetial(SeekerBaseView, RetrieveUpdateAPIView):
     """
 
     def get_serializer_class(self):
+        # Use simplified version of serializer to update application status
         if self.request.method in ["PUT", "PATCH"]:
-            return ApplicationStatusSerializer
-        return ApplicationSerializer
+            return ApplicationBasicSerializer
+        return ApplicationFullSerializer
 
     def get_object(self):
         application = get_object_or_404(Application, id=self.kwargs["id"])
@@ -70,6 +72,8 @@ class SeekerApplicationDetial(SeekerBaseView, RetrieveUpdateAPIView):
         self.check_object_permissions(self.request, application)
         return application
 
+    # Django REST Framework - Serializers
+    # https://cheat.readthedocs.io/en/latest/django/drf_serializers.html#putting-an-object
     def update(self, request, *args, **kwargs):
         application = self.get_object()
 
@@ -80,10 +84,59 @@ class SeekerApplicationDetial(SeekerBaseView, RetrieveUpdateAPIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # Update the status to 'withdrawn'
-        application.status = "withdrawn"
-        application.save()
+        # # Update the status to 'withdrawn'
+        # application.status = "withdrawn"
+        # application.save()
+        # # Return the updated data
+        # serializer = self.get_serializer(application)
+        # return Response(serializer.data)
 
-        # Return the updated data
-        serializer = self.get_serializer(application)
+        # Save update with status to 'withdrawn'
+        serializer = self.get_serializer(
+            application, data={"status": "withdrawn"}, partial=True
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data)
+
+
+class SeekerApplicationCreate(SeekerBaseView, CreateAPIView):
+    """
+    Create a new application for a pet with status 'available' from the login user
+    REFER
+        Django REST Framework - Serializers
+        https://cheat.readthedocs.io/en/latest/django/drf_serializers.html#creating-a-new-object
+    """
+
+    serializer_class = ApplicationFullSerializer
+
+    def create(self, request, *args, **kwargs):
+        petpost = get_object_or_404(PetPost, id=self.kwargs["id"])
+        print("NEW Application for ", petpost, petpost.status)
+
+        # Verify whether the application is for available petpost
+        if petpost.status != "available":
+            return Response(
+                {"error": "Cannot submit application for unavailable pets."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Check whether user has 'pending'/'accepted' application with the petpost already
+        conflict_applications = Application.objects.filter(
+            petpost=petpost, seeker=request.user, status__in=["pending", "accepted"]
+        )
+        print(conflict_applications, conflict_applications.exists())
+        if conflict_applications.exists():
+            return Response(
+                {
+                    "error": "You already have a pending/accepted application for this pet."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Save the object
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(seeker=request.user, petpost=petpost)
         return Response(serializer.data)
