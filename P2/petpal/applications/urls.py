@@ -7,4 +7,5 @@ urlpatterns = [
     path("seeker/<int:id>/", views.SeekerApplicationDetial.as_view(), name="detail"),
     path("shelter/", views.ShelterApplicationList.as_view(), name="list_all"),
     path("shelter/<int:id>/", views.ShelterApplicationDetial.as_view(), name="detail"),
+    path("<int:id>/", views.SeekerApplicationCreate.as_view(), name="create"),
 ]

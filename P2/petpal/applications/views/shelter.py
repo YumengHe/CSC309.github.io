@@ -10,7 +10,7 @@ from rest_framework.generics import (
     RetrieveUpdateAPIView,
 )
 
-from ..serializers import ApplicationSerializer, ApplicationStatusSerializer
+from ..serializers import ApplicationFullSerializer, ApplicationBasicSerializer
 from ..permissions import IsShelter
 from ..models import Application
 from ..paginations import BasePageNumberPagination
@@ -19,12 +19,12 @@ from pets.models import PetPost
 
 
 class ShelterBaseView(GenericAPIView):
-    serializer_class = ApplicationSerializer
+    serializer_class = ApplicationBasicSerializer
     permission_classes = [IsShelter]
 
 
 class ShelterApplicationList(ShelterBaseView, ListAPIView):
-    """Retrive a list of applications that submitted by the login user"""
+    """Retrieve a list of applications that submitted by the login user"""
 
     # To implement pagination,
     # add '?page_size=1&page=2' at end of URL (the 2nd page while each page contains 1 obj)
@@ -58,15 +58,15 @@ class ShelterApplicationList(ShelterBaseView, ListAPIView):
 
 class ShelterApplicationDetial(ShelterBaseView, RetrieveUpdateAPIView):
     """
-    Retrive the specific application detail by its id for specific login user,
+    Retrieve the specific application detail by its id for specific login user,
         update its status from 'pending' to 'accepted'/'denied'.
     """
 
     def get_serializer_class(self):
         # Use simplified version of serializer to update application status
         if self.request.method in ["PUT", "PATCH"]:
-            return ApplicationStatusSerializer
-        return ApplicationSerializer
+            return ApplicationBasicSerializer
+        return ApplicationFullSerializer
 
     def get_object(self):
         application = get_object_or_404(Application, id=self.kwargs["id"])
@@ -74,6 +74,8 @@ class ShelterApplicationDetial(ShelterBaseView, RetrieveUpdateAPIView):
         self.check_object_permissions(self.request, application)
         return application
 
+    # Django REST Framework - Serializers
+    # https://cheat.readthedocs.io/en/latest/django/drf_serializers.html#putting-an-object
     def update(self, request, *args, **kwargs):
         application = self.get_object()
 
