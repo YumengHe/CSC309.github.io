@@ -1,17 +1,21 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from ..serializers import ApplicationSerializer
+from rest_framework import status
 from rest_framework.generics import (
     GenericAPIView,
     ListAPIView,
     ListCreateAPIView,
     RetrieveAPIView,
+    RetrieveUpdateAPIView,
 )
+
+from ..serializers import ApplicationSerializer, ApplicationStatusSerializer
 from ..permissions import IsShelter
 from ..models import Application
-from pets.models import PetPost
 from ..paginations import BasePageNumberPagination
+
+from pets.models import PetPost
 
 
 class ShlterBaseView(GenericAPIView):
@@ -28,7 +32,7 @@ class ShlterApplicationList(ShlterBaseView, ListAPIView):
 
     def get_queryset(self):
         petposts = get_list_or_404(PetPost, owner=self.request.user)
-        applications = get_list_or_404(Application.objects.filter(petpost__in=petposts))
+        applications = Application.objects.filter(petpost__in=petposts)
 
         # Filter applications by status
         status_param = self.request.query_params.get("status")
@@ -36,15 +40,22 @@ class ShlterApplicationList(ShlterBaseView, ListAPIView):
         if status_param is not None and any(
             status_param in STATUS for STATUS in Application.STATUS_CHOICE
         ):
-            applications = get_list_or_404(
-                Application.objects.filter(petpost__in=petposts, status=status_param)
-            )
+            applications = applications.filter(status=status_param)
 
-        return applications
+        return get_list_or_404(applications)
 
 
-class ShlterApplicationDetial(ShlterBaseView, RetrieveAPIView):
-    """Retrive the specific application detail by its id for specific login user"""
+class ShlterApplicationDetial(ShlterBaseView, RetrieveUpdateAPIView):
+    """
+    Retrive the specific application detail by its id for specific login user,
+        update its status from 'pending' to 'accepted'/'denied'.
+    """
+
+    def get_serializer_class(self):
+        # Use simplified version of serializer to update application status
+        if self.request.method in ["PUT", "PATCH"]:
+            return ApplicationStatusSerializer
+        return ApplicationSerializer
 
     def get_object(self):
         application = get_object_or_404(Application, id=self.kwargs["id"])
@@ -52,4 +63,31 @@ class ShlterApplicationDetial(ShlterBaseView, RetrieveAPIView):
         self.check_object_permissions(self.request, application)
         return application
 
+    def update(self, request, *args, **kwargs):
+        application = self.get_object()
 
+        # Check if the current status is 'pending'
+        if application.status != "pending":
+            return Response(
+                {"error": "Cannot update the application with the current status."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Get the status from the request data then verify
+        new_status = request.data.get("status", None)
+        if new_status not in ["accepted", "denied"]:
+            return Response(
+                {
+                    "error": "Invalid status. The status of application can be updated to accepted/denied."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Save update
+        serializer = self.get_serializer(
+            application, data={"status": new_status}, partial=True
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data)
