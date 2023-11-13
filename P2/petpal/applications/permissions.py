@@ -19,8 +19,7 @@ class IsSeeker(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         # Check if the request method is allowed, and if the seeker of Application instance obj is the login user
-        print(obj, obj.seeker, request.user)
-        return request.method in permissions.SAFE_METHODS and request.user == obj.seeker
+        return request.user == obj.seeker
 
 
 class IsShelter(permissions.BasePermission):
@@ -39,7 +38,4 @@ class IsShelter(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # obj is the Application instance
         # print(obj, obj.petpost.owner, request.user)
-        return (
-            request.method in permissions.SAFE_METHODS
-            and request.user == obj.petpost.owner
-        )
+        return request.user == obj.petpost.owner
