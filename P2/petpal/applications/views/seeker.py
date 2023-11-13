@@ -32,12 +32,23 @@ class SeekerApplicationList(SeekerBaseView, ListAPIView):
         applications = Application.objects.filter(seeker=self.request.user)
 
         # Filter applications by status
-        status_param = self.request.query_params.get("status")
+        status_param = self.request.query_params.get("status", None)
         # Varify the status parameter
         if status_param is not None and any(
             status_param in STATUS for STATUS in Application.STATUS_CHOICE
         ):
             applications = applications.filter(status=status_param)
+
+        # Sort applications by create time or update time
+        sort_param = self.request.query_params.get("sort", None)
+        if sort_param == "creation":
+            applications = applications.order_by("created_at")
+        elif sort_param == "-creation":
+            applications = applications.order_by("-created_at")
+        elif sort_param == "update":
+            applications = applications.order_by("-last_updated")
+        elif sort_param == "-update":
+            applications = applications.order_by("last_updated")
 
         return get_list_or_404(applications)
 
