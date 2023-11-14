@@ -34,7 +34,7 @@ class SeekerApplicationList(SeekerBaseView, ListAPIView):
 
         # Filter applications by status
         status_param = self.request.query_params.get("status", None)
-        # Varify the status parameter
+        # Verify the status parameter
         if status_param is not None and any(
             status_param in STATUS for STATUS in Application.STATUS_CHOICE
         ):
@@ -54,7 +54,7 @@ class SeekerApplicationList(SeekerBaseView, ListAPIView):
         return get_list_or_404(applications)
 
 
-class SeekerApplicationDetial(SeekerBaseView, RetrieveUpdateAPIView):
+class SeekerApplicationDetail(SeekerBaseView, RetrieveUpdateAPIView):
     """
     Retrieve the specific application detail by its id for specific login user,
         update its status from 'pending'/'accepted' to 'withdrawn'.
@@ -68,7 +68,8 @@ class SeekerApplicationDetial(SeekerBaseView, RetrieveUpdateAPIView):
 
     def get_object(self):
         application = get_object_or_404(Application, id=self.kwargs["id"])
-        # Need to explicitly check permissions
+        # Need to explicitly check permissions for APIView
+        # https://testdriven.io/blog/drf-permissions/#has_object_permission
         self.check_object_permissions(self.request, application)
         return application
 
@@ -112,7 +113,7 @@ class SeekerApplicationCreate(SeekerBaseView, CreateAPIView):
     serializer_class = ApplicationFullSerializer
 
     def create(self, request, *args, **kwargs):
-        petpost = get_object_or_404(PetPost, id=self.kwargs["id"])
+        petpost = get_object_or_404(PetPost, id=self.kwargs["pet_id"])
         print("NEW Application for ", petpost, petpost.status)
 
         # Verify whether the application is for available petpost
@@ -126,7 +127,7 @@ class SeekerApplicationCreate(SeekerBaseView, CreateAPIView):
         conflict_applications = Application.objects.filter(
             petpost=petpost, seeker=request.user, status__in=["pending", "accepted"]
         )
-        print(conflict_applications, conflict_applications.exists())
+        # print(conflict_applications, conflict_applications.exists())
         if conflict_applications.exists():
             return Response(
                 {
