@@ -39,7 +39,7 @@ class Application(models.Model):
         max_length=10, choices=(("cell", "Cell"), ("home", "Home"))
     )
 
-    have_pet_curretly = models.BooleanField(verbose_name="Currently have any pets?")
+    have_pet_currently = models.BooleanField(verbose_name="Currently have any pets?")
     have_pet_notes = models.TextField(
         null=True, blank=True, verbose_name="Please list your current pets"
     )
@@ -53,4 +53,16 @@ class Application(models.Model):
         ordering = ("-last_updated",)
 
     def __str__(self) -> str:
-        return f"{self.seeker} wants {self.petpost}"
+        return f"App{self.id}: {self.seeker} wants {self.petpost}"
+
+
+class Conversation(models.Model):
+    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    content = models.CharField(max_length=255)
+    application = models.ForeignKey(
+        Application, on_delete=models.CASCADE, related_name="conversations"
+    )
+
+    def __str__(self) -> str:
+        return f"{self.id} {self.content}"
