@@ -68,7 +68,8 @@ class SeekerApplicationDetail(SeekerBaseView, RetrieveUpdateAPIView):
 
     def get_object(self):
         application = get_object_or_404(Application, id=self.kwargs["id"])
-        # Need to explicitly check permissions
+        # Need to explicitly check permissions for APIView
+        # https://testdriven.io/blog/drf-permissions/#has_object_permission
         self.check_object_permissions(self.request, application)
         return application
 
@@ -126,7 +127,7 @@ class SeekerApplicationCreate(SeekerBaseView, CreateAPIView):
         conflict_applications = Application.objects.filter(
             petpost=petpost, seeker=request.user, status__in=["pending", "accepted"]
         )
-        print(conflict_applications, conflict_applications.exists())
+        # print(conflict_applications, conflict_applications.exists())
         if conflict_applications.exists():
             return Response(
                 {

@@ -31,7 +31,7 @@ class ShelterApplicationList(ShelterBaseView, ListAPIView):
     pagination_class = BasePageNumberPagination
 
     def get_queryset(self):
-        petposts = get_list_or_404(PetPost, owner=self.request.user)
+        petposts = get_list_or_404(PetPost, shelter=self.request.user)
         applications = Application.objects.filter(petpost__in=petposts)
 
         # Filter applications by status
@@ -70,7 +70,8 @@ class ShelterApplicationDetail(ShelterBaseView, RetrieveUpdateAPIView):
 
     def get_object(self):
         application = get_object_or_404(Application, id=self.kwargs["id"])
-        # Need to explicitly check permissions
+        # Need to explicitly check permissions for APIView
+        # https://testdriven.io/blog/drf-permissions/#has_object_permission
         self.check_object_permissions(self.request, application)
         return application
 
