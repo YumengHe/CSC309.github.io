@@ -6,7 +6,6 @@ from rest_framework.generics import (
     GenericAPIView,
     ListAPIView,
     CreateAPIView,
-    RetrieveAPIView,
     RetrieveUpdateAPIView,
 )
 
@@ -85,19 +84,24 @@ class SeekerApplicationDetail(SeekerBaseView, RetrieveUpdateAPIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # # Update the status to 'withdrawn'
-        # application.status = "withdrawn"
-        # application.save()
-        # # Return the updated data
-        # serializer = self.get_serializer(application)
-        # return Response(serializer.data)
-
         # Save update with status to 'withdrawn'
         serializer = self.get_serializer(
             application, data={"status": "withdrawn"}, partial=True
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
+        # Create notification for status change,
+        #   for seeker
+        application.seeker.notifications.create(
+            content=f"You have withdrawn your application to {application.petpost.name}.",
+            event_link=f"/applications/seeker/{application.id}/",
+        )
+        #   for shelter
+        application.petpost.shelter.notifications.create(
+            content=f"Application to {application.petpost.name} has been withdrawn by {application.seeker}.",
+            event_link=f"/applications/shelter/{application.id}/",
+        )
 
         return Response(serializer.data)
 
@@ -130,9 +134,7 @@ class SeekerApplicationCreate(SeekerBaseView, CreateAPIView):
         # print(conflict_applications, conflict_applications.exists())
         if conflict_applications.exists():
             return Response(
-                {
-                    "error": "You already have a pending/accepted application for this pet."
-                },
+                {"error": "You have a pending/accepted application for this pet."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -140,4 +142,18 @@ class SeekerApplicationCreate(SeekerBaseView, CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(seeker=request.user, petpost=petpost)
+
+        # Create notification with info of new application
+        new_application = serializer.instance
+        #   for seeker
+        request.user.notifications.create(
+            content=f"New application submitted for {new_application.petpost.name}.",
+            event_link=f"/applications/seeker/{new_application.id}/",
+        )
+        #   for shelter
+        petpost.shelter.notifications.create(
+            content=f"New application received for {new_application.petpost.name} from applicant {new_application.seeker}.",
+            event_link=f"/applications/shelter/{new_application.id}/",
+        )
+
         return Response(serializer.data)
