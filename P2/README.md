@@ -10,6 +10,7 @@ chmod +x run.sh
 # API Endpoints
 ## `/accounts`
 - `/<id:user_id>/`
+  - `GET` (get user)
   - `POST` (create user)
     - ```json
       {"username":"seeker1", "password":"seeker1", "role":"seeker"}
