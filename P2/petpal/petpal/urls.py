@@ -28,5 +28,4 @@ urlpatterns = [
     path('comments/', include('comments.urls')),
     path('applications/', include('applications.urls')),
     path('notifications/', include('notifications.urls')),
-    path('listings/', include('listings.urls')),
 ]

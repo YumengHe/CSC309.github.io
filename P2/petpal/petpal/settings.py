@@ -39,12 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_filters',
     'accounts',  # --> account creation and authentication for pet seeker and shelters
-    'pets',  # --> pet information and pet search
+    'pets',  # --> pet information, pet listing and pet search
     'comments',  # --> comments on pets and shelter
     'applications',  # --> pet adoption applications
     'notifications',  # --> notifications for pet seeker and shelters
-    'listings', # --> pet listings
 ]
 
 MIDDLEWARE = [
