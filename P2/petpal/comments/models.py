@@ -1,28 +1,26 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from accounts.models import CustomUser
+
 
 class Comment(models.Model):
-    # Content-object field to create a generic foreign key
+    # The text of the comment
+    text = models.TextField()
+
+    # Fields for generic relation to various content types
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    # User reference - assuming you're using Django's built-in User model
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # ForeignKey to link a comment to a user
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
-    # Comment text
-    text = models.TextField()
-
-    # Timestamps
+    # Automatic timestamp when a comment is created
     created_at = models.DateTimeField(auto_now_add=True)
-    # updated_at = models.DateTimeField(auto_now=True) # Uncomment if you decide to track updates
 
     def __str__(self):
-        return f'Comment by {self.user.username} on {self.content_type}'
+        return f'Comment by {self.user.username} on {self.created_at}'
 
-    # Additional methods and meta configurations as required
+    class Meta:
+        ordering = ['-created_at']  # Sort comments by creation time in descending order
