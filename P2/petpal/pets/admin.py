@@ -4,7 +4,7 @@ from .models import PetPost
 
 # Register your models here.
 class PetsAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "owner", "status")
+    list_display = ("id", "name", "shelter", "status")
 
 
 admin.site.register(PetPost, PetsAdmin)
