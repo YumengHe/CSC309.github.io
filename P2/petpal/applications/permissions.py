@@ -38,4 +38,4 @@ class IsShelter(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # obj is the Application instance
         # print(obj, obj.petpost.owner, request.user)
-        return request.user == obj.petpost.owner
+        return request.user == obj.petpost.shelter

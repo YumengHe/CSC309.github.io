@@ -34,7 +34,7 @@ class SeekerApplicationList(SeekerBaseView, ListAPIView):
 
         # Filter applications by status
         status_param = self.request.query_params.get("status", None)
-        # Varify the status parameter
+        # Verify the status parameter
         if status_param is not None and any(
             status_param in STATUS for STATUS in Application.STATUS_CHOICE
         ):
@@ -54,7 +54,7 @@ class SeekerApplicationList(SeekerBaseView, ListAPIView):
         return get_list_or_404(applications)
 
 
-class SeekerApplicationDetial(SeekerBaseView, RetrieveUpdateAPIView):
+class SeekerApplicationDetail(SeekerBaseView, RetrieveUpdateAPIView):
     """
     Retrieve the specific application detail by its id for specific login user,
         update its status from 'pending'/'accepted' to 'withdrawn'.
@@ -112,7 +112,7 @@ class SeekerApplicationCreate(SeekerBaseView, CreateAPIView):
     serializer_class = ApplicationFullSerializer
 
     def create(self, request, *args, **kwargs):
-        petpost = get_object_or_404(PetPost, id=self.kwargs["id"])
+        petpost = get_object_or_404(PetPost, id=self.kwargs["pet_id"])
         print("NEW Application for ", petpost, petpost.status)
 
         # Verify whether the application is for available petpost
