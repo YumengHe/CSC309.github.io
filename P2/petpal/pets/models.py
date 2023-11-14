@@ -5,7 +5,7 @@ from accounts.models import CustomUser
 # Create your models here.
 class PetPost(models.Model):
     STATUS_CHOICE = (
-        ("abailable", "Available"),
+        ("available", "Available"),
         ("pending", "Pending"),
         ("adopted", "Adopted"),
         ("withdrawn", "withdrawn"),
