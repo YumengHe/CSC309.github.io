@@ -5,8 +5,6 @@ from rest_framework import status
 from rest_framework.generics import (
     GenericAPIView,
     ListAPIView,
-    ListCreateAPIView,
-    RetrieveAPIView,
     RetrieveUpdateAPIView,
 )
 
@@ -103,5 +101,17 @@ class ShelterApplicationDetail(ShelterBaseView, RetrieveUpdateAPIView):
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
+        # Create notification for status change
+        #   for seeker
+        application.seeker.notifications.create(
+            content=f"You application to {application.petpost.name} has been {application.status}.",
+            event_link=f"/applications/seeker/{application.id}/",
+        )
+        #   for shelter
+        application.petpost.shelter.notifications.create(
+            content=f"You have {application.status} {application.seeker}'s application to {application.petpost.name}.",
+            event_link=f"/applications/shelter/{application.id}/",
+        )
 
         return Response(serializer.data)

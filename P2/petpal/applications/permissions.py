@@ -51,8 +51,11 @@ class IsApplicationParticipant(permissions.BasePermission):
         "Unauthorized. This resource is available for application participants only."
     )
 
+    # has_object_permission() is never executed for list views, so use has_permission()
     def has_permission(self, request, view):
-        application = get_object_or_404(Application, id=view.kwargs["id"])
+        # Access to url parameters in DRF permission
+        # https://stackoverflow.com/questions/47397323/how-can-i-get-an-access-to-url-paramaters-in-django-rest-framework-permission-cl
+        application = get_object_or_404(Application, id=view.kwargs.get("id"))
         print(application, application.seeker, application.petpost.shelter)
         Authorized_users = [application.seeker, application.petpost.shelter]
         return request.user.is_authenticated and request.user in Authorized_users

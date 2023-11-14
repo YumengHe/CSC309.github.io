@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView
 
 from accounts.models import CustomUser
+from notifications.models import Notification
 from ..serializers import ConversationSerializer
 from ..models import Application, Conversation
 
@@ -37,4 +38,17 @@ class ConversationListCreateView(ListCreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(created_by=request.user, application=application)
+
+        # Create notification for the conversation recipient
+        recipient = (
+            application.seeker
+            if request.user.role == "shelter"
+            else application.petpost.shelter
+        )
+        Notification.objects.create(
+            recipient=recipient,
+            content=f"New message received for application {application}",
+            event_link=f"/applications/{application.id}/conversations",
+        )
+
         return Response(serializer.data)
