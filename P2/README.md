@@ -9,15 +9,25 @@ chmod +x run.sh
 
 # API Endpoints
 ## `/accounts`
-- `/registration`
-  - `POST`
-  - ```json
-    {"username":"seeker1", "password":"seeker1", "role":"seeker"}
-    ```
-  - ```json
-    {"username":"shelter1", "password":"shelter1", "role":"shelter", "address":"123 Main St, City, State, Zip"}
-    ```
-- `/auth`
+- `/`
+  - `POST` (create user)
+     - ```json
+       {"username":"seeker1", "password":"seeker1", "role":"seeker"}
+       ```
+     - ```json
+       {"username":"shelter1", "password":"shelter1", "role":"shelter", "address":"123 Main St, City, State, Zip"}
+       ```
+- `/<id:user_id>/`
+  - `GET` (get user)
+  - `PUT` (update user)
+    - ```json
+      {"first_name":"John", "last_name":"Doe"}
+      ```
+  - `DELETE` (delete user)
+      
+
+
+- `/auth/` (user login)
   - `POST`
   - ```json
     {"username":"seeker1", "password":"seeker1"}
@@ -25,17 +35,7 @@ chmod +x run.sh
   - ```json
     {"username":"shelter1", "password":"shelter1"}
     ```
-- `/update`
-  - `PATCH`
-  - ```json
-    {"first_name":"John", "last_name":"Doe"}
-    ```
-- `/delete`
-  - `DELETE`
 
-- 
-- `/view/?role=<role>&user_id=<id>`
-  - `GET`
 
 
 ## `/pets`

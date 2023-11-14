@@ -28,7 +28,4 @@ urlpatterns = [
     path('comments/', include('comments.urls')),
     path('applications/', include('applications.urls')),
     path('notifications/', include('notifications.urls')),
-
-    # Enable DRF panel authentication
-    path('api_auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
