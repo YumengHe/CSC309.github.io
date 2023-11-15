@@ -22,7 +22,7 @@ class ShelterBaseView(GenericAPIView):
 
 
 class ShelterApplicationList(ShelterBaseView, ListAPIView):
-    """Retrieve a list of applications that submitted by the login user"""
+    """Retrieve a list of applications that were received for pets posted by the login user"""
 
     # To implement pagination,
     # add '?page_size=1&page=2' at end of URL (the 2nd page while each page contains 1 obj)
