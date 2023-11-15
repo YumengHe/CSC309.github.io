@@ -341,8 +341,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 /P2/petpal/db.sqlite3
-/P2/petpal/pets/migrations/
-/P2/petpal/accounts/migrations/
-/P2/petpal/notifications/migrations/
-/P2/petpal/comments/migrations/
-/P2/petpal/applications/migrations/
+*/migrations/*.py
+!*/migrations/__init__.py
