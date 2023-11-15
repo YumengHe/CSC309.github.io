@@ -126,6 +126,7 @@ chmod +x run.sh
 
 ### Shelter User Comments
 
+
 1. **List and Create Comments for a Shelter User**
    - **Endpoint**: `GET /shelter-comments/<int:user_id>/` for listing comments.
    - **Endpoint**: `POST /shelter-comments/<int:user_id>/` for creating a comment.
@@ -177,7 +178,7 @@ chmod +x run.sh
 
     - **Endpoint**: `GET /applications/seeker/`
     - **Description**: Retrieve the list of applications that were submitted by the login user whose role is seeker
-    - **Example Response**
+    - **Response Example**
 
         ```json
         {
@@ -223,7 +224,7 @@ chmod +x run.sh
 
             > Eg. `/applications/seeker?status=pending`
 
-        3. Support sorting applications by creation time or last update time. The parameter `sort` is passed in and it takes one of these values `['creation', '-creation', 'updated', '-updated']`. For creation time in an ascending order, use value `'creation'`; for the most recent update, use value `'update'`. The `'-'` sign reverses the order.
+        3. Support sorting applications by creation time or last update time. The parameter `sort` is passed in and it takes one of these values `['creation', '-creation', 'update', '-update']`. For creation time in an ascending order, use value `'creation'`; for the most recent update, use value `'update'`. The `'-'` sign reverses the order.
 
             > Eg. `/applications/seeker?sort=update`
 
@@ -235,7 +236,7 @@ chmod +x run.sh
     - **Endpoint**: `GET /applications/shelter/`
     - **Description**: Retrieve the list of applications that were received by the login user whose role is shelter
 
-    - **Example Response**
+    - **Response Example**
         ```json
         {
             "count": 2,
@@ -274,7 +275,7 @@ chmod +x run.sh
     - **Endpoint**: `GET /applications/seeker/<application_id>`
     - **Description**: Retrieve the application whose `id` is passed in as path parameter `application_id`, which was submitted by the login user with role seeker
 
-    - **Example Response**
+    - **Response Example**
 
         ```json
         {
@@ -313,7 +314,7 @@ chmod +x run.sh
     - **Endpoint**: `PUT /applications/seeker/<application_id>`
     - **Description**: Update the status of the application with the `id` matching the path parameter `application_id` from '**pending**'/'**accepted**' to '**withdrawn**'.
 
-    - **Example Response**
+    - **Response Example**
 
         ```json
         {
@@ -339,7 +340,7 @@ chmod +x run.sh
     - **Endpoint**: `GET /applications/shelter/<application_id>`
     - **Description**: Retrieve the application whose `id` is passed in as path parameter `application_id`, which was received by the login user with role shelter
 
-    - **Example Response**
+    - **Response Example**
 
         ```json
         {
@@ -377,7 +378,7 @@ chmod +x run.sh
     - **Endpoint**: `PUT /applications/shelter/<application_id>` 
     - **Description**: Update the status of the application with the `id` matching the path parameter `application_id` from '**pending**' to '**accepted**'/'**denied**'.
 
-    - **Example Request Body**
+    - **Request Body Example**
 
         ```json
         {
@@ -385,7 +386,7 @@ chmod +x run.sh
         }
         ```
 
-    - **Example Response**
+    - **Response Example**
 
         ```json
         {
@@ -410,7 +411,7 @@ chmod +x run.sh
     - **Endpoint**: `POST /applications/pet/<pet_id>/`
     - **Description**: Create a new adoption application for the logged-in seeker with the pet status set to '**available**'.
 
-    - **Example Request Body**
+    - **Request Body Example**
 
         ```json
         {
@@ -429,7 +430,7 @@ chmod +x run.sh
         }
         ```
 
-    - **Example Response**
+    - **Response Example**
 
         ```json
         {
@@ -472,7 +473,7 @@ chmod +x run.sh
     - **Endpoint**: `GET /applications/<application_id>/conversations/`
     - **Description**: Retrieve the list of conversations between the seeker and shelter for the submitted application with the `id` matching the path parameter `application_id`.
 
-    - **Example Response**
+    - **Response Example**
 
         ```json
         {
@@ -521,7 +522,7 @@ chmod +x run.sh
     - **Endpoint**: `POST /applications/<application_id>/conversations/` 
     - **Description**: Create a conversation from the logged-in user for the submitted application with the `id` matching the path parameter `application_id`.
 
-    - **Example Request Body**
+    - **Request Body Example**
 
         ```json
         {
@@ -529,7 +530,7 @@ chmod +x run.sh
         }
         ```
 
-    - **Example Response**
+    - **Response Example**
 
         ```json
         {
@@ -554,76 +555,128 @@ chmod +x run.sh
 1. **List all notifications**
 
     - **Endpoint**: `GET /notifications`
-    - **Description**:
+    - **Description**: Retrieve the list of notifications that received by the login user
 
-    - **Example Response**
+    - **Response Example**
 
         ```json
-
+        {
+            "count": 4,
+            "next": null,
+            "previous": null,
+            "results": [
+                {
+                    "id": 29,
+                    "created_at": "2023-11-15T10:04:40.930851-05:00",
+                    "modified_at": "2023-11-15T10:04:40.930887-05:00",
+                    "content": "Application to BoBo has been withdrawn by chan@email.com.",
+                    "read": false,
+                    "event_link": "/applications/shelter/3/",
+                    "recipient": 7
+                },
+                {
+                    "id": 27,
+                    "created_at": "2023-11-14T20:47:42.206826-05:00",
+                    "modified_at": "2023-11-14T20:47:42.206843-05:00",
+                    "content": "New application received for BoBo from applicant chan@email.com.",
+                    "read": false,
+                    "event_link": "/applications/shelter/17/",
+                    "recipient": 7
+                },
+                {
+                    "id": 21,
+                    "created_at": "2023-11-14T20:14:22.561369-05:00",
+                    "modified_at": "2023-11-14T20:14:22.561412-05:00",
+                    "content": "Application to BoBo has been withdrawn by chan@email.com.",
+                    "read": false,
+                    "event_link": "/applications/shelter/3/",
+                    "recipient": 7
+                },
+                {
+                    "id": 3,
+                    "created_at": "2023-11-14T15:00:35.298662-05:00",
+                    "modified_at": "2023-11-14T15:00:35.298677-05:00",
+                    "content": "Application to BoBo has been withdrawn by seeker6 chan.",
+                    "read": false,
+                    "event_link": "/applications/shelter/3/",
+                    "recipient": 7
+                }
+            ]
+        }
         ```
 
     - **Additional Notes**
 
-        1.
+        1. Support pagination by passing parameters `page_size` (default is set to 10) and `page`.
 
-        2.
+            > Eg. /notifications/?page_size=4&page=3
+
+        2. Support filter notifications by read/unread status. The parameter `state` is passed in and it takes either `'read'` or `'unread'`.
+
+            > Eg. /notifications/?state=read
+
+        3. Support sort notifications by creation time. The parameter `sort` is passed in and it takes one of these values `['creation', '-creation']`.
+
+            > Eg. /notifications/?sort=creation
+
+        4. **401 UNAUTHORIZED** response received when an unauthenticated user accesses. Users can only view their own notifications.
 
 2. **Get a notification**
 
     - **Endpoint**: `GET /notifications/<notification_id>`
-    - **Description**:
+    - **Description**: Retrieve a specific notification by its id
 
-    - **Example Response**
+    - **Response Example**
 
         ```json
-
+        {
+            "id": 29,
+            "created_at": "2023-11-15T10:04:40.930851-05:00",
+            "modified_at": "2023-11-15T10:04:40.930887-05:00",
+            "content": "Application to BoBo has been withdrawn by chan@email.com.",
+            "read": false,
+            "event_link": "/applications/shelter/3/",
+            "recipient": 7
+        }
         ```
 
     - **Additional Notes**
 
-        1.
+        1. Users can only view their own notifications. Otherwise, **404 NOT_FOUND** response returns. 
 
-        2.
+        2. `'event_link'` field provides a link to the associated `GET` retrieves. 
 
 3. **Update read status of a notification**
 
     - **Endpoint**: `PUT /notifications/<notification_id>`
-    - **Description**:
-
-    - **Example Request Body**
-
-        ```json
-
-        ```
-
-    - **Example Response**
+    - **Description**: Update the state of a specific notification from unread to read
+    - **Response Example**
 
         ```json
-
+        {
+            "id": 33,
+            "recipient": 9,
+            "created_at": "2023-11-15T10:34:40.616092-05:00",
+            "modified_at": "2023-11-15T13:08:59.773018-05:00",
+            "content": "New application received for Whisky from applicant chan@email.com.",
+            "event_link": "/applications/shelter/18/",
+            "read": true
+        }
         ```
 
     - **Additional Notes**
 
-        1.
+        1. Users can only update their own notifications, otherwise, **404 NOT_FOUND** response returns.
 
-        2.
-
-        3.
 
 
 4. **Delete a notification**
 
     - **Endpoint**: `DELETE /notifications/<notification_id>`
-    - **Description**:
-
-    - **Example Response**
-
-        ```json
-
-        ```
+    - **Description**: Delete a specific notification by its id
 
     - **Additional Notes**
 
-        1.
+        1. Users can only delete their own notifications, otherwise, **404 NOT_FOUND** response returns.
 
-        2.
+        2. Response returns **204 NO_CONTENT** on deletion.
