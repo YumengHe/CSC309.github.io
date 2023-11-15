@@ -18,7 +18,9 @@ class NotificationView(APIView):
         return Response(serializer.data)
 
     def put(self, request, *args, **kwargs):
-        notification = get_object_or_404(Notification, id=self.kwargs.get("id"))
+        notification = get_object_or_404(
+            Notification, id=self.kwargs.get("id"), recipient=request.user
+        )
         serializer = NotificationSerializer(notification, data=self.request.data)
         if serializer.is_valid():
             serializer.save()
@@ -26,7 +28,9 @@ class NotificationView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, *args, **kwargs):
-        notification = get_object_or_404(Notification, id=self.kwargs.get("id"))
+        notification = get_object_or_404(
+            Notification, id=self.kwargs.get("id"), recipient=request.user
+        )
         notification.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
