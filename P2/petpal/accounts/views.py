@@ -20,8 +20,8 @@ class UserLoginView(views.APIView):
             # Create a Notification instance here
             notification = Notification.objects.create(
                 recipient=user,
-                content="Welcome back, {}".format(username),
-                event_link="URL_to_some_event_or_page"  # Customize this as needed
+                content=f"Welcome back, {username}",
+                event_link=f"/accounts/{user.id}/"  # Customize this as needed
             )
             print(notification)
 
@@ -45,6 +45,12 @@ class UserCreateView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            # Create a Notification instance here
+            notification = Notification.objects.create(
+                recipient=serializer.instance,
+                content=f"Welcome, {serializer.instance.username}",
+                event_link=f"/accounts/{serializer.instance.id}/"
+            )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -112,6 +118,11 @@ class UserView(generics.GenericAPIView):
         serializer = self.get_serializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            Notification.objects.create(
+                recipient=user,
+                content=f"Your profile has been updated.",
+                event_link=f"/accounts/{user.id}/"
+            )
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -122,9 +133,30 @@ class UserView(generics.GenericAPIView):
             return Response({"error": "User ID is required for update."}, status=status.HTTP_400_BAD_REQUEST)
 
         user = get_object_or_404(User, id=user_id)
+        serializer = self.get_serializer(user, data=request.data)
+        original_data = {field: getattr(user, field) for field in serializer.fields}
         serializer = self.get_serializer(user, data=request.data, partial=True)
+
         if serializer.is_valid():
             serializer.save()
+
+            # Identify changed fields
+            updated_fields = []
+            for field, value in serializer.validated_data.items():
+                if original_data[field] != value:
+                    updated_fields.append(field)
+
+            # Create notification content
+            updated_fields_str = ', '.join(updated_fields)
+            notification_content = f"Your profile fields {updated_fields_str} have been updated."
+
+            # Create a notification
+            Notification.objects.create(
+                recipient=user,
+                content=notification_content,
+                event_link=f"/accounts/{user.id}/"
+            )
+
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -135,6 +167,11 @@ class UserView(generics.GenericAPIView):
             return Response({"error": "User ID is required for deletion."}, status=status.HTTP_400_BAD_REQUEST)
 
         user = get_object_or_404(User, id=user_id)
+        Notification.objects.create(
+            recipient=user,
+            content=f"Your account has been deleted.",
+            event_link=""
+        )
         user.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
