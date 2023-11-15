@@ -61,7 +61,7 @@ class SeekerApplicationDetail(SeekerBaseView, RetrieveUpdateAPIView):
 
     def get_serializer_class(self):
         # Use simplified version of serializer to update application status
-        if self.request.method in ["PUT", "PATCH"]:
+        if self.request is not None and self.request.method in ["PUT", "PATCH"]:
             return ApplicationBasicSerializer
         return ApplicationFullSerializer
 

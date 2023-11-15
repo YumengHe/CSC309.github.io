@@ -39,6 +39,12 @@ class ConversationListCreateView(ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save(created_by=request.user, application=application)
 
+        # Update last_updated field for the corresponding application
+        # https://stackoverflow.com/a/2712871
+        Application.objects.filter(id=self.kwargs["id"]).update(
+            last_updated=serializer.instance.created_at
+        )
+
         # Create notification for the conversation recipient
         recipient = (
             application.seeker
