@@ -4,4 +4,4 @@ from .models import PetPost
 class PetPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = PetPost
-        fields = '__all__'
+        fields = ['name', 'description', 'shelter', 'status', 'breed', 'age', 'size', 'color', 'gender', 'expiry', 'image']
