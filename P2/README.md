@@ -122,15 +122,20 @@ chmod +x run.sh
 
 
 
-## Comments Endpoints
+## `Comments Endpoints`
 
 ### Shelter User Comments
 
-1. **List Comments for a Shelter User**
-   - **Endpoint**: `GET /shelter-comments/<int:user_id>/`
-   - **Description**: Retrieves a list of all comments for a specific shelter user. This endpoint is accessible to any authenticated user.
-   - **Permissions**: Authenticated users can view comments.
-   - **Example Response**:
+1. **List and Create Comments for a Shelter User**
+   - **Endpoint**: `GET /shelter-comments/<int:user_id>/` for listing comments.
+   - **Endpoint**: `POST /shelter-comments/<int:user_id>/` for creating a comment.
+   - **Description**: 
+     - For `GET`: Retrieves a list of all comments for a specific shelter user. This endpoint is accessible to any authenticated user.
+     - For `POST`: Allows an authenticated user to create a comment on a specific shelter user's profile.
+   - **Permissions**: 
+     - For `GET`: Authenticated users can view comments.
+     - For `POST`: Only authenticated users can create comments.
+   - **GET Example Response**:
      ```json
      [
        {
@@ -147,18 +152,13 @@ chmod +x run.sh
        }
      ]
      ```
-
-2. **Create a Comment for a Shelter User**
-   - **Endpoint**: `POST /shelter-comments/<int:user_id>/create/`
-   - **Description**: Allows an authenticated user to create a comment on a specific shelter user's profile. The comment text should be included in the request body.
-   - **Permissions**: Only authenticated users can create comments.
-   - **Request Body Example**:
+   - **POST Request Body Example**:
      ```json
      {
        "text": "This shelter has been wonderful in helping us find a new pet."
      }
      ```
-   - **Success Response**:
+   - **POST Success Response**:
      ```json
      {
        "id": 3,
@@ -167,6 +167,7 @@ chmod +x run.sh
        "created_at": "2023-11-15T12:00:00.000Z"
      }
      ```
+
 
 
 
