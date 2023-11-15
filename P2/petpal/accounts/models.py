@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
     address = models.CharField(max_length=100, null=True, blank=True)
     # role can be one of "seeker" or "shelter"
     role = models.CharField(max_length=10)
-    profile_pic = models.ImageField(upload_to="user_profiles/")
+    profile_pic = models.ImageField(upload_to="user_profiles/", default="user_profiles/default_profile.png")
 
     def get_profile_pic_url(self):
         if self.profile_pic and hasattr(self.profile_pic, 'url'):
