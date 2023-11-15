@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from .models import Notification
-from .serializer import NotificationSerializer
+from .serializer import NotificationSerializer, NotificationStateSerializer
 from applications.paginations import BasePageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 
@@ -21,7 +21,8 @@ class NotificationView(APIView):
         notification = get_object_or_404(
             Notification, id=self.kwargs.get("id"), recipient=request.user
         )
-        serializer = NotificationSerializer(notification, data=self.request.data)
+        notification.read = True
+        serializer = NotificationStateSerializer(notification, data=self.request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
