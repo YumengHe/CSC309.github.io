@@ -12,13 +12,16 @@ class ShelterUserCommentListView(generics.ListAPIView):
     permission_classes = [CanViewShelterComments]  # Use the custom permission for viewing comments
 
     def get_queryset(self):
-        """
-        This view should return a list of all comments for
-        a shelter user as determined by the user_id portion of the URL.
-        """
         user_id = self.kwargs['user_id']
         user_type = ContentType.objects.get_for_model(CustomUser)
-        return Comment.objects.filter(content_type=user_type, object_id=user_id, content_object__role='shelter')
+
+        # Filtering based on content_type and object_id
+        comments = Comment.objects.filter(content_type=user_type, object_id=user_id)
+
+        # Further filtering to only include comments for users with the 'shelter' role
+        shelter_comments = [comment for comment in comments if comment.content_object.role == 'shelter']
+
+        return shelter_comments
 
 
 
