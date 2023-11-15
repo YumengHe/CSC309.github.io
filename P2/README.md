@@ -90,7 +90,7 @@ chmod +x run.sh
    - **Description**: Retrieves a list of all pet posts. Can include query parameters for filtering, sorting, and pagination.
 
 2. **Create a New Pet Post**
-   - **Endpoint**: `POST /pets/`
+   - **Endpoint**: `POST /pets/newpet`
    - **Description**: Allows the creation of a new pet post. Requires data for the pet post in the request body.
 
 3. **Retrieve a Specific Pet Post**

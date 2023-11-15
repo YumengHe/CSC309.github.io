@@ -15,6 +15,31 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .permissions import IsPetPostShelter
 
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class PetPostCreate(APIView):
+    """
+    Create a new pet post. The user creating the post will be assigned as the shelter.
+    """
+
+    serializer_class = PetPostSerializer
+
+    def post(self, request, *args, **kwargs):
+        # Check if the user is authenticated and is a shelter
+        if not request.user.is_authenticated or request.user.role != "shelter":
+            return Response(
+                {"error": "Only authenticated shelters can create pet posts."},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        # Save the PetPost object
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(shelter=request.user)  # Assign the current user as the shelter
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 class PetPostViewSet(viewsets.ModelViewSet):
     queryset = PetPost.objects.all()
     serializer_class = PetPostSerializer
@@ -79,6 +104,7 @@ class PetPostList(ListAPIView):
         if gender is not None:
             queryset = queryset.filter(gender=gender)
 
+        # Sort by name and age
         sort_by = self.request.query_params.get('sort')
         if sort_by in ['name', 'age']:
             queryset = queryset.order_by(sort_by)
