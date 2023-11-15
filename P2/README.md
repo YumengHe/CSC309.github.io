@@ -10,42 +10,78 @@ chmod +x run.sh
 
 # Model Design
 
-![Class Diagram](UML.jpg)
+![Class Diagram](UML.png)
 
 # API Endpoints
 
 ## `Accounts Endpoints`
 
--   `/accounts/`
-    -   `POST` (create user)
-        -   ```json
-            { "username": "seeker1", "password": "seeker1", "role": "seeker" }
-            ```
-        -   ```json
-            {
-            	"username": "shelter1",
-            	"password": "shelter1",
-            	"role": "shelter",
-            	"address": "123 Main St, City, State, Zip"
-            }
-            ```
--   `/accounts/<id:user_id>/`
+1. **create user**
+  - **Endpoint**:  `POST /accounts/`
+  - **Description**: Creates a new user account. Requires a username, password, and role in the request body. If the role is `shelter`, then an address is also required.
+  - **Request Body Example**:
+     ```json
+     { 
+     "username": "seeker1", 
+     "password": "seeker1", 
+     "role": "seeker" 
+     }
+     ```
+     ```json
+        {
+        "username": "shelter1",
+        "password": "shelter1",
+        "role": "shelter",
+        "address": "123 Main St, City, State, Zip"
+        }
+     ```
+2. **User Authentication**
+   - **Endpoint**:  `POST /accounts/auth/`
+   - **Description**: Authenticates a user. Requires a username and password in the request body.
+   - **Request Body Example**:
+       ```json
+       { "username": "seeker1", "password": "seeker1" }
+       ```
+       ```json
+       { "username": "shelter1", "password": "shelter1" }
+       ```
+3. **Get user**
+   - **Endpoint**:  `GET /accounts/{user_id}`
+   - **Description**: Retrieves a specific user by their ID.
 
-    -   `GET` (get user)
-    -   `PUT` (update user)
-        -   ```json
-            { "first_name": "John", "last_name": "Doe" }
-            ```
-    -   `DELETE` (delete user)
+4. **Update user**
+   - **Endpoint**:  `PUT /accounts/{user_id}`
+   - **Description**: Updates a specific user by their ID. All user data must be provided in the request body.
+   - **Request Body Example**:
+     ```json
+     {
+       "username": "seeker1",
+       "password": "seeker1",
+       "role": "seeker",
+       "first_name": "John",
+       "last_name": "Doe",
+       "address": "123 Main St, City, State, Zip"
+     }
+     ```
+5. **Partial update user**
+    - **Endpoint**:  `PATCH /accounts/{user_id}`
+    - **Description**: Partially updates a specific user by their ID. Only the provided fields in the request body will be updated.
+    - **Request Body Example**:
+        ```json
+        {
+        "first_name": "John",
+        "last_name": "Doe"
+        }
+        ```
 
--   `/accounts/auth/` (user login)
-    -   `POST`
-    -   ```json
-        { "username": "seeker1", "password": "seeker1" }
-        ```
-    -   ```json
-        { "username": "shelter1", "password": "shelter1" }
-        ```
+6. **Delete user**
+    - **Endpoint**:  `DELETE /accounts/{user_id}`
+    - **Description**: Deletes a specific user by their ID.
+
+7. **list users (shelters only)**
+    - **Endpoint**:  `GET /accounts/list/`
+    - **Description**: Retrieves a list of all users. (only valid for ?role=shelter)
+
 
 ## `Pets Endpoints`
 1. **List All Pet Posts**
