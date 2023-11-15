@@ -87,6 +87,51 @@ chmod +x run.sh
 
 ## `Comments Endpoints`
 
+### Shelter User Comments
+
+1. **List Comments for a Shelter User**
+   - **Endpoint**: `GET /shelter-comments/<int:user_id>/`
+   - **Description**: Retrieves a list of all comments for a specific shelter user. This endpoint is accessible to any authenticated user.
+   - **Permissions**: Authenticated users can view comments.
+   - **Example Response**:
+     ```json
+     [
+       {
+         "id": 1,
+         "text": "Great shelter with caring staff!",
+         "user": 2,
+         "created_at": "2023-11-14T10:00:00.000Z"
+       },
+       {
+         "id": 2,
+         "text": "Highly recommend this place for pet adoption.",
+         "user": 3,
+         "created_at": "2023-11-13T15:30:00.000Z"
+       }
+     ]
+     ```
+
+2. **Create a Comment for a Shelter User**
+   - **Endpoint**: `POST /shelter-comments/<int:user_id>/create/`
+   - **Description**: Allows an authenticated user to create a comment on a specific shelter user's profile. The comment text should be included in the request body.
+   - **Permissions**: Only authenticated users can create comments.
+   - **Request Body Example**:
+     ```json
+     {
+       "text": "This shelter has been wonderful in helping us find a new pet."
+     }
+     ```
+   - **Success Response**:
+     ```json
+     {
+       "id": 3,
+       "text": "This shelter has been wonderful in helping us find a new pet.",
+       "user": 4,
+       "created_at": "2023-11-15T12:00:00.000Z"
+     }
+     ```
+
+
 ## `Applications Endpoints`
 
 -   `/applications/seeker/` 
