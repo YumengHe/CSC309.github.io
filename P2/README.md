@@ -48,6 +48,42 @@ chmod +x run.sh
         ```
 
 ## `Pets Endpoints`
+1. **List All Pet Posts**
+   - **Endpoint**: `GET /pets/`
+   - **Description**: Retrieves a list of all pet posts. Can include query parameters for filtering, sorting, and pagination.
+
+2. **Create a New Pet Post**
+   - **Endpoint**: `POST /pets/`
+   - **Description**: Allows the creation of a new pet post. Requires data for the pet post in the request body.
+
+3. **Retrieve a Specific Pet Post**
+   - **Endpoint**: `GET /pets/{id}/`
+   - **Description**: Retrieves a specific pet post by its ID.
+
+4. **Update a Specific Pet Post**
+   - **Endpoint**: `PUT /pets/{id}/`
+   - **Description**: Fully updates a specific pet post. All pet post data must be provided in the request body.
+
+5. **Partial Update a Specific Pet Post**
+   - **Endpoint**: `PATCH /pets/{id}/`
+   - **Description**: Partially updates a specific pet post. Only the provided fields in the request body will be updated.
+
+6. **Delete a Specific Pet Post**
+   - **Endpoint**: `DELETE /pets/{id}/`
+   - **Description**: Deletes a specific pet post by its ID.
+
+7. **List Pet Posts by a Specific Filter**
+   - **Example Endpoint**: `GET /pets/?status=available`
+   - **Description**: Lists pet posts filtered by a specific query. For example, filtering by `status`. This can be extended to other filters like `size`, `gender`, etc.
+
+8. **List Pet Posts with Sorting**
+   - **Example Endpoint**: `GET /pets/?sort=name`
+   - **Description**: Lists pet posts with sorting based on specified fields such as `name` or `age`.
+
+
+
+
+
 
 ## `Comments Endpoints`
 
