@@ -341,5 +341,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 /P2/petpal/db.sqlite3
-*/migrations/*
+**/migrations/*.py
 !*/migrations/__init__.py
