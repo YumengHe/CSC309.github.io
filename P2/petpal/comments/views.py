@@ -5,6 +5,7 @@ from .models import Comment
 from accounts.models import CustomUser
 from .serializers import ShelterCommentSerializer
 from .permissions import IsAuthenticatedToComment, CanViewShelterComments
+from notifications.models import Notification
 
 class ShelterUserCommentsView(generics.ListCreateAPIView):
     serializer_class = ShelterCommentSerializer
@@ -27,3 +28,16 @@ class ShelterUserCommentsView(generics.ListCreateAPIView):
         user_id = self.kwargs['user_id']
         user_type = ContentType.objects.get_for_model(CustomUser)
         serializer.save(content_type=user_type, object_id=user_id, user=self.request.user)
+
+        # Create notification for the conversation recipient
+        # Assuming the recipient is the shelter owner/user
+        recipient = CustomUser.objects.get(id=user_id)
+
+        # Create and save the notification
+        notification = Notification(
+            recipient=recipient,
+            content=f"A new comment has been posted by {self.request.user.username}.",
+            # Example content, modify as needed
+            event_link=f"/comments/shelter-comments/{user_id}/"  # Example link, modify as needed
+        )
+        notification.save()
