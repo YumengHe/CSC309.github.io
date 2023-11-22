@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework import status, views, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
@@ -8,6 +8,8 @@ from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from .serializers import UserSerializer, User
 from .permissions import DenyAll
 from notifications.models import Notification
+from pets.models import PetPost
+from applications.models import Application
 
 
 class UserLoginView(views.APIView):
@@ -23,7 +25,6 @@ class UserLoginView(views.APIView):
                 content=f"Welcome back, {username}",
                 event_link=f"/accounts/{user.id}/"  # Customize this as needed
             )
-            print(notification)
 
             # User is authenticated. We can generate tokens now.
             refresh = RefreshToken.for_user(user)
@@ -48,7 +49,7 @@ class UserCreateView(generics.GenericAPIView):
             # Create a Notification instance here
             notification = Notification.objects.create(
                 recipient=serializer.instance,
-                content=f"Welcome, {serializer.instance.username}",
+                content=f"Welcome new {serializer.instance.role}, {serializer.instance.username}",
                 event_link=f"/accounts/{serializer.instance.id}/"
             )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -72,9 +73,22 @@ class UserView(generics.GenericAPIView):
                 if self.request.user.id == requested_user.id:
                     # allow if is current user
                     permission_classes = [IsAuthenticated]
-                # elif (self.request.user.role == "shelter" and requested_user in self.request.user.applicants.all()):
-                #     # TODO: allow if is a shelter that the seeker applied to
-                #     permission_classes = [IsAuthenticated]
+                elif self.request.user.role == "shelter":
+                    if requested_user.role == "shelter":
+                        # allow if ask for a shelter
+                        permission_classes = [AllowAny]
+
+                    else:
+                        # if ask for a seeker
+                        # allow if is a shelter that the seeker applied to
+                        pet_posts = get_list_or_404(PetPost, shelter=self.request.user)
+                        applications = Application.objects.filter(petpost__in=pet_posts)
+                        application_seekers = [application.seeker for application in applications]
+                        if requested_user in application_seekers:
+                            permission_classes = [IsAuthenticated]
+                        else:
+                            permission_classes = [DenyAll]
+
                 else:
                     permission_classes = [DenyAll]
 
