@@ -17,6 +17,7 @@ from .permissions import IsPetPoster, IsSeeker, IsShelter
 
 from django.contrib.auth import get_user_model
 from accounts.models import CustomUser
+from notifications.models import Notification
 
 User = get_user_model()
 
@@ -28,25 +29,26 @@ class PetPostCreate(APIView):
     """
 
     serializer_class = PetPostFullSerializer
-    # permission_classes = [IsShelter]
-    permission_classes = [AllowAny]
+    permission_classes = [IsShelter]
+    # permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-        # account = get_object_or_404(CustomUser, id=self.kwargs['id'])
-
-        #check if user is shelter
-        # if account.role != "shelter":
-            # return Response(
-                # {"error": "You must be a shelter to create new pet post."},
-                # status=status.HTTP_400_BAD_REQUEST,
-            # )
         
         # Save the object
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(shelter=self.request.user)  # Assign the current user as the shelter
 
+        # Create notification
+        Notification.objects.create(
+                recipient=self.request.user,
+                content=f"New pet post has been created",
+                event_link=f"/pets/?shelter={request.user.id}"
+        )
+
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        
 
 class PetPostViewSet(viewsets.ModelViewSet):
     queryset = PetPost.objects.all()
@@ -62,42 +64,87 @@ class PetPostViewSet(viewsets.ModelViewSet):
         super().perform_destroy(instance)
 
 class PetPostView(APIView):
-    permission_classes = [AllowAny]
+
+    # Define a mapping of methods to permission classes
+    permission_classes_by_action = {
+        'get': [AllowAny],
+        'put': [IsPetPoster],
+        'patch': [IsPetPoster],
+        'delete': [IsPetPoster]
+    }
+
+    def get_permissions(self):
+        # Get the method and return the respective permission classes
+        try:
+            return [permission() for permission in self.permission_classes_by_action[self.request.method.lower()]]
+        except KeyError:
+            return [permission() for permission in self.permission_classes]
+
 
     def get(self, request, *args, **kwargs):
-        pet_post = get_object_or_404(
-            PetPost, id=self.kwargs.get("id")
-        )
-        serializer = PetPostSerializer(pet_post)
+        pet_post = get_object_or_404(PetPost, id=self.kwargs.get("id"))
+        serializer = PetPostFullSerializer(pet_post)
         return Response(serializer.data)
 
     def put(self, request, *args, **kwargs):
         pet_post = get_object_or_404(PetPost, id=self.kwargs.get("id"))
-        serializer = PetPostSerializer(pet_post, data=request.data)
+        serializer = PetPostFullSerializer(pet_post, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            # Create notification
+            Notification.objects.create(
+                recipient=self.request.user,
+                content=f"Pet post has been updated!",
+                event_link=f"/pets/?shelter={request.user.id}"
+            )
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, *args, **kwargs):
+        pet_post = get_object_or_404(PetPost, id=self.kwargs.get("id"))
+        serializer = PetPostFullSerializer(pet_post, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            # Create notification
+            Notification.objects.create(
+                recipient=self.request.user,
+                content=f"Pet post has been updated!",
+                event_link=f"/pets/?shelter={request.user.id}"
+            )
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, *args, **kwargs):
+        permission_classes = [IsPetPoster]
         pet_post = get_object_or_404(PetPost, id=self.kwargs.get("id"))
         pet_post.delete()
+        # Create notification
+        Notification.objects.create(
+            recipient=self.request.user,
+            content=f"Pet post has been deleted!",
+            event_link=f"/pets/?shelter={request.user.id}"
+        )
+        print("delete successfully!")
         return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 class PetPostList(ListAPIView):
     """Retrieve a list of pet posts with filtering capabilities."""
-    
-    serializer_class = PetPostSerializer
+
+    serializer_class = PetPostFullSerializer
     pagination_class = BasePageNumberPagination
     permission_classes = [AllowAny]
 
     def get_queryset(self):
         queryset = PetPost.objects.all()
 
-        # Default filter for status
-        status = self.request.query_params.get('status', 'available')
-        queryset = queryset.filter(status=status)
+        # Get the status parameter from the request
+        status = self.request.query_params.get('status')
+        
+        # Apply default filter for status only if status parameter is not provided
+        if status == "":
+            queryset = queryset.filter(status='available')
+        elif status:  # Apply status filter if it's provided
+            queryset = queryset.filter(status=status)
 
         # Filters for shelter, size, and gender
         shelter = self.request.query_params.get('shelter')
@@ -112,7 +159,7 @@ class PetPostList(ListAPIView):
         if gender is not None:
             queryset = queryset.filter(gender=gender)
 
-        # Sort by name and age
+        # Sorting logic
         sort_by = self.request.query_params.get('sort')
         if sort_by in ['name', 'age']:
             queryset = queryset.order_by(sort_by)

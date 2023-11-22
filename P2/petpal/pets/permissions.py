@@ -57,5 +57,4 @@ class IsPetPoster(permissions.BasePermission):
         # https://stackoverflow.com/questions/47397323/how-can-i-get-an-access-to-url-paramaters-in-django-rest-framework-permission-cl
         petpost = get_object_or_404(PetPost, id=view.kwargs.get("id"))
         print(petpost, petpost.shelter)
-        Authorized_users = [petpost.shelter]
-        return request.user.is_authenticated and request.user in Authorized_users
+        return request.user.is_authenticated and request.user == petpost.shelter and request.user.role == "shelter"
