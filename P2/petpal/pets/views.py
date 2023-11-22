@@ -4,7 +4,7 @@ from django.shortcuts import render
 from rest_framework import viewsets, filters, status
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import PetPost
-from .serializers import PetPostSerializer
+from .serializers import PetPostSerializer, PetPostFullSerializer
 
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.response import Response
@@ -13,31 +13,39 @@ from rest_framework.generics import ListAPIView
 from .paginations import BasePageNumberPagination
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from .permissions import IsPetPostShelter
+from .permissions import IsPetPoster, IsSeeker, IsShelter
 
 from django.contrib.auth import get_user_model
+from accounts.models import CustomUser
 
 User = get_user_model()
 
 class PetPostCreate(APIView):
     """
-    Create a new pet post. The user creating the post will be assigned as the shelter.
+    Create a new pet post. 
+    Only shelter is able to create a new post.
+    The user creating the post will be assigned as the shelter.
     """
 
-    serializer_class = PetPostSerializer
+    serializer_class = PetPostFullSerializer
+    # permission_classes = [IsShelter]
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-        # Check if the user is authenticated and is a shelter
-        if not request.user.is_authenticated or request.user.role != "shelter":
-            return Response(
-                {"error": "Only authenticated shelters can create pet posts."},
-                status=status.HTTP_403_FORBIDDEN,
-            )
+        # account = get_object_or_404(CustomUser, id=self.kwargs['id'])
 
-        # Save the PetPost object
+        #check if user is shelter
+        # if account.role != "shelter":
+            # return Response(
+                # {"error": "You must be a shelter to create new pet post."},
+                # status=status.HTTP_400_BAD_REQUEST,
+            # )
+        
+        # Save the object
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(shelter=request.user)  # Assign the current user as the shelter
+        serializer.save(shelter=self.request.user)  # Assign the current user as the shelter
+
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class PetPostViewSet(viewsets.ModelViewSet):

@@ -132,7 +132,13 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'], # this is used for filter and sort
-    'PAGE_SIZE': 10  # Adjust the number of items per page as needed
+    'PAGE_SIZE': 10,  # Adjust the number of items per page as needed
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAdminUser'
+    ),
 }
 
 SIMPLE_JWT = {

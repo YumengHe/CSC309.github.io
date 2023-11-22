@@ -4,4 +4,19 @@ from .models import PetPost
 class PetPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = PetPost
-        fields = ['name', 'description', 'shelter', 'status', 'breed', 'age', 'size', 'color', 'gender', 'expiry', 'image']
+        fields = ['name', 'description', 'status', 'breed', 'age', 'size', 'color', 'gender', 'expiry', 'image']
+
+class PetPostFullSerializer(serializers.ModelSerializer):
+    created_at = serializers.DateTimeField(read_only=True)
+    last_updated = serializers.DateTimeField(read_only=True)
+    shelter = serializers.PrimaryKeyRelatedField(read_only=True)
+    status = serializers.CharField(default="available")
+
+    class Meta:
+        model = PetPost
+        fields = "__all__"
+
+    def create(self, validated_data):
+        # Set the 'status' to "available" before creating the object
+        # validated_data["status"] = "available"
+        return super().create(validated_data)

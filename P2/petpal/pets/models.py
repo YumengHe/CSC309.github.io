@@ -19,6 +19,7 @@ class PetPost(models.Model):
         ("medium", "Medium"),
         ("large", "Large"),
         ("extra_large", "Extra Large"),
+        ("unknown", "Unknown"),
     )
 
     name = models.CharField(max_length=100)
