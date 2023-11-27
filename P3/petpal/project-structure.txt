@@ -1,0 +1,72 @@
+/pet-adoption-website
+|-- /src
+    |-- /components
+    |   |-- /common
+    |   |   |-- Button.js
+    |   |   |-- InputField.js
+    |   |   |-- Modal.js
+    |   |   |-- Navbar.js
+    |   |   |-- Footer.js
+    |   |-- /shelter
+    |   |   |-- ShelterCard.js
+    |   |   |-- ShelterForm.js
+    |   |-- /pet
+    |   |   |-- PetCard.js
+    |   |   |-- PetForm.js
+    |   |-- /application
+    |       |-- ApplicationForm.js
+    |       |-- ApplicationList.js
+    |-- /pages
+    |   |-- HomePage.js
+    |   |-- ShelterProfilePage.js
+    |   |-- PetSeekerProfilePage.js
+    |   |-- PetListingPage.js
+    |   |-- LoginPage.js
+    |   |-- RegistrationPage.js
+    |-- /services
+    |   |-- authService.js
+    |   |-- shelterService.js
+    |   |-- petService.js
+    |   |-- applicationService.js
+    |   |-- commentService.js
+    |-- /models
+    |   |-- Shelter.js
+    |   |-- PetSeeker.js
+    |   |-- Pet.js
+    |   |-- Application.js
+    |   |-- Comment.js
+    |-- /hooks
+    |   |-- useAuth.js
+    |   |-- usePagination.js
+    |   |-- useFilter.js
+    |-- /context
+    |   |-- AuthContext.js
+    |   |-- NotificationContext.js
+    |-- /utils
+    |   |-- api.js
+    |   |-- helpers.js
+    |-- /styles
+    |   |-- global.css
+    |   |-- theme.js
+    |-- /assets
+    |   |-- /images
+    |   |   |-- logo.png
+    |   |   |-- defaultPet.jpg
+    |   |-- /fonts
+    |-- /config
+    |   |-- index.js
+    |-- /tests
+    |   |-- /components
+    |   |   |-- Button.test.js
+    |   |   |-- Navbar.test.js
+    |   |-- /pages
+    |   |   |-- HomePage.test.js
+    |   |   |-- LoginPage.test.js
+    |   |-- /services
+    |       |-- authService.test.js
+    |       |-- shelterService.test.js
+    |-- index.js
+    |-- App.js
+    |-- AppRouter.js
+|-- package.json
+|-- README.md
