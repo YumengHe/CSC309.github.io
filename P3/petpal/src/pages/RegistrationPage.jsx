@@ -1,5 +1,5 @@
-function RegistrationPage () {
-  return <div> Registration Page </div>
+function RegistrationPage() {
+  return <div> Registration Page </div>;
 }
 
-export default RegistrationPage
+export default RegistrationPage;

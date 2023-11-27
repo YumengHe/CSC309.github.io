@@ -1,5 +1,5 @@
-function LoginPage () {
-  return <div>Welcome to Petpal Login Page</div>
+function LoginPage() {
+  return <div>Welcome to Petpal Login Page</div>;
 }
 
-export default LoginPage
+export default LoginPage;
