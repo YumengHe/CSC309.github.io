@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'comments',  # --> comments on pets and shelter
     'applications',  # --> pet adoption applications
     'notifications',  # --> notifications for pet seeker and shelters
-    'drf_yasg'
+    'drf_yasg',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'petpal.urls'
@@ -155,3 +158,12 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# For development
+CORS_ALLOW_ALL_ORIGINS = True  # DEVELOPMENT ONLY! Will ignore CORS_ALLOWED_ORIGINS
+CORS_ALLOW_CREDENTIALS = True
+
+# For production, list the allowed origins
+CORS_ALLOWED_ORIGINS = [
+
+]

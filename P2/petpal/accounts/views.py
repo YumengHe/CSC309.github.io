@@ -33,6 +33,7 @@ class UserLoginView(views.APIView):
             data = {
                 "refresh": str(refresh),
                 "access": str(access),
+                'user_id': user.id,
             }
             return Response(data, status=status.HTTP_200_OK)
 
@@ -127,7 +128,7 @@ class UserView(generics.GenericAPIView):
         user_id = self.kwargs.get("id")
         if not user_id:
             return Response({"error": "User ID is required for update."}, status=status.HTTP_400_BAD_REQUEST)
-
+        print(request.data)
         user = get_object_or_404(User, id=user_id)
         serializer = self.get_serializer(user, data=request.data)
         if serializer.is_valid():
@@ -145,7 +146,7 @@ class UserView(generics.GenericAPIView):
         user_id = self.kwargs.get("id")
         if not user_id:
             return Response({"error": "User ID is required for update."}, status=status.HTTP_400_BAD_REQUEST)
-
+        print(request.data)
         user = get_object_or_404(User, id=user_id)
         serializer = self.get_serializer(user, data=request.data)
         original_data = {field: getattr(user, field) for field in serializer.fields}

@@ -7,3 +7,4 @@ django-phonenumbers
 pytz
 django-filter
 drf-yasg
+django-cors-headers
