@@ -4,9 +4,12 @@ export const fetchWithToken = async (url, method = "GET", data = null) => {
   const fullUrl = `${API_BASE_URL}${url}`;
   const accessToken = localStorage.getItem("accessToken");
   const headers = {
-    "Content-Type": "application/json", // Set Content-Type header for JSON data
     Authorization: `Bearer ${accessToken}`,
   };
+
+  if (!(data instanceof FormData)) {
+    headers["Content-Type"] = "application/json";
+  }
 
   const config = {
     headers,
@@ -37,9 +40,11 @@ export const fetchWithToken = async (url, method = "GET", data = null) => {
 
 export const fetchWithoutToken = async (url, method = "GET", data = null) => {
   const fullUrl = `${API_BASE_URL}${url}`;
-  const headers = {
-    "Content-Type": "application/json", // Set Content-Type header for JSON data
-  };
+  const headers = {};
+
+  if (!(data instanceof FormData)) {
+    headers["Content-Type"] = "application/json";
+  }
 
   const config = {
     method,

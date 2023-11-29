@@ -12,12 +12,19 @@ const UserProfilePage = () => {
 
   useEffect(() => {
     fetchUserProfile();
-  }, [userId]);
+  }, [userId, isEditMode]);
 
-  const currentProfilePic = useMemo(
-    () => `${API_BASE_URL}/${user?.profile_pic}`,
-    [user?.profile_pic],
-  );
+  const currentProfilePic = useMemo(() => {
+    // If there's a preview URL, return it; this handles the scenario where the user
+    // has changed the image but hasn't submitted the change yet.
+    if (imagePreviewUrl) {
+      return imagePreviewUrl;
+    }
+
+    // In all other cases, use the profile picture from the backend.
+    // Since every user is assumed to have a profile picture, there's no need for a default case.
+    return `${API_BASE_URL}/${user?.profile_pic}`;
+  }, [user?.profile_pic, imagePreviewUrl]);
 
   const fetchUserProfile = async () => {
     try {
@@ -95,7 +102,6 @@ const UserProfilePage = () => {
       } else {
         setUser({ ...data, originalData: data });
         setIsEditMode(false); // Exit edit mode
-        await fetchUserProfile();
       }
     } catch (error) {
       console.error("Error updating user data:", error);
@@ -123,8 +129,6 @@ const UserProfilePage = () => {
     setUser({ ...user, [e.target.name]: file });
     setImagePreviewUrl(URL.createObjectURL(file));
   };
-
-  const profileImage = imagePreviewUrl || currentProfilePic;
 
   return (
     <div>
@@ -189,7 +193,7 @@ const UserProfilePage = () => {
                 />
                 {user?.profile_pic && (
                   <img
-                    src={profileImage}
+                    src={currentProfilePic}
                     alt="Profile"
                     style={{ width: "200px" }}
                   />
@@ -212,7 +216,7 @@ const UserProfilePage = () => {
               <p>
                 Profile Picture:{" "}
                 <img
-                  src={profileImage}
+                  src={currentProfilePic}
                   alt="Profile Pic"
                   style={{ width: "200px" }}
                 />
