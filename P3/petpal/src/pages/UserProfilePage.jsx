@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_BASE_URL, fetchWithToken } from "../services/utils";
+import { UserContext } from "../contexts/UserContext";
 
 const UserProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -9,6 +10,13 @@ const UserProfilePage = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const { userId } = useParams();
   const navigate = useNavigate();
+  const userContext = useContext(UserContext);
+
+  // TODO get rid of user, use userContext instead, and rename to user
+  useEffect(() => {
+    console.log("userContext:", userContext);
+    console.log("userContext.id:", userContext?.id);
+  }, [userContext]);
 
   useEffect(() => {
     fetchUserProfile();
@@ -45,6 +53,11 @@ const UserProfilePage = () => {
       }
       const userData = await response.json();
       setUser({ ...userData, originalData: userData }); // Assuming the response data is an object
+      if (userContext) {
+        userContext.updateUser(userData);
+      } else {
+        console.log("userContext is null");
+      }
     } catch (error) {
       console.error("Error fetching user data:", error);
       setError("An error occurred while fetching user data."); // Handle other errors
@@ -100,6 +113,8 @@ const UserProfilePage = () => {
           setError("An unexpected error occurred.");
         }
       } else {
+        // Update the user context with the new user data
+        userContext.updateUser(data);
         setUser({ ...data, originalData: data });
         setIsEditMode(false); // Exit edit mode
       }
@@ -221,7 +236,7 @@ const UserProfilePage = () => {
                   style={{ width: "200px" }}
                 />
               </p>
-              {localStorage.getItem("userId") === userId && (
+              {userContext?.id === parseInt(userId) && (
                 <button onClick={handleEditToggle}>Edit Profile</button>
               )}
             </div>
