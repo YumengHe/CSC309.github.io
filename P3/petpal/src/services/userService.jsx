@@ -25,12 +25,15 @@ export const loginUser = async (username, password) => {
     username,
     password,
   });
+
   const responseData = await response.json();
   if (response.ok) {
-    localStorage.setItem("accessToken", responseData.access);
-    localStorage.setItem("refreshToken", responseData.refresh);
-    localStorage.setItem("userId", responseData.user_id);
-    return responseData.user_id;
+    localStorage.setItem("accessToken", responseData?.access);
+    localStorage.setItem("refreshToken", responseData?.refresh);
+    const userData = await getUserInfo(responseData?.user_id);
+    localStorage.setItem("currentUser", JSON.stringify(userData));
+    console.log("curr user: ", JSON.parse(localStorage.getItem("currentUser")));
+    return responseData?.user_id;
   } else {
     console.error("Login failed:", responseData.error);
     throw new Error(responseData.error || "Login failed");

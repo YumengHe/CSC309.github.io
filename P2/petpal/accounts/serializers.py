@@ -37,3 +37,10 @@ class UserSerializer(serializers.ModelSerializer):
 
         return data
 
+        def to_representation(self, instance):
+                representation = super().to_representation(instance)
+                # Assuming 'profile_pic' is the field name for the image
+                if representation['profile_pic']:
+                    representation['profile_pic'] = os.path.basename(representation['profile_pic'])
+                return representation
+

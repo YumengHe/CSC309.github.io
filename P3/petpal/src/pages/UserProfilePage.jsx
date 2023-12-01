@@ -1,7 +1,6 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_BASE_URL, fetchWithToken } from "../services/utils";
-import { UserContext } from "../contexts/UserContext";
 
 const UserProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -10,27 +9,24 @@ const UserProfilePage = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const { userId } = useParams();
   const navigate = useNavigate();
-  const userContext = useContext(UserContext);
-
-  // TODO get rid of user, use userContext instead, and rename to user
-  useEffect(() => {
-    console.log("userContext:", userContext);
-    console.log("userContext.id:", userContext?.id);
-  }, [userContext]);
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   useEffect(() => {
     fetchUserProfile();
   }, [userId, isEditMode]);
 
   const currentProfilePic = useMemo(() => {
-    // If there's a preview URL, return it; this handles the scenario where the user
-    // has changed the image but hasn't submitted the change yet.
+    // If there's a preview URL, return it.
     if (imagePreviewUrl) {
       return imagePreviewUrl;
     }
 
-    // In all other cases, use the profile picture from the backend.
-    // Since every user is assumed to have a profile picture, there's no need for a default case.
+    // Check if user?.profile_pic already includes API_BASE_URL
+    if (user?.profile_pic.startsWith(API_BASE_URL)) {
+      return user?.profile_pic;
+    }
+
+    // Otherwise, concatenate API_BASE_URL with user?.profile_pic
     return `${API_BASE_URL}/${user?.profile_pic}`;
   }, [user?.profile_pic, imagePreviewUrl]);
 
@@ -53,11 +49,6 @@ const UserProfilePage = () => {
       }
       const userData = await response.json();
       setUser({ ...userData, originalData: userData }); // Assuming the response data is an object
-      if (userContext) {
-        userContext.updateUser(userData);
-      } else {
-        console.log("userContext is null");
-      }
     } catch (error) {
       console.error("Error fetching user data:", error);
       setError("An error occurred while fetching user data."); // Handle other errors
@@ -70,6 +61,7 @@ const UserProfilePage = () => {
     // Prepare FormData with only the fields that have been changed
     const formData = new FormData();
     let isFormDataUsed = false;
+
     Object.entries(user).forEach(([key, value]) => {
       if (key !== "originalData") {
         const originalValue = user.originalData[key];
@@ -98,6 +90,7 @@ const UserProfilePage = () => {
         formData,
       );
       const data = await response.json();
+      console.log("data:", data);
 
       if (!response.ok) {
         if (response.status === 403) {
@@ -113,9 +106,13 @@ const UserProfilePage = () => {
           setError("An unexpected error occurred.");
         }
       } else {
-        // Update the user context with the new user data
-        userContext.updateUser(data);
+        // Update the user context with the new current user data
         setUser({ ...data, originalData: data });
+        if (localStorage?.currentUser?.id === user.id) {
+          console.log("updating user context with data: ", data);
+          localStorage.setItem("currentUser", JSON.stringify(data));
+        }
+
         setIsEditMode(false); // Exit edit mode
       }
     } catch (error) {
@@ -236,7 +233,7 @@ const UserProfilePage = () => {
                   style={{ width: "200px" }}
                 />
               </p>
-              {userContext?.id === parseInt(userId) && (
+              {currentUser?.id === parseInt(userId) && (
                 <button onClick={handleEditToggle}>Edit Profile</button>
               )}
             </div>

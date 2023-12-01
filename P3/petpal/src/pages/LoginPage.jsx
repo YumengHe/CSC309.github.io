@@ -1,14 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { loginUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../contexts/UserContext";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { updateUser } = useContext(UserContext); // Accessing the updateUser function from UserContext
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -16,9 +14,6 @@ const LoginPage = () => {
 
     try {
       const userId = await loginUser(username, password);
-      // Update the user context with the new user data
-      updateUser({ userId }); // Assuming updateUser accepts an object with user data
-
       // Redirect to UserProfilePage with user data
       navigate(`/user-profile/${userId}`, { state: { userId } });
     } catch (error) {
