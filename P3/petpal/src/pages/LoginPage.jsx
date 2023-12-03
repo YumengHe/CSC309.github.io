@@ -13,9 +13,9 @@ const LoginPage = () => {
     setError("");
 
     try {
-      const userId = await loginUser(username, password);
+      await loginUser(username, password);
       // Redirect to UserProfilePage with user data
-      navigate(`/user-profile/${userId}`, { state: { userId } });
+      navigate("/");
     } catch (error) {
       console.error("Login error:", error);
       setPassword("");

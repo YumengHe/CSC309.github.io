@@ -33,7 +33,6 @@ export const loginUser = async (username, password) => {
     const userData = await getUserInfo(responseData?.user_id);
     localStorage.setItem("currentUser", JSON.stringify(userData));
     console.log("curr user: ", JSON.parse(localStorage.getItem("currentUser")));
-    return responseData?.user_id;
   } else {
     console.error("Login failed:", responseData.error);
     throw new Error(responseData.error || "Login failed");
@@ -41,6 +40,9 @@ export const loginUser = async (username, password) => {
 };
 
 export const getUserInfo = async (userId) => {
+  if (isLoggedIn() && !userId) {
+    return JSON.parse(localStorage.getItem("currentUser"));
+  }
   try {
     const response = await fetchWithToken(`/accounts/${userId}/`);
 
@@ -49,4 +51,18 @@ export const getUserInfo = async (userId) => {
     console.error("Error fetching user info:", error);
     throw error;
   }
+};
+
+export const isLoggedIn = async () => {
+  return !!localStorage.getItem("accessToken");
+};
+
+export const getUserId = () => {
+  return JSON.parse(localStorage.getItem("currentUser")).id;
+};
+
+export const logoutUser = () => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("currentUser");
 };
