@@ -1,15 +1,15 @@
+from applications.models import Application
 from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404, get_list_or_404
+from notifications.models import Notification
+from pets.models import PetPost
 from rest_framework import status, views, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
-from .serializers import UserSerializer, User
 from .permissions import DenyAll
-from notifications.models import Notification
-from pets.models import PetPost
-from applications.models import Application
+from .serializers import UserSerializer, User
 
 
 class UserLoginView(views.APIView):
@@ -17,6 +17,10 @@ class UserLoginView(views.APIView):
     def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
+        if not username or not password:
+            return Response({"error": "Both username and password are required."}, status=status.HTTP_400_BAD_REQUEST)
+        if not User.objects.filter(username=username).exists():
+            return Response({"error": "User does not exist."}, status=status.HTTP_404_NOT_FOUND)
         user = authenticate(request=request, username=username, password=password)
         if user is not None:
             # Create a Notification instance here
@@ -45,6 +49,7 @@ class UserCreateView(generics.GenericAPIView):
     permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
+        print(request.data)
         if serializer.is_valid():
             serializer.save()
             # Create a Notification instance here
