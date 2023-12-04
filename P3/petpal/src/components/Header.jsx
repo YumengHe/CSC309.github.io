@@ -28,8 +28,8 @@ function Header() {
   }, [userLoggedIn, location]);
 
   useEffect(() => {
-    console.log("Login status changed:", userLoggedIn);
-    console.log("User location:", location.pathname);
+    // console.log("Login status changed:", userLoggedIn);
+    // console.log("User location:", location.pathname);
     // Rest of your code
   }, [userLoggedIn, location]);
 

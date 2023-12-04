@@ -1,23 +1,46 @@
 import { fetchWithoutToken, fetchWithToken } from "./utils";
 
 export const registerUser = async (userData) => {
-  const formData = new FormData();
+  // Filter out empty or null fields
+  const filteredUserData = Object.fromEntries(
+    Object.entries(userData).filter(
+      ([_, value]) => value !== "" && value !== null,
+    ),
+  );
+  const hasProfilePic =
+    filteredUserData.profile_pic && filteredUserData.profile_pic.size > 0;
+  // console.log(
+  //   "filtered data:",
+  //   filteredUserData,
+  //   "has profile pic:",
+  //   hasProfilePic,
+  // );
 
-  for (const key in userData) {
-    formData.append(key, userData[key]);
-  }
-  try {
-    const response = await fetchWithoutToken(
-      `/accounts/register/`,
+  let response;
+
+  if (hasProfilePic) {
+    // Use FormData for the request with a profile picture
+    const formData = new FormData();
+    for (const key in filteredUserData) {
+      formData.append(key, filteredUserData[key]);
+    }
+    response = await fetchWithoutToken(`/accounts/`, "POST", formData);
+  } else {
+    // Use JSON for the request without a profile picture
+    response = await fetchWithoutToken(
+      `/accounts/`,
       "POST",
-      formData,
+      JSON.stringify(filteredUserData),
     );
-
-    return await response.json();
-  } catch (error) {
-    console.error("Registration error:", error);
-    throw error;
   }
+
+  const responseData = await response.json();
+  if (!response.ok) {
+    console.error("Registration failed:", responseData);
+    throw responseData || "Registration failed";
+  }
+
+  return responseData;
 };
 
 export const loginUser = async (username, password) => {
