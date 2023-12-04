@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { loginUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
+import LoginForm from "../components/forms/LoginForm";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -8,13 +9,16 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const navigateToRegister = () => {
+    navigate("/register");
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
       await loginUser(username, password);
-      // Redirect to UserProfilePage with user data
       navigate("/");
     } catch (error) {
       console.error("Login error:", error);
@@ -24,24 +28,15 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button type="submit">Login</button>
-        {error && <p>{error}</p>}
-      </form>
-    </div>
+    <LoginForm
+      username={username}
+      setUsername={setUsername}
+      password={password}
+      setPassword={setPassword}
+      error={error}
+      handleLogin={handleLogin}
+      navigateToRegister={navigateToRegister}
+    />
   );
 };
 
