@@ -63,7 +63,7 @@ export const loginUser = async (username, password) => {
 };
 
 export const getUserInfo = async (userId) => {
-  if (isLoggedIn() && !userId) {
+  if (isUserLoggedIn() && !userId) {
     return JSON.parse(localStorage.getItem("currentUser"));
   }
   try {
@@ -76,7 +76,7 @@ export const getUserInfo = async (userId) => {
   }
 };
 
-export const isLoggedIn = async () => {
+export const isUserLoggedIn = async () => {
   return !!localStorage.getItem("accessToken");
 };
 
