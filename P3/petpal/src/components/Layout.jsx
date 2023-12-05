@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
           // console.log("No new notification");
         }
       } catch (error) {
-        // console.error("Error fetching notification:", error);
+        console.error("Error fetching notification:", error);
       }
     } else {
       // console.log("User not logged in");
