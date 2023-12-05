@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getUserInfo, isLoggedIn, logoutUser } from "../services/userService";
+import {
+  getUserInfo,
+  isUserLoggedIn,
+  logoutUser,
+} from "../services/userService";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
 function Header() {
@@ -11,7 +15,7 @@ function Header() {
 
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const loggedIn = await isLoggedIn();
+      const loggedIn = await isUserLoggedIn();
       setUserLoggedIn(loggedIn);
       if (loggedIn) {
         try {

@@ -30,3 +30,9 @@ html, body {
   flex: 1;
   /* Add padding or margin as needed */
 }
+
+.notification-popup {
+  right: 20px;
+  bottom: 20px;
+  width: 300px; /* Adjust the width as needed */
+}

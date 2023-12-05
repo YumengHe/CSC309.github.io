@@ -1,12 +1,13 @@
-from django.shortcuts import get_object_or_404, get_list_or_404
+from applications.paginations import BasePageNumberPagination
+from django.shortcuts import get_object_or_404
 from rest_framework import status
+from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
+
 from .models import Notification
 from .serializer import NotificationSerializer, NotificationStateSerializer
-from applications.paginations import BasePageNumberPagination
-from rest_framework.permissions import IsAuthenticated
 
 
 class NotificationView(APIView):
@@ -44,20 +45,36 @@ class NotificationList(ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        # Filter notifications for the logged-in user
         notifications = Notification.objects.filter(recipient=self.request.user)
 
-        # Filter notifications by read/unread
-        state_param = self.request.query_params.get("state", None)
-        # Verify the status parameter
-        if state_param in ["read", "unread"]:
-            read_bool = state_param == "read"
-            notifications = notifications.filter(read=read_bool)
+        # Extract query parameters
+        state_param = self.request.query_params.get("state")
+        sort_param = self.request.query_params.get("sort")
 
-        # Sort notifications by create time
-        sort_param = self.request.query_params.get("sort", None)
-        if sort_param == "creation":
-            notifications = notifications.order_by("created_at")
-        elif sort_param == "-creation":
+        # Filter notifications by read/unread status
+        if state_param in ["read", "unread"]:
+            notifications = notifications.filter(read=(state_param == "read"))
+
+        # Sort notifications by creation time
+        if sort_param in ["creation", "-creation"]:
+            notifications = notifications.order_by(sort_param)
+        else:
+            # Default sorting order
             notifications = notifications.order_by("-created_at")
 
-        return get_list_or_404(notifications)
+        return notifications
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        if not queryset.exists():
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
