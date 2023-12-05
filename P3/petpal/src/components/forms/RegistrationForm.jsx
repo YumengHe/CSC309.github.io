@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const RegistrationForm = ({ error, onSubmit, navigateToLogin }) => {
   const [userData, setUserData] = useState({
@@ -12,9 +12,9 @@ const RegistrationForm = ({ error, onSubmit, navigateToLogin }) => {
     profile_pic: null,
   });
 
-  useEffect(() => {
-    console.log("errors in form:", error);
-  }, [error]);
+  // useEffect(() => {
+  //   console.log("errors in form:", error);
+  // }, [error]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -28,15 +28,18 @@ const LoginPage = () => {
   };
 
   return (
-    <LoginForm
-      username={username}
-      setUsername={setUsername}
-      password={password}
-      setPassword={setPassword}
-      error={error}
-      handleLogin={handleLogin}
-      navigateToRegister={navigateToRegister}
-    />
+    <div>
+      <h2>Login</h2>
+      <LoginForm
+        username={username}
+        setUsername={setUsername}
+        password={password}
+        setPassword={setPassword}
+        error={error}
+        handleLogin={handleLogin}
+        navigateToRegister={navigateToRegister}
+      />
+    </div>
   );
 };
 
