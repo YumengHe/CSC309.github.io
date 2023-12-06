@@ -7,6 +7,10 @@ import NotFoundPage from "./pages/NotFoundPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "./components/Layout";
+import AboutPage from "./pages/AboutPage";
+import ShelterSearchPage from "./pages/Search/ShelterSearchPage";
+import PetSearchPage from "./pages/Search/PetSearchPage";
+import HowItWorkPage from "./pages/HowItWorkPage";
 
 function App() {
   return (
@@ -21,6 +25,10 @@ function App() {
               path="/user-profile/:userId?"
               element={<UserProfilePage />}
             />
+            <Route path="/search/shelter" element={<ShelterSearchPage />} />
+            <Route path="/search/pets" element={<PetSearchPage />} />
+            <Route path="/how-it-works" element={<HowItWorkPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Layout>
