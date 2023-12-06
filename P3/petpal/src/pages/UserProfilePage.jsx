@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_BASE_URL, fetchWithToken } from "../services/utils";
+import EditUserProfileForm from "../components/forms/EditUserProfileForm";
 
 const UserProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -27,7 +28,7 @@ const UserProfilePage = () => {
     }
 
     // Otherwise, concatenate API_BASE_URL with user?.profile_pic
-    return `${API_BASE_URL}/${user?.profile_pic}`;
+    return `${API_BASE_URL}/media/user_profiles/${user?.profile_pic}`;
   }, [user?.profile_pic, imagePreviewUrl]);
 
   const fetchUserProfile = async () => {
@@ -143,98 +144,60 @@ const UserProfilePage = () => {
   };
 
   return (
-    <div>
-      <h1>User Profile</h1>
+    <div className="container mt-4">
+      <h1 className="text-center mb-3">User Profile</h1>
       {error ? (
         <div
-          className="error-message"
+          className="alert alert-danger"
           dangerouslySetInnerHTML={{ __html: error }}
         />
       ) : (
-        <div id="user-profile">
+        <div id="user-profile" className="card">
           {isEditMode ? (
-            <form onSubmit={handleSubmit} id="user-profile-edit-form">
-              <div>
-                <label>Username: </label>
-                <input
-                  name="username"
-                  value={user?.username || ""}
-                  onChange={handleFormChange}
-                />
-              </div>
-              <div>
-                <label>Email: </label>
-                <input
-                  name="email"
-                  type="email"
-                  value={user?.email}
-                  onChange={handleFormChange}
-                />
-              </div>
-              <div>
-                <label>First Name: </label>
-                <input
-                  name="first_name"
-                  value={user?.first_name}
-                  onChange={handleFormChange}
-                />
-              </div>
-              <div>
-                <label>Last Name: </label>
-                <input
-                  name="last_name"
-                  value={user?.last_name}
-                  onChange={handleFormChange}
-                />
-              </div>
-              <div>
-                <label>Address: </label>
-                <input
-                  name="address"
-                  value={user?.address}
-                  onChange={handleFormChange}
-                />
-              </div>
-              <div>
-                <label>Profile Picture: </label>
-                <input
-                  name="profile_pic"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                />
-                {user?.profile_pic && (
-                  <img
-                    src={currentProfilePic}
-                    alt="Profile"
-                    style={{ width: "200px" }}
-                  />
-                )}
-              </div>
-              <button type="submit">Save Changes</button>
-              <button type="button" onClick={handleEditToggle}>
-                Cancel
-              </button>
-            </form>
+            <EditUserProfileForm
+              user={user}
+              handleSubmit={handleSubmit}
+              handleFormChange={handleFormChange}
+              handleFileChange={handleFileChange}
+              currentProfilePic={currentProfilePic}
+              handleEditToggle={handleEditToggle}
+            />
           ) : (
-            <div id="user-profile-view">
-              <p>User ID: {user?.id}</p>
-              <p>Username: {user?.username}</p>
-              <p>Email: {user?.email}</p>
-              <p>First Name: {user?.first_name}</p>
-              <p>Last Name: {user?.last_name}</p>
-              <p>Address: {user?.address}</p>
-              <p>Role: {user?.role}</p>
+            <div id="user-profile-view" className="card-body">
               <p>
-                Profile Picture:{" "}
+                <strong>User ID:</strong> {user?.id}
+              </p>
+              <p>
+                <strong>Username:</strong> {user?.username}
+              </p>
+              <p>
+                <strong>Email:</strong> {user?.email}
+              </p>
+              <p>
+                <strong>First Name:</strong> {user?.first_name}
+              </p>
+              <p>
+                <strong>Last Name:</strong> {user?.last_name}
+              </p>
+              <p>
+                <strong>Address:</strong> {user?.address}
+              </p>
+              <p>
+                <strong>Role:</strong> {user?.role}
+              </p>
+              <p>
+                <strong>Profile Picture:</strong>
                 <img
                   src={currentProfilePic}
                   alt="Profile Pic"
+                  className="img-thumbnail mt-2"
                   style={{ width: "200px" }}
                 />
               </p>
               {currentUser?.id === parseInt(userId) && (
-                <button onClick={handleEditToggle}>Edit Profile</button>
+                <button className="btn btn-primary" onClick={handleEditToggle}>
+                  Edit Profile
+                </button>
               )}
             </div>
           )}

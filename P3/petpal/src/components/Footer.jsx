@@ -12,8 +12,8 @@ function Footer() {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               About
-            </Link>
-            {"    "}|{"     "}
+            </Link>{" "}
+            |{" "}
             <Link
               to="/how-it-works"
               style={{ textDecoration: "none", color: "inherit" }}
