@@ -76,10 +76,10 @@ class UserView(generics.GenericAPIView):
             if requested_user.role == "shelter":
                 permission_classes = [AllowAny]
             else:  # gets a seeker
-                if self.request.user.id == requested_user.id:
+                if self.request.user.is_authenticated and self.request.user.id == requested_user.id:
                     # allow if is current user
                     permission_classes = [IsAuthenticated]
-                elif self.request.user.role == "shelter":
+                elif self.request.user.is_authenticated and self.request.user.role == "shelter":
                     if requested_user.role == "shelter":
                         # allow if ask for a shelter
                         permission_classes = [AllowAny]
