@@ -78,7 +78,7 @@ function ShelterSearchPage() {
                     <img
                       src={`${API_BASE_URL}/media/user_profiles/${shelter?.profile_pic}`}
                       className="card-img-top"
-                      alt={shelter?.username}
+                      alt={`${shelter?.username}'s profile picture`}
                     />
                     <div className="card-body">
                       <h5 className="card-title">{shelter?.username}</h5>
