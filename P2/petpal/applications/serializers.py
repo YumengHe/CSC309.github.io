@@ -7,26 +7,7 @@ from rest_framework.serializers import (
 from .models import Application, Conversation, PetPost, CustomUser
 
 
-# Serializer to be used in ApplicationSerializer to display foreign key object
-class PetPostSerializer(ModelSerializer):
-    class Meta:
-        model = PetPost
-        fields = [
-            "id",
-            "name",
-            "description",
-            "status",
-            "breed",
-            "age",
-            "size",
-            "color",
-            "gender",
-            "expiry",
-            "image",
-        ]
-
-
-# Serializer to be used in ApplicationSerializer to display foreign key object
+# Serializer used in Application & PetPost Serializer  to display foreign key object
 class AccountSerializer(ModelSerializer):
     class Meta:
         model = CustomUser
@@ -43,6 +24,13 @@ class AccountSerializer(ModelSerializer):
             "role",
             "profile_pic",
         ]
+# Serializer used in ApplicationSerializer to display foreign key object
+class PetPostSerializer(ModelSerializer):
+    shelter = AccountSerializer(read_only=True)
+    
+    class Meta:
+        model = PetPost
+        fields = ['shelter', 'name', 'description', 'status', 'breed', 'age', 'size', 'color', 'gender', 'expiry', 'image']
 
 
 class ApplicationFullSerializer(ModelSerializer):

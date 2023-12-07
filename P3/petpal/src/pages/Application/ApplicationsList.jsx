@@ -48,7 +48,7 @@ const ApplicationsList = () => {
                                 </div>
                                 <div className="col col-6 col-md-7 flex-fill">
                                     <h5 className="mb-0 text-truncate">
-                                        {app.petpost.name}
+                                        {`${app.seeker.first_name} wants ${app.petpost.name} from ${app.petpost.shelter.username}`}
                                     </h5>
                                 </div>
                                 <div className="col col-3 me-2">
