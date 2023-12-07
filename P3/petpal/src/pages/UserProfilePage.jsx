@@ -41,9 +41,10 @@ const UserProfilePage = () => {
 
       const response = await fetchWithToken(`/accounts/${userId}/`);
       if (!response.ok) {
-        if (response.status === 403) {
-          // Check if the status code indicates a permission issue
-          setError("You do not have permission to view this profile."); // Set the appropriate error message
+        if (response.status === 401) {
+          setError("You must be logged in to view this profile.");
+        } else if (response.status === 403) {
+          setError("You do not have permission to view this profile.");
         } else if (response.status === 404) {
           setError(`User with user_id ${userId} not found.`);
         }
@@ -154,14 +155,16 @@ const UserProfilePage = () => {
       ) : (
         <div id="user-profile" className="card">
           {isEditMode ? (
-            <EditUserProfileForm
-              user={user}
-              handleSubmit={handleSubmit}
-              handleFormChange={handleFormChange}
-              handleFileChange={handleFileChange}
-              currentProfilePic={currentProfilePic}
-              handleEditToggle={handleEditToggle}
-            />
+            <div id="user-profile-edit" className="card-body">
+              <EditUserProfileForm
+                user={user}
+                handleSubmit={handleSubmit}
+                handleFormChange={handleFormChange}
+                handleFileChange={handleFileChange}
+                currentProfilePic={currentProfilePic}
+                handleEditToggle={handleEditToggle}
+              />
+            </div>
           ) : (
             <div id="user-profile-view" className="card-body">
               <p>
