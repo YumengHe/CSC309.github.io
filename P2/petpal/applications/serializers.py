@@ -4,14 +4,54 @@ from rest_framework.serializers import (
     DateTimeField,
     CharField,
 )
-from .models import Application, Conversation
+from .models import Application, Conversation, PetPost, CustomUser
+
+
+# Serializer to be used in ApplicationSerializer to display foreign key object
+class PetPostSerializer(ModelSerializer):
+    class Meta:
+        model = PetPost
+        fields = [
+            "id",
+            "name",
+            "description",
+            "status",
+            "breed",
+            "age",
+            "size",
+            "color",
+            "gender",
+            "expiry",
+            "image",
+        ]
+
+
+# Serializer to be used in ApplicationSerializer to display foreign key object
+class AccountSerializer(ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = [
+            "id",
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "is_active",
+            "is_staff",
+            "phone_number",
+            "address",
+            "role",
+            "profile_pic",
+        ]
 
 
 class ApplicationFullSerializer(ModelSerializer):
     created_at = DateTimeField(read_only=True)
     last_updated = DateTimeField(read_only=True)
-    seeker = PrimaryKeyRelatedField(read_only=True)
-    petpost = PrimaryKeyRelatedField(read_only=True)
+    # seeker = PrimaryKeyRelatedField(read_only=True)
+    # petpost = PrimaryKeyRelatedField(read_only=True)
+    seeker = AccountSerializer(read_only=True)
+    petpost = PetPostSerializer(read_only=True)
     status = CharField(default="pending")
 
     class Meta:

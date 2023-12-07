@@ -1,0 +1,31 @@
+/*  https://www.w3schools.com/cssref/pr_import_rule.php */
+@import "base_style.css";
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Applications & Application Submitted *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+.application.list-group a img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--main-mid-color);
+}
+
+.side_nav .list-group .list-group-item.active {
+  background-color: var(--main-light-color);
+  border: 0;
+}
+
+#conversation .shelter_conv div:nth-child(3) {
+  background-color: #86707099;
+  color: white;
+}
+
+#conversation .seeker_conv {
+  display: flex;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+#conversation .timestamp {
+  font-size: smaller;
+}

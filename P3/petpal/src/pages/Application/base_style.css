@@ -1,0 +1,55 @@
+:root {
+  --main-dark-color: #867070;
+  --main-mid-color: #D5B4B4;
+  --main-light-color: #F5EBEB;
+  --main-font-familty: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --footer-height: 50px;
+}
+
+[href] {
+  text-decoration: none;
+}
+
+.main-light-color {
+  color: var(--main-light-color)
+}
+
+.main-dark-color {
+  color: var(--main-dark-color)
+}
+
+.btn-outline-primary-cust {
+  --bs-btn-color: var(--main-dark-color);
+  --bs-btn-bg: var(--main-light-color);
+  --bs-btn-border-color: var(--main-dark-color);
+  --bs-btn-hover-color: var(--main-light-color);
+  --bs-btn-hover-bg: var(--main-dark-color);
+  --bs-btn-hover-border-color: var(--main-light-color);
+  --bs-btn-active-color: var(--main-dark-color);
+  --bs-btn-active-bg: var(--main-mid-color);
+  --bs-btn-active-border-color: var(--main-dark-color);
+  --bs-btn-focus-shadow-rgb: var(--main-mid-color);
+}
+
+.btn-outline-primary-cust {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-outline-primary-cust:hover {
+  box-shadow: none;
+  text-shadow: 0.5px 0.5px rgba(255, 255, 255, 0.5);
+}
+
+
+.btn-primary-cust {
+  --bs-btn-color: var(--main-light-color);
+  --bs-btn-bg: var(--main-dark-color);
+  --bs-btn-border-color: var(--main-dark-color);
+  --bs-btn-hover-color: var(--main-dark-color);
+  --bs-btn-hover-bg: var(--main-light-color);
+  --bs-btn-hover-border-color: var(--main-mid-color);
+  --bs-btn-active-color: var(--main-dark-color);
+  --bs-btn-active-bg: var(--main-mid-color);
+  --bs-btn-active-border-color: var(--main-dark-color);
+  --bs-btn-focus-shadow-rgb: var(--main-mid-color);
+}
