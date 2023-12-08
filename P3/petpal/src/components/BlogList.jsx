@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { fetchWithToken } from "../services/utils";
 import { useNavigate } from "react-router-dom";
+import { getUserId } from "../services/userService";
 
 const BlogList = ({ userId }) => {
   const [blogs, setBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const currentUserId = getUserId(); // Directly get the current user's ID
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -13,7 +15,7 @@ const BlogList = ({ userId }) => {
         const response = await fetchWithToken(`/blogs/?author=${userId}`);
         if (response.ok) {
           const blogsData = await response.json();
-          setBlogs(blogsData.results); // Set blogs to blogsData.results
+          setBlogs(blogsData.results);
         } else {
           throw new Error("Error fetching blogs");
         }
@@ -34,12 +36,8 @@ const BlogList = ({ userId }) => {
   }
 
   const goToBlog = (blogId) => {
-    navigate(`/blogs/${blogId}`); // Navigate to the blog detail page
+    navigate(`/blogs/${blogId}`);
   };
-
-  if (isLoading) {
-    return <div>Loading blogs...</div>;
-  }
 
   const handleCreateBlog = () => {
     navigate("/blogs/new");
@@ -65,9 +63,11 @@ const BlogList = ({ userId }) => {
           ))}
         </ul>
       )}
-      <button onClick={handleCreateBlog} className="btn btn-primary mt-3">
-        Create New Blog
-      </button>
+      {userId === currentUserId && (
+        <button onClick={handleCreateBlog} className="btn btn-primary mt-3">
+          Create New Blog
+        </button>
+      )}
     </div>
   );
 };
