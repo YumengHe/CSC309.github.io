@@ -16,7 +16,7 @@ const FilterButtons = ({ currentStatus, onStatusChange }) => {
             <div className="btn-group" role="group">
                 {STATUS_OPTIONS.map((option) => (
                     <label
-                        className={`btn btn-outline-primary-cust text-nowrap py-1 px-1 ${
+                        className={`btn btn-outline-primary-cust text-nowrap p-1 fs-6 ${
                             currentStatus === option.value ? "active" : ""
                         }`}
                         htmlFor={`filter-${option.value}`}
@@ -30,7 +30,7 @@ const FilterButtons = ({ currentStatus, onStatusChange }) => {
                             checked={currentStatus === option.value}
                             onChange={() => onStatusChange(option.value)}
                         />
-                        {option.label}
+                        <small>{option.label}</small>
                     </label>
                 ))}
             </div>

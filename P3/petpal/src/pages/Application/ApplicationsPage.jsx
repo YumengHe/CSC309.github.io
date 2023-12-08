@@ -5,8 +5,8 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import "./style.css";
 import Sidebar from "./Sidebar";
 import Paginate from "./Paginate";
-import SortRadioButtons from "./SortRadioButtons";
-import ApplicationList from "./List";
+import SortRadioButtons from "./SortButtons";
+import ApplicationList from "./ApplicationsList";
 import FilterButtons from "./FilterButtons";
 
 const ApplicationsPage = () => {
@@ -64,14 +64,12 @@ const ApplicationsPage = () => {
                         .then((response) => response.json())
                         .then((json) => {
                             setApplications(json.results);
-                            setTotalPages(
-                                Math.ceil(json.count / query.page_size)
-                            );
-                            console.log("APPLICATIONS:", applications);
-                            console.log("PARAM:", param.toString());
+                            setTotalPages(Math.ceil(json.count / query.page_size));
+                            // console.log("APPLICATIONS:", applications);
+                            // console.log("PARAM:", param.toString());
                         });
                 } catch (error) {
-                    console.error("Fetching application error:", error);
+                    console.error("Fetching applications error:", error);
                 }
             };
 
@@ -87,15 +85,9 @@ const ApplicationsPage = () => {
                 <div className="col col-12 col-lg-9">
                     <div className="row my-4 justify-content-between">
                         {/* Filter by status */}
-                        <FilterButtons
-                            currentStatus={query.status}
-                            onStatusChange={handleStatusChange}
-                        />
+                        <FilterButtons currentStatus={query.status} onStatusChange={handleStatusChange} />
                         {/* Sort by datetime */}
-                        <SortRadioButtons
-                            currentSort={query.sort}
-                            onSortChange={handleSortChange}
-                        />
+                        <SortRadioButtons currentSort={query.sort} onSortChange={handleSortChange} />
                     </div>
                     {applications ? (
                         <>
@@ -103,19 +95,13 @@ const ApplicationsPage = () => {
                             <ApplicationList applications={applications} />
                             {/* Pagination */}
                             <div className="row">
-                                <Paginate
-                                    totalPages={totalPages}
-                                    currentPage={query.page}
-                                    paginate={setPagination}
-                                />
+                                <Paginate totalPages={totalPages} currentPage={query.page} paginate={setPagination} />
                             </div>
                         </>
                     ) : (
                         // Display when applications list is empty
                         <div className="col col-12 col-lg-9 main-dark-color h5 p-4">
-                            You don't have{" "}
-                            {query.status === "all" ? "any" : query.status}{" "}
-                            applications.
+                            You don't have {query.status === "all" ? "any" : query.status} applications.
                         </div>
                     )}
                 </div>

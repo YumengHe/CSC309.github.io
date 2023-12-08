@@ -25,9 +25,9 @@ const ApplicationList = ({ applications }) => {
                             <img src={app.petpost.image} alt="pet photo" />
                         </div>
                         <div className="col col-6 col-md-7 flex-fill">
-                            <h5 className="mb-0 text-truncate">
+                            <h6 className="mb-0 text-truncate">
                                 {`APP${app.id}: ${app.seeker.first_name} wants ${app.petpost.name} from ${app.petpost.shelter.username}`}
-                            </h5>
+                            </h6>
                         </div>
                         <div className="col col-3 me-2">
                             <div className="d-none d-md-block">
