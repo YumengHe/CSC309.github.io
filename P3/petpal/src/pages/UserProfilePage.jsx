@@ -4,6 +4,7 @@ import { API_BASE_URL, fetchWithToken } from "../services/utils";
 import EditUserProfileForm from "../components/forms/EditUserProfileForm";
 import UserProfileView from "../components/UserProfileView";
 import ShelterPetListings from "../components/ShelterPetsListing";
+import BlogList from "../components/BlogList";
 
 const UserProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -147,6 +148,10 @@ const UserProfilePage = () => {
     setImagePreviewUrl(URL.createObjectURL(file));
   };
 
+  const handleCreateBlog = () => {
+    navigate("/blogs/new");
+  };
+
   return (
     <div className="container mt-4">
       <h1 className="text-center mb-3">
@@ -187,6 +192,17 @@ const UserProfilePage = () => {
           </div>
           {user?.role === "shelter" && (
             <ShelterPetListings shelterId={user?.id} />
+          )}
+          {user?.id === parseInt(userId) && (
+            <>
+              <BlogList userId={user?.id} />
+              <button
+                onClick={handleCreateBlog}
+                className="btn btn-primary mt-3"
+              >
+                Create New Blog
+              </button>
+            </>
           )}
         </>
       )}

@@ -11,6 +11,8 @@ import AboutPage from "./pages/AboutPage";
 import ShelterSearchPage from "./pages/Search/ShelterSearchPage";
 import PetSearchPage from "./pages/Search/PetSearchPage";
 import HowItWorkPage from "./pages/HowItWorkPage";
+import NewBlogPage from "./pages/NewBlogPage";
+import BlogPage from "./pages/BlogPage";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
               path="/user-profile/:userId?"
               element={<UserProfilePage />}
             />
+            <Route path="/blogs/new" element={<NewBlogPage />} />
+            <Route path="/blogs/:id" element={<BlogPage />} />
             <Route path="/search/shelter" element={<ShelterSearchPage />} />
             <Route path="/search/pets" element={<PetSearchPage />} />
             <Route path="/how-it-works" element={<HowItWorkPage />} />
