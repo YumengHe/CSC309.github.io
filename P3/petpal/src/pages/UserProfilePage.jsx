@@ -148,10 +148,6 @@ const UserProfilePage = () => {
     setImagePreviewUrl(URL.createObjectURL(file));
   };
 
-  const handleCreateBlog = () => {
-    navigate("/blogs/new");
-  };
-
   return (
     <div className="container mt-4">
       <h1 className="text-center mb-3">
@@ -194,15 +190,9 @@ const UserProfilePage = () => {
             <ShelterPetListings shelterId={user?.id} />
           )}
           {user?.id === parseInt(userId) && (
-            <>
+            <div className="card">
               <BlogList userId={user?.id} />
-              <button
-                onClick={handleCreateBlog}
-                className="btn btn-primary mt-3"
-              >
-                Create New Blog
-              </button>
-            </>
+            </div>
           )}
         </>
       )}

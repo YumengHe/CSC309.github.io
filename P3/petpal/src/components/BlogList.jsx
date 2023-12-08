@@ -41,8 +41,12 @@ const BlogList = ({ userId }) => {
     return <div>Loading blogs...</div>;
   }
 
+  const handleCreateBlog = () => {
+    navigate("/blogs/new");
+  };
+
   return (
-    <div>
+    <div className="card-body">
       <h3>User Blogs</h3>
       {blogs.length === 0 ? (
         <p>No blogs found.</p>
@@ -61,6 +65,9 @@ const BlogList = ({ userId }) => {
           ))}
         </ul>
       )}
+      <button onClick={handleCreateBlog} className="btn btn-primary mt-3">
+        Create New Blog
+      </button>
     </div>
   );
 };
