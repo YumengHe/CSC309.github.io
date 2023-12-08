@@ -11,7 +11,7 @@ import AboutPage from "./pages/AboutPage";
 import ShelterSearchPage from "./pages/Search/ShelterSearchPage";
 import PetSearchPage from "./pages/Search/PetSearchPage";
 import HowItWorkPage from "./pages/HowItWorkPage";
-import ApplicationsList from "./pages/Application/ApplicationsList";
+import ApplicationsPage from "./pages/Application/ApplicationsPage";
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
             <Route path="/how-it-works" element={<HowItWorkPage />} />
             <Route path="/about" element={<AboutPage />} />
 
-            <Route path="/applications" element={<ApplicationsList />} />
+            <Route path="/applications" element={<ApplicationsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Layout>
