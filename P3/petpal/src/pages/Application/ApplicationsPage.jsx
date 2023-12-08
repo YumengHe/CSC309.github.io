@@ -1,12 +1,7 @@
 /* eslint-disable */
 import React, { useState, useEffect, useMemo } from "react";
 import { fetchWithToken } from "../../services/utils";
-import {
-    Link,
-    useLocation,
-    useNavigate,
-    useSearchParams,
-} from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import "./style.css";
 import Sidebar from "./Sidebar";
 import Paginate from "./Paginate";
@@ -44,12 +39,12 @@ const ApplicationsPage = () => {
     };
 
     const handleSortChange = (newSort) => {
-        // Update the sort parameter in the query
+        // Update sort parameter and set page to 1
         setSearchParams({ ...query, sort: newSort, page: 1 });
     };
 
     const handleStatusChange = (newStatus) => {
-        // Update the sort parameter in the query
+        // Update status parameter and set page to 1
         setSearchParams({ ...query, status: newStatus, page: 1 });
     };
 
@@ -116,6 +111,7 @@ const ApplicationsPage = () => {
                             </div>
                         </>
                     ) : (
+                        // Display when applications list is empty
                         <div className="col col-12 col-lg-9 main-dark-color h5 p-4">
                             You don't have{" "}
                             {query.status === "all" ? "any" : query.status}{" "}
@@ -126,6 +122,7 @@ const ApplicationsPage = () => {
             </div>
         </div>
     ) : (
+        // Return empty when user not logged-in
         <></>
     );
 };
