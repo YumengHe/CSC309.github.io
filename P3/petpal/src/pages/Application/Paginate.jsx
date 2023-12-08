@@ -1,4 +1,5 @@
 /* eslint-disable */
+// How to Implement Pagination in React  https://hygraph.com/blog/react-pagination
 import React from "react";
 import "./style.css";
 
@@ -15,7 +16,9 @@ const Paginate = ({ totalPages, currentPage, paginate }) => {
                 <li
                     className="btn btn-outline-primary-cust"
                     onClick={() =>
-                        currentPage > 1 ? paginate(currentPage - 1) : pass
+                        currentPage > 1
+                            ? paginate(currentPage - 1)
+                            : paginate(currentPage)
                     }
                 >
                     &lt;
@@ -35,7 +38,7 @@ const Paginate = ({ totalPages, currentPage, paginate }) => {
                     onClick={() =>
                         currentPage < totalPages
                             ? paginate(currentPage + 1)
-                            : pass
+                            : paginate(currentPage)
                     }
                 >
                     &gt;

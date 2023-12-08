@@ -8,7 +8,6 @@ const Sidebar = () => {
     const location = useLocation();
     const url = location.pathname;
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    const navigate = useNavigate();
 
     return currentUser ? (
         <div className="side_nav col col-12 col-lg-3 mb-4">
