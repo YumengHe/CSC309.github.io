@@ -12,6 +12,7 @@ import Sidebar from "./Sidebar";
 import Paginate from "./Paginate";
 import SortRadioButtons from "./SortRadioButtons";
 import ApplicationList from "./List";
+import FilterButtons from "./FilterButtons";
 
 const ApplicationsPage = () => {
     const [applications, setApplications] = useState([]);
@@ -28,7 +29,7 @@ const ApplicationsPage = () => {
             page: parseInt(searchParams.get("page") ?? 1),
             page_size: parseInt(searchParams.get("page_size") ?? 10),
             sort: searchParams.get("sort") ?? "update",
-            status: searchParams.get("status") ?? "",
+            status: searchParams.get("status") ?? "all",
         }),
         [searchParams]
     );
@@ -44,7 +45,12 @@ const ApplicationsPage = () => {
 
     const handleSortChange = (newSort) => {
         // Update the sort parameter in the query
-        setSearchParams({ ...query, sort: newSort });
+        setSearchParams({ ...query, sort: newSort, page: 1 });
+    };
+
+    const handleStatusChange = (newStatus) => {
+        // Update the sort parameter in the query
+        setSearchParams({ ...query, status: newStatus, page: 1 });
     };
 
     useEffect(() => {
@@ -83,36 +89,40 @@ const ApplicationsPage = () => {
             <div className="row d-lg-flex flex-lg-row justify-content-between">
                 <Sidebar />
                 {/* Main section for application list */}
-                {applications ? (
-                    <div className="col col-12 col-lg-9">
-                        <div className="row my-4 justify-content-between">
-                            {/* Filter by status */}
-                            <div className="col col-12 col-lg-6 my-2 main-dark-color d-flex align-items-center justify-content-lg-start justify-content-center">
-                                Filter by Status
+                <div className="col col-12 col-lg-9">
+                    <div className="row my-4 justify-content-between">
+                        {/* Filter by status */}
+                        <FilterButtons
+                            currentStatus={query.status}
+                            onStatusChange={handleStatusChange}
+                        />
+                        {/* Sort by datetime */}
+                        <SortRadioButtons
+                            currentSort={query.sort}
+                            onSortChange={handleSortChange}
+                        />
+                    </div>
+                    {applications ? (
+                        <>
+                            {/* Applications List */}
+                            <ApplicationList applications={applications} />
+                            {/* Pagination */}
+                            <div className="row">
+                                <Paginate
+                                    totalPages={totalPages}
+                                    currentPage={query.page}
+                                    paginate={setPagination}
+                                />
                             </div>
-                            {/* Sort by datetime */}
-                            <SortRadioButtons
-                                currentSort={query.sort}
-                                onSortChange={handleSortChange}
-                            />
+                        </>
+                    ) : (
+                        <div className="col col-12 col-lg-9 main-dark-color h5 p-4">
+                            You don't have{" "}
+                            {query.status === "all" ? "any" : query.status}{" "}
+                            applications.
                         </div>
-                        {/* Applications List */}
-                        <ApplicationList applications={applications} />
-                        {/* Pagination */}
-                        <div className="row">
-                            {/* {query.page} out of {totalPages} */}
-                            <Paginate
-                                totalPages={totalPages}
-                                currentPage={query.page}
-                                paginate={setPagination}
-                            />
-                        </div>
-                    </div>
-                ) : (
-                    <div className="col col-12 col-lg-9 main-dark-color h5 p-4">
-                        You don't have applications.
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         </div>
     ) : (
