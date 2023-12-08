@@ -30,7 +30,7 @@ const ApplicationDetails = () => {
             // }
 
             try {
-                const response = await fetchWithToken(`/applications/seeker/${appId}/`);
+                const response = await fetchWithToken(`/applications/${currentUser.role}/${appId}/`);
                 if (!response.ok) {
                     if (response.status === 403) {
                         setError("You do not have permission to view this application."); // Set the appropriate error message
