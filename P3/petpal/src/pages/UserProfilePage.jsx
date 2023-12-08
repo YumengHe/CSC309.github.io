@@ -2,6 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_BASE_URL, fetchWithToken } from "../services/utils";
 import EditUserProfileForm from "../components/forms/EditUserProfileForm";
+import UserProfileView from "../components/UserProfileView";
+import ShelterPetListings from "../components/ShelterPetsListing";
+import ShelterComments from "./ShelterComment";
+import BlogList from "../components/BlogList";
 
 const UserProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -22,13 +26,14 @@ const UserProfilePage = () => {
       return imagePreviewUrl;
     }
 
-    // Check if user?.profile_pic already includes API_BASE_URL
-    if (user?.profile_pic.startsWith(API_BASE_URL)) {
-      return user?.profile_pic;
+    // Check if user?.profile_pic is valid
+    if (user?.profile_pic && !user?.profile_pic.startsWith(API_BASE_URL)) {
+      // Concatenate API_BASE_URL with user?.profile_pic
+      return `${API_BASE_URL}/media/user_profiles/${user?.profile_pic}`;
     }
 
-    // Otherwise, concatenate API_BASE_URL with user?.profile_pic
-    return `${API_BASE_URL}/media/user_profiles/${user?.profile_pic}`;
+    // Return a default image or null if no valid profile picture is available
+    return null; // Or the URL to a default image
   }, [user?.profile_pic, imagePreviewUrl]);
 
   const fetchUserProfile = async () => {
@@ -41,9 +46,10 @@ const UserProfilePage = () => {
 
       const response = await fetchWithToken(`/accounts/${userId}/`);
       if (!response.ok) {
-        if (response.status === 403) {
-          // Check if the status code indicates a permission issue
-          setError("You do not have permission to view this profile."); // Set the appropriate error message
+        if (response.status === 401) {
+          setError("You must be logged in to view this profile.");
+        } else if (response.status === 403) {
+          setError("You do not have permission to view this profile.");
         } else if (response.status === 404) {
           setError(`User with user_id ${userId} not found.`);
         }
@@ -145,66 +151,56 @@ const UserProfilePage = () => {
 
   return (
     <div className="container mt-4">
-      <h1 className="text-center mb-3">User Profile</h1>
+      <h1 className="text-center mb-3">
+        {user?.role === "seeker"
+          ? "Seeker Profile"
+          : user?.role === "shelter"
+            ? "Shelter Profile"
+            : "Profile"}
+      </h1>
       {error ? (
         <div
           className="alert alert-danger"
           dangerouslySetInnerHTML={{ __html: error }}
         />
       ) : (
-        <div id="user-profile" className="card">
-          {isEditMode ? (
-            <EditUserProfileForm
-              user={user}
-              handleSubmit={handleSubmit}
-              handleFormChange={handleFormChange}
-              handleFileChange={handleFileChange}
-              currentProfilePic={currentProfilePic}
-              handleEditToggle={handleEditToggle}
-            />
-          ) : (
-            <div id="user-profile-view" className="card-body">
-              <p>
-                <strong>User ID:</strong> {user?.id}
-              </p>
-              <p>
-                <strong>Username:</strong> {user?.username}
-              </p>
-              <p>
-                <strong>Email:</strong> {user?.email}
-              </p>
-              <p>
-                <strong>First Name:</strong> {user?.first_name}
-              </p>
-              <p>
-                <strong>Last Name:</strong> {user?.last_name}
-              </p>
-              <p>
-                <strong>Address:</strong> {user?.address}
-              </p>
-              <p>
-                <strong>Role:</strong> {user?.role}
-              </p>
-              <p>
-                <strong>Profile Picture:</strong>
-                <img
-                  src={currentProfilePic}
-                  alt="Profile Pic"
-                  className="img-thumbnail mt-2"
-                  style={{ width: "200px" }}
+        <>
+          <div id="user-profile" className="card">
+            {isEditMode ? (
+              <div id="user-profile-edit" className="card-body">
+                <EditUserProfileForm
+                  user={user}
+                  handleSubmit={handleSubmit}
+                  handleFormChange={handleFormChange}
+                  handleFileChange={handleFileChange}
+                  currentProfilePic={currentProfilePic}
+                  handleEditToggle={handleEditToggle}
                 />
-              </p>
-              {currentUser?.id === parseInt(userId) && (
-                <button className="btn btn-primary" onClick={handleEditToggle}>
-                  Edit Profile
-                </button>
-              )}
+              </div>
+            ) : (
+              <UserProfileView
+                user={user}
+                currentProfilePic={currentProfilePic}
+                handleEditToggle={handleEditToggle}
+                currentUser={currentUser}
+                userId={userId}
+              />
+            )}
+          </div>
+          {user?.role === "shelter" && (
+            <>
+              <ShelterPetListings shelterId={user?.id} />
+              <ShelterComments shelterId={user?.id} />
+            </>
+          )}
+          {user?.id === parseInt(userId) && (
+            <div className="card">
+              <BlogList userId={user?.id} />
             </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );
 };
-
 export default UserProfilePage;

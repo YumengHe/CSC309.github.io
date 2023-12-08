@@ -6,6 +6,10 @@ export const fetchWithToken = async (url, method = "GET", data = null) => {
   const headers = {
     Authorization: `Bearer ${accessToken}`,
   };
+  if (accessToken === null) {
+    // If there's no access token, make a request without a token
+    return await fetchWithoutToken(url, method, data);
+  }
 
   if (!(data instanceof FormData)) {
     headers["Content-Type"] = "application/json";

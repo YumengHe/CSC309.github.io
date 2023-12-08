@@ -76,10 +76,10 @@ class UserView(generics.GenericAPIView):
             if requested_user.role == "shelter":
                 permission_classes = [AllowAny]
             else:  # gets a seeker
-                if self.request.user.id == requested_user.id:
+                if self.request.user.is_authenticated and self.request.user.id == requested_user.id:
                     # allow if is current user
                     permission_classes = [IsAuthenticated]
-                elif self.request.user.role == "shelter":
+                elif self.request.user.is_authenticated and self.request.user.role == "shelter":
                     if requested_user.role == "shelter":
                         # allow if ask for a shelter
                         permission_classes = [AllowAny]
@@ -216,11 +216,17 @@ class UserListView(generics.ListAPIView):
 
     def get_queryset(self):
         role = self.request.query_params.get('role', None)
+        name = self.request.query_params.get('name', None)
+
         if role == "shelter":
-            return User.objects.filter(role=role)
+            queryset = User.objects.filter(role=role)
         else:
-            # no results if role is not specified or if role is "seeker"
-            return User.objects.none()
+            queryset = User.objects.none()
+
+        if name:
+            queryset = queryset.filter(username__icontains=name)
+
+        return queryset
 
     def get(self, request, *args, **kwargs):
         print(self.request.query_params)

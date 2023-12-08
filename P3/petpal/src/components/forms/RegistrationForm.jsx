@@ -41,10 +41,14 @@ const RegistrationForm = ({ error, onSubmit, navigateToLogin }) => {
               <input
                 type="text"
                 className="form-control"
-                name="username"
+                name={"username"}
                 value={userData.username}
                 onChange={handleChange}
-                placeholder="Username"
+                placeholder={
+                  userData?.role === "shelter"
+                    ? "Username (For shelters, it will be your shelter name)"
+                    : "Username"
+                }
               />
               {error.username && (
                 <div className="text-danger">{error.username}</div>

@@ -7,17 +7,11 @@ function Footer() {
       <Container>
         <div className="text-center py-1">
           <p>
-            <Link
-              to="/about"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
+            <Link to="/about" style={{ color: "inherit" }}>
               About
             </Link>{" "}
             |{" "}
-            <Link
-              to="/how-it-works"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
+            <Link to="/how-it-works" style={{ color: "inherit" }}>
               How It Works
             </Link>
           </p>
