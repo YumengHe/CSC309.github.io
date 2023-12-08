@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchWithToken } from "../../services/utils";
 import Sidebar from "./Sidebar";
 import ApplicationSubmitted from "./ApplicationSubmitted";
+import StatusUpdate from "./StatusUpdate";
 
 const ApplicationDetails = () => {
     const { appId } = useParams();
@@ -59,7 +60,14 @@ const ApplicationDetails = () => {
                     {error ? (
                         <div className="col col-12 main-dark-color h5 p-4">{error}</div>
                     ) : app ? (
-                        <ApplicationSubmitted app={app} />
+                        <>
+                            {/* Display submitted application */}
+                            <ApplicationSubmitted app={app} />
+                            {/* Update application status based on logged-in user role */}
+                            <StatusUpdate app={app} />
+                            {/* Conversation between seeker & shelter */}
+
+                        </>
                     ) : (
                         <>Loading...</>
                     )}
