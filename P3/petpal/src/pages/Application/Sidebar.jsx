@@ -1,15 +1,16 @@
 /* eslint-disable */
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PersonVcardFill, CollectionFill } from "react-bootstrap-icons";
 import "./style.css";
 
 const Sidebar = () => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const location = useLocation();
     const url = location.pathname;
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const navigate = useNavigate();
 
-    return (
+    return currentUser ? (
         <div className="side_nav col col-12 col-lg-3 mb-4">
             <div className="list-group list-group-flush border border-start-0 border-2 rounded-end">
                 <Link
@@ -18,7 +19,7 @@ const Sidebar = () => {
                         url.startsWith("/user-profile") ? "active" : ""
                     }`}
                 >
-                    <div class="w-100 fw-bolder ps-4 main-dark-color">
+                    <div className="w-100 fw-bolder ps-4 main-dark-color">
                         <PersonVcardFill
                             className="pe-2 align-bottom"
                             size={24}
@@ -33,7 +34,7 @@ const Sidebar = () => {
                         url.startsWith("/applications") ? "active" : ""
                     }`}
                 >
-                    <div class="w-100 fw-bolder ps-4 main-dark-color">
+                    <div className="w-100 fw-bolder ps-4 main-dark-color">
                         <CollectionFill
                             className="pe-2 align-bottom"
                             size={24}
@@ -43,6 +44,8 @@ const Sidebar = () => {
                 </Link>
             </div>
         </div>
+    ) : (
+        <></>
     );
 };
 
