@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'comments',  # --> comments on pets and shelter
     'applications',  # --> pet adoption applications
     'notifications',  # --> notifications for pet seeker and shelters
+    "blogs",  # --> blogs for pet seeker and shelters
     'drf_yasg',
     'corsheaders'
 ]

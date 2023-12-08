@@ -5,6 +5,7 @@ import EditUserProfileForm from "../components/forms/EditUserProfileForm";
 import UserProfileView from "../components/UserProfileView";
 import ShelterPetListings from "../components/ShelterPetsListing";
 import ShelterComments from "./ShelterComment";
+import BlogList from "../components/BlogList";
 
 const UserProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -191,6 +192,11 @@ const UserProfilePage = () => {
               <ShelterPetListings shelterId={user?.id} />
               <ShelterComments shelterId={user?.id} />
             </>
+          )}
+          {user?.id === parseInt(userId) && (
+            <div className="card">
+              <BlogList userId={user?.id} />
+            </div>
           )}
         </>
       )}
