@@ -1,3 +1,4 @@
+from notifications.models import Notification
 from rest_framework import generics, permissions
 
 from .models import BlogPost
@@ -21,6 +22,12 @@ class BlogPostView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+        # Create a notification for the new blog post
+        Notification.objects.create(
+            recipient=serializer.instance.author,
+            content=f"New blog post created: {serializer.instance.title}",
+            event_link=f"/blogs/{serializer.instance.id}/"
+        )
 
 
 

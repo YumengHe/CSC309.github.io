@@ -35,6 +35,7 @@ const BlogPage = () => {
       {blogPost && (
         <>
           <h1>{blogPost?.title}</h1>
+          <p>Author: {blogPost?.author_username}</p>
           <p>Updated at: {blogPost?.updated_at}</p>
           <p>{blogPost?.content}</p>
         </>
