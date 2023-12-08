@@ -4,6 +4,7 @@ import { API_BASE_URL, fetchWithToken } from "../services/utils";
 import EditUserProfileForm from "../components/forms/EditUserProfileForm";
 import UserProfileView from "../components/UserProfileView";
 import ShelterPetListings from "../components/ShelterPetsListing";
+import ShelterComments from "./ShelterComment";
 import BlogList from "../components/BlogList";
 
 const UserProfilePage = () => {
@@ -187,7 +188,10 @@ const UserProfilePage = () => {
             )}
           </div>
           {user?.role === "shelter" && (
-            <ShelterPetListings shelterId={user?.id} />
+            <>
+              <ShelterPetListings shelterId={user?.id} />
+              <ShelterComments shelterId={user?.id} />
+            </>
           )}
           {user?.id === parseInt(userId) && (
             <div className="card">
