@@ -16,7 +16,6 @@ import ApplicationDetails from "./pages/Application/ApplicationDetail";
 import NewBlogPage from "./pages/NewBlogPage";
 import BlogPage from "./pages/BlogPage";
 
-
 function App() {
   return (
     <div>
