@@ -20,10 +20,8 @@ const PetSearchPage = () => {
     species: searchParams.get("species") || "", // Add species filter
   };
   const [filters, setFilters] = useState(initialFilters);
-
+  const queryParams = new URLSearchParams();
   useEffect(() => {
-    const queryParams = new URLSearchParams();
-
     // Append filter parameters to the query string if they exist
     Object.keys(filters).forEach((key) => {
       if (filters[key]) {
@@ -47,7 +45,7 @@ const PetSearchPage = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [filters]);
+  }, [filters, queryParams]);
 
   const handleFilterChange = (e) => {
     const newFilters = {
