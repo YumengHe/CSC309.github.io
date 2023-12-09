@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchWithToken } from "../../services/utils";
-import Sidebar from "../../components/buttons/Sidebar";
+import Sidebar, { generateApplicationSidebar } from "../../components/buttons/Sidebar";
 import ApplicationSubmitted from "./ApplicationSubmitted";
 import StatusUpdateButton from "./StatusUpdateButton";
 
@@ -53,7 +53,7 @@ const ApplicationDetails = () => {
     return (
         <div className="container mt-5">
             <div className="row d-lg-flex flex-lg-row justify-content-between">
-                <Sidebar />
+                <Sidebar navItems={generateApplicationSidebar(currentUser.id)} />
                 {/* Main section for application detail */}
                 <div className="col col-12 col-lg-8  main-dark-color">
                     {error ? (
