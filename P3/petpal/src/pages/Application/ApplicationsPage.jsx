@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { fetchWithToken } from "../../services/utils";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import "../../assets/css/ApplicationStyle.css";
-import Sidebar from "../../components/buttons/Sidebar";
+import Sidebar, { generateApplicationSidebar } from "../../components/buttons/Sidebar";
 import Paginate from "../../components/buttons/PageButtons";
 import SortRadioButtons from "../../components/buttons/SortButtons";
 import ApplicationList from "./ApplicationsList";
@@ -80,7 +80,7 @@ const ApplicationsPage = () => {
     return currentUser ? (
         <div className="container mt-5">
             <div className="row d-lg-flex flex-lg-row justify-content-between">
-                <Sidebar />
+                <Sidebar navItems={generateApplicationSidebar(currentUser.id)} />
                 {/* Main section for application list */}
                 <div className="col col-12 col-lg-9">
                     <div className="row my-4 justify-content-between">
