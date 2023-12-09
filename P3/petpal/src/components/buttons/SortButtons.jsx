@@ -1,17 +1,18 @@
 /* eslint-disable */
 import React from "react";
 
-const SortRadioButtons = ({ currentSort, onSortChange }) => {
-    const SORT_OPTIONS = [
-        { value: "-creation", label: "Newest" },
-        { value: "creation", label: "Oldest" },
-        { value: "update", label: "Most Updated" },
-    ];
+const APPLICATION_SORT_OPTIONS = [
+    { value: "-creation", label: "Newest" },
+    { value: "creation", label: "Oldest" },
+    { value: "update", label: "Most Updated" },
+];
+
+const SortRadioButtons = ({ currentSort, onSortChange, sortOption = APPLICATION_SORT_OPTIONS }) => {
     return (
         <div className="col col-12 col-lg-5 my-2 p-0 main-dark-color d-flex align-items-center justify-content-lg-end justify-content-center">
             <label className="text-nowrap pe-2 fw-bold">Sort</label>
             <div className="btn-group" role="group">
-                {SORT_OPTIONS.map((sortBy) => (
+                {sortOption.map((sortBy) => (
                     <label
                         key={sortBy.value}
                         htmlFor={`sort-${sortBy.value}`}
