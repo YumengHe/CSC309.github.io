@@ -11,6 +11,7 @@ class PetPostFullSerializer(serializers.ModelSerializer):
     last_updated = serializers.DateTimeField(read_only=True)
     shelter = serializers.PrimaryKeyRelatedField(read_only=True)
     status = serializers.CharField(default="available")
+    species = serializers.CharField(default="others")
 
     class Meta:
         model = PetPost

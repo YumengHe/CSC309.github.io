@@ -53,13 +53,13 @@ function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavDropdown title="Adopt" id="nav-dropdown-adopt">
-              <NavDropdown.Item as={Link} to="/search/pets/?type=dog">
+              <NavDropdown.Item as={Link} to="/search/pets/?species=dog">
                 Dogs
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/search/pets/?type=cat">
+              <NavDropdown.Item as={Link} to="/search/pets/?species=cat">
                 Cats
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/search/pets/?type=other">
+              <NavDropdown.Item as={Link} to="/search/pets/?species=other">
                 Others
               </NavDropdown.Item>
             </NavDropdown>

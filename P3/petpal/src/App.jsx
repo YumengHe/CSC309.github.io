@@ -35,13 +35,11 @@ function App() {
             <Route path="/search/pets" element={<PetSearchPage />} />
             <Route path="/how-it-works" element={<HowItWorkPage />} />
             <Route path="/about" element={<AboutPage />} />
-
             <Route path="/applications" element={<ApplicationsPage />} />
             <Route
               path="/applications/:appId"
               element={<ApplicationDetails />}
             />
-
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Layout>

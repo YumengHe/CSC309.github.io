@@ -21,11 +21,17 @@ class PetPost(models.Model):
         ("extra_large", "Extra Large"),
         ("unknown", "Unknown"),
     )
+    SPECIES_CHOICES = (
+        ("dog", "Dog"),
+        ("cat", "Cat"),
+        ("other", "Other"),
+    )
 
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     shelter = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICE)
+    species = models.CharField(max_length=20, choices=SPECIES_CHOICES, null=True, blank=True)  # Species field
     breed = models.CharField(max_length=50, null=True, blank=True)
     age = models.FloatField(null=True, blank=True)  # Age in years, can include decimals
     size = models.CharField(max_length=20, choices=SIZE_CHOICES, null=True, blank=True)

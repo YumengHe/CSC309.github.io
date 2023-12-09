@@ -158,6 +158,10 @@ class PetPostList(ListAPIView):
         gender = self.request.query_params.get('gender')
         if gender is not None:
             queryset = queryset.filter(gender=gender)
+        
+        species = self.request.query_params.get('species')
+        if species is not None:
+            queryset = queryset.filter(species=species)
 
         # Sorting logic
         sort_by = self.request.query_params.get('sort')

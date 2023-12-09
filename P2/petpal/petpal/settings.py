@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'notifications',  # --> notifications for pet seeker and shelters
     "blogs",  # --> blogs for pet seeker and shelters
     'drf_yasg',
-    'corsheaders'
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -167,4 +167,8 @@ CORS_ALLOW_CREDENTIALS = True
 # For production, list the allowed origins
 CORS_ALLOWED_ORIGINS = [
 
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
 ]
