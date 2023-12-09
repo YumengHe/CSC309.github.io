@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PersonVcardFill, CollectionFill } from "react-bootstrap-icons";
-import "./style.css";
+import "../../assets/css/ApplicationStyle.css";
 
 const Sidebar = () => {
     const location = useLocation();
@@ -19,10 +19,7 @@ const Sidebar = () => {
                     }`}
                 >
                     <div className="w-100 fw-bolder ps-4 main-dark-color">
-                        <PersonVcardFill
-                            className="pe-2 align-bottom"
-                            size={24}
-                        />
+                        <PersonVcardFill className="pe-2 align-bottom" size={24} />
                         Profile
                     </div>
                 </Link>
@@ -34,10 +31,7 @@ const Sidebar = () => {
                     }`}
                 >
                     <div className="w-100 fw-bolder ps-4 main-dark-color">
-                        <CollectionFill
-                            className="pe-2 align-bottom"
-                            size={24}
-                        />
+                        <CollectionFill className="pe-2 align-bottom" size={24} />
                         Applications
                     </div>
                 </Link>

@@ -2,12 +2,12 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { fetchWithToken } from "../../services/utils";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import "./style.css";
-import Sidebar from "./Sidebar";
-import Paginate from "./Paginate";
-import SortRadioButtons from "./SortButtons";
+import "../../assets/css/ApplicationStyle.css";
+import Sidebar from "../../components/buttons/Sidebar";
+import Paginate from "../../components/buttons/PageButtons";
+import SortRadioButtons from "../../components/buttons/SortButtons";
 import ApplicationList from "./ApplicationsList";
-import FilterButtons from "./FilterButtons";
+import FilterButtons from "../../components/buttons/FilterButtons";
 
 const ApplicationsPage = () => {
     const [applications, setApplications] = useState([]);
