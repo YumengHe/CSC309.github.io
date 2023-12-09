@@ -9,6 +9,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogPost
         fields = ['id', 'title', 'content', 'author', 'author_username', 'created_at', 'updated_at']
+        read_only_fields = ['author']
 
     def get_author_username(self, obj):
         return obj.author.username
