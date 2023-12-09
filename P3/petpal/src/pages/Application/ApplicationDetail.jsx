@@ -1,11 +1,10 @@
 /* eslint-disable */
-// ApplicationDetails.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchWithToken } from "../../services/utils";
-import Sidebar from "./Sidebar";
+import Sidebar from "../../components/buttons/Sidebar";
 import ApplicationSubmitted from "./ApplicationSubmitted";
-import StatusUpdate from "./StatusUpdate";
+import StatusUpdateButton from "./StatusUpdateButton";
 
 const ApplicationDetails = () => {
     const { appId } = useParams();
@@ -64,9 +63,8 @@ const ApplicationDetails = () => {
                             {/* Display submitted application */}
                             <ApplicationSubmitted app={app} />
                             {/* Update application status based on logged-in user role */}
-                            <StatusUpdate app={app} />
+                            <StatusUpdateButton app={app} />
                             {/* Conversation between seeker & shelter */}
-
                         </>
                     ) : (
                         <>Loading...</>
