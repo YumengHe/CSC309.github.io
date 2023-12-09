@@ -1,0 +1,42 @@
+/* CSS for AboutPage */
+
+.about-section {
+    margin: 0;
+    height: 100%;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* background-color: #F5EBEB; */
+    flex-direction: column;
+    padding: 5% 10%;
+}
+
+.about-section h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #867070;
+    font-weight: 700;
+}
+
+.about-content {
+    display: flex;
+    gap: 20px; /* spacing between the image and text */
+    align-items: center; /* center the content vertically */
+}
+
+.about-content img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.about-text p {
+    margin: 15px 0;
+    color: #867070;
+}
+
+/* Responsive design: Stacking image and text on smaller screens */
+@media screen and (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+    }
+}
