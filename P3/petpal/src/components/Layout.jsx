@@ -8,37 +8,46 @@ import { isUserLoggedIn } from "../services/userService";
 const Layout = ({ children }) => {
   const [notification, setNotification] = useState(null);
   const [showNotificationPopup, setShowNotificationPopup] = useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false); // New state for switch
 
   useEffect(() => {
+    let interval;
+
     const fetchNotifications = async () => {
-      // Only fetch notifications if (there are no notifications or the notification popup is not shown) and (the user is logged in)
-      if (
-        (!showNotificationPopup || !notification) &&
-        (await isUserLoggedIn())
-      ) {
+      // Check if the user is logged in and notifications are enabled
+      if ((await isUserLoggedIn()) && notificationsEnabled) {
         try {
-          const response = await fetchWithToken("/notifications/?state=unread"); // Update with your actual API endpoint
+          const response = await fetchWithToken("/notifications/?state=unread");
           if (response.status === 200) {
             const data = await response.json();
             const newNotifications = data?.results[0];
-            setNotification(newNotifications);
             if (newNotifications) {
-              setShowNotificationPopup(true); // Show pop-up if there are new notifications
+              setNotification(newNotifications);
+              setShowNotificationPopup(true);
+            } else {
+              // No new notifications, you might want to reset the state here
+              setNotification(null);
+              setShowNotificationPopup(false);
             }
           } else if (response.status === 204) {
             // Handle no new notifications
+            setNotification(null);
+            setShowNotificationPopup(false);
           }
         } catch (error) {
           console.error("Error fetching notification:", error);
         }
-      } else {
-        // Handle user not logged in
       }
     };
 
-    const interval = setInterval(fetchNotifications, 1000); // Poll every 1 second
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, [showNotificationPopup]); // Add relevant dependencies here
+    if (notificationsEnabled) {
+      interval = setInterval(fetchNotifications, 1000); // Poll every 1 second if notifications are enabled
+    }
+
+    return () => {
+      if (interval) clearInterval(interval); // Cleanup on unmount
+    };
+  }, [notificationsEnabled]);
 
   const handleClosePopup = async () => {
     try {
@@ -53,9 +62,16 @@ const Layout = ({ children }) => {
     }
   };
 
+  const toggleNotifications = () => {
+    setNotificationsEnabled(!notificationsEnabled);
+  };
+
   return (
     <div id="root">
-      <Header />
+      <Header
+        onToggleNotifications={toggleNotifications}
+        notificationsEnabled={notificationsEnabled}
+      />
       <main className="content flex-grow-1">
         <div className="container">{children}</div>
       </main>

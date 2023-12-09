@@ -5,9 +5,9 @@ import {
   isUserLoggedIn,
   logoutUser,
 } from "../services/userService";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Form, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
-function Header() {
+function Header({ onToggleNotifications, notificationsEnabled }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -43,6 +43,11 @@ function Header() {
     setUserInfo(null); // Clear user info on logout
     navigate("/");
   };
+
+  const handleToggleNotifications = () => {
+    onToggleNotifications();
+  };
+
   return (
     <Navbar bg="light" expand="lg" className="shadow-sm">
       <Container>
@@ -51,6 +56,10 @@ function Header() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
+          {/* Only visible on small screens */}
+          {userLoggedIn && (
+            <span className="d-lg-none fw-bold">Hi, {userInfo?.username}</span>
+          )}
           <Nav className="me-auto">
             <NavDropdown title="Adopt" id="nav-dropdown-adopt">
               <NavDropdown.Item as={Link} to="/search/pets/?species=dog">
@@ -76,12 +85,30 @@ function Header() {
             {userLoggedIn ? (
               <>
                 <Nav.Item className="align-self-center me-3">
-                  <span className="fw-bold">Hi, {userInfo?.username}</span>
+                  {/* Only visible on large screens */}
+                  {userLoggedIn && (
+                    <span className="d-none d-lg-block fw-bold">
+                      Hi, {userInfo?.username}
+                    </span>
+                  )}
                 </Nav.Item>
                 <Nav.Link as={Link} to={`/user-profile/${userInfo?.id}`}>
                   Profile
                 </Nav.Link>
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                <Nav.Item className="d-flex align-items-center">
+                  <Form.Switch
+                    id="custom-switch"
+                    label={
+                      notificationsEnabled
+                        ? "Notifications On"
+                        : "Notifications Off"
+                    }
+                    checked={notificationsEnabled}
+                    onChange={handleToggleNotifications}
+                    className="me-3"
+                  />
+                </Nav.Item>
               </>
             ) : (
               <>
