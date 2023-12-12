@@ -1,11 +1,12 @@
 /* eslint-disable */
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { PersonVcardFill, CollectionFill } from "react-bootstrap-icons";
+import { PersonVcardFill, CollectionFill, BellFill } from "react-bootstrap-icons";
 
 export const generateApplicationSidebar = (userId) => [
     { path: `/user-profile/${userId}`, label: "Profile", icon: <PersonVcardFill /> },
-    { path: "/applications", label: "Application", icon: <CollectionFill /> },
+    { path: "/applications", label: "Applications", icon: <CollectionFill /> },
+    { path: "/notifications", label: "Notifications", icon: <BellFill /> },
 ];
 
 const Sidebar = ({ navItems }) => {
@@ -28,7 +29,7 @@ const Sidebar = ({ navItems }) => {
                             url.startsWith(item.path) ? "active" : ""
                         }`}
                     >
-                        <div className="w-100 fw-bolder ps-4 main-dark-color">
+                        <div className="w-100 fw-bolder ps-3 main-dark-color">
                             {item.icon}
                             <span className="ps-2 align-bottom">{item.label}</span>
                         </div>

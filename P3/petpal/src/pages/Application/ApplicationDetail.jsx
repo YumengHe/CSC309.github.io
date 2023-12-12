@@ -2,9 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchWithToken } from "../../services/utils";
+import "../../assets/css/ApplicationStyle.css";
 import Sidebar, { generateApplicationSidebar } from "../../components/buttons/Sidebar";
-import ApplicationSubmitted from "./ApplicationSubmitted";
-import StatusUpdateButton from "./StatusUpdateButton";
+import ApplicationSubmitted from "./ChildComponents/ApplicationSubmitted";
+import SubmissionStatus from "./ChildComponents/SubmissionStatus";
 
 const ApplicationDetails = () => {
     const { appId } = useParams();
@@ -19,16 +20,6 @@ const ApplicationDetails = () => {
             return;
         }
         const fetchApplicationDetails = async () => {
-            // try {
-            //     await fetchWithToken(`/applications/seeker/${appId}/`)
-            //         .then((response) => response.json())
-            //         .then((json) => {
-            //             setApplication(json);
-            //         });
-            // } catch (error) {
-            //     console.error("Error fetching application details:", error);
-            // }
-
             try {
                 const response = await fetchWithToken(`/applications/${currentUser.role}/${appId}/`);
                 if (!response.ok) {
@@ -50,7 +41,7 @@ const ApplicationDetails = () => {
         fetchApplicationDetails();
     }, [appId]);
 
-    return (
+    return currentUser ? (
         <div className="container mt-5">
             <div className="row d-lg-flex flex-lg-row justify-content-between">
                 <Sidebar navItems={generateApplicationSidebar(currentUser.id)} />
@@ -62,8 +53,10 @@ const ApplicationDetails = () => {
                         <>
                             {/* Display submitted application */}
                             <ApplicationSubmitted app={app} />
+                            <hr className="mb-4 mt-5" />
                             {/* Update application status based on logged-in user role */}
-                            <StatusUpdateButton app={app} />
+                            <SubmissionStatus app={app} currentUser={currentUser} />
+                            <hr className="my-4" />
                             {/* Conversation between seeker & shelter */}
                         </>
                     ) : (
@@ -72,6 +65,9 @@ const ApplicationDetails = () => {
                 </div>
             </div>
         </div>
+    ) : (
+        // Return empty when user not logged-in
+        <></>
     );
 };
 
