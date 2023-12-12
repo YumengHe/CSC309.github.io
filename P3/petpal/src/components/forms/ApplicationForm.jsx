@@ -1,5 +1,6 @@
 /* eslint-disable */
 // React Number Format Component Example https://glebbahmutov.com/blog/test-react-number-format/
+// Phone Number Formatting Made Easy! https://aprilescobar.medium.com/phone-number-formatting-made-easy-1b887872ab2f
 import React, { useState, useEffect } from "react";
 import { PatternFormat } from "react-number-format";
 
@@ -46,158 +47,195 @@ const ApplicationForm = ({ error, onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="main-dark-color mb-5">
-            {/* Adopter's Name  */}
+        <form onSubmit={handleSubmit} className="main-dark-color mb-5 form-group">
+            {/* Primary Adopter */}
             <div className="my-4">
                 <label className="form-label fw-bold ">
-                    Adopter's Name<span className="text-danger">*</span>
+                    Primary Adopter<span className="text-danger">*</span>
                 </label>
                 <div className="row d-flex justify-content-between mt-2 gap-1 gap-md-0">
                     <div className="col col-12 col-md-6">
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={appData.adopter_firstname}
-                            name="adopter_firstname"
-                            placeholder="First Name"
-                            onChange={handleChange}
-                            // required
-                        />
+                        <div className="form-floating">
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="floating_af_name"
+                                name="adopter_firstname"
+                                placeholder="First name"
+                                onChange={handleChange}
+                                // required
+                            />
+                            <label htmlFor="floating_af_name">First name</label>
+                        </div>
                         {error.adopter_firstname && <div className="text-danger">{error.adopter_firstname}</div>}
                     </div>
                     <div className="col col-12 col-md-6">
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="adopter_lastname"
-                            value={appData.adopter_lastname}
-                            placeholder="Last Name"
-                            onChange={handleChange}
-                            // required
-                        />
+                        <div className="form-floating">
+                            <input
+                                id="floating_al_name"
+                                type="text"
+                                className="form-control"
+                                name="adopter_lastname"
+                                value={appData.adopter_lastname}
+                                placeholder="Last Name"
+                                onChange={handleChange}
+                                // required
+                            />
+                            <label htmlFor="floating_al_name">Last Name</label>
+                        </div>
                         {error.adopter_lastname && <div className="text-danger">{error.adopter_lastname}</div>}
                     </div>
                 </div>
+                {/* Email */}
+                <div className="my-2 col col-12">
+                    <div className="form-floating">
+                        <input
+                            id="floating_a_email"
+                            type="email"
+                            className="form-control"
+                            value={appData.adopter_email}
+                            name="adopter_email"
+                            placeholder="Email"
+                            onChange={handleChange}
+                            // required
+                        />
+                        <label htmlFor="floating_a_email">Email</label>
+                    </div>
+                    {error.adopter_email && <div className="text-danger">{error.adopter_email}</div>}
+                </div>
             </div>
-            {/* Email */}
+
+            {/* Co-Adopter */}
             <div className="my-4">
-                <label className="form-label fw-bold">
-                    Adopter's Email<span className="text-danger">*</span>
-                </label>
-                <input
-                    type="email"
-                    className="form-control"
-                    value={appData.adopter_email}
-                    name="adopter_email"
-                    placeholder="Email"
-                    onChange={handleChange}
-                    // required
-                />
-                {error.adopter_email && <div className="text-danger">{error.adopter_email}</div>}
-            </div>
-            {/* Co-Adopter's Name */}
-            <div className="my-4">
-                <label className="form-label fw-bold">Co-Adopter's Name</label>
+                <label className="form-label fw-bold">Co-Adopter</label>
                 <div className="row d-flex justify-content-between mt-2 gap-1 gap-md-0">
                     <div className="col col-12 col-md-6">
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={appData.co_adopter_firstname}
-                            name="co_adopter_firstname"
-                            placeholder="First Name"
-                            onChange={handleChange}
-                        />
+                        <div className="form-floating">
+                            <input
+                                id="floating_caf_name"
+                                type="text"
+                                className="form-control"
+                                value={appData.co_adopter_firstname}
+                                name="co_adopter_firstname"
+                                placeholder="First Name"
+                                onChange={handleChange}
+                            />
+                            <label htmlFor="floating_caf_name">First Name</label>
+                        </div>
                     </div>
                     <div className="col col-12 col-md-6">
+                        <div className="form-floating">
+                            <input
+                                id="floating_cal_name"
+                                type="text"
+                                className="form-control"
+                                value={appData.co_adopter_lastname}
+                                name="co_adopter_lastname"
+                                placeholder="Last Name"
+                                onChange={handleChange}
+                            />
+                            <label htmlFor="floating_cal_name">Last Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div className="col col-12 my-2">
+                    <div className="form-floating">
                         <input
-                            type="text"
+                            id="floating_ca_email"
+                            type="email"
                             className="form-control"
-                            value={appData.co_adopter_lastname}
-                            name="co_adopter_lastname"
-                            placeholder="Last Name"
+                            value={appData.co_adopter_email}
+                            name="co_adopter_email"
+                            placeholder="Email"
                             onChange={handleChange}
                         />
+                        <label htmlFor="floating_ca_email">Email</label>
                     </div>
                 </div>
             </div>
-            {/* Co-Adopter's Email */}
-            <div className="my-4">
-                <label className="form-label fw-bold">Co-Adopter's Email</label>
-                <input
-                    type="email"
-                    className="form-control"
-                    value={appData.co_adopter_email}
-                    name="co_adopter_email"
-                    placeholder="Email"
-                    onChange={handleChange}
-                />
-            </div>
+
             {/* Address */}
             <div className="my-4">
                 <label className="form-label fw-bold">
                     Address<span className="text-danger">*</span>
                 </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    value={appData.addr_street}
-                    name="addr_street"
-                    placeholder="Street"
-                    onChange={handleChange}
-                    // required
-                />
+                <div className="form-floating">
+                    <input
+                        id="floating_street"
+                        type="text"
+                        className="form-control"
+                        value={appData.addr_street}
+                        name="addr_street"
+                        placeholder="Street"
+                        onChange={handleChange}
+                        // required
+                    />
+                    <label htmlFor="floating_street">Street</label>
+                </div>
                 {error.addr_street && <div className="text-danger">{error.addr_street}</div>}
                 <div className="row d-sm-flex mt-2">
-                    <div className="col col-sm-4">
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={appData.addr_city}
-                            name="addr_city"
-                            placeholder="City"
-                            onChange={handleChange}
-                            // required
-                        />
+                    <div className="col col-7 col-sm-4">
+                        <div className="form-floating">
+                            <input
+                                id="floating_city"
+                                type="text"
+                                className="form-control"
+                                value={appData.addr_city}
+                                name="addr_city"
+                                placeholder="City"
+                                onChange={handleChange}
+                                // required
+                            />
+                            <label htmlFor="floating_city">City</label>
+                        </div>
                         {error.addr_city && <div className="text-danger">{error.addr_city}</div>}
                     </div>
-                    <div className="col-3 col-sm-4">
-                        <select
-                            className="form-control"
-                            value={appData.addr_province}
-                            name="addr_province"
-                            onChange={handleChange}
-                            // required
-                        >
-                            <option value="" disabled>
-                                Choose...
-                            </option>
-                            <option value="AB">AB</option>
-                            <option value="BC">BC</option>
-                            <option value="MB">MB</option>
-                            <option value="NB">NB</option>
-                            <option value="NL">NL</option>
-                            <option value="NS">NS</option>
-                            <option value="NT">NT</option>
-                            <option value="NU">NU</option>
-                            <option value="ON">ON</option>
-                            <option value="PE">PE</option>
-                            <option value="QC">QC</option>
-                            <option value="SK">SK</option>
-                            <option value="YT">YT</option>
-                        </select>
+                    <div className="col col-5 col-sm-4">
+                        <div className="form-floating">
+                            <select
+                                id="floating_province"
+                                className="form-control"
+                                value={appData.addr_province}
+                                name="addr_province"
+                                onChange={handleChange}
+                                // required
+                            >
+                                <option value="" disabled>
+                                    Choose...
+                                </option>
+                                <option value="AB">AB</option>
+                                <option value="BC">BC</option>
+                                <option value="MB">MB</option>
+                                <option value="NB">NB</option>
+                                <option value="NL">NL</option>
+                                <option value="NS">NS</option>
+                                <option value="NT">NT</option>
+                                <option value="NU">NU</option>
+                                <option value="ON">ON</option>
+                                <option value="PE">PE</option>
+                                <option value="QC">QC</option>
+                                <option value="SK">SK</option>
+                                <option value="YT">YT</option>
+                            </select>
+                            <label htmlFor="floating_province">Province</label>
+                        </div>
                         {error.addr_province && <div className="text-danger">{error.addr_province}</div>}
                     </div>
-                    <div className="col col-sm-4">
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={appData.addr_postal}
-                            name="addr_postal"
-                            placeholder="Postal"
-                            onChange={handleChange}
-                            // required
-                        />
+                    <div className="col col-12 col-sm-4 mt-2 mt-sm-0">
+                        <div className="form-floating">
+                            <input
+                                id="floating_postal"
+                                type="text"
+                                className="form-control"
+                                value={appData.addr_postal}
+                                name="addr_postal"
+                                placeholder="Postal"
+                                onChange={handleChange}
+                                onInput={(e) => (e.target.value = ("" + e.target.value).toUpperCase())}
+                                // required
+                            />
+                            <label htmlFor="floating_postal">Postal</label>
+                        </div>
                         {error.addr_postal && <div className="text-danger">{error.addr_postal}</div>}
                     </div>
                 </div>
@@ -240,17 +278,6 @@ const ApplicationForm = ({ error, onSubmit }) => {
                         allowEmptyFormatting
                         // required
                     />
-                    {/* <div className="input-group">
-                        <span className="input-group-text">+1</span>
-                        <input
-                            type="phone"
-                            className="form-control"
-                            value={appData.phone}
-                            name="phone"
-                            onChange={handleChange}
-                            // required
-                        />
-                    </div> */}
                     {error.phone && <div className="text-danger">{error.phone}</div>}
                 </div>
             </div>
