@@ -66,3 +66,13 @@ html {
   --bs-btn-active-border-color: var(--main-dark-color);
   --bs-btn-focus-shadow-rgb: var(--main-mid-color);
 }
+
+/* div.row {
+  border: 1px solid darkblue;
+  background: lightgreen;
+}
+
+div.col {
+  border: 1px dashed darkred;
+  background: lightcoral;
+} */

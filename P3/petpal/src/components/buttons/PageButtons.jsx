@@ -1,7 +1,6 @@
 /* eslint-disable */
 // How to Implement Pagination in React  https://hygraph.com/blog/react-pagination
 import React from "react";
-import "../../assets/css/ApplicationStyle.css";
 
 const Paginate = ({ totalPages, currentPage, paginate }) => {
     const pageNumbers = [];
