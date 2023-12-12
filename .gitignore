@@ -343,3 +343,5 @@ fabric.properties
 /P2/petpal/db.sqlite3
 **/migrations/*.py
 !*/migrations/__init__.py
+/P2/petpal/media/*
+.vscode/settings.json
