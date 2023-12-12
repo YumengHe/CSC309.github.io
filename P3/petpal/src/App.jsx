@@ -13,6 +13,7 @@ import PetSearchPage from "./pages/Search/PetSearchPage";
 import HowItWorkPage from "./pages/HowItWorkPage";
 import ApplicationsPage from "./pages/Application/ApplicationsPage";
 import ApplicationDetails from "./pages/Application/ApplicationDetail";
+import NewApplicationPage from "./pages/Application/NewApplicationPage";
 import NewBlogPage from "./pages/NewBlogPage";
 import BlogPage from "./pages/BlogPage";
 
@@ -39,6 +40,10 @@ function App() {
             <Route
               path="/applications/:appId"
               element={<ApplicationDetails />}
+            />
+            <Route
+              path="/applications/pet/:petId"
+              element={<NewApplicationPage />}
             />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

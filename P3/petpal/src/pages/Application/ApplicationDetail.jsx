@@ -22,14 +22,15 @@ const ApplicationDetails = () => {
         const fetchApplicationDetails = async () => {
             try {
                 const response = await fetchWithToken(`/applications/${currentUser.role}/${appId}/`);
+                const jsonData = await response.json();
+
                 if (!response.ok) {
                     if (response.status === 403) {
-                        setError("You do not have permission to view this application."); // Set the appropriate error message
+                        setError(jsonData.detail);
                     } else if (response.status === 404) {
                         setError(`Application not found.`);
                     }
                 } else {
-                    const jsonData = await response.json();
                     setApplication(jsonData);
                 }
             } catch (error) {

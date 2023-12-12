@@ -32,26 +32,15 @@ const ApplicationList = ({ applications }) => {
                         <div className="col col-3 me-2">
                             <div className="d-none d-md-block">
                                 <small className="opacity-50 text-nowrap m-0 align-self-center d-flex align-self-center justify-content-end">
-                                    Created:{" "}
-                                    {new Date(app.created_at).toLocaleString(
-                                        undefined,
-                                        DATE_FORMATTER
-                                    )}
+                                    Created: {new Date(app.created_at).toLocaleString(undefined, DATE_FORMATTER)}
                                 </small>
                                 <small className="opacity-50 text-nowrap m-0 align-self-center d-flex align-self-center justify-content-end">
-                                    Updated:{" "}
-                                    {new Date(app.last_updated).toLocaleString(
-                                        undefined,
-                                        DATE_FORMATTER
-                                    )}
+                                    Updated: {new Date(app.last_updated).toLocaleString(undefined, DATE_FORMATTER)}
                                 </small>
                             </div>
                             <small className="opacity-50 text-nowrap m-0 align-self-center d-flex align-self-center justify-content-end">
-                                <div className="d-none d-md-block">
-                                    Status:{" "}
-                                </div>
-                                {app.status.slice(0, 1).toUpperCase() +
-                                    app.status.slice(1)}
+                                <div className="d-none d-md-block">Status: </div>
+                                {app.status.slice(0, 1).toUpperCase() + app.status.slice(1)}
                             </small>
                         </div>
                     </Link>
