@@ -6,18 +6,12 @@ import "../../assets/css/ApplicationStyle.css";
 import Sidebar, { generateApplicationSidebar } from "../../components/buttons/Sidebar";
 import Paginate from "../../components/buttons/PageButtons";
 import SortRadioButtons from "../../components/buttons/SortButtons";
-import ApplicationList from "./ApplicationsList";
+import ApplicationList from "./ChildComponents/ApplicationsList";
 import FilterButtons from "../../components/buttons/FilterButtons";
 
 const ApplicationsPage = () => {
     const [applications, setApplications] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
-    // const [query, setQuery] = useState({
-    //     page: 1,
-    //     pageSize: 10,
-    //     status: "",
-    //     sort: "",
-    // });
     const [searchParams, setSearchParams] = useSearchParams();
     const query = useMemo(
         () => ({
@@ -34,7 +28,7 @@ const ApplicationsPage = () => {
     const location = useLocation();
 
     const setPagination = (pageNumber) => {
-        // setQuery({ ...query, page: pageNumber });
+        // Update page parameter
         setSearchParams({ ...query, page: pageNumber });
     };
 
@@ -53,12 +47,10 @@ const ApplicationsPage = () => {
         if (!currentUser) {
             navigate("/login");
         } else {
-            // const { page, pageSize, status, sort } = query;
             const param = new URLSearchParams(location.search);
             const fetchApplications = async () => {
                 try {
                     await fetchWithToken(
-                        // `/applications/${currentUser.role}?page=${page}&page_size=${pageSize}&status=${status}&sort=${sort}`
                         `/applications/${currentUser.role}?${param.toString()}`
                     )
                         .then((response) => response.json())
