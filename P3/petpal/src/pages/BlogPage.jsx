@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchWithToken } from "../services/utils";
+import BlogComments from "./BlogComment";
 
 const BlogPage = () => {
   const { id } = useParams();
@@ -38,6 +39,7 @@ const BlogPage = () => {
           <p>Author: {blogPost?.author_username}</p>
           <p>Updated at: {blogPost?.updated_at}</p>
           <p>{blogPost?.content}</p>
+          <BlogComments blogId={id} />
         </>
       )}
     </div>
