@@ -1,51 +1,86 @@
-import React, { useEffect, useState } from "react";
-import { fetchWithToken } from "../services/utils";
+import React, { useEffect, useState, useCallback } from "react";
+import { fetchWithToken } from "../services/utils"; // Adjust the import path as needed
 
-const ApplicationComments = ({ applicationId, seekerUsername }) => {
-  const [messages, setMessages] = useState([]);
+const ApplicationConversation = ({ applicationId, currentUser }) => {
+  const [conversations, setConversations] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(() => {}, [applicationId]);
+  // Define fetchConversations inside the component
+  const fetchConversations = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetchWithToken(
+        `/applications/${applicationId}/conversations/`,
+      );
+      if (!response.ok) throw new Error("Network response was not ok");
+      const data = await response.json();
+      setConversations(data);
+    } catch (err) {
+      setError("Error fetching conversations");
+    } finally {
+      setLoading(false);
+    }
+  }, [applicationId]);
 
-  const handleSubmit = (e) => {
+  // useEffect hook to load conversations
+  useEffect(() => {
+    fetchConversations();
+  }, [fetchConversations]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!newMessage.trim()) return;
+
+    try {
+      const response = await fetchWithToken(
+        `/applications/${applicationId}/conversations/`,
+        "POST",
+        JSON.stringify({ content: newMessage }),
+      );
+      if (!response.ok) throw new Error("Network response was not ok");
+      setNewMessage("");
+      await fetchConversations(); // Refetch the conversations
+    } catch (err) {
+      setError("Error sending message");
+    }
   };
 
   return (
-    <div className="conversation">
+    <div>
       <h3>Conversations</h3>
-      <div className="messages">
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          messages.map((msg) => (
+      {error && <p className="error">{error}</p>}
+      {loading ? (
+        <p>Loading conversations...</p>
+      ) : (
+        <div className="conversations-list">
+          {conversations.map((conversation) => (
             <div
+              key={conversation.id}
               className={`message ${
-                msg.sender === "Shelter Rep" ? "left" : "right"
+                conversation.created_by === currentUser.id ? "right" : "left"
               }`}
-              key={msg.id}
             >
-              <span className="sender">{msg.sender}</span>
-              <p>{msg.text}</p>
-              <span className="timestamp">{msg.timestamp}</span>
+              <p>{conversation.content}</p>
+              <span>{new Date(conversation.created_at).toLocaleString()}</span>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
+        <textarea
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder="Send message ..."
+          className="message-input"
         />
-        <button type="submit">➤</button>
+        <button type="submit" className="send-button">
+          Send
+        </button>
       </form>
-      {error && <p className="error">{error}</p>}
     </div>
   );
 };
 
-export default ApplicationComments;
+export default ApplicationConversation;

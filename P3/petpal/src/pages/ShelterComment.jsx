@@ -1,26 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { fetchWithToken } from "../services/utils";
+import {
+  API_BASE_URL,
+  fetchWithToken,
+  fetchWithTokenWithFullUrl,
+} from "../services/utils";
 
 const ShelterComments = ({ shelterId }) => {
   const [comments, setComments] = useState([]);
+  const [nextPage, setNextPage] = useState(null);
+  const [prevPage, setPrevPage] = useState(null);
   const [newComment, setNewComment] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Fetch comments function with pagination support
+  const fetchComments = async (pageUrl) => {
+    setLoading(true);
+    try {
+      const url =
+        pageUrl || `${API_BASE_URL}/comments/shelter-comments/${shelterId}/`;
+      const response = await fetchWithTokenWithFullUrl(url);
+      const data = await response.json();
+      console.log("comments:", data);
+      setComments(data?.results);
+      setNextPage(data?.next);
+      setPrevPage(data?.previous);
+    } catch (err) {
+      console.error("Error fetching comments:", err);
+      setError(err.getText);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Initial fetch of comments
   useEffect(() => {
-    const fetchComments = async () => {
-      setLoading(true);
-      try {
-        const response = await fetchWithToken(`/shelter-comments/${shelterId}`);
-        const data = await response.json();
-        setComments(data);
-      } catch (err) {
-        console.error("Error fetching comments:", err);
-        setError("Error fetching comments");
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchComments();
   }, [shelterId]);
 
@@ -30,16 +44,15 @@ const ShelterComments = ({ shelterId }) => {
 
     try {
       const response = await fetchWithToken(
-        `/shelter-comments/${shelterId}`,
+        `/comments/shelter-comments/${shelterId}/`,
         "POST",
         { text: newComment },
       );
-      const data = await response.json(); // Get JSON response regardless of response.ok
+      const data = await response.json();
       if (response.ok) {
         setNewComment("");
-        // Optionally refetch comments or add the new comment to the list
+        fetchComments(); // Refetch comments to include the new one
       } else {
-        // Display a more specific error message from the server response
         setError(`Error posting comment: ${data.message || response.status}`);
       }
     } catch (err) {
@@ -51,14 +64,32 @@ const ShelterComments = ({ shelterId }) => {
   return (
     <div>
       <h3>Shelter Comments</h3>
+      {error}
       {loading ? (
         <p>Loading...</p>
       ) : (
-        comments.map((comment) => (
-          <div key={comment.id}>
-            <p> {comment.text}</p>
+        <>
+          {comments.map((comment) => (
+            <div key={comment.id}>
+              <p>{comment.text}</p>
+              <span>{new Date(comment.created_at).toLocaleString()}</span>
+            </div>
+          ))}
+          <div className="pagination">
+            <button
+              onClick={() => fetchComments(prevPage)}
+              disabled={!prevPage}
+            >
+              Previous
+            </button>
+            <button
+              onClick={() => fetchComments(nextPage)}
+              disabled={!nextPage}
+            >
+              Next
+            </button>
           </div>
-        ))
+        </>
       )}
       <form
         onSubmit={handleSubmit}
@@ -67,11 +98,10 @@ const ShelterComments = ({ shelterId }) => {
         <textarea
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
-          style={{ marginBottom: "10px" }} // Add some space between the text area and the button
+          style={{ marginBottom: "10px" }}
         />
         <button type="submit">Post Comment</button>
       </form>
-
       {error && <p className="error">{error}</p>}
     </div>
   );

@@ -6,6 +6,7 @@ import "../../assets/css/ApplicationStyle.css";
 import Sidebar, { generateApplicationSidebar } from "../../components/buttons/Sidebar";
 import ApplicationSubmitted from "./ChildComponents/ApplicationSubmitted";
 import SubmissionStatus from "./ChildComponents/SubmissionStatus";
+import ApplicationConversation from "../ApplicationComment";
 
 const ApplicationDetails = () => {
     const { appId } = useParams();
@@ -58,6 +59,7 @@ const ApplicationDetails = () => {
                             <SubmissionStatus app={app} currentUser={currentUser} />
                             <hr className="my-4" />
                             {/* Conversation between seeker & shelter */}
+                            <ApplicationConversation applicationId={appId} currentUser={currentUser} />
                         </>
                     ) : (
                         <>Loading...</>
