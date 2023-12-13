@@ -81,7 +81,8 @@ export const isUserLoggedIn = async () => {
 };
 
 export const getUserId = () => {
-  return JSON.parse(localStorage.getItem("currentUser")).id;
+  const currentUser = localStorage.getItem("currentUser");
+  return currentUser ? JSON.parse(currentUser).id : null;
 };
 
 export const logoutUser = () => {

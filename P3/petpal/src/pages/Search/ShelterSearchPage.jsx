@@ -15,17 +15,6 @@ function ShelterSearchPage() {
     navigate(searchPath);
   };
 
-  const getAllQueryParams = () => {
-    const queryParams = new URLSearchParams(location.search);
-    const params = {};
-    for (const [key, value] of queryParams.entries()) {
-      params[key] = value;
-    }
-    return params;
-  };
-
-  const filters = getAllQueryParams();
-
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const searchParam = queryParams.get("name")
@@ -65,7 +54,6 @@ function ShelterSearchPage() {
           <button className="btn btn-primary mb-3" onClick={handleSearchSubmit}>
             Search
           </button>
-          <p>Filters: {JSON.stringify(filters)}</p>
         </div>
 
         {/* Shelters Column */}

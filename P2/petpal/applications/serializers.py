@@ -30,7 +30,7 @@ class PetPostSerializer(ModelSerializer):
     
     class Meta:
         model = PetPost
-        fields = ['shelter', 'name', 'description', 'status', 'breed', 'age', 'size', 'color', 'gender', 'expiry', 'image']
+        fields = ['shelter', 'id', 'name', 'description', 'status', 'breed', 'age', 'size', 'color', 'gender', 'expiry', 'image']
 
 
 class ApplicationFullSerializer(ModelSerializer):
