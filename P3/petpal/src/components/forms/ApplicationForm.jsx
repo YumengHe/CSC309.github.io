@@ -39,7 +39,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
     });
     const [isChecked, setIsChecked] = useState(false);
 
-    const handleChange = (e) => {
+    const handleInputChange = (e) => {
         const { name, value } = e.target;
         if (name === "have_pet_currently" && value == "false") {
             // Clean have_pet_notes field
@@ -93,7 +93,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                                 id="floating_af_name"
                                 name="adopter_firstname"
                                 placeholder="First name"
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 // required
                             />
                             <label htmlFor="floating_af_name">First name</label>
@@ -109,7 +109,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                                 name="adopter_lastname"
                                 value={appData.adopter_lastname}
                                 placeholder="Last Name"
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 // required
                             />
                             <label htmlFor="floating_al_name">Last Name</label>
@@ -127,7 +127,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                             value={appData.adopter_email}
                             name="adopter_email"
                             placeholder="Email"
-                            onChange={handleChange}
+                            onChange={handleInputChange}
                             // required
                         />
                         <label htmlFor="floating_a_email">Email</label>
@@ -149,7 +149,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                                 value={appData.co_adopter_firstname}
                                 name="co_adopter_firstname"
                                 placeholder="First Name"
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                             />
                             <label htmlFor="floating_caf_name">First Name</label>
                         </div>
@@ -163,7 +163,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                                 value={appData.co_adopter_lastname}
                                 name="co_adopter_lastname"
                                 placeholder="Last Name"
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                             />
                             <label htmlFor="floating_cal_name">Last Name</label>
                         </div>
@@ -178,7 +178,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                             value={appData.co_adopter_email}
                             name="co_adopter_email"
                             placeholder="Email"
-                            onChange={handleChange}
+                            onChange={handleInputChange}
                         />
                         <label htmlFor="floating_ca_email">Email</label>
                     </div>
@@ -198,7 +198,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                         value={appData.addr_street}
                         name="addr_street"
                         placeholder="Street"
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         // required
                     />
                     <label htmlFor="floating_street">Street</label>
@@ -214,7 +214,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                                 value={appData.addr_city}
                                 name="addr_city"
                                 placeholder="City"
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 // required
                             />
                             <label htmlFor="floating_city">City</label>
@@ -228,7 +228,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                                 className="form-control"
                                 value={appData.addr_province}
                                 name="addr_province"
-                                onChange={handleChange}
+                                onChange={handleInputChange}
                                 // required
                             >
                                 <option value="" disabled>
@@ -282,7 +282,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                         name="phone_type"
                         className="form-control"
                         value={appData.phone_type || ""}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         // required
                     >
                         <option value="" disabled>
@@ -301,7 +301,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                         name="phone"
                         value={appData.phone}
                         onValueChange={(values) => {
-                            handleChange({ target: { name: "phone", value: values.value } });
+                            handleInputChange({ target: { name: "phone", value: values.value } });
                         }}
                         className="form-control"
                         data-cy="phone"
@@ -324,7 +324,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                     className="form-control"
                     value={appData.family_members}
                     name="family_members"
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                     // required
                 />
                 {error.family_members && <div className="text-danger">{error.family_members}</div>}
@@ -338,7 +338,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                     name="have_pet_currently"
                     className="form-control"
                     value={appData.have_pet_currently || ""}
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                     // required
                 >
                     <option value="" disabled>
@@ -360,7 +360,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                     className="form-control"
                     value={appData.have_pet_notes}
                     name="have_pet_notes"
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                     disabled={appData.have_pet_currently != "true"}
                     required={appData.have_pet_currently == "true"}
                 />
