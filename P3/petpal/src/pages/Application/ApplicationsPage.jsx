@@ -50,9 +50,7 @@ const ApplicationsPage = () => {
             const param = new URLSearchParams(location.search);
             const fetchApplications = async () => {
                 try {
-                    await fetchWithToken(
-                        `/applications/${currentUser.role}?${param.toString()}`
-                    )
+                    await fetchWithToken(`/applications/${currentUser.role}?${param.toString()}`)
                         .then((response) => response.json())
                         .then((json) => {
                             setApplications(json.results);
@@ -72,7 +70,9 @@ const ApplicationsPage = () => {
     return currentUser ? (
         <div className="container mt-5">
             <div className="row d-lg-flex flex-lg-row justify-content-between">
-                <Sidebar navItems={generateApplicationSidebar(currentUser.id)} />
+                <div className="col col-12 col-lg-3 mb-4">
+                    <Sidebar navItems={generateApplicationSidebar(currentUser.id)} />
+                </div>
                 {/* Main section for application list */}
                 <div className="col col-12 col-lg-9">
                     <div className="row my-4 justify-content-between">

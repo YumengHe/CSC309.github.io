@@ -8,7 +8,6 @@ import ApplicationForm from "../../components/forms/ApplicationForm";
 const NewApplicationPage = () => {
     const navigate = useNavigate();
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    // const navigate = useNavigate();
     const { petId } = useParams();
     const initialFieldErrors = {
         adopter_firstname: "",
@@ -55,6 +54,7 @@ const NewApplicationPage = () => {
         }
     };
     const handleApplicationSubmit = async (appData) => {
+        setFieldErrors(initialFieldErrors); // clean previous error
         try {
             const response = await fetchWithToken(`/applications/pet/${petId}/`, "POST", appData);
             const responseData = await response.json();
