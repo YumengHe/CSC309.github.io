@@ -38,6 +38,7 @@ const BlogPage = () => {
           <p>Author: {blogPost?.author_username}</p>
           <p>Updated at: {blogPost?.updated_at}</p>
           <p>{blogPost?.content}</p>
+          <BlogComments blogId={id} />
         </>
       )}
     </div>
