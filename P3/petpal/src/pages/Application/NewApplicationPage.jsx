@@ -6,11 +6,11 @@ import { fetchWithToken } from "../../services/utils";
 import ApplicationForm from "../../components/forms/ApplicationForm";
 
 const NewApplicationPage = () => {
+    const navigate = useNavigate();
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     // const navigate = useNavigate();
     const { petId } = useParams();
-
-    const [fieldErrors, setFieldErrors] = useState({
+    const initialFieldErrors = {
         adopter_firstname: "",
         adopter_lastname: "",
         adopter_email: "",
@@ -22,8 +22,38 @@ const NewApplicationPage = () => {
         phone_type: "",
         have_pet_currently: false,
         family_members: "",
-    });
+    };
+    const [fieldErrors, setFieldErrors] = useState(initialFieldErrors);
+    const [isSubmissionAllowed, setIsSubmissionAllowed] = useState({ allowed: null, msg: "" });
+    useEffect(() => {
+        checkSubmissionAllowed();
+    }, []);
 
+    const checkSubmissionAllowed = async () => {
+        try {
+            const response = await fetchWithToken(`/applications/pet/${petId}/`, "POST");
+            const responseData = await response.json();
+            if (!response.ok) {
+                // Handle 403 forbidden access & submission to unavailable/expiry pets
+                if (
+                    (response.status === 403 || response.status === 400) &&
+                    (responseData.error || responseData.detail)
+                ) {
+                    // console.log(responseData.error || responseData.detail);
+                    setIsSubmissionAllowed({ allowed: false, msg: responseData.error || responseData.detail });
+                } else if (response.status === 404) {
+                    setIsSubmissionAllowed({
+                        allowed: false,
+                        msg: "Unable to submit applications for pets not found.",
+                    });
+                } else {
+                    setIsSubmissionAllowed({ allowed: true, msg: "" });
+                }
+            }
+        } catch (error) {
+            console.error("CheckSubmissionAllowed Error:", error);
+        }
+    };
     const handleApplicationSubmit = async (appData) => {
         try {
             const response = await fetchWithToken(`/applications/pet/${petId}/`, "POST", appData);
@@ -33,7 +63,8 @@ const NewApplicationPage = () => {
                 throw responseData;
             } else {
                 // Submission succeed
-                console.log("SUCCEED", responseData);
+                console.log("Application Submission SUCCEED", responseData);
+                navigate(`/applications/${responseData.id}`);
             }
         } catch (error) {
             console.error("Application Submission Error:", error);
@@ -47,7 +78,12 @@ const NewApplicationPage = () => {
             }
         }
     };
-    return (
+
+    if (!currentUser) {
+        navigate("/login");
+    }
+
+    return isSubmissionAllowed.allowed && currentUser ? (
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <h2 className="text-center fs-2 fw-bolder main-dark-color">Adoption Application</h2>
@@ -56,6 +92,16 @@ const NewApplicationPage = () => {
                 </div>
             </div>
         </div>
+    ) : (
+        <>
+            <div className="container mt-5">
+                <div className="row d-flex justify-content-center py-5">
+                    <div className="col col-10">
+                        <p className="fs-4 main-dark-color text-center">{isSubmissionAllowed.msg}</p>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 };
 

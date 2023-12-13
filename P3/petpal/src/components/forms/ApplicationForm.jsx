@@ -4,6 +4,21 @@
 import React, { useState, useEffect } from "react";
 import { PatternFormat } from "react-number-format";
 
+const PostalInput = ({ value, onChange }) => {
+    const handleInputChange = (e) => {
+        const inputValue = e.target.value;
+
+        // Check if the input matches the desired pattern
+        // Regex - check if input still has chances to become matching https://stackoverflow.com/a/22489941
+        const pattern = /^([A-Za-z]|$)(\d|$)([A-Za-z]|$)(\s|$)(\d|$)([A-Za-z]|$)(\d|$)$/;
+        if (pattern.test(inputValue) || inputValue === "") {
+            onChange(inputValue.toUpperCase()); // Convert to uppercase
+        }
+    };
+
+    return <input type="text" className="form-control" value={value} onChange={handleInputChange} />;
+};
+
 const ApplicationForm = ({ error, onSubmit }) => {
     const [appData, setAppData] = useState({
         adopter_firstname: "",
@@ -22,14 +37,27 @@ const ApplicationForm = ({ error, onSubmit }) => {
         co_adopter_lastname: "",
         co_adopter_email: "",
     });
+    const [isChecked, setIsChecked] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        if (name === "have_pet_currently" && value == "false") {
+            // Clean have_pet_notes field
+            appData.have_pet_notes = "";
+            // setAppData({ ...appData, have_pet_currently: "" });
+        }
+        setAppData({ ...appData, [name]: value });
+    };
+
+    const handlePostalChange = (value) => {
         setAppData({
             ...appData,
-            [name]: value,
-            have_pet_notes: appData.have_pet_currently === true ? appData.have_pet_notes : "",
+            addr_postal: value,
         });
+    };
+
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked);
     };
 
     const handleSubmit = (e) => {
@@ -42,8 +70,11 @@ const ApplicationForm = ({ error, onSubmit }) => {
         if ("phone" in filteredAppData) {
             filteredAppData["phone"] = "+1" + filteredAppData["phone"];
         }
-        console.log("HANDLE_SUBMIT", filteredAppData);
-        onSubmit(filteredAppData);
+        if (!isChecked) {
+            alert("Please check the box to confirm understanding.");
+        } else {
+            onSubmit(filteredAppData);
+        }
     };
 
     return (
@@ -223,7 +254,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
                     </div>
                     <div className="col col-12 col-sm-4 mt-2 mt-sm-0">
                         <div className="form-floating">
-                            <input
+                            {/* <input
                                 id="floating_postal"
                                 type="text"
                                 className="form-control"
@@ -233,7 +264,8 @@ const ApplicationForm = ({ error, onSubmit }) => {
                                 onChange={handleChange}
                                 onInput={(e) => (e.target.value = ("" + e.target.value).toUpperCase())}
                                 // required
-                            />
+                            /> */}
+                            <PostalInput value={appData.addr_postal} onChange={handlePostalChange} />
                             <label htmlFor="floating_postal">Postal</label>
                         </div>
                         {error.addr_postal && <div className="text-danger">{error.addr_postal}</div>}
@@ -285,6 +317,7 @@ const ApplicationForm = ({ error, onSubmit }) => {
             <div className="my-4">
                 <label className="form-label fw-bold">
                     Names and ages of all permanent residents of your home (adults/children)
+                    <span className="text-danger">*</span>
                 </label>
                 <input
                     type="text"
@@ -292,7 +325,9 @@ const ApplicationForm = ({ error, onSubmit }) => {
                     value={appData.family_members}
                     name="family_members"
                     onChange={handleChange}
+                    // required
                 />
+                {error.family_members && <div className="text-danger">{error.family_members}</div>}
             </div>
             {/* Current Pets */}
             <div className="my-4">
@@ -331,8 +366,25 @@ const ApplicationForm = ({ error, onSubmit }) => {
                 />
             </div>
 
+            {/* Checkbox */}
+            <div className="my-4 form-check border border-danger rounded-pill p-3">
+                <div className="mx-4">
+                    <input
+                        type="checkbox"
+                        className="form-check-input"
+                        id="confirmationCheckbox"
+                        checked={isChecked}
+                        onChange={handleCheckboxChange}
+                    />
+                    <label className="form-check-label" htmlFor="confirmationCheckbox">
+                        I confirm that the information provided is truthful and accurate, and I understand the
+                        application <b>cannot</b> be changed after submission.
+                    </label>
+                </div>
+            </div>
+
             <div className="d-flex justify-content-center">
-                <button type="submit" className="btn btn-primary-cust">
+                <button type="submit" className="btn btn-primary-cust" disabled={!isChecked}>
                     Submit Application
                 </button>
             </div>
