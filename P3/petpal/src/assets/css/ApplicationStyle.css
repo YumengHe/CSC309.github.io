@@ -10,6 +10,7 @@
   border: 1px solid var(--main-mid-color);
 }
 
+/* Sidebar active tab bg-color */
 .side_nav .list-group .list-group-item.active {
   background-color: var(--main-light-color);
   border: 0;
