@@ -65,6 +65,9 @@ html {
   --bs-btn-active-bg: var(--main-mid-color);
   --bs-btn-active-border-color: var(--main-dark-color);
   --bs-btn-focus-shadow-rgb: var(--main-mid-color);
+  --bs-btn-disabled-color: var(--main-mid-color);
+  --bs-btn-disabled-bg: white;
+  --bs-btn-disabled-border-color: var(--main-dark-color);
 }
 
 /* div.row {

@@ -1,3 +1,5 @@
+import datetime
+from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from rest_framework import status
 from rest_framework.response import Response
@@ -120,10 +122,14 @@ class SeekerApplicationCreate(SeekerBaseView, CreateAPIView):
         petpost = get_object_or_404(PetPost, id=self.kwargs["pet_id"])
         print("NEW Application for ", petpost, petpost.status)
 
-        # Verify whether the application is for available petpost
-        if petpost.status != "available":
+        # Verify whether the application is for available petpost before expiry
+        now = timezone.now()
+        print("EXPIRY?", now > petpost.expiry)
+        if petpost.status != "available" or now > petpost.expiry:
             return Response(
-                {"error": "Cannot submit application for unavailable pets."},
+                {
+                    "error": "Cannot submit new applications for unavailable pets or expired listings."
+                },
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
