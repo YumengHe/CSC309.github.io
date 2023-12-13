@@ -19,7 +19,7 @@ const Sidebar = ({ navItems }) => {
         navigate("/login");
     }
     return (
-        <div className="side_nav col col-12 col-lg-3 mb-4">
+        <div className="side_nav">
             <div className="list-group list-group-flush border border-start-0 border-2 rounded-end">
                 {navItems.map((item) => (
                     <Link

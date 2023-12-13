@@ -1,11 +1,18 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchWithToken } from "../../services/utils";
 import "../../assets/css/ApplicationStyle.css";
 import Sidebar, { generateApplicationSidebar } from "../../components/buttons/Sidebar";
 import ApplicationSubmitted from "./ChildComponents/ApplicationSubmitted";
 import SubmissionStatus from "./ChildComponents/SubmissionStatus";
+import { Link45deg } from "react-bootstrap-icons";
+
+const DATE_FORMATTER = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+};
 
 const ApplicationDetails = () => {
     const { appId } = useParams();
@@ -45,7 +52,53 @@ const ApplicationDetails = () => {
     return currentUser ? (
         <div className="container mt-5">
             <div className="row d-lg-flex flex-lg-row justify-content-between">
-                <Sidebar navItems={generateApplicationSidebar(currentUser.id)} />
+                <div className="col col-12 col-lg-3 mb-4">
+                    <Sidebar navItems={generateApplicationSidebar(currentUser.id)} />
+                    {app && (
+                        <div className="row border rounded mt-4 mx-1 main-dark-color p-3 gap-3 d-flex justify-content-center align-items-center flex-lg-column flex-md-row flex-column">
+                            <div className="col">
+                                <img
+                                    src={app.petpost.image}
+                                    alt="pet image"
+                                    id="imageInApp"
+                                    className="border border-5 rounded object-fit-cover w-100"
+                                />
+                            </div>
+                            <div className="col d-flex flex-column gap-2">
+                                <div className="col">
+                                    <b>Seeker: </b>
+                                    <Link to={`/user-profile/${app.seeker.id}`} className="main-dark-color">
+                                        {app.seeker.username}
+                                        <Link45deg />
+                                    </Link>
+                                </div>
+                                <div className="col">
+                                    <b>Pet: </b>
+                                    <Link to={`/pets/${app.petpost.id}`} className="main-dark-color">
+                                        {app.petpost.name}
+                                        <Link45deg />
+                                    </Link>
+                                </div>
+
+                                <div className="col">
+                                    <b>Shelter: </b>
+                                    <Link to={`/user-profile/${app.petpost.shelter.id}`} className="main-dark-color">
+                                        {app.petpost.shelter.username}
+                                        <Link45deg />
+                                    </Link>
+                                </div>
+                                <div className="col">
+                                    <b>Submitted: </b>
+                                    {new Date(app.created_at).toLocaleString(undefined, DATE_FORMATTER)}
+                                </div>
+                                <div className="col">
+                                    <b>Updated: </b>
+                                    {new Date(app.last_updated).toLocaleString(undefined, DATE_FORMATTER)}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
                 {/* Main section for application detail */}
                 <div className="col col-12 col-lg-8  main-dark-color">
                     {error ? (

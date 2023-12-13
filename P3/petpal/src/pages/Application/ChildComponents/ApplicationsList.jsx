@@ -9,6 +9,7 @@ const DATE_FORMATTER = {
     hour: "numeric",
     minute: "numeric",
     second: "numeric",
+    hour12: false,
 };
 
 const ApplicationList = ({ applications }) => {
