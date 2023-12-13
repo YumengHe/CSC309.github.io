@@ -34,7 +34,7 @@ class NotificationView(APIView):
             Notification, id=self.kwargs.get("id"), recipient=request.user
         )
         notification.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(data={"detail": "succeed"}, status=status.HTTP_204_NO_CONTENT)
 
 
 class NotificationList(ListAPIView):

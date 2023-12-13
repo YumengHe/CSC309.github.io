@@ -6,7 +6,10 @@ import FilterButtons from "../../components/buttons/FilterButtons";
 import SortRadioButtons from "../../components/buttons/SortButtons";
 import Paginate from "../../components/buttons/PageButtons";
 import { fetchWithToken } from "../../services/utils";
-import { CircleFill, EnvelopeFill } from "react-bootstrap-icons";
+import { EnvelopeFill } from "react-bootstrap-icons";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 
 const DATE_FORMATTER = {
     year: "numeric",
@@ -16,6 +19,13 @@ const DATE_FORMATTER = {
     minute: "numeric",
     second: "numeric",
     hour12: false,
+};
+
+const INIT_QUERY_PARAM = {
+    page: 1,
+    page_size: 10,
+    sort: "-creation",
+    state: "all",
 };
 
 const NotificationsPage = () => {
@@ -34,6 +44,14 @@ const NotificationsPage = () => {
         }),
         [searchParams]
     );
+    const [showAlert, setShowAlert] = useState({ show: false, msg: "", variant: "" });
+    const [showModal, setShowModal] = useState({
+        show: false,
+        title: "",
+        bodyMsg: "",
+        notId: "",
+        eventLink: "",
+    });
 
     const setPagination = (pageNumber) => {
         // Update page parameter
@@ -50,6 +68,42 @@ const NotificationsPage = () => {
         setSearchParams({ ...query, state: newState, page: 1 });
     };
 
+    const handleDeleteClicked = async () => {
+        setShowModal({ ...showModal, show: false });
+        try {
+            const response = await fetchWithToken(`/notifications/${showModal.notId}/`, "DELETE");
+            if (!response.ok) {
+                setShowAlert({ show: true, msg: "Notification not found.", variant: "danger" });
+            } else {
+                // Update succeed
+                setShowAlert({ show: true, msg: "Deletion succeed.", variant: "success" });
+                navigate("/notifications");
+            }
+        } catch (error) {
+            console.error("DELETE NOTIFICATION failed:", error);
+        }
+    };
+
+    const handleMarkReadClicked = async () => {
+        setShowModal({ ...showModal, show: false });
+        console.log("READ CLICKED");
+        try {
+            const response = await fetchWithToken(`/notifications/${showModal.notId}/`, "PUT");
+            if (!response.ok) {
+                setShowAlert({ show: true, msg: "Notification not found.", variant: "danger" });
+            } else {
+                // Update succeed
+                setShowAlert({ show: true, msg: "Succeed.", variant: "success" });
+                // Set query param to reload list, otherwise unread icon won't refresh
+                setSearchParams(INIT_QUERY_PARAM);
+            }
+        } catch (error) {
+            console.error("MARK NOTIFICATION READ failed:", error);
+        }
+    };
+
+    const handleViewPageClicked = () => {};
+
     useEffect(() => {
         // Navigate to login page if use is not logged in
         if (!currentUser) {
@@ -58,7 +112,7 @@ const NotificationsPage = () => {
             const param = new URLSearchParams(location.search);
             const fetchNotifications = async () => {
                 try {
-                    await fetchWithToken(`/notifications?${param.toString()}`)
+                    await fetchWithToken(`/notifications/?${param.toString()}`)
                         .then((response) => response.json())
                         .then((json) => {
                             setNotifications(json.results);
@@ -83,6 +137,11 @@ const NotificationsPage = () => {
                 </div>
                 {/* Main section for list */}
                 <div className="col col-12 col-lg-9">
+                    {showAlert.show ? (
+                        <Alert variant={showAlert.variant} onClose={() => setShowAlert(false)} dismissible>
+                            {showAlert.msg}
+                        </Alert>
+                    ) : null}
                     <div className="row my-4 justify-content-between">
                         {/* Filter by state */}
                         <FilterButtons
@@ -111,9 +170,29 @@ const NotificationsPage = () => {
                             <div className="row">
                                 <div className="application list-group list mb-4 p-0 border">
                                     {notifications?.map((notification) => (
-                                        <Link
-                                            to={`/applications/${notification.id}`}
+                                        <a
+                                            // to={`/applications/${notification.id}`}
                                             key={notification.id}
+                                            onClick={() =>
+                                                setShowModal({
+                                                    notId: notification.id,
+                                                    eventLink: notification.event_link,
+                                                    show: true,
+                                                    title: "Notification Details",
+                                                    bodyMsg: (
+                                                        <>
+                                                            <p>{notification.content}</p>
+                                                            <small>
+                                                                Received on{" "}
+                                                                {new Date(notification.created_at).toLocaleString(
+                                                                    undefined,
+                                                                    { dateStyle: "full", timeStyle: "medium" }
+                                                                )}
+                                                            </small>
+                                                        </>
+                                                    ),
+                                                })
+                                            }
                                             className="list-group-item list-group-item-action d-flex align-items-center gap-lg-3 gap-1 py-3"
                                         >
                                             <div className="col col-1 main-dark-color d-flex justify-content-center">
@@ -136,7 +215,7 @@ const NotificationsPage = () => {
                                                     {notification.read ? "Read" : "Unread"}
                                                 </small>
                                             </div>
-                                        </Link>
+                                        </a>
                                     ))}
                                 </div>
                             </div>
@@ -153,6 +232,28 @@ const NotificationsPage = () => {
                     )}
                 </div>
             </div>
+            {/* Display modal with 3 buttons: delete/read/visit detail */}
+            <Modal show={showModal.show} onHide={() => setShowModal(false)} centered backdrop="static" keyboard={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="main-dark-color">{showModal.title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{showModal.bodyMsg}</Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="outline-danger"
+                        className="btn btn-sm me-auto"
+                        onClick={() => handleDeleteClicked()}
+                    >
+                        Delete
+                    </Button>
+                    <Button className="btn btn-outline-primary-cust btn-sm " onClick={() => handleMarkReadClicked()}>
+                        Mark as read
+                    </Button>
+                    <Button className="btn btn-primary-cust btn-sm " onClick={() => handleViewPageClicked()}>
+                        View Page
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     ) : (
         <></> // Return empty when user not logged-in
