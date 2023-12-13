@@ -1,5 +1,5 @@
 from applications.paginations import BasePageNumberPagination
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework import status
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
@@ -57,19 +57,19 @@ class NotificationList(ListAPIView):
             notifications = notifications.filter(read=(state_param == "read"))
 
         # Sort notifications by creation time
-        if sort_param in ["creation", "-creation"]:
-            notifications = notifications.order_by(sort_param)
+        if sort_param == "creation":
+            notifications = notifications.order_by("created_at")
         else:
             # Default sorting order
             notifications = notifications.order_by("-created_at")
 
-        return notifications
+        return get_list_or_404(notifications)
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 
-        if not queryset.exists():
-            return Response(status=status.HTTP_204_NO_CONTENT)
+        # if not queryset.exists():
+        #     return Response(status=status.HTTP_204_NO_CONTENT)
 
         page = self.paginate_queryset(queryset)
         if page is not None:

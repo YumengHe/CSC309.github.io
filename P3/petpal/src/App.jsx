@@ -12,6 +12,7 @@ import ShelterSearchPage from "./pages/Search/ShelterSearchPage";
 import PetSearchPage from "./pages/Search/PetSearchPage";
 import HowItWorkPage from "./pages/HowItWorkPage";
 import ApplicationsPage from "./pages/Application/ApplicationsPage";
+import NotificationsPage from "./pages/Notification/NotificationsPage";
 import ApplicationDetails from "./pages/Application/ApplicationDetail";
 import NewApplicationPage from "./pages/Application/NewApplicationPage";
 import NewBlogPage from "./pages/NewBlogPage";
@@ -45,6 +46,7 @@ function App() {
               path="/applications/pet/:petId"
               element={<NewApplicationPage />}
             />
+            <Route path="/notifications" element={<NotificationsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Layout>
