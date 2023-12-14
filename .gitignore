@@ -340,8 +340,8 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
-/P2/petpal/db.sqlite3
+/backend/petpal/db.sqlite3
 **/migrations/*.py
 !*/migrations/__init__.py
-/P2/petpal/media/*
+/backend/petpal/media/*
 .vscode/settings.json
