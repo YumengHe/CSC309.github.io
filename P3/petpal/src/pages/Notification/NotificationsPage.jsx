@@ -51,6 +51,7 @@ const NotificationsPage = () => {
         bodyMsg: "",
         notId: "",
         eventLink: "",
+        read: false,
     });
 
     const setPagination = (pageNumber) => {
@@ -86,7 +87,6 @@ const NotificationsPage = () => {
 
     const handleMarkReadClicked = async () => {
         setShowModal({ ...showModal, show: false });
-        console.log("READ CLICKED");
         try {
             const response = await fetchWithToken(`/notifications/${showModal.notId}/`, "PUT");
             if (!response.ok) {
@@ -102,7 +102,29 @@ const NotificationsPage = () => {
         }
     };
 
-    const handleViewPageClicked = () => {};
+    const handleViewPageClicked = () => {
+        // Mark as read
+        if (!showModal.read) {
+            fetchWithToken(`/notifications/${showModal.notId}/`, "PUT");
+        }
+
+        const USER_REGEX_PATTERN = /^\/(accounts|pets)\/((\d+)|(\?shelter=(\d+)))/;
+        const APP_REGEX_PATTERN = /^\/applications\/(([a-z]*\/(\d+))|(\d+)\/conversations)?/;
+        const userProfileMatch = showModal.eventLink.match(USER_REGEX_PATTERN);
+        const applicationMatch = showModal.eventLink.match(APP_REGEX_PATTERN);
+
+        console.log(showModal.eventLink, userProfileMatch, applicationMatch);
+
+        if (userProfileMatch) {
+            // When eventLink in pattern of '/accounts/#/' or '/pets/?shelter=#'
+            const id = userProfileMatch[3] || userProfileMatch[5];
+            navigate(`/user-profile/${id}`);
+        } else if (applicationMatch) {
+            // When eventLink in pattern of '/applications/seeker/#/' or '/applications/#/conversations'
+            const id = applicationMatch[3] || applicationMatch[4];
+            navigate(`/applications/${id}`);
+        }
+    };
 
     useEffect(() => {
         // Navigate to login page if use is not logged in
@@ -177,6 +199,7 @@ const NotificationsPage = () => {
                                                 setShowModal({
                                                     notId: notification.id,
                                                     eventLink: notification.event_link,
+                                                    read: notification.read,
                                                     show: true,
                                                     title: "Notification Details",
                                                     bodyMsg: (
@@ -233,7 +256,7 @@ const NotificationsPage = () => {
                 </div>
             </div>
             {/* Display modal with 3 buttons: delete/read/visit detail */}
-            <Modal show={showModal.show} onHide={() => setShowModal(false)} centered backdrop="static" keyboard={false}>
+            <Modal show={showModal.show} onHide={() => setShowModal(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title className="main-dark-color">{showModal.title}</Modal.Title>
                 </Modal.Header>
@@ -246,9 +269,15 @@ const NotificationsPage = () => {
                     >
                         Delete
                     </Button>
-                    <Button className="btn btn-outline-primary-cust btn-sm " onClick={() => handleMarkReadClicked()}>
-                        Mark as read
-                    </Button>
+                    {showModal.read ? null : (
+                        <Button
+                            className="btn btn-outline-primary-cust btn-sm "
+                            onClick={() => handleMarkReadClicked()}
+                        >
+                            Mark as read
+                        </Button>
+                    )}
+
                     <Button className="btn btn-primary-cust btn-sm " onClick={() => handleViewPageClicked()}>
                         View Page
                     </Button>
