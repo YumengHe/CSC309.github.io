@@ -10,16 +10,7 @@ import { EnvelopeFill } from "react-bootstrap-icons";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
-
-const DATE_FORMATTER = {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    hour12: false,
-};
+import NotificationsList from "./List";
 
 const INIT_QUERY_PARAM = {
     page: 1,
@@ -107,14 +98,10 @@ const NotificationsPage = () => {
         if (!showModal.read) {
             fetchWithToken(`/notifications/${showModal.notId}/`, "PUT");
         }
-
         const USER_REGEX_PATTERN = /^\/(accounts|pets)\/((\d+)|(\?shelter=(\d+)))/;
         const APP_REGEX_PATTERN = /^\/applications\/(([a-z]*\/(\d+))|(\d+)\/conversations)?/;
         const userProfileMatch = showModal.eventLink.match(USER_REGEX_PATTERN);
         const applicationMatch = showModal.eventLink.match(APP_REGEX_PATTERN);
-
-        console.log(showModal.eventLink, userProfileMatch, applicationMatch);
-
         if (userProfileMatch) {
             // When eventLink in pattern of '/accounts/#/' or '/pets/?shelter=#'
             const id = userProfileMatch[3] || userProfileMatch[5];
@@ -146,7 +133,6 @@ const NotificationsPage = () => {
                     console.error("Fetching applications error:", error);
                 }
             };
-
             fetchNotifications();
         }
     }, [query]);
@@ -189,59 +175,35 @@ const NotificationsPage = () => {
                     {notifications ? (
                         <>
                             {/* Notification List */}
-                            <div className="row">
-                                <div className="application list-group list mb-4 p-0 border">
-                                    {notifications?.map((notification) => (
-                                        <a
-                                            // to={`/applications/${notification.id}`}
-                                            key={notification.id}
-                                            onClick={() =>
-                                                setShowModal({
-                                                    notId: notification.id,
-                                                    eventLink: notification.event_link,
-                                                    read: notification.read,
-                                                    show: true,
-                                                    title: "Notification Details",
-                                                    bodyMsg: (
-                                                        <>
-                                                            <p>{notification.content}</p>
-                                                            <small>
-                                                                Received on{" "}
-                                                                {new Date(notification.created_at).toLocaleString(
-                                                                    undefined,
-                                                                    { dateStyle: "full", timeStyle: "medium" }
-                                                                )}
-                                                            </small>
-                                                        </>
-                                                    ),
-                                                })
-                                            }
-                                            className="list-group-item list-group-item-action d-flex align-items-center gap-lg-3 gap-1 py-3"
-                                        >
-                                            <div className="col col-1 main-dark-color d-flex justify-content-center">
-                                                {notification.read ? null : <EnvelopeFill />}
-                                            </div>
-                                            <div className="col col-6 col-md-7 flex-fill">
-                                                <h6 className="mb-0 text-truncate">{notification.content}</h6>
-                                            </div>
-                                            <div className="col col-3 me-2">
-                                                <div className="d-none d-md-block">
-                                                    <small className="opacity-50 text-nowrap m-0 align-self-center d-flex align-self-center justify-content-end">
-                                                        {new Date(notification.created_at).toLocaleString(
-                                                            undefined,
-                                                            DATE_FORMATTER
-                                                        )}
-                                                    </small>
-                                                </div>
-                                                <small className="opacity-50 text-nowrap m-0 align-self-center d-flex align-self-center justify-content-end">
-                                                    <div className="d-none d-md-block">State: </div>
-                                                    {notification.read ? "Read" : "Unread"}
+                            <NotificationsList
+                                notifications={notifications}
+                                onItemClick={(notification) => {
+                                    setShowModal({
+                                        notId: notification.id,
+                                        eventLink: notification.event_link,
+                                        read: notification.read,
+                                        show: true,
+                                        title: "Notification Details",
+                                        bodyMsg: (
+                                            <>
+                                                <p>{notification.content}</p>
+                                                <small>
+                                                    Received on{" "}
+                                                    {new Date(notification.created_at).toLocaleString(undefined, {
+                                                        year: "numeric",
+                                                        month: "numeric",
+                                                        day: "numeric",
+                                                        hour: "numeric",
+                                                        minute: "numeric",
+                                                        second: "numeric",
+                                                        hour12: false,
+                                                    })}
                                                 </small>
-                                            </div>
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
+                                            </>
+                                        ),
+                                    });
+                                }}
+                            />
                             {/* Pagination */}
                             <div className="row">
                                 <Paginate totalPages={totalPages} currentPage={query.page} paginate={setPagination} />
