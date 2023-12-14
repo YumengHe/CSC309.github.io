@@ -2,9 +2,20 @@ const UserProfileView = ({
   user,
   currentProfilePic,
   handleEditToggle,
+  handleDeleteUser,
   currentUser,
   userId,
 }) => {
+  const handleDeleteClick = () => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this user? This action cannot be undone.",
+      )
+    ) {
+      handleDeleteUser(user?.id);
+    }
+  };
+
   return (
     <div id="user-profile-view" className="card">
       <div className="card-body">
@@ -40,9 +51,14 @@ const UserProfileView = ({
           />
         </p>
         {currentUser?.id === parseInt(userId) && (
-          <button className="btn btn-primary-cust" onClick={handleEditToggle}>
-            Edit Profile
-          </button>
+          <>
+            <button className="btn btn-primary-cust" onClick={handleEditToggle}>
+              Edit Profile
+            </button>
+            <button className="btn btn-danger ms-2" onClick={handleDeleteClick}>
+              Delete User
+            </button>
+          </>
         )}
       </div>
     </div>

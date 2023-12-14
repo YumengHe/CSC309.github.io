@@ -6,6 +6,7 @@ import UserProfileView from "../components/UserProfileView";
 import ShelterPetListings from "../components/ShelterPetsListing";
 import ShelterComments from "../components/ShelterComment";
 import BlogList from "../components/BlogList";
+import { logoutUser } from "../services/userService";
 
 const UserProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -149,6 +150,22 @@ const UserProfilePage = () => {
     setImagePreviewUrl(URL.createObjectURL(file));
   };
 
+  const handleDeleteUser = async (userId) => {
+    try {
+      const response = await fetchWithToken(`/accounts/${userId}/`, "DELETE");
+      if (response.ok) {
+        console.log(`User ${userId} deleted successfully.`);
+        logoutUser();
+        navigate("/");
+        window.confirm(`User ${userId} deleted successfully.`);
+      }
+
+      // Add any post-deletion logic here, like redirecting or updating UI
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+
   return (
     <div className="container mt-4">
       <h1 className="text-center mb-3">
@@ -182,6 +199,7 @@ const UserProfilePage = () => {
                 user={user}
                 currentProfilePic={currentProfilePic}
                 handleEditToggle={handleEditToggle}
+                handleDeleteUser={handleDeleteUser}
                 currentUser={currentUser}
                 userId={userId}
               />
