@@ -52,8 +52,9 @@ const PetSearchPage = () => {
       .then((data) => {
         setPets(data.results);
         // Assuming `query.page_size` is the number of items per page you want to display
-        const pageSize = queryParams.page_size || data.results.length; // Fallback to number of items in results if page size not defined
+        const pageSize = 10; // Fallback to number of items in results if page size not defined
         setTotalPages(Math.ceil(data.count / pageSize));
+        console.log(data.count, pageSize);
       })
       .catch((error) => {
         setError(error.message);
@@ -61,7 +62,7 @@ const PetSearchPage = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [filters, queryParams, currentPage]);
+  }, [queryParams]);
 
   const handleFilterChange = (e) => {
     const newFilters = {

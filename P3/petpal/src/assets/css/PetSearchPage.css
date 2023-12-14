@@ -3,12 +3,6 @@
     padding:0;
     margin:0;
 }
-.content {
-    /* background-color: #F5EBEB; */
-}
-.pet-cards-container {
-    /* background-color: #F5EBEB; */
-}
 .pet-search-page {
     display: flex;
     max-width: 1200px;
