@@ -151,6 +151,7 @@ const PetProfilePage = () => {
   }
 
   const canEdit = currentUser?.id === pet.shelter;
+  const canApply = currentUser?.role === "seeker";
   // const canEdit = true;
 
   return (
@@ -175,6 +176,7 @@ const PetProfilePage = () => {
             handleDeleteUser={handleDeleteUser}
             currentUser={currentUser}
             isEditable={canEdit}
+            isAppliable={canApply}
           />
         )}
       </div>

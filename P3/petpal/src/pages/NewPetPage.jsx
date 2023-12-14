@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Import useState here
+import React, { useEffect, useState } from "react"; // Import useState here
 import { useNavigate } from "react-router-dom";
 import NewPetForm from "../components/forms/NewPetForm";
 import { fetchWithToken } from "../services/utils";
@@ -27,15 +27,23 @@ const NewPetPage = () => {
     }
   };
 
-  // check for user log in
-  if (!currentUser) {
-    navigate("/login");
-  }
+  useEffect(() => {
+    // check for user log in
+    if (!currentUser) {
+      navigate("/login");
+    }
+  }, [currentUser, navigate]);
 
   return (
     <div className="new-pet-page">
       <h1>Create a New Pet</h1>
-      <NewPetForm error={error} onSubmit={handleNewPetSubmit} />
+      {currentUser?.role === "shelter" ? (
+        <NewPetForm error={error} onSubmit={handleNewPetSubmit} />
+      ) : (
+        <div className="alert alert-info">
+          {error || "Only pet shelters are able to create pet posts."}
+        </div>
+      )}
       {error && <div className="error-message">{error}</div>}
     </div>
   );

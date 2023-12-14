@@ -10,10 +10,6 @@ function Footer() {
             <Link to="/about" style={{ color: "inherit" }}>
               About
             </Link>{" "}
-            |{" "}
-            <Link to="/how-it-works" style={{ color: "inherit" }}>
-              How It Works
-            </Link>
           </p>
           <p>© 2023 PetPal, Inc.</p>
         </div>

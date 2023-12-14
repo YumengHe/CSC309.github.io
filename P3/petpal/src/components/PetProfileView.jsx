@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const PetProfileView = ({
   pet,
   handleEditToggle,
@@ -5,7 +7,9 @@ const PetProfileView = ({
   currentImage,
   handleDeleteUser,
   currentUser,
+  isAppliable,
 }) => {
+  const navigate = useNavigate();
   const handleDeleteClick = () => {
     if (
       window.confirm(
@@ -70,6 +74,14 @@ const PetProfileView = ({
             Delete Pet Profile
           </button>
         </>
+      )}
+      {isAppliable && (
+        <button
+          className="btn btn-primary"
+          onClick={(petId) => navigate(`/applications/pet/${pet?.id}`)}
+        >
+          Apply Now!
+        </button>
       )}
     </div>
   );

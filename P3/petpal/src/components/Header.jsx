@@ -81,6 +81,9 @@ function Header({ onToggleNotifications, notificationsEnabled }) {
                 Shelters
               </NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link as={Link} to="/newpet">
+              Create
+            </Nav.Link>
           </Nav>
           <Nav className="ms-auto">
             {userLoggedIn ? (
