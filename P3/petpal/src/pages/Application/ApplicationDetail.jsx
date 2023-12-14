@@ -7,6 +7,7 @@ import Sidebar, { generateApplicationSidebar } from "../../components/buttons/Si
 import ApplicationSubmitted from "./ChildComponents/ApplicationSubmitted";
 import SubmissionStatus from "./ChildComponents/SubmissionStatus";
 import { Link45deg } from "react-bootstrap-icons";
+import ApplicationConversation from "../ApplicationComment";
 
 const DATE_FORMATTER = {
     year: "numeric",
@@ -112,6 +113,7 @@ const ApplicationDetails = () => {
                             <SubmissionStatus app={app} currentUser={currentUser} />
                             <hr className="my-4" />
                             {/* Conversation between seeker & shelter */}
+                            <ApplicationConversation applicationId={app.id} currentUser={currentUser} />
                         </>
                     ) : (
                         <>Loading...</>
