@@ -45,17 +45,18 @@ const BlogList = ({ userId }) => {
 
   return (
     <div className="card-body">
-      <h3>User Blogs</h3>
+      <h2 className="card-title">User Blogs</h2>
       {blogs.length === 0 ? (
         <p>No blogs found.</p>
       ) : (
         <ul>
           {blogs.map((blog) => (
-            <li key={blog.id}>
+            <li key={blog.id} className="m-3">
               {blog.title}
+              {"  "}
               <button
                 onClick={() => goToBlog(blog.id)}
-                className="btn btn-secondary"
+                className="btn btn-outline-primary-cust btn-sm"
               >
                 Read
               </button>
@@ -64,7 +65,10 @@ const BlogList = ({ userId }) => {
         </ul>
       )}
       {userId === currentUserId && (
-        <button onClick={handleCreateBlog} className="btn btn-primary mt-3">
+        <button
+          onClick={handleCreateBlog}
+          className="btn btn-primary-cust mt-3"
+        >
           Create New Blog
         </button>
       )}

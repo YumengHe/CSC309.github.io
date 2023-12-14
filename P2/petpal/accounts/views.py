@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from notifications.models import Notification
 from pets.models import PetPost
 from rest_framework import status, views, generics
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
@@ -201,6 +202,7 @@ class UserView(generics.GenericAPIView):
 class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    pagination_class = PageNumberPagination
 
     def get_permissions(self):
         """
@@ -229,7 +231,11 @@ class UserListView(generics.ListAPIView):
         return queryset
 
     def get(self, request, *args, **kwargs):
-        print(self.request.query_params)
         queryset = self.get_queryset()
-        serializer = UserSerializer(queryset, many=True)
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

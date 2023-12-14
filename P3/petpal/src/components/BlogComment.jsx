@@ -5,7 +5,7 @@ import {
   fetchWithTokenWithFullUrl,
 } from "../services/utils";
 
-const ShelterComments = ({ shelterId }) => {
+const BlogComments = ({ blogId }) => {
   const [comments, setComments] = useState([]);
   const [nextPage, setNextPage] = useState(null);
   const [prevPage, setPrevPage] = useState(null);
@@ -13,30 +13,27 @@ const ShelterComments = ({ shelterId }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Fetch comments function with pagination support
   const fetchComments = async (pageUrl) => {
     setLoading(true);
     try {
       const url =
-        pageUrl || `${API_BASE_URL}/comments/shelter-comments/${shelterId}/`;
+        pageUrl || `${API_BASE_URL}/comments/blog-comments/${blogId}/`;
       const response = await fetchWithTokenWithFullUrl(url);
       const data = await response.json();
-      console.log("comments:", data);
       setComments(data?.results);
       setNextPage(data?.next);
       setPrevPage(data?.previous);
     } catch (err) {
       console.error("Error fetching comments:", err);
-      setError(err.getText);
+      setError("Error fetching comments");
     } finally {
       setLoading(false);
     }
   };
 
-  // Initial fetch of comments
   useEffect(() => {
     fetchComments();
-  }, [shelterId]);
+  }, [blogId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,14 +41,14 @@ const ShelterComments = ({ shelterId }) => {
 
     try {
       const response = await fetchWithToken(
-        `/comments/shelter-comments/${shelterId}/`,
+        `/comments/blog-comments/${blogId}/`,
         "POST",
         { text: newComment },
       );
       const data = await response.json();
       if (response.ok) {
         setNewComment("");
-        fetchComments(); // Refetch comments to include the new one
+        fetchComments();
       } else {
         setError(`Error posting comment: ${data.message || response.status}`);
       }
@@ -62,9 +59,9 @@ const ShelterComments = ({ shelterId }) => {
   };
 
   return (
-    <div>
-      <h3>Shelter Comments</h3>
-      {error}
+    <div className="card-body">
+      <h3>Blog Comments</h3>
+      {error && <p className="error">{error}</p>}
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -98,13 +95,17 @@ const ShelterComments = ({ shelterId }) => {
         <textarea
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
+          placeholder="Write your comment here..."
           style={{ marginBottom: "10px" }}
         />
-        <button type="submit">Post Comment</button>
+        <div>
+          <button type="submit" className="btn btn-primary-cust">
+            Post Comment
+          </button>
+        </div>
       </form>
-      {error && <p className="error">{error}</p>}
     </div>
   );
 };
 
-export default ShelterComments;
+export default BlogComments;
