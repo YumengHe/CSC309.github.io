@@ -93,7 +93,7 @@ const UserProfilePage = () => {
 
     try {
       const response = await fetchWithToken(
-        `/accounts/${user.id}/`,
+        `/accounts/${user?.id}/`,
         "PATCH",
         formData,
       );
@@ -154,10 +154,10 @@ const UserProfilePage = () => {
     try {
       const response = await fetchWithToken(`/accounts/${userId}/`, "DELETE");
       if (response.ok) {
-        console.log(`User ${userId} deleted successfully.`);
+        console.log(`User ${user?.username} deleted successfully.`);
         logoutUser();
         navigate("/");
-        window.confirm(`User ${userId} deleted successfully.`);
+        window.confirm(`User ${user?.username} deleted successfully.`);
       }
 
       // Add any post-deletion logic here, like redirecting or updating UI
