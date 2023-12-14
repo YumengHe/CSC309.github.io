@@ -79,14 +79,16 @@ const ShelterComments = ({ shelterId }) => {
             <button
               onClick={() => fetchComments(prevPage)}
               disabled={!prevPage}
+              className="btn btn-outline-primary-cust rounded-circle"
             >
-              Previous
+              &lt;
             </button>
             <button
               onClick={() => fetchComments(nextPage)}
               disabled={!nextPage}
+              className="btn btn-outline-primary-cust rounded-circle"
             >
-              Next
+              &gt;
             </button>
           </div>
         </>
@@ -98,7 +100,8 @@ const ShelterComments = ({ shelterId }) => {
         <textarea
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
-          style={{ marginBottom: "10px" }}
+          placeholder="Write your comment here..."
+          className="form-control mt-3 mb-3"
         />
         <div>
           <button type="submit" className="btn btn-primary-cust">
