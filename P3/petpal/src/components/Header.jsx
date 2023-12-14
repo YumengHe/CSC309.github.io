@@ -5,14 +5,7 @@ import {
   isUserLoggedIn,
   logoutUser,
 } from "../services/userService";
-import {
-  Container,
-  Form,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Dropdown,
-} from "react-bootstrap";
+import { Container, Form, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { PersonCircle } from "react-bootstrap-icons";
 
 function Header({ onToggleNotifications, notificationsEnabled }) {
@@ -116,7 +109,7 @@ function Header({ onToggleNotifications, notificationsEnabled }) {
                   <NavDropdown.Item as={Link} to={`/notifications`}>
                     Notification
                   </NavDropdown.Item>
-                  <Dropdown.Divider />
+                  <NavDropdown.Divider />
                   <NavDropdown.Item as={Link} onClick={handleLogout}>
                     Logout
                   </NavDropdown.Item>
