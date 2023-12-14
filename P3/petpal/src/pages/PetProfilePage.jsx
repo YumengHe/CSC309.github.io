@@ -151,7 +151,7 @@ const PetProfilePage = () => {
   }
 
   const canEdit = currentUser?.id === pet.shelter;
-  const canApply = currentUser?.role === "seeker";
+  const canApply = currentUser?.role !== "shelter";
   // const canEdit = true;
 
   return (

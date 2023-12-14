@@ -3,7 +3,7 @@ const EditPetForm = ({
   handleSubmit,
   handleFormChange,
   handleFileChange,
-  currentPetImage,
+  currentImage,
   handleEditToggle,
 }) => {
   return (
@@ -129,7 +129,7 @@ const EditPetForm = ({
             />
             {pet?.image && (
               <img
-                src={currentPetImage}
+                src={currentImage}
                 alt="Pet"
                 style={{ width: "200px", marginTop: "10px" }}
               />
