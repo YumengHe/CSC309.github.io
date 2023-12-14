@@ -30,14 +30,97 @@ const EditPetForm = ({
               onChange={handleFormChange}
             />
           </div>
-
+          {/* Species Field */}
           <div className="mb-3">
-            <label>Species: </label>
-            {/* Add more fields as needed for species, breed, age, etc. */}
+            <label htmlFor="species">Species: </label>
+            <select
+              id="species"
+              name="species"
+              className="form-control"
+              value={pet?.species || ""}
+              onChange={handleFormChange}
+            >
+              <option value="dog">Dog</option>
+              <option value="cat">Cat</option>
+              <option value="other">Other</option>
+            </select>
           </div>
+
+          {/* Breed Field */}
           <div className="mb-3">
-            <label>Pet Image: </label>
+            <label htmlFor="breed">Breed: </label>
             <input
+              id="breed"
+              name="breed"
+              className="form-control"
+              value={pet?.breed || ""}
+              onChange={handleFormChange}
+            />
+          </div>
+
+          {/* Age Field */}
+          <div className="mb-3">
+            <label htmlFor="age">Age: </label>
+            <input
+              id="age"
+              name="age"
+              type="number"
+              className="form-control"
+              value={pet?.age || ""}
+              onChange={handleFormChange}
+            />
+          </div>
+
+          {/* Size Field */}
+          <div className="mb-3">
+            <label htmlFor="size">Size: </label>
+            <select
+              id="size"
+              name="size"
+              className="form-control"
+              value={pet?.size || ""}
+              onChange={handleFormChange}
+            >
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+              <option value="extra_large">Extra Large</option>
+            </select>
+          </div>
+
+          {/* Color Field */}
+          <div className="mb-3">
+            <label htmlFor="color">Color: </label>
+            <input
+              id="color"
+              name="color"
+              className="form-control"
+              value={pet?.color || ""}
+              onChange={handleFormChange}
+            />
+          </div>
+
+          {/* Gender Field */}
+          <div className="mb-3">
+            <label htmlFor="gender">Gender: </label>
+            <select
+              id="gender"
+              name="gender"
+              className="form-control"
+              value={pet?.gender || ""}
+              onChange={handleFormChange}
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="unknown">Unknown</option>
+            </select>
+          </div>
+
+          {/* Image Field */}
+          <div className="mb-3">
+            <label htmlFor="image">Pet Image: </label>
+            <input
+              id="image"
               name="image"
               type="file"
               accept="image/*"

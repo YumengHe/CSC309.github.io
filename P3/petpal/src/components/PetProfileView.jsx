@@ -1,4 +1,20 @@
-const PetProfileView = ({ pet, handleEditToggle, isEditable }) => {
+const PetProfileView = ({
+  pet,
+  handleEditToggle,
+  isEditable,
+  currentImage,
+  handleDeleteUser,
+  currentUser,
+}) => {
+  const handleDeleteClick = () => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this pet? This action cannot be undone.",
+      )
+    ) {
+      handleDeleteUser(pet?.id);
+    }
+  };
   return (
     <div id="pet-profile-view" className="card-body">
       <p>
@@ -6,6 +22,9 @@ const PetProfileView = ({ pet, handleEditToggle, isEditable }) => {
       </p>
       <p>
         <strong>Name:</strong> {pet?.name}
+      </p>
+      <p>
+        <strong>Shelter:</strong> {pet?.shelter}
       </p>
       <p>
         <strong>Description:</strong> {pet?.description}
@@ -35,7 +54,7 @@ const PetProfileView = ({ pet, handleEditToggle, isEditable }) => {
         <p>
           <strong>Pet Image:</strong>
           <img
-            src={pet.image}
+            src={currentImage}
             alt={pet.name}
             className="img-thumbnail mt-2"
             style={{ width: "200px" }}
@@ -43,9 +62,14 @@ const PetProfileView = ({ pet, handleEditToggle, isEditable }) => {
         </p>
       )}
       {isEditable && (
-        <button className="btn btn-primary" onClick={handleEditToggle}>
-          Edit Pet Profile
-        </button>
+        <>
+          <button className="btn btn-primary" onClick={handleEditToggle}>
+            Edit Pet Profile
+          </button>
+          <button className="btn btn-primary" onClick={handleDeleteClick}>
+            Delete Pet Profile
+          </button>
+        </>
       )}
     </div>
   );
