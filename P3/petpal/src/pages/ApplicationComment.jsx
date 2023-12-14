@@ -16,7 +16,8 @@ const ApplicationConversation = ({ applicationId, currentUser }) => {
       );
       if (!response.ok) throw new Error("Network response was not ok");
       const data = await response.json();
-      setConversations(data);
+      console.log(data);
+      setConversations(data.results);
     } catch (err) {
       setError("Error fetching conversations");
     } finally {
@@ -55,7 +56,7 @@ const ApplicationConversation = ({ applicationId, currentUser }) => {
         <p>Loading conversations...</p>
       ) : (
         <div className="conversations-list">
-          {conversations.map((conversation) => (
+          {conversations?.map((conversation) => (
             <div
               key={conversation.id}
               className={`message ${

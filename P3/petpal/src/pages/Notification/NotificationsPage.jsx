@@ -69,7 +69,8 @@ const NotificationsPage = () => {
             } else {
                 // Update succeed
                 setShowAlert({ show: true, msg: "Deletion succeed.", variant: "success" });
-                navigate("/notifications");
+                // Set query param to reload list, otherwise deleted item won't go
+                setSearchParams(INIT_QUERY_PARAM);
             }
         } catch (error) {
             console.error("DELETE NOTIFICATION failed:", error);
