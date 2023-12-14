@@ -1,0 +1,116 @@
+/* PetSearchPage.css */
+*{
+    padding:0;
+    margin:0;
+}
+.content {
+    background-color: #F5EBEB;
+}
+.pet-cards-container {
+    background-color: #F5EBEB;
+}
+.pet-search-page {
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F5EBEB;
+    padding:0;
+    margin:0;
+  }
+  
+  .filter-sort-sidebar {
+    flex-basis: 250px;
+    padding-right: 20px;
+    padding-top: 2rem; /* Added padding at the top for spacing */
+    background-color: #F5EBEB; /* Assuming you want the same background as the about-section */
+  }
+  
+  .filter-section h2,
+  .sort-section h2 {
+    text-align: center;
+    color: #867070;
+    font-weight: 700;
+    margin-bottom: 0.5rem; /* Add some space below the headers */
+  }
+  
+  .filter-section,
+  .sort-section {
+    background-color: #fff; /* Optional: if you want these sections to stand out */
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for filter and sort select elements and buttons */
+  .filter-sort-sidebar select,
+  .filter-sort-sidebar button {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pet-cards-main {
+    padding-top: 2rem;
+    flex-grow: 1;
+    padding-left: 1rem; /* Added padding for spacing from the sidebar */
+  }
+  
+  .pet-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .pet-card {
+    background-color: #fff; /* Assuming you want a white background for cards */
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .pet-card h3 {
+    color: #867070;
+    font-weight: 700;
+  }
+  
+  .pet-card p {
+    color: #867070;
+  }
+  
+  .pet-card button {
+    background-color: #867070;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+  }
+  
+  .pet-card button:hover {
+    background-color: #a39090; /* A lighter shade for hover effect */
+  }
+  
+  /* Responsive design adjustments */
+  @media screen and (max-width: 768px) {
+    .pet-search-page {
+      flex-direction: column;
+    }
+  
+    .filter-sort-sidebar {
+      flex-basis: auto;
+      padding-right: 0;
+    }
+  
+    .pet-cards-main {
+      padding-left: 0;
+    }
+  }
+  

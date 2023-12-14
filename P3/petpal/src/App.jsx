@@ -17,6 +17,8 @@ import ApplicationDetails from "./pages/Application/ApplicationDetail";
 import NewApplicationPage from "./pages/Application/NewApplicationPage";
 import NewBlogPage from "./pages/NewBlogPage";
 import BlogPage from "./pages/BlogPage";
+import NewPetPage from "./pages/NewPetPage";
+import PetProfilePage from "./pages/PetProfilePage";
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
             <Route path="/blogs/:id" element={<BlogPage />} />
             <Route path="/search/shelter" element={<ShelterSearchPage />} />
             <Route path="/search/pets" element={<PetSearchPage />} />
+            <Route path="/newpet" element={<NewPetPage />} />
+            <Route path="/pets/:id" elemenet={<PetProfilePage />} />
             <Route path="/how-it-works" element={<HowItWorkPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/applications" element={<ApplicationsPage />} />
