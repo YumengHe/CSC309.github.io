@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
+  API_BASE_URL,
   fetchWithToken,
   fetchWithTokenWithFullUrl,
-  API_BASE_URL,
 } from "../services/utils";
 
 const BlogComments = ({ blogId }) => {
@@ -59,7 +59,7 @@ const BlogComments = ({ blogId }) => {
   };
 
   return (
-    <div>
+    <div className="card-body">
       <h3>Blog Comments</h3>
       {error && <p className="error">{error}</p>}
       {loading ? (
@@ -76,14 +76,16 @@ const BlogComments = ({ blogId }) => {
             <button
               onClick={() => fetchComments(prevPage)}
               disabled={!prevPage}
+              className="btn btn-outline-primary-cust rounded-circle"
             >
-              Previous
+              &lt;
             </button>
             <button
               onClick={() => fetchComments(nextPage)}
               disabled={!nextPage}
+              className="btn btn-outline-primary-cust rounded-circle"
             >
-              Next
+              &gt;
             </button>
           </div>
         </>
@@ -96,9 +98,13 @@ const BlogComments = ({ blogId }) => {
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="Write your comment here..."
-          style={{ marginBottom: "10px" }}
+          className="form-control mt-3 mb-3"
         />
-        <button type="submit">Post Comment</button>
+        <div>
+          <button type="submit" className="btn btn-primary-cust">
+            Post Comment
+          </button>
+        </div>
       </form>
     </div>
   );

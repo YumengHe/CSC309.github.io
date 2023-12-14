@@ -13,6 +13,7 @@ const PetProfilePage = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   useEffect(() => {
+    console.log("Pet ID:", petId);
     fetchPetProfile();
   }, [petId, isEditMode]);
 

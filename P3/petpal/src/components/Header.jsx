@@ -6,6 +6,7 @@ import {
   logoutUser,
 } from "../services/userService";
 import { Container, Form, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { PersonCircle } from "react-bootstrap-icons";
 
 function Header({ onToggleNotifications, notificationsEnabled }) {
   const navigate = useNavigate();
@@ -92,10 +93,28 @@ function Header({ onToggleNotifications, notificationsEnabled }) {
                     </span>
                   )}
                 </Nav.Item>
-                <Nav.Link as={Link} to={`/user-profile/${userInfo?.id}`}>
+                {/* <Nav.Link as={Link} to={`/user-profile/${userInfo?.id}`}>
                   Profile
-                </Nav.Link>
-                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                </Nav.Link> */}
+                <NavDropdown title={<PersonCircle />}>
+                  <NavDropdown.Item
+                    as={Link}
+                    to={`/user-profile/${userInfo?.id}`}
+                  >
+                    Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to={`/applications`}>
+                    Application
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to={`/notifications`}>
+                    Notification
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item as={Link} onClick={handleLogout}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+                {/* <Nav.Link onClick={handleLogout}>Logout</Nav.Link> */}
                 <Nav.Item className="d-flex align-items-center">
                   <Form.Switch
                     id="custom-switch"

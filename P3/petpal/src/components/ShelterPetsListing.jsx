@@ -27,8 +27,8 @@ const ShelterPetListings = ({ shelterId }) => {
   }, [shelterId]);
 
   return (
-    <div className="shelter-pet-listings pt-4">
-      <h2>Pet Listings</h2>
+    <div className="shelter-pet-listings pt-4 card-body">
+      <h2 className="card-title">Pet Listings</h2>
       <div className="row">
         {pets.length > 0 ? (
           pets.map((pet) => (
@@ -49,7 +49,7 @@ const ShelterPetListings = ({ shelterId }) => {
                     {pet.description || "No description available"}
                   </p>
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-primary-cust"
                     onClick={() => handlePetClick(pet.id)}
                   >
                     View Details

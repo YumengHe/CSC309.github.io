@@ -29,7 +29,7 @@ const LoginForm = ({
               placeholder="Password"
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary-cust">
             Login
           </button>
           {error && <p className="text-danger mt-3">{error}</p>}

@@ -4,8 +4,9 @@ import { API_BASE_URL, fetchWithToken } from "../services/utils";
 import EditUserProfileForm from "../components/forms/EditUserProfileForm";
 import UserProfileView from "../components/UserProfileView";
 import ShelterPetListings from "../components/ShelterPetsListing";
-import ShelterComments from "./ShelterComment";
+import ShelterComments from "../components/ShelterComment";
 import BlogList from "../components/BlogList";
+import { logoutUser } from "../services/userService";
 
 const UserProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -92,7 +93,7 @@ const UserProfilePage = () => {
 
     try {
       const response = await fetchWithToken(
-        `/accounts/${user.id}/`,
+        `/accounts/${user?.id}/`,
         "PATCH",
         formData,
       );
@@ -149,6 +150,22 @@ const UserProfilePage = () => {
     setImagePreviewUrl(URL.createObjectURL(file));
   };
 
+  const handleDeleteUser = async (userId) => {
+    try {
+      const response = await fetchWithToken(`/accounts/${userId}/`, "DELETE");
+      if (response.ok) {
+        console.log(`User ${user?.username} deleted successfully.`);
+        logoutUser();
+        navigate("/");
+        window.confirm(`User ${user?.username} deleted successfully.`);
+      }
+
+      // Add any post-deletion logic here, like redirecting or updating UI
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+
   return (
     <div className="container mt-4">
       <h1 className="text-center mb-3">
@@ -182,6 +199,7 @@ const UserProfilePage = () => {
                 user={user}
                 currentProfilePic={currentProfilePic}
                 handleEditToggle={handleEditToggle}
+                handleDeleteUser={handleDeleteUser}
                 currentUser={currentUser}
                 userId={userId}
               />
@@ -189,12 +207,16 @@ const UserProfilePage = () => {
           </div>
           {user?.role === "shelter" && (
             <>
-              <ShelterPetListings shelterId={user?.id} />
-              <ShelterComments shelterId={user?.id} />
+              <div className="card mt-4 mb-4">
+                <ShelterPetListings shelterId={user?.id} />
+              </div>
+              <div className="card mb-4">
+                <ShelterComments shelterId={user?.id} />
+              </div>
             </>
           )}
           {user?.id === parseInt(userId) && (
-            <div className="card">
+            <div className="card mb-4">
               <BlogList userId={user?.id} />
             </div>
           )}

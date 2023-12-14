@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchWithToken } from "../services/utils";
-import BlogComments from "./BlogComment";
+import BlogComments from "../components/BlogComment";
 
 const BlogPage = () => {
   const { id } = useParams();
@@ -28,19 +28,24 @@ const BlogPage = () => {
     fetchBlogPost();
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div className="text-center my-3">Loading...</div>;
+  if (error)
+    return <div className="alert alert-danger my-3">Error: {error}</div>;
 
   return (
-    <div>
+    <div className="container my-4">
       {blogPost && (
-        <>
-          <h1>{blogPost?.title}</h1>
-          <p>Author: {blogPost?.author_username}</p>
-          <p>Updated at: {blogPost?.updated_at}</p>
-          <p>{blogPost?.content}</p>
-          <BlogComments blogId={id} />
-        </>
+        <div>
+          <h1 className="display-4">{blogPost.title}</h1>
+          <p className="text-muted">Author: {blogPost.author_username}</p>
+          <p className="text-muted">
+            Updated at: {new Date(blogPost.updated_at).toLocaleString()}
+          </p>
+          <div className="my-3 mb-4">{blogPost.content}</div>
+          <div className="card mb-4">
+            <BlogComments blogId={id} />
+          </div>
+        </div>
       )}
     </div>
   );

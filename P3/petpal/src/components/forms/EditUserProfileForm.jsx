@@ -73,13 +73,13 @@ const EditUserProfileForm = ({
               />
             )}
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary-cust">
             Save Changes
           </button>
           <button
             type="button"
             onClick={handleEditToggle}
-            className="btn btn-secondary ms-2"
+            className="btn btn-outline-primary-cust ms-2"
           >
             Cancel
           </button>
