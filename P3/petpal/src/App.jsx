@@ -37,7 +37,7 @@ function App() {
             <Route path="/search/shelter" element={<ShelterSearchPage />} />
             <Route path="/search/pets" element={<PetSearchPage />} />
             <Route path="/newpet" element={<NewPetPage />} />
-            <Route path="/pets/:id" elemenet={<PetProfilePage />} />
+            <Route path="/pets/:petId" element={<PetProfilePage />} />
             <Route path="/how-it-works" element={<HowItWorkPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/applications" element={<ApplicationsPage />} />

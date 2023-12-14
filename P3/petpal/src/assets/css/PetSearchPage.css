@@ -4,10 +4,10 @@
     margin:0;
 }
 .content {
-    background-color: #F5EBEB;
+    /* background-color: #F5EBEB; */
 }
 .pet-cards-container {
-    background-color: #F5EBEB;
+    /* background-color: #F5EBEB; */
 }
 .pet-search-page {
     display: flex;

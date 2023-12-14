@@ -15,6 +15,10 @@ const PetSearchPage = () => {
   const [sort, setSort] = useState("");
   const navigate = useNavigate();
 
+  // New state variables for pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
   // Initialize filters with URL query parameters
   const initialFilters = {
     status: searchParams.get("status") || "",
@@ -36,7 +40,9 @@ const PetSearchPage = () => {
       }
     });
 
-    fetch(`http://localhost:8000/pets/?${queryParams.toString()}`)
+    fetch(
+      `http://localhost:8000/pets/?page=${currentPage}&${queryParams.toString()}`,
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -45,6 +51,9 @@ const PetSearchPage = () => {
       })
       .then((data) => {
         setPets(data.results);
+        // Assuming `query.page_size` is the number of items per page you want to display
+        const pageSize = queryParams.page_size || data.results.length; // Fallback to number of items in results if page size not defined
+        setTotalPages(Math.ceil(data.count / pageSize));
       })
       .catch((error) => {
         setError(error.message);
@@ -52,7 +61,7 @@ const PetSearchPage = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [filters, queryParams]);
+  }, [filters, queryParams, currentPage]);
 
   const handleFilterChange = (e) => {
     const newFilters = {
@@ -61,6 +70,12 @@ const PetSearchPage = () => {
     };
     setFilters(newFilters);
     setSearchParams(newFilters); // Update URL query parameters
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
   };
 
   const handleSortChange = (e) => {
@@ -123,6 +138,23 @@ const PetSearchPage = () => {
             ))}
           </select>
         </section>
+        <div className="pagination-controls">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
       </aside>
       <main className="pet-cards-main">
         <div className="pet-cards-container">
