@@ -161,29 +161,35 @@ const PetSearchPage = () => {
         <div className="pet-cards-container ">
           {pets.length > 0 ? (
             pets.map((pet) => (
-              <div key={pet.id} className="pet-card card h-auto">
-                <div className="card-body">
+              <div key={pet?.id}>
+                <div className="card">
                   <img
                     src={
                       pet?.image
-                        ? pet.image
+                        ? pet?.image
                         : "https://icons.veryicon.com/png/o/miscellaneous/fresh-icon-1/cat-62.png"
                     }
                     className="card-img-top"
                     alt={`${pet?.name} picture`}
                   />
-
-                  <h3>{pet.name}</h3>
-                  <p>Age: {pet.age || "Unknown"}</p>
-                  <p>Size: {pet.size || "Unknown"}</p>
-                  <p>Gender: {pet.gender || "Unknown"}</p>
-                  <p>
-                    Status:{" "}
-                    {pet.status.charAt(0).toUpperCase() + pet.status.slice(1)}
-                  </p>
-                  <button onClick={() => viewDetails(pet.id)}>
-                    View Detail
-                  </button>
+                  <div className="card-body">
+                    <h3 className="card-title">{pet?.name}</h3>
+                    <p className="card-text">Age: {pet?.age || "Unknown"}</p>
+                    <p className="card-text">Size: {pet?.size || "Unknown"}</p>
+                    <p className="card-text">
+                      Gender: {pet?.gender || "Unknown"}
+                    </p>
+                    <p className="card-text">
+                      Status:{" "}
+                      {pet.status.charAt(0).toUpperCase() + pet.status.slice(1)}
+                    </p>
+                    <button
+                      className="btn btn-outline-primary-cust"
+                      onClick={() => viewDetails(pet.id)}
+                    >
+                      View Detail
+                    </button>
+                  </div>
                 </div>
               </div>
             ))
