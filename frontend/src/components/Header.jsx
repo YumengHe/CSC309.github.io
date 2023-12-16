@@ -6,7 +6,7 @@ import {
   logoutUser,
 } from "../services/userService";
 import { Container, Form, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { PersonCircle, BellSlashFill, BellFill } from "react-bootstrap-icons";
+import { BellFill, BellSlashFill, PersonCircle } from "react-bootstrap-icons";
 
 function Header({ onToggleNotifications, notificationsEnabled }) {
   const navigate = useNavigate();
@@ -30,12 +30,6 @@ function Header({ onToggleNotifications, notificationsEnabled }) {
       }
     };
     checkLoginStatus();
-  }, [userLoggedIn, location]);
-
-  useEffect(() => {
-    // console.log("Login status changed:", userLoggedIn);
-    // console.log("User location:", location.pathname);
-    // Rest of your code
   }, [userLoggedIn, location]);
 
   const handleLogout = async () => {
@@ -108,24 +102,26 @@ function Header({ onToggleNotifications, notificationsEnabled }) {
                     </span>
                   )}
                 </Nav.Item>
-                <NavDropdown title={<PersonCircle size={24} />}>
-                  <NavDropdown.Item
-                    as={Link}
-                    to={`/user-profile/${userInfo?.id}`}
-                  >
-                    Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to={`/applications`}>
-                    Application
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to={`/notifications`}>
-                    Notification
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item as={Link} onClick={handleLogout}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
+                <Nav.Item>
+                  <NavDropdown title={<PersonCircle size={24} />}>
+                    <NavDropdown.Item
+                      as={Link}
+                      to={`/user-profile/${userInfo?.id}`}
+                    >
+                      Profile
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to={`/applications`}>
+                      Application
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to={`/notifications`}>
+                      Notification
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item as={Link} onClick={handleLogout}>
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav.Item>
                 <Nav.Item className="d-flex align-items-center">
                   <Form.Switch
                     id="custom-switch"

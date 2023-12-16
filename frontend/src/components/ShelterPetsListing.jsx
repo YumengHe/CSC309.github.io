@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { fetchWithoutToken } from "../services/utils";
 import { useNavigate } from "react-router-dom";
+import Paginate from "./buttons/PageButtons";
 
 const ShelterPetListings = ({ shelterId }) => {
   const [pets, setPets] = useState([]);
+  const [totalPets, setTotalPets] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1); // Local state for current page
   const navigate = useNavigate();
   const handlePetClick = (petId) => {
     navigate(`/pets/${petId}`);
@@ -13,32 +16,43 @@ const ShelterPetListings = ({ shelterId }) => {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await fetchWithoutToken(`/pets/?shelter=${shelterId}`);
+        const response = await fetchWithoutToken(
+          `/pets/?shelter=${shelterId}&page=${currentPage}`,
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch pets");
         }
         const data = await response.json();
         setPets(data.results);
+        setTotalPets(data.count); // Set total pets from the response
       } catch (error) {
         console.error("Error fetching pets:", error);
       }
     };
 
     fetchPets();
-  }, [shelterId]);
+  }, [shelterId, currentPage]);
+
+  const setPagination = (pageNumber) => {
+    setCurrentPage(pageNumber); // Update the local current page state
+  };
+
+  const itemsPerPage = 10; // Assuming 10 items per page, adjust as needed
+  const totalPages = Math.ceil(totalPets / itemsPerPage);
 
   return (
     <div className="shelter-pet-listings pt-4 card-body">
       <div className="row mb-3">
         <h2 className="card-title">Pet Listings</h2>
         {currentUser?.role === "shelter" && currentUser?.id === shelterId ? (
+        {currentUser?.id === shelterId ? (
           <div className="col col-12">
             <button
               type="button"
-              className="btn btn-outline-primary-cust"
+              className="btn btn-primary-cust"
               onClick={() => navigate("/newpet")}
             >
-              Add Pets
+              Add Another Pet
             </button>
           </div>
         ) : null}
@@ -52,7 +66,7 @@ const ShelterPetListings = ({ shelterId }) => {
                   src={
                     pet?.image
                       ? pet.image
-                      : "https://source.unsplash.com/short-coated-brown-and-white-puppy-eoqnr8ikwFE"
+                      : "https://icons.veryicon.com/png/o/miscellaneous/fresh-icon-1/cat-62.png"
                   }
                   className="card-img-top"
                   alt={`${pet?.name} picture`}
@@ -63,7 +77,7 @@ const ShelterPetListings = ({ shelterId }) => {
                     {pet.description || "No description available"}
                   </p>
                   <button
-                    className="btn btn-primary-cust"
+                    className="btn btn-outline-primary-cust"
                     onClick={() => handlePetClick(pet.id)}
                   >
                     View Details
@@ -76,6 +90,15 @@ const ShelterPetListings = ({ shelterId }) => {
           <p>No pets available at the moment.</p>
         )}
       </div>
+      {totalPages >= 1 && (
+        <div className="mt-3">
+          <Paginate
+            totalPages={totalPages}
+            currentPage={currentPage}
+            paginate={setPagination}
+          />
+        </div>
+      )}
     </div>
   );
 };

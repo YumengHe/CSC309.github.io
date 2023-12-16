@@ -215,11 +215,10 @@ const UserProfilePage = () => {
               </div>
             </>
           )}
-          {user?.id === parseInt(userId) && (
-            <div className="card mb-4">
-              <BlogList userId={user?.id} />
-            </div>
-          )}
+
+          <div className="card mb-4">
+            <BlogList userId={user?.id} />
+          </div>
         </>
       )}
     </div>

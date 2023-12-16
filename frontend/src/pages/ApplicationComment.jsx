@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { fetchWithToken } from "../services/utils"; // Adjust the import path as needed
 
 const ApplicationConversation = ({ applicationId, currentUser }) => {
@@ -76,7 +76,7 @@ const ApplicationConversation = ({ applicationId, currentUser }) => {
           placeholder="Send message ..."
           className="message-input"
         />
-        <button type="submit" className="send-button">
+        <button type="submit" className="btn btn-outline-primary-cust">
           Send
         </button>
       </form>

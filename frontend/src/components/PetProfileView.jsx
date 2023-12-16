@@ -67,10 +67,10 @@ const PetProfileView = ({
       )}
       {isEditable && (
         <>
-          <button className="btn btn-primary" onClick={handleEditToggle}>
+          <button className="btn btn-primary-cust" onClick={handleEditToggle}>
             Edit Pet Profile
           </button>
-          <button className="btn btn-primary" onClick={handleDeleteClick}>
+          <button className="btn btn-danger" onClick={handleDeleteClick}>
             Delete Pet Profile
           </button>
         </>

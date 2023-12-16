@@ -45,7 +45,7 @@ const BlogList = ({ userId }) => {
 
   return (
     <div className="card-body">
-      <h2 className="card-title">User Blogs</h2>
+      <h2 className="card-title">Blogs</h2>
       {blogs.length === 0 ? (
         <p>No blogs found.</p>
       ) : (

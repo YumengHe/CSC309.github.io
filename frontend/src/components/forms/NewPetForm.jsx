@@ -194,7 +194,7 @@ const NewPetForm = ({ error, onSubmit }) => {
               {error.image && <div className="text-danger">{error.image}</div>}
             </div>
             <div className="mb-3">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary-cust">
                 Create Pet Post
               </button>
             </div>

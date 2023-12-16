@@ -35,8 +35,13 @@ const LoginForm = ({
           {error && <p className="text-danger mt-3">{error}</p>}
         </form>
         <div className="text-center mt-3">
-          <span>Don&apos;t have an account? </span>
-          <button onClick={navigateToRegister} className="btn btn-link">
+          <span className="d-inline-block align-middle">
+            Don&apos;t have an account?
+          </span>
+          <button
+            onClick={navigateToRegister}
+            className="btn btn-link d-inline-block align-middle"
+          >
             Register
           </button>
         </div>

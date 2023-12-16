@@ -24,7 +24,7 @@ const NotificationPopup = ({ notificationContent, onClose }) => {
           <p className="card-text">{notificationContent}</p>
           <Link
             to="/notifications"
-            className="card-link"
+            className="card-link card-link btn-link"
             onClick={handleLinkClick}
           >
             View All Notifications

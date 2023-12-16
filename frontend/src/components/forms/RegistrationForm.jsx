@@ -144,14 +144,19 @@ const RegistrationForm = ({ error, onSubmit, navigateToLogin }) => {
               )}
             </div>
             <div className="mb-3">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary-cust">
                 Register
               </button>
             </div>
           </form>
           <div className="text-center mt-3">
-            <span>Already have an account? </span>
-            <button onClick={navigateToLogin} className="btn btn-link">
+            <span className="d-inline-block align-middle">
+              Already have an account?{" "}
+            </span>
+            <button
+              onClick={navigateToLogin}
+              className="btn btn-link d-inline-block align-middle"
+            >
               Login
             </button>
           </div>
