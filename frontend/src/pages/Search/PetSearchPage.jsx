@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "../../assets/css/PetSearchPage.css";
 
 const STATUS_CHOICES = ["available", "pending", "adopted", "withdrawn"];
@@ -158,19 +158,33 @@ const PetSearchPage = () => {
         </div>
       </aside>
       <main className="pet-cards-main">
-        <div className="pet-cards-container">
+        <div className="pet-cards-container ">
           {pets.length > 0 ? (
             pets.map((pet) => (
-              <div key={pet.id} className="pet-card">
-                <h3>{pet.name}</h3>
-                <p>Age: {pet.age || "Unknown"}</p>
-                <p>Size: {pet.size || "Unknown"}</p>
-                <p>Gender: {pet.gender || "Unknown"}</p>
-                <p>
-                  Status:{" "}
-                  {pet.status.charAt(0).toUpperCase() + pet.status.slice(1)}
-                </p>
-                <button onClick={() => viewDetails(pet.id)}>View Detail</button>
+              <div key={pet.id} className="pet-card card h-auto">
+                <div className="card-body">
+                  <img
+                    src={
+                      pet?.image
+                        ? pet.image
+                        : "https://icons.veryicon.com/png/o/miscellaneous/fresh-icon-1/cat-62.png"
+                    }
+                    className="card-img-top"
+                    alt={`${pet?.name} picture`}
+                  />
+
+                  <h3>{pet.name}</h3>
+                  <p>Age: {pet.age || "Unknown"}</p>
+                  <p>Size: {pet.size || "Unknown"}</p>
+                  <p>Gender: {pet.gender || "Unknown"}</p>
+                  <p>
+                    Status:{" "}
+                    {pet.status.charAt(0).toUpperCase() + pet.status.slice(1)}
+                  </p>
+                  <button onClick={() => viewDetails(pet.id)}>
+                    View Detail
+                  </button>
+                </div>
               </div>
             ))
           ) : (
