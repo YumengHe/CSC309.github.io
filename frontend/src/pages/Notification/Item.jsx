@@ -16,7 +16,10 @@ const DATE_FORMATTER = {
 const NotificationItem = ({ notification, onClick }) => (
     <Link
         to="#"
-        onClick={() => onClick(notification)}
+        onClick={(event) => {
+            event.preventDefault(); // prevent loading page from showing Modal
+            onClick(notification);
+        }}
         className="list-group-item list-group-item-action d-flex align-items-center gap-lg-3 gap-1 py-3"
     >
         <div className="col col-1 main-dark-color d-flex justify-content-center">
