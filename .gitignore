@@ -345,3 +345,4 @@ fabric.properties
 !*/migrations/__init__.py
 /backend/petpal/media/*
 .vscode/settings.json
+!/backend/petpal/media/user_profiles/default_profile.png
