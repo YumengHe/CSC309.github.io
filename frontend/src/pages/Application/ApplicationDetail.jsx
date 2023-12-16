@@ -92,10 +92,16 @@ const ApplicationDetails = () => {
                                     <b>Submitted: </b>
                                     {new Date(app.created_at).toLocaleString(undefined, DATE_FORMATTER)}
                                 </div>
-                                <div className="col">
-                                    <b>Updated: </b>
-                                    {new Date(app.last_updated).toLocaleString(undefined, DATE_FORMATTER)}
-                                </div>
+                                {/* Calculate date different in minutes  https://stackoverflow.com/a/7709819 */}
+                                {Math.round(
+                                    (((new Date(app.last_updated) - new Date(app.created_at)) % 86400000) % 3600000) /
+                                        60000
+                                ) <= 1 ? null : (
+                                    <div className="col">
+                                        <b>Updated: </b>
+                                        {new Date(app.last_updated).toLocaleString(undefined, DATE_FORMATTER)}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}

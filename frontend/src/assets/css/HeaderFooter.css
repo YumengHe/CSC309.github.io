@@ -24,7 +24,6 @@
     color: var(--main-light-color);
 }
 
-
 .navbar-nav a,
 .navbar-nav a::after {
     color: var(--main-light-color);
@@ -45,6 +44,16 @@
 
 .dropdown-menu a {
     color: var(--main-dark-color);
+}
+
+.dropdown-item:hover {
+    background-color: var(--main-light-color);
+    color: var(--main-dark-color);
+}
+
+.dropdown-item:active {
+    background-color: var(--main-dark-color);
+    color: var(--main-light-color);
 }
 
 footer {
