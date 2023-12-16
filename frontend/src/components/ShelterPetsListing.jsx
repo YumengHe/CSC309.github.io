@@ -89,7 +89,7 @@ const ShelterPetListings = ({ shelterId }) => {
           <p>No pets available at the moment.</p>
         )}
       </div>
-      {totalPages >= 1 && (
+      {totalPages > 1 && (
         <div className="mt-3">
           <Paginate
             totalPages={totalPages}
