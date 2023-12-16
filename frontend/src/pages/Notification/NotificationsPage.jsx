@@ -6,7 +6,6 @@ import FilterButtons from "../../components/buttons/FilterButtons";
 import SortRadioButtons from "../../components/buttons/SortButtons";
 import Paginate from "../../components/buttons/PageButtons";
 import { fetchWithToken } from "../../services/utils";
-import { EnvelopeFill } from "react-bootstrap-icons";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
@@ -26,6 +25,7 @@ const NotificationsPage = () => {
     const [notifications, setNotifications] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [reload, setReload] = useState({ reloadToggler: false, itemCount: 0 });
     const query = useMemo(
         () => ({
             page: parseInt(searchParams.get("page") ?? 1),
@@ -69,8 +69,14 @@ const NotificationsPage = () => {
             } else {
                 // Update succeed
                 setShowAlert({ show: true, msg: "Deletion succeed.", variant: "success" });
-                // Set query param to reload list, otherwise deleted item won't go
-                setSearchParams(INIT_QUERY_PARAM);
+                // Trigger useEffect dependency, otherwise deleted item still show up
+                if (reload.itemCount == 1) {
+                    // console.log("INIT QUERY ing...");
+                    // Reset search param when running out of items from current fetch
+                    setSearchParams(INIT_QUERY_PARAM);
+                }
+                // console.log("Reloading...", reload);
+                setReload({ ...reload, reloadToggler: !reload.reloadToggler });
             }
         } catch (error) {
             console.error("DELETE NOTIFICATION failed:", error);
@@ -86,8 +92,14 @@ const NotificationsPage = () => {
             } else {
                 // Update succeed
                 setShowAlert({ show: true, msg: "Succeed.", variant: "success" });
-                // Set query param to reload list, otherwise unread icon won't refresh
-                setSearchParams(INIT_QUERY_PARAM);
+                // Trigger useEffect dependency, otherwise unread icon won't refresh
+                if (reload.itemCount == 1) {
+                    // console.log("INIT QUERY ing...");
+                    // Reset search param when running out of items from current fetch
+                    setSearchParams(INIT_QUERY_PARAM);
+                }
+                // console.log("Reloading...", reload);
+                setReload({ ...reload, reloadToggler: !reload.reloadToggler });
             }
         } catch (error) {
             console.error("MARK NOTIFICATION READ failed:", error);
@@ -119,15 +131,16 @@ const NotificationsPage = () => {
         if (!currentUser) {
             navigate("/login");
         } else {
-            const param = new URLSearchParams(location.search);
             const fetchNotifications = async () => {
+                const param = new URLSearchParams(location.search);
                 try {
                     await fetchWithToken(`/notifications/?${param.toString()}`)
                         .then((response) => response.json())
                         .then((json) => {
                             setNotifications(json.results);
                             setTotalPages(Math.ceil(json.count / query.page_size));
-                            // console.log("NOTIFICATIONS:", notifications);
+                            setReload({ ...reload, itemCount: json.results?.length });
+                            // console.log("NOTIFICATIONS:", json.results.length, json);
                             // console.log("PARAM:", param.toString());
                         });
                 } catch (error) {
@@ -136,7 +149,7 @@ const NotificationsPage = () => {
             };
             fetchNotifications();
         }
-    }, [query]);
+    }, [query, reload.reloadToggler]);
 
     return currentUser ? (
         <div className="container mt-5">
