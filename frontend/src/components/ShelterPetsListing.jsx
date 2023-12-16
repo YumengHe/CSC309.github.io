@@ -31,7 +31,7 @@ const ShelterPetListings = ({ shelterId }) => {
     <div className="shelter-pet-listings pt-4 card-body">
       <div className="row mb-3">
         <h2 className="card-title">Pet Listings</h2>
-        {currentUser.role === "shelter" ? (
+        {currentUser?.role === "shelter" && currentUser?.id === shelterId ? (
           <div className="col col-12">
             <button
               type="button"
