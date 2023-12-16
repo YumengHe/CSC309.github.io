@@ -8,6 +8,7 @@ const ShelterPetListings = ({ shelterId }) => {
   const handlePetClick = (petId) => {
     navigate(`/pets/${petId}`);
   };
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -28,7 +29,20 @@ const ShelterPetListings = ({ shelterId }) => {
 
   return (
     <div className="shelter-pet-listings pt-4 card-body">
-      <h2 className="card-title">Pet Listings</h2>
+      <div className="row mb-3">
+        <h2 className="card-title">Pet Listings</h2>
+        {currentUser.role === "shelter" ? (
+          <div className="col col-12">
+            <button
+              type="button"
+              className="btn btn-outline-primary-cust"
+              onClick={() => navigate("/newpet")}
+            >
+              Add Pets
+            </button>
+          </div>
+        ) : null}
+      </div>
       <div className="row">
         {pets.length > 0 ? (
           pets.map((pet) => (
