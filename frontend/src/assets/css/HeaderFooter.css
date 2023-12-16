@@ -1,0 +1,52 @@
+/*  https://www.w3schools.com/cssref/pr_import_rule.php */
+@import "Base.css";
+
+#navbar {
+    color: var(--main-light-color);
+    background-color: var(--main-dark-color);
+}
+
+.navbar-brand {
+    font-size: 3rem;
+    padding-right: 1.5rem;
+}
+
+.navbar-brand:hover {
+    opacity: 0.68;
+}
+
+.navbar-brand:focus,
+.navbar-brand:focus::after {
+    color: var(--main-light-color);
+}
+
+.navbar-brand:hover {
+    color: var(--main-light-color);
+}
+
+
+.navbar-nav a,
+.navbar-nav a::after {
+    color: var(--main-light-color);
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.show,
+.nav-link:focus,
+.nav-link:hover {
+    color: var(--main-mid-color);
+}
+
+
+.navbar-nav a:hover {
+    opacity: 0.68;
+}
+
+.dropdown-menu a {
+    color: var(--main-dark-color);
+}
+
+footer {
+    background-color: var(--main-dark-color);
+}

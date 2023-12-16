@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchWithToken } from "../services/utils";
 import NotificationPopup from "./NotificationPopup";
 import { isUserLoggedIn } from "../services/userService";
+import "../assets/css/HeaderFooter.css";
 
 const Layout = ({ children }) => {
   const [notification, setNotification] = useState(null);

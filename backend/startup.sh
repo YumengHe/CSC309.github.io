@@ -25,8 +25,8 @@ pip install -r requirements.txt
 cd petpal || exit
 # Running database migrations (if your project requires them)
 echo "Applying database migrations..."
-python manage.py makemigrations  # Adjust this line as per your project's framework
-python manage.py migrate # Adjust this line as per your project's framework
+python3 manage.py makemigrations  # Adjust this line as per your project's framework
+python3 manage.py migrate # Adjust this line as per your project's framework
 
 echo "Setup is complete."
 

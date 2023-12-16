@@ -6,7 +6,7 @@ import {
   logoutUser,
 } from "../services/userService";
 import { Container, Form, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { PersonCircle } from "react-bootstrap-icons";
+import { PersonCircle, BellSlashFill, BellFill } from "react-bootstrap-icons";
 
 function Header({ onToggleNotifications, notificationsEnabled }) {
   const navigate = useNavigate();
@@ -50,9 +50,9 @@ function Header({ onToggleNotifications, notificationsEnabled }) {
   };
 
   return (
-    <Navbar bg="light" expand="lg" className="shadow-sm">
+    <Navbar expand="lg" className="shadow-sm" id="navbar">
       <Container>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/" className="fw-bolder main-light-color">
           PetPal
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -61,8 +61,12 @@ function Header({ onToggleNotifications, notificationsEnabled }) {
           {userLoggedIn && (
             <span className="d-lg-none fw-bold">Hi, {userInfo?.username}</span>
           )}
-          <Nav className="me-auto">
-            <NavDropdown title="Adopt" id="nav-dropdown-adopt">
+          <Nav className="me-auto gap-3">
+            <NavDropdown
+              title="Adopt"
+              id="nav-dropdown-adopt"
+              className="fw-bold"
+            >
               <NavDropdown.Item as={Link} to="/search/pets/?species=dog">
                 Dogs
               </NavDropdown.Item>
@@ -73,7 +77,11 @@ function Header({ onToggleNotifications, notificationsEnabled }) {
                 Others
               </NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Search" id="nav-dropdown-search">
+            <NavDropdown
+              title="Search"
+              id="nav-dropdown-search"
+              className="fw-bold"
+            >
               <NavDropdown.Item as={Link} to="/search/pets">
                 Pets
               </NavDropdown.Item>
@@ -81,11 +89,15 @@ function Header({ onToggleNotifications, notificationsEnabled }) {
                 Shelters
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link as={Link} to="/newpet">
-              Create
-            </Nav.Link>
+            <Nav.Item
+              as={Link}
+              to={"/about"}
+              className="align-self-lg-center fw-bold"
+            >
+              About
+            </Nav.Item>
           </Nav>
-          <Nav className="ms-auto">
+          <Nav className="ms-auto gap-3">
             {userLoggedIn ? (
               <>
                 <Nav.Item className="align-self-center me-3">
@@ -96,10 +108,7 @@ function Header({ onToggleNotifications, notificationsEnabled }) {
                     </span>
                   )}
                 </Nav.Item>
-                {/* <Nav.Link as={Link} to={`/user-profile/${userInfo?.id}`}>
-                  Profile
-                </Nav.Link> */}
-                <NavDropdown title={<PersonCircle />}>
+                <NavDropdown title={<PersonCircle size={24} />}>
                   <NavDropdown.Item
                     as={Link}
                     to={`/user-profile/${userInfo?.id}`}
@@ -117,27 +126,28 @@ function Header({ onToggleNotifications, notificationsEnabled }) {
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>
-                {/* <Nav.Link onClick={handleLogout}>Logout</Nav.Link> */}
                 <Nav.Item className="d-flex align-items-center">
                   <Form.Switch
                     id="custom-switch"
                     label={
-                      notificationsEnabled
-                        ? "Notifications On"
-                        : "Notifications Off"
+                      notificationsEnabled ? (
+                        <BellFill size={24} />
+                      ) : (
+                        <BellSlashFill size={24} />
+                      )
                     }
                     checked={notificationsEnabled}
                     onChange={handleToggleNotifications}
-                    className="me-3"
+                    className="me-3 form-check-reverse"
                   />
                 </Nav.Item>
               </>
             ) : (
               <>
-                <Nav.Link as={Link} to="/register">
+                <Nav.Link as={Link} to="/register" className="fw-bold">
                   Register
                 </Nav.Link>
-                <Nav.Link as={Link} to="/login">
+                <Nav.Link as={Link} to="/login" className="fw-bold">
                   Login
                 </Nav.Link>
               </>
