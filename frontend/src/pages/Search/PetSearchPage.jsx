@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import "../../assets/css/PetSearchPage.css";
+import { fetchWithoutToken } from "../../services/utils";
 
 const STATUS_CHOICES = ["available", "pending", "adopted", "withdrawn"];
 const GENDER_CHOICES = ["male", "female", "unknown"];
 const SIZE_CHOICES = ["small", "medium", "large", "extra_large", "unknown"];
 const SORT_OPTIONS = ["Name", "-Name", "Age", "-Age"];
+const SPECIES_CHOICES = ["cat", "dog", "others"];
 
 const PetSearchPage = () => {
   const [pets, setPets] = useState([]);
@@ -25,24 +27,27 @@ const PetSearchPage = () => {
     gender: searchParams.get("gender") || "",
     size: searchParams.get("size") || "",
     shelter: searchParams.get("shelter") || "",
-    species: searchParams.get("species") || "", // Add species filter
+    species: searchParams.get("species") || "",
   };
   const [filters, setFilters] = useState(initialFilters);
-  const queryParams = new URLSearchParams();
-  useEffect(() => {
-    // Append filter parameters to the query string if they exist
+  const queryParams = useMemo(() => {
+    const params = new URLSearchParams();
     Object.keys(filters).forEach((key) => {
       if (filters[key]) {
-        queryParams.append(key, filters[key]);
-      }
-      if (sort) {
-        queryParams.set("sort", sort); // Set the sort parameter
+        params.append(key, filters[key]);
       }
     });
+    if (sort) {
+      params.set("sort", sort);
+    }
+    return params;
+  }, [filters, sort]);
 
-    fetch(
-      `http://localhost:8000/pets/?page=${currentPage}&${queryParams.toString()}`,
-    )
+  useEffect(() => {
+    // Construct the URL for the API call
+    const url = `/pets/?page=${currentPage}&${queryParams.toString()}`;
+
+    fetchWithoutToken(url)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -51,10 +56,8 @@ const PetSearchPage = () => {
       })
       .then((data) => {
         setPets(data.results);
-        // Assuming `query.page_size` is the number of items per page you want to display
-        const pageSize = 10; // Fallback to number of items in results if page size not defined
+        const pageSize = 10; // Adjust this according to your actual page size
         setTotalPages(Math.ceil(data.count / pageSize));
-        console.log(data.count, pageSize);
       })
       .catch((error) => {
         setError(error.message);
@@ -62,25 +65,28 @@ const PetSearchPage = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [queryParams]);
+  }, [currentPage, queryParams]);
+
+  const updateFiltersAndFetch = (newFilters, newSort = sort) => {
+    setFilters(newFilters);
+    if (newSort !== sort) setSort(newSort);
+    setCurrentPage(1); // Reset page to 1
+    setSearchParams({ ...newFilters, sort: newSort });
+  };
 
   const handleFilterChange = (e) => {
-    const newFilters = {
-      ...filters,
-      [e.target.name]: e.target.value,
-    };
-    setFilters(newFilters);
-    setSearchParams(newFilters); // Update URL query parameters
+    const newFilters = { ...filters, [e.target.name]: e.target.value };
+    updateFiltersAndFetch(newFilters);
+  };
+
+  const handleSortChange = (e) => {
+    updateFiltersAndFetch(filters, e.target.value);
   };
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
-  };
-
-  const handleSortChange = (e) => {
-    setSort(e.target.value);
   };
 
   const viewDetails = (petId) => {
@@ -101,6 +107,14 @@ const PetSearchPage = () => {
             {STATUS_CHOICES.map((status) => (
               <option key={status} value={status}>
                 {status.charAt(0).toUpperCase() + status.slice(1)}
+              </option>
+            ))}
+          </select>
+          <select name="species" onChange={handleFilterChange}>
+            <option value="">All Species</option>
+            {SPECIES_CHOICES.map((species) => (
+              <option key={species} value={species}>
+                {species.charAt(0).toUpperCase() + species.slice(1)}
               </option>
             ))}
           </select>
