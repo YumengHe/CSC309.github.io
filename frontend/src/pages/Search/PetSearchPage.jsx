@@ -1,27 +1,26 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../../assets/css/PetSearchPage.css";
 import { fetchWithoutToken } from "../../services/utils";
+import Paginate from "../../components/buttons/PageButtons";
 
 const STATUS_CHOICES = ["available", "pending", "adopted", "withdrawn"];
 const GENDER_CHOICES = ["male", "female", "unknown"];
 const SIZE_CHOICES = ["small", "medium", "large", "extra_large", "unknown"];
 const SORT_OPTIONS = ["Name", "-Name", "Age", "-Age"];
-const SPECIES_CHOICES = ["cat", "dog", "others"];
+const SPECIES_CHOICES = ["cat", "dog", "other"];
 
 const PetSearchPage = () => {
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchParams, setSearchParams] = useSearchParams(); // Get search parameters
-  const [sort, setSort] = useState("");
   const navigate = useNavigate();
 
   // New state variables for pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  // Initialize filters with URL query parameters
+  const searchParams = new URLSearchParams(useLocation().search);
   const initialFilters = {
     status: searchParams.get("status") || "",
     gender: searchParams.get("gender") || "",
@@ -30,7 +29,24 @@ const PetSearchPage = () => {
     species: searchParams.get("species") || "",
   };
   const [filters, setFilters] = useState(initialFilters);
-  const queryParams = useMemo(() => {
+  const [sort, setSort] = useState(searchParams.get("sort") || "");
+
+  useEffect(() => {
+    const updateFilters = {
+      status: searchParams.get("status") || "",
+      gender: searchParams.get("gender") || "",
+      size: searchParams.get("size") || "",
+      shelter: searchParams.get("shelter") || "",
+      species: searchParams.get("species") || "",
+    };
+    const newSort = searchParams.get("sort") || "";
+
+    setFilters(updateFilters);
+    setSort(newSort);
+    setCurrentPage(1); // Reset the page to 1 when filters change
+  }, [location.search]); // Listen to changes in search string
+
+  const constructQueryParams = (filters, sort) => {
     const params = new URLSearchParams();
     Object.keys(filters).forEach((key) => {
       if (filters[key]) {
@@ -41,12 +57,14 @@ const PetSearchPage = () => {
       params.set("sort", sort);
     }
     return params;
-  }, [filters, sort]);
+  };
+
+  // Initialize filters with URL query parameters
 
   useEffect(() => {
-    // Construct the URL for the API call
+    // Fetch data whenever filters, sort, or currentPage changes
+    const queryParams = constructQueryParams(filters, sort);
     const url = `/pets/?page=${currentPage}&${queryParams.toString()}`;
-
     fetchWithoutToken(url)
       .then((response) => {
         if (!response.ok) {
@@ -65,27 +83,23 @@ const PetSearchPage = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [currentPage, queryParams]);
-
-  const updateFiltersAndFetch = (newFilters, newSort = sort) => {
-    setFilters(newFilters);
-    if (newSort !== sort) setSort(newSort);
-    setCurrentPage(1); // Reset page to 1
-    setSearchParams({ ...newFilters, sort: newSort });
-  };
+  }, [currentPage, filters, sort]);
 
   const handleFilterChange = (e) => {
     const newFilters = { ...filters, [e.target.name]: e.target.value };
-    updateFiltersAndFetch(newFilters);
+    const queryParams = constructQueryParams(newFilters, sort);
+    navigate(`/search/pets/?${queryParams.toString()}`);
   };
 
   const handleSortChange = (e) => {
-    updateFiltersAndFetch(filters, e.target.value);
+    const newSort = e.target.value;
+    const queryParams = constructQueryParams(filters, newSort);
+    navigate(`/search/pets/?${queryParams.toString()}`);
   };
 
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      setCurrentPage(newPage);
+  const setPagination = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
     }
   };
 
@@ -102,7 +116,11 @@ const PetSearchPage = () => {
         {/* Filters Form */}
         <section className="filter-section">
           <h2>Filter</h2>
-          <select name="status" onChange={handleFilterChange}>
+          <select
+            name="status"
+            value={filters.status}
+            onChange={handleFilterChange}
+          >
             <option value="">All Statuses</option>
             {STATUS_CHOICES.map((status) => (
               <option key={status} value={status}>
@@ -110,7 +128,11 @@ const PetSearchPage = () => {
               </option>
             ))}
           </select>
-          <select name="species" onChange={handleFilterChange}>
+          <select
+            name="species"
+            value={filters.species}
+            onChange={handleFilterChange}
+          >
             <option value="">All Species</option>
             {SPECIES_CHOICES.map((species) => (
               <option key={species} value={species}>
@@ -118,7 +140,11 @@ const PetSearchPage = () => {
               </option>
             ))}
           </select>
-          <select name="gender" onChange={handleFilterChange}>
+          <select
+            name="gender"
+            value={filters.gender}
+            onChange={handleFilterChange}
+          >
             <option value="">All Genders</option>
             {GENDER_CHOICES.map((gender) => (
               <option key={gender} value={gender}>
@@ -126,7 +152,11 @@ const PetSearchPage = () => {
               </option>
             ))}
           </select>
-          <select name="size" onChange={handleFilterChange}>
+          <select
+            name="size"
+            value={filters.size}
+            onChange={handleFilterChange}
+          >
             <option value="">All Sizes</option>
             {SIZE_CHOICES.map((size) => (
               <option key={size} value={size}>
@@ -137,6 +167,7 @@ const PetSearchPage = () => {
           <input
             type="number"
             name="shelter"
+            value={filters.shelter}
             placeholder="Shelter ID"
             onChange={handleFilterChange}
           />
@@ -153,25 +184,8 @@ const PetSearchPage = () => {
             ))}
           </select>
         </section>
-        <div className="pagination-controls">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
       </aside>
-      <main className="pet-cards-main">
+      <div className="pet-cards-main">
         <div className="pet-cards-container ">
           {pets.length > 0 ? (
             pets.map((pet) => (
@@ -211,7 +225,16 @@ const PetSearchPage = () => {
             <p>No pets available at the moment.</p>
           )}
         </div>
-      </main>
+        {pets.length > 0 && (
+          <div className="mt-3">
+            <Paginate
+              totalPages={totalPages}
+              currentPage={currentPage}
+              paginate={setPagination}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
