@@ -1,5 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { fetchWithToken } from "../services/utils"; // Adjust the import path as needed
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  // Button,
+  ListGroup,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
 
 const ApplicationConversation = ({ applicationId, currentUser }) => {
   const [conversations, setConversations] = useState([]);
@@ -48,39 +58,77 @@ const ApplicationConversation = ({ applicationId, currentUser }) => {
     }
   };
 
+  // Function to get the display name based on the role
+  // Function to get the display name based on the role
+  // Function to get the display name based on the role
+  const getDisplayName = (conversation) => {
+    // Check the role and display the corresponding name
+    if (conversation.created_by === currentUser.id) {
+      // If the current user sent the message, display "jack" or "Shelter Rep" based on their role
+      return currentUser.role === "seeker"
+        ? currentUser.username
+        : "Shelter Rep";
+    } else {
+      // If the other user sent the message, display "Shelter Rep" or their username based on their role
+      return conversation.role === "shelter"
+        ? "Shelter Rep"
+        : conversation.username;
+    }
+  };
+
   return (
-    <div>
-      <h3>Conversations</h3>
-      {error && <p className="error">{error}</p>}
-      {loading ? (
-        <p>Loading conversations...</p>
-      ) : (
-        <div className="conversations-list">
-          {conversations?.map((conversation) => (
-            <div
-              key={conversation.id}
-              className={`message ${
-                conversation.created_by === currentUser.id ? "right" : "left"
-              }`}
-            >
-              <p>{conversation.content}</p>
-              <span>{new Date(conversation.created_at).toLocaleString()}</span>
+    <Container>
+      <Row>
+        <Col>
+          <h3>Conversations</h3>
+          {error && <Alert variant="danger">{error}</Alert>}
+          {loading ? (
+            <div className="text-center">
+              <Spinner animation="border" />
             </div>
-          ))}
-        </div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <textarea
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Send message ..."
-          className="message-input"
-        />
-        <button type="submit" className="btn btn-outline-primary-cust">
-          Send
-        </button>
-      </form>
-    </div>
+          ) : (
+            <ListGroup className="mb-3">
+              {conversations?.map((conversation) => (
+                <ListGroup.Item
+                  key={conversation.id}
+                  className={`d-flex justify-content-between align-items-start ${
+                    conversation.created_by === currentUser.id
+                      ? "text-right"
+                      : ""
+                  }`}
+                >
+                  <div className="ms-2 me-auto">
+                    <div className="fw-bold">
+                      {getDisplayName(conversation)}
+                    </div>
+                    <div>{conversation.content}</div>
+                    <div className="text-muted">
+                      {new Date(conversation.created_at).toLocaleString()}
+                    </div>
+                  </div>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          )}
+          <Form onSubmit={handleSubmit} className="mt-3">
+            <Form.Group className="mb-3" controlId="messageInput">
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                placeholder="Send message ..."
+              />
+            </Form.Group>
+            <div>
+              <button type="submit" className="btn btn-primary-cust">
+                Send
+              </button>
+            </div>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
