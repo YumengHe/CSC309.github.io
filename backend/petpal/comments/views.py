@@ -50,22 +50,33 @@ class BlogCommentsView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         blog_id = self.kwargs['blog_id']
-        return Comment.objects.filter(blog_id=blog_id)  # Filter comments by blog post
+        blog = BlogPost.objects.get(id=blog_id)
+
+        # Get the content type for BlogPost model
+        content_type = ContentType.objects.get_for_model(BlogPost)
+
+        # Filter comments by content type and object_id
+        return Comment.objects.filter(content_type=content_type, object_id=blog_id)
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         blog_id = self.kwargs['blog_id']
-        serializer.save(user=self.request.user, blog_id=blog_id)
-
-        # Create notification for the blog comment
-        # Assuming notification logic is similar to shelter comments
         blog = BlogPost.objects.get(id=blog_id)
+
+        # Get the content type for BlogPost model
+        content_type = ContentType.objects.get_for_model(blog)
+
+        # Save the comment with the appropriate content_type and object_id
+        serializer.save(user=self.request.user, content_type=content_type, object_id=blog_id)
+
+        # Notification logic
         notification = Notification(
             recipient=blog.author,
             content=f"A new comment has been posted by {self.request.user.username} on your blog.",
-            # Modify content and link as needed
             event_link=f"/comments/blog-comments/{blog_id}/"  # Example link, modify as needed
         )
         notification.save()
+
+
