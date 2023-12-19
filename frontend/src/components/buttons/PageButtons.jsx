@@ -13,7 +13,7 @@ const Paginate = ({ totalPages, currentPage, paginate }) => {
         <div className="col col-12 mx-auto">
             <ul className="d-flex justify-content-center gap-3 flex-wrap p-0">
                 <li
-                    className="btn btn-outline-primary-cust rounded-circle"
+                    className={`btn btn-outline-primary-cust rounded-circle ${currentPage === 1 ? "disabled" : ""}`}
                     onClick={() => (currentPage > 1 ? paginate(currentPage - 1) : paginate(currentPage))}
                 >
                     &lt;
@@ -29,7 +29,9 @@ const Paginate = ({ totalPages, currentPage, paginate }) => {
                     </li>
                 ))}
                 <li
-                    className="btn btn-outline-primary-cust rounded-circle"
+                    className={`btn btn-outline-primary-cust rounded-circle ${
+                        currentPage === totalPages ? "disabled" : ""
+                    }`}
                     onClick={() => (currentPage < totalPages ? paginate(currentPage + 1) : paginate(currentPage))}
                 >
                     &gt;

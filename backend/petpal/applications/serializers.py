@@ -24,13 +24,28 @@ class AccountSerializer(ModelSerializer):
             "role",
             "profile_pic",
         ]
+
+
 # Serializer used in ApplicationSerializer to display foreign key object
 class PetPostSerializer(ModelSerializer):
     shelter = AccountSerializer(read_only=True)
-    
+
     class Meta:
         model = PetPost
-        fields = ['shelter', 'id', 'name', 'description', 'status', 'breed', 'age', 'size', 'color', 'gender', 'expiry', 'image']
+        fields = [
+            "shelter",
+            "id",
+            "name",
+            "description",
+            "status",
+            "breed",
+            "age",
+            "size",
+            "color",
+            "gender",
+            "expiry",
+            "image",
+        ]
 
 
 class ApplicationFullSerializer(ModelSerializer):
@@ -60,7 +75,8 @@ class ApplicationBasicSerializer(ApplicationFullSerializer):
 
 class ConversationSerializer(ModelSerializer):
     created_at = DateTimeField(read_only=True)
-    created_by = PrimaryKeyRelatedField(read_only=True)
+    # created_by = PrimaryKeyRelatedField(read_only=True)
+    created_by = AccountSerializer(read_only=True)
     application = PrimaryKeyRelatedField(read_only=True)
 
     class Meta:

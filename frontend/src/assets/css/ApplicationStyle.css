@@ -16,6 +16,7 @@
   border: 0;
 }
 
+/* Conversation box */
 #conversation .shelter_conv div:nth-child(3) {
   background-color: #86707099;
   color: white;
