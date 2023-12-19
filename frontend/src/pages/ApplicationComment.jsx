@@ -10,7 +10,7 @@ const ApplicationConversation = ({ applicationId, currentUser }) => {
     const [newMessage, setNewMessage] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState({ errorMsg: "", variant: "danger" });
-    const [totalPages, setTotalPages] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
     const [page, setPage] = useState(1);
 
     // Define fetchConversations inside the component
@@ -69,7 +69,7 @@ const ApplicationConversation = ({ applicationId, currentUser }) => {
 
     return (
         <>
-            <h5 className="text-start fw-bolder" id="Conversation">
+            <h5 className="text-start fw-bolder pb-2" id="Conversation">
                 Conversation
             </h5>
             {error.errorMsg && <Alert variant={error.variant}>{error.errorMsg}</Alert>}
@@ -92,7 +92,7 @@ const ApplicationConversation = ({ applicationId, currentUser }) => {
                 </div>
             ) : (
                 <>
-                    <div className="border rounded p-3 px-md-5" id="conversation">
+                    <div className={`border rounded p-3 px-md-5 ${totalPages === 0 ? "d-none" : ""}`} id="conversation">
                         {/* Pagination */}
                         {totalPages > 1 ? (
                             <div className="row">
