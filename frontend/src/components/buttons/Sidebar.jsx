@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PersonVcardFill, CollectionFill, BellFill } from "react-bootstrap-icons";
 
 export const generateApplicationSidebar = (userId) => [
-    { path: `/user-profile/${userId}`, label: "Profile", icon: <PersonVcardFill /> },
+    // { path: `/user-profile/${userId}`, label: "Profile", icon: <PersonVcardFill /> },
     { path: "/applications", label: "Applications", icon: <CollectionFill /> },
     { path: "/notifications", label: "Notifications", icon: <BellFill /> },
 ];

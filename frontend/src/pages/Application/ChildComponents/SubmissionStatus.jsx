@@ -57,7 +57,7 @@ const StatusUpdate = ({ app, currentUser }) => {
                 <div className="col col-12 pb-1">
                     If you wish to withdraw your application, click the withdraw button.
                 </div>
-                <div className="col col-12 d-flex justify-content-center">
+                <div className="col col-12 d-flex justify-content-center mb-4">
                     <div className="col col-8 col-md-6 d-flex justify-content-center">
                         <button
                             className="btn btn-outline-primary-cust btn-sm"
@@ -87,7 +87,7 @@ const StatusUpdate = ({ app, currentUser }) => {
                 <div className="col col-12 pb-1">
                     You can choose to either accept or deny the application by using the respective buttons below.
                 </div>
-                <div className="col col-12 d-flex p-0">
+                <div className="col col-12 d-flex p-0 mb-4">
                     <div className="col d-flex justify-content-center">
                         <button
                             className="btn btn-outline-primary-cust btn-sm px-2 px-md-5"
@@ -134,7 +134,7 @@ const StatusUpdate = ({ app, currentUser }) => {
             <h5 className="text-start fw-bolder" id="SubmissionStatus">
                 Submission Status
             </h5>
-            <div className="row m-1 m-md-4 mb-2">
+            <div className="row m-1 m-5 m-md-4">
                 <div className="col col-12">
                     <p>
                         The status of your current application is <b>{app.status.toUpperCase()}</b>.{" "}

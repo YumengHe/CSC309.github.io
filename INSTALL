@@ -11,7 +11,7 @@ sudo pip3 install django Pillow djangorestframework djangorestframework-simplejw
 sudo pip3 install gunicorn mod-wsgi
 sudo apt install npm
 
-### Backend - Apache
+### Backend 
 1. Added IP address as ALLOWED_HOSTS in project settings.py
 2. Added static root in project settings.py
     STATIC_ROOT = os.path.join(BASE_DIR, 'static-root')
