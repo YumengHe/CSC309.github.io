@@ -1,40 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/css/HomePage.css";
 import "../assets/css/Base.css";
 
 const HomePage = () => {
-  const [pets, setPets] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Fetch pet listings from the backend
-    fetch("http://localhost:8000/pets/")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPets(data.results); // Set the pet listings in state
-      })
-      .catch((error) => {
-        setError(error.message); // Set any errors that occur during fetch
-      })
-      .finally(() => {
-        setLoading(false); // Set loading to false once the fetch is complete
-      });
-  }, []);
-
-  const viewDetails = (petId) => {
-    navigate(`/pets/${petId}`);
-  };
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="home-section">
@@ -87,30 +57,6 @@ const HomePage = () => {
           </button>
         </div>
       </div>
-      <ul className="pets-list">
-        {pets.length > 0 ? (
-          pets.map((pet) => (
-            <li key={pet.id} className="pet-item">
-              <h3>{pet.name}</h3>
-              <p>Age: {pet.age || "Unknown"}</p>
-              <p>Size: {pet.size || "Unknown"}</p>
-              <p>Gender: {pet.gender || "Unknown"}</p>
-              <p>
-                Status:{" "}
-                {pet.status.charAt(0).toUpperCase() + pet.status.slice(1)}
-              </p>
-              <button
-                className="btn btn-outline-primary-cust"
-                onClick={() => viewDetails(pet.id)}
-              >
-                View Detail
-              </button>
-            </li>
-          ))
-        ) : (
-          <p>No pets available at the moment.</p>
-        )}
-      </ul>
     </div>
   );
 };
